@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:03:37 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:03:51 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/25 19:52:55 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/04/26 14:05:01 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 int	ft_isalnum(int c)
 {
-	if (c > 47 && c < 58)
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
-	else if (c > 64 && c < 91)
+	if (c >= '0' && c <= '9')
 		return (1);
-	else if (c > 96 && c < 123)
-		return (1);
-	else
-		return (0);
+	return (0);
 }

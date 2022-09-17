@@ -3,39 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:53:39 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:53:47 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/06 22:48:50 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/06 22:48:50 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void	ft_jonction(char const *s1, char const *s2,
+				char *str_joined, int length);
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned int	s1_len;
-	unsigned int	s2_len;
-	unsigned int	i;
-	unsigned int	j;
-	char			*out_str;
+	char	*str_joined;
+	int		i;
+	int		j;
+	int		length;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
 	i = 0;
-	j = -1;
-	out_str = malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!(out_str))
-		return (NULL);
-	while (s1[i])
-	{
-		out_str[i] = s1[i];
+	j = 0;
+	while (s1[i] != '\0')
 		i++;
+	while (s2[j] != '\0')
+		j++;
+	length = i + j;
+	str_joined = (char *)malloc(length + 1);
+	if (!str_joined)
+		return (0);
+	ft_jonction(s1, s2, str_joined, length);
+	str_joined[length] = '\0';
+	return (str_joined);
+}
+
+static void	ft_jonction(char const *s1, char const *s2,
+char *str_joined, int length)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i + j < length)
+	{
+		if (s1[i] != 0)
+		{
+			str_joined[i + j] = s1[i];
+			i++;
+		}
+		else if (s2[j] != 0)
+		{
+			str_joined[i + j] = s2[j];
+			j++;
+		}
 	}
-	while (s2[++j])
-		out_str[i++] = s2[j];
-	out_str[i] = '\0';
-	return (out_str);
 }

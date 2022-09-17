@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:49:04 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:49:21 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 15:27:57 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/13 14:42:01 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	*ft_memset(void *s, int c, size_t n)
+/**---------------------------------------------------------------------------*/
+/* This functions replace the first len content of b by int c and 
+	return a pointer to b
+*/
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char	*str;
+	int		i;
+	char	*b_int;
 
-	str = (char *) s;
-	while (n > 0)
+	i = 0;
+	b_int = (char *)b;
+	while (i < (int)len)
 	{
-		*str++ = (char)c;
-		n--;
+		*(b_int + i) = (unsigned char)c;
+		i++;
 	}
-	return (s);
+	return (b_int);
 }

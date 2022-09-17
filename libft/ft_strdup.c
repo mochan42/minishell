@@ -3,29 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:53:04 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:53:13 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/06 22:07:50 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/06 22:07:50 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+/**---------------------------------------------------------------------------*/
+/* This functions create a new copy of a given string and return a pointer to 
+	the new string
+*/
+char	*ft_strdup(const char *s)
 {
-	char	*str;
 	int		i;
+	char	*s_cpy;
 
 	i = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!(str))
-		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
+	while (s[i] != 0)
 		i++;
+	s_cpy = (char *)malloc(i + 1);
+	if (!s_cpy)
+		return (0);
+	s_cpy[i] = '\0';
+	while (i > 0)
+	{
+		s_cpy[i - 1] = s[i - 1];
+		i--;
 	}
-	str[i] = '\0';
-	return (str);
+	return (s_cpy);
 }

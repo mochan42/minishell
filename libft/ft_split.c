@@ -3,57 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:52:30 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/14 11:07:34 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/08 17:33:34 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/08 17:33:34 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	ft_count(char *s, char c)
+void	ft_fill_splited_array(char **array_split, char *s, char c)
 {
+	int	word_start;
 	int	i;
-	int	count;
+	int	lenght;
+	int	word;
 
 	i = 0;
-	count = 1;
-	while (*(s + i))
+	word = 0;
+	while (i < (int)ft_strlen(s))
 	{
-		if (*(s + i) && *(s + (i + 1)) != c && (s + (i + 1)))
-			count++;
+		if (s[i] != c)
+		{
+			word_start = i;
+			lenght = 0;
+			while (s[i] != 0 && s[i] != c)
+			{
+				lenght++;
+				i++;
+			}
+			array_split[word] = (char *)ft_substr(s, word_start, lenght);
+			word++;
+		}
 		i++;
 	}
-	return (count);
+	array_split[word] = 0;
+}
+
+static int	ft_nb_words(char const *s, char c)
+{
+	int	i;
+	int	result;
+
+	if (!s)
+		return (0);
+	i = 0;
+	result = 0;
+	while (i <= (int)ft_strlen(s))
+	{
+		if ((s[i] == c || s[i] == 0) && i != 0 && (s[i - 1] != 0)
+			&& s[i - 1] != c)
+			result++;
+		i++;
+	}
+	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		start;
-	int		end;
-	char	**string;
+	char	**array_result;
+	int		nb_words;
 
 	if (!s)
 		return (NULL);
-	i = 0;
-	start = 0;
-	string = ft_calloc(ft_count((char *)s, c) + 1, sizeof(char *));
-	if (!string)
+	nb_words = ft_nb_words(s, c);
+	array_result = malloc(sizeof(char *) * (nb_words + 1));
+	ft_fill_splited_array(array_result, (char *)s, c);
+	if (!array_result)
 		return (NULL);
-	while (*(s + start))
-	{
-		while (*(s + start) == c && *(s + start))
-			start++;
-		end = start;
-		while (*(s + end) != c && *(s + end))
-			end++;
-		if (*(s + start))
-			string[i] = ft_substr(s, start, end - start);
-		i++;
-		start = end;
-	}
-	return (string);
+	return (array_result);
 }

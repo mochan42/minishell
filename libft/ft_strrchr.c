@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:56:09 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:56:18 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/01 16:13:20 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/01 16:13:20 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+/**---------------------------------------------------------------------------*/
+/* This functions is almost same with strchr, the only difference reversing
+*/
 
 char	*ft_strrchr(const char *s, int c)
 {
-	unsigned int	i;
-	char			*last_occurence;
+	int		size;
 
-	last_occurence = NULL;
-	i = 0;
-	while (s[i])
+	size = ft_strlen(s);
+	while (size >= 0)
 	{
-		if (s[i] == (char)c)
-			last_occurence = (char *)&s[i];
-		i++;
+		if (s[size] == (char)c)
+			return ((char *)(s + size));
+		size--;
 	}
-	if ((char)c == s[i])
-		return ((char *)&s[i]);
-	return (last_occurence);
+	return (0);
 }

@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:51:27 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:51:39 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/11 23:37:00 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/17 14:56:21 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int nb, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	num;
+	char	unit;
 
-	num = nb;
-	if (nb == -2147483648)
+	if (n == -2147483648)
 	{
-		ft_putstr_fd("-2147483648", fd);
+		write(fd, "-2147483648", 11);
 		return ;
 	}
-	if (num < 0)
+	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
-		num = -num;
+		write(fd, "-", 1);
+		n *= -1;
 	}
-	if (num > 9 || num < -9)
+	if (n < 10)
 	{
-		ft_putnbr_fd(num / 10, fd);
-		ft_putnbr_fd(num % 10, fd);
+		unit = n + '0';
+		write(fd, &unit, 1);
 	}
 	else
 	{
-		ft_putchar_fd(num + '0', fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
 }

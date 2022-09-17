@@ -31,7 +31,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	main.c\
+SRC_FILES			:=	main.c init.c free.c parsing.c\
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 
@@ -48,6 +48,7 @@ $(NAME):  $(OBJ_DIR) $(OBJ)
 ifeq ($(MACHINE), Darwin)
 	@echo "$(BLUE)make $(LIBFT_DIR)$(END_COLOR)"
 	make -C $(LIBFT_DIR)
+	make bonus -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_A) $(LIB_READLINE_MAC) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
 # -C	:	make option that tells make to change directory before execution.

@@ -3,39 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:56:51 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:57:00 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/06 22:29:07 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/06 22:29:07 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+/*Returns pointer to new allocated string copied cuted from *s from start
+	until len
+*/
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	i;
-	char			*substr;
+	char	*sub_str;
+	size_t	i;
+	size_t	s_len;
 
-	if (!s)
-		return (NULL);
-	if (ft_strlen(s) < start)
-	{
-		substr = malloc(sizeof(char) * 1);
-		if (!(substr))
-			return (NULL);
-		substr[0] = '\0';
-		return (substr);
-	}
-	substr = malloc(sizeof(char) * (len + 1));
-	if (!(substr))
-		return (NULL);
+	s_len = ft_strlen(s);
 	i = 0;
-	while (i < len)
+	if (s_len < len)
+		sub_str = (char *)malloc(sizeof(char) * 1);
+	else
+		sub_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub_str)
+		return (NULL);
+	while (i < len && start < s_len)
 	{
-		substr[i] = s[start + i];
+		sub_str[i] = s[start];
 		i++;
+		start++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	sub_str[i] = 0;
+	return (sub_str);
 }

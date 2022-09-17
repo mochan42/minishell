@@ -3,27 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:56:31 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:56:44 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/07 00:05:10 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/07 00:05:10 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
+#include <stdio.h>
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	int		begin;
 	int		end;
-	char	*newstring;
+	char	*str_trimed;
 
-	if (!s1 || !set)
+	end = ft_strlen(s1) - 1;
+	begin = 0;
+	if (set == NULL)
+		return ((char *)s1);
+	if (s1 == NULL && set == NULL)
 		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	end = ft_strlen(s1);
-	while (end && ft_strchr(set, *(s1 + end)))
+	while (ft_strchr(set, s1[begin]) && s1[begin])
+		begin++;
+	while (ft_strchr(set, s1[end]) && end > begin)
 		end--;
-	newstring = ft_substr(s1, 0, end + 1);
-	return (newstring);
+	end -= begin;
+	str_trimed = ft_substr(s1, begin, end + 1);
+	if (!str_trimed)
+		return (NULL);
+	return (str_trimed);
 }

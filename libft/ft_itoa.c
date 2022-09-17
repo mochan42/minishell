@@ -3,66 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:05:24 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:05:36 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/11 14:35:36 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/22 14:17:20 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static unsigned int	get_nb_digit(long n_l, int sign)
+int	ft_nb_digits(int n)
 {
-	unsigned int	nb_digit;
+	int	size;
+	int	n_original;
 
-	if (n_l == 0)
-		return (1);
-	nb_digit = 0;
-	while (n_l > 0)
+	n_original = n;
+	size = 1;
+	if (n < 0)
+		n = n * -1;
+	while (n >= 10)
 	{
-		n_l /= 10;
-		nb_digit++;
+		n /= 10;
+		size++;
 	}
-	if (sign == -1)
-		nb_digit++;
-	return (nb_digit);
-}
-
-static void	convert_nb(char *outstr, long n_l, unsigned int nb_digit, int sign)
-{
-	outstr[nb_digit] = '\0';
-	outstr[--nb_digit] = n_l % 10 + '0';
-	n_l /= 10;
-	while (n_l > 0)
-	{
-		outstr[--nb_digit] = n_l % 10 + '0';
-		n_l /= 10;
-	}
-	if (sign == -1)
-		outstr[0] = '-';
+	if (n_original < 0)
+		size += 1;
+	return (size);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*outstr;
-	long			n_l;
-	unsigned int	nb_digit;
-	int				sign;
+	char	*n_in_string;
+	int		nb_of_digits;
+	int		i;
 
-	sign = 1;
+	i = 0;
+	if (n == -2147483648)
+		return (ft_substr("-2147483648", 0, 12));
+	nb_of_digits = ft_nb_digits(n);
+	n_in_string = (char *)malloc(sizeof(char) * (nb_of_digits + 1));
+	if (n_in_string == NULL)
+		return (0);
+	n_in_string[nb_of_digits] = 0;
 	if (n < 0)
 	{
-		n_l = (long)n * -1;
-		sign = -1;
+		n_in_string[0] = '-';
+		i = 1;
+		n *= -1;
 	}
-	else
-		n_l = n;
-	nb_digit = get_nb_digit(n_l, sign);
-	outstr = malloc(sizeof(char) * (nb_digit + 1));
-	if (!(outstr))
-		return (NULL);
-	convert_nb(outstr, n_l, nb_digit, sign);
-	return (outstr);
+	while (i < nb_of_digits)
+	{
+		n_in_string[nb_of_digits - 1] = n % 10 + '0';
+		n = n / 10;
+		nb_of_digits--;
+	}
+	return (n_in_string);
 }

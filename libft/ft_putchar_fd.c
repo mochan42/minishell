@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:50:16 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/17 00:08:03 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/11 22:59:36 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/13 13:34:24 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

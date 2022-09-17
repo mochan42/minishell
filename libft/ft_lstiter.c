@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 19:19:11 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/05/13 13:31:39 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/05/12 19:26:23 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/13 16:37:32 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	while (lst)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:57:06 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:57:15 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/01 14:42:24 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/01 14:42:24 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_tolower(int c)
 {
-	if (c > 64 && c < 91)
-		c = c + 32;
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
 	return (c);
 }

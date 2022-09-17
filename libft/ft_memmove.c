@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 22:48:44 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:48:52 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 18:35:07 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/13 14:44:14 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned int	i;
+	char	*dst_int;
+	char	*src_int;
+	size_t	i;
 
+	dst_int = (char *)dst;
+	src_int = (char *)src;
 	if (!dst && !src)
 		return (NULL);
-	if (dst > src)
-	{
-		while (len > 0)
-		{
-			((char *)dst)[len - 1] = ((char *)src)[len - 1];
-			len--;
-		}
-	}
-	else
+	if (src_int > dst_int)
 	{
 		i = 0;
 		while (i < len)
 		{
-			((char *)dst)[i] = ((char *)src)[i];
+			dst_int[i] = src_int[i];
 			i++;
 		}
+		return (dst_int);
 	}
-	return (dst);
+	while (len > 0)
+	{
+		dst_int[len - 1] = src_int[len - 1];
+		len--;
+	}
+	return (dst_int);
 }

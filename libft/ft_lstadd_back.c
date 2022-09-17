@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 21:57:54 by mochan            #+#    #+#             */
-/*   Updated: 2021/09/13 22:51:54 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 17:42:29 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/13 16:23:32 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int nb)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	num;
+	t_list	*head;
 
-	num = nb;
-	if (nb == -2147483648)
+	head = *lst;
+	if (*lst == NULL)
 	{
-		ft_putstr_fd("-2147483648", 1);
+		*lst = new;
 		return ;
 	}
-	if (num < 0)
+	while (head)
 	{
-		ft_putchar('-');
-		num = -num;
-	}
-	if (num > 9 || num < -9)
-	{
-		ft_putnbr(num / 10);
-		ft_putnbr(num % 10);
-	}
-	else
-	{
-		ft_putchar(num + '0');
+		if (head->next == NULL)
+		{
+			head->next = new;
+			break ;
+		}
+		head = head->next;
 	}
 }

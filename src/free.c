@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:37:23 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/05/03 18:50:54 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
+/*   Updated: 2022/09/17 16:11:13 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	free_table(char **table)
 {
-	unsigned char	*s_char;
-	size_t			i;
+	int	i;
 
-	s_char = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	if (!table)
+		exit (1);
+	while (table[i] != NULL)
 	{
-		if (s_char[i] == (unsigned char)c)
-			return (&s_char[i]);
+		free(table[i]);
 		i++;
 	}
-	return (NULL);
+	free(table);
+}
+
+void	free_stuff(t_prgm *vars)
+{
+	free(vars->env_path);
+	free_table(vars->cmd_paths);
+	free(vars);
 }
