@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/17 19:40:07 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/18 16:17:24 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	init(t_prgm *vars)
 {
 	vars->env_path = find_path_in_envp(*vars);
 	vars->cmd_paths = ft_split(vars->env_path, ':');
-	vars->pipe_present = 0;
+	vars->pipe_ct = 0;
 }

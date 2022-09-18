@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/17 19:50:40 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/18 16:25:29 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ void	parsing(t_prgm *vars)
 	{
 		if (vars->cmd_line[i] == '|')
 		{
-			vars->pipe_present = 1;
-			printf("pipe parsing required\n");
-			break;
+			vars->pipe_ct += 1;
 		}
 		i++;
 	}
-	if (vars->pipe_present == 0)
+	if (vars->pipe_ct == 0)
 	{
 		char	**one_token;
 		int	i;

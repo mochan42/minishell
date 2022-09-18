@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:55:22 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/17 19:49:47 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/18 16:17:16 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_prgm
 	char	**env;
 	char	*env_path;
 	char	**cmd_paths;
-	int		pipe_present;
+	int		pipe_ct;
 }	t_prgm;
 
 typedef struct s_token
