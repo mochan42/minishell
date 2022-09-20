@@ -6,27 +6,11 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/18 16:40:04 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/19 19:13:23 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// 'welcome' message
-void	init_shell(void)
-{
-	char	*username;
-
-	printf("\n\n\n\n******************"
-		"************************");
-	printf("\n\n\n\t**** 42 MINISHELL ****");
-	printf("\n\n\t-USE AT YOUR OWN RISK-");
-	printf("\n\n\n\n*******************"
-		"***********************");
-	username = getenv("USER");
-	printf("\n\n\nUSER is: @%s", username);
-	printf("\n");
-}
 
 // Function to print Current Directory.
 void	print_dir(void)
@@ -41,7 +25,7 @@ void	print_dir(void)
 int	input_loop(char *str, t_prgm *vars)
 {
 	char	*buf;
-	int pid_loop;
+	int		pid_loop;
 	int		flag;
 
 	while (1)
@@ -54,12 +38,15 @@ int	input_loop(char *str, t_prgm *vars)
 		vars->cmd_line = str;
 		//parsing : into struct
 		if (buf)
+		{
 			flag = 1;
+			parsing(vars);
+		}
 		if (flag == 1)
 		{
 			pid_loop = fork();
 			if (pid_loop == 0)
-				parsing(vars);
+				ms_executer(vars);
 			else
 				wait(NULL);
 			free(buf);
@@ -80,10 +67,8 @@ int	main(int ac, char **av, char **env)
 	ms = malloc(sizeof(t_prgm) * 1);
 	ms->env = env;
 	init(ms);
-	init_shell();
-	print_dir();
+	// print_dir();
 	input_loop(input_string, ms);
-	parsing(ms);
 	free_stuff(ms);
 	return (0);
 }

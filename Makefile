@@ -31,7 +31,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	main.c init.c free.c parsing.c\
+SRC_FILES			:=	main.c init.c free.c parsing.c executer.c\
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 
