@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/19 19:13:23 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:18:36 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,36 @@ void	print_dir(void)
 }
 
 // Function to take input
-int	input_loop(char *str, t_prgm *vars)
+int	input_loop(t_prgm *vars)
 {
-	char	*buf;
-	int		pid_loop;
-	int		flag;
+	int	flag;
+	int	i;
 
 	while (1)
 	{
-		buf = readline("minishell$");
-		if (!buf)
+		vars->cmd_line = readline("minishell$");
+		if (!vars->cmd_line)
 			return (0);
-		add_history(buf);
-		strcpy(str, buf);
-		vars->cmd_line = str;
-		//parsing : into struct
-		if (buf)
+		flag = 1;
+		if (vars->cmd_line)
 		{
-			flag = 1;
+			add_history(vars->cmd_line);
 			parsing(vars);
-		}
-		if (flag == 1)
-		{
-			pid_loop = fork();
-			if (pid_loop == 0)
-				ms_executer(vars);
-			else
-				wait(NULL);
-			free(buf);
+			ms_executer(vars);
 			flag = 0;
-			//exit function;
+		}
+		i = 0;
+		if (flag == 0)
+		{
+			vars->pipe_ct = 0;
+			if (vars->pipe_ct > 0)
+			{
+				while (i < vars->pipe_ct)
+				{
+					free(vars->array_tokens[i].token_str);
+					i++;
+				}
+			}
 		}
 	}
 	return (0);
@@ -59,7 +59,6 @@ int	input_loop(char *str, t_prgm *vars)
 
 int	main(int ac, char **av, char **env)
 {
-	char	input_string[MAXCOM];
 	t_prgm	*ms;
 
 	(void)ac;
@@ -68,7 +67,7 @@ int	main(int ac, char **av, char **env)
 	ms->env = env;
 	init(ms);
 	// print_dir();
-	input_loop(input_string, ms);
+	input_loop(ms);
 	free_stuff(ms);
 	return (0);
 }

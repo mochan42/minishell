@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:55:22 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/20 18:17:29 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:17:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include \
+</Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include \
+</Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
 # include "../libft/libft.h"
+# include <signal.h>
 
 /* ########################################################################## */
 /* STRUCTURES */
@@ -35,7 +38,6 @@ typedef struct s_token
 	int		built_in;
 	char	*options;
 	char	*token_str;
-	char	*exp_var;
 }	t_token;
 
 typedef struct s_prgm
@@ -44,11 +46,14 @@ typedef struct s_prgm
 	char	**env; //transform into a linked list
 	t_token	*array_tokens;
 	int		pipe_ct;
+	char	**exp_var;
 }	t_prgm;
+
+
 
 /* ########################################################################## */
 /* CONSTANTS */
-# define MAXCOM 1000 // max number of letters to support directory printing
+
 
 /* ########################################################################## */
 /* FUNCTIONS */

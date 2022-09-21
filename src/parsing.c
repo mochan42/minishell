@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/19 09:46:58 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:19:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	parsing_lvl1(t_prgm *vars)
 			vars->pipe_ct += 1;
 		i++;
 	}
+	printf("pipe_ct = %d\n", vars->pipe_ct);
 	if (vars->pipe_ct > 0)
 	{
 		tab_token = ft_split(vars->cmd_line, '|');
