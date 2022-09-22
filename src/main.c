@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/21 21:18:36 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/22 12:34:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	input_loop(t_prgm *vars)
 		i = 0;
 		if (flag == 0)
 		{
-			vars->pipe_ct = 0;
 			if (vars->pipe_ct > 0)
 			{
-				while (i < vars->pipe_ct)
+				while (i < vars->pipe_ct + 1)
 				{
 					free(vars->array_tokens[i].token_str);
 					i++;
 				}
 			}
+			vars->pipe_ct = 0;
 		}
 	}
 	return (0);
