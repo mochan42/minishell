@@ -12,29 +12,29 @@
 
 #include "../pipex.h"
 
-int	ft_is_error(t_pipe *p)
+int	ft_is_error(t_prgm *vars)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->nb_cmd)
+	while (i < vars->pipe_ct)
 	{
-		if (p->error[i][0] != '\0')
+		if (vars->p.error[i][0] != '\0')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void	ft_print_err_message(t_pipe *p)
+void	ft_print_err_message(t_prgm *vars)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->nb_cmd)
+	while (i < vars->pipe_ct)
 	{
-		if (p->error[i][0] != '\0')
-			ft_printf("%s\n", p->error[i]);
+		if (vars->p.error[i][0] != '\0')
+			ft_printf("%s\n", vars->p.error[i]);
 		i++;
 	}
 }

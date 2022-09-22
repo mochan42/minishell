@@ -11,36 +11,32 @@
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-void	ft_init_pipe(t_pipe *p, int argc, char **argv, char **envp)
+ /* must be analysed again*/
+void	ft_init_pipe(t_prgm *vars)
 {
-	p->fd_args[0] = 0;
-	p->fd_args[1] = 0;
-	p->nb_cmd = argc - 3;
-	p->ac = argc;
-	p->av = argv;
-	p->child = 0;
-	p->env = envp;
-	p->tmp_file = (char *)ft_calloc(sizeof(char), 1);
-	p->fd_hd = -1;
+	//vars->p.nb_cmd = vars->pipe_ct + 1;
+	vars->p.child = 0;
+	//vars->p->env = ft_env_to_local_env(vars->env);
+	vars->p.tmp_file = (char *)ft_calloc(sizeof(char), 1);
+	vars->p.fd_hd = -1;
 }
 
-void	free_p(t_pipe *p)
+void	free_vars(t_prgm *vars)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < p->nb_cmd)
+	while (i < vars->p.nb_cmd)
 	{
 		j = 0;
-		while (p->cmds[i].options[j])
+		while (vars->tokens[i].options[j])
 		{
-			free(p->cmds[i].options[j]);
+			free(vars->tokens[i].options[j]);
 			j++;
 		}
-		free(p->cmds[i].bin_path);
-		free(p->cmds[i].options);
+		free(vars->tokens[i].bin);
+		free(vars->tokens[i].options);
 		i++;
 	}
 }
@@ -57,18 +53,16 @@ int	len_path(char **paths)
 	return (i);
 }
 
-void	ft_parse_all(t_pipe *p, char **pt)
+// must be analysed deeply
+void	ft_parse_all(t_prgm *vars, char **pt)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->nb_cmd)
+	while (i < vars->pipe_ct + 1)
 	{
-		if (p->fd_hd < 0)
-			p->cmds[i].options = ft_split(p->av[2 + i], ' ');
-		else
-			p->cmds[i].options = ft_split(p->av[3 + i], ' ');
-		ft_parse(p, pt, i);
+		vars->tokens[i].options = ft_split(vars->tokens[i].t_str, ' ');
+		ft_parse(vars, pt, i);
 		i++;
 	}
 }

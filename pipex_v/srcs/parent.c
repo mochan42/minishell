@@ -12,23 +12,23 @@
 
 #include "../pipex.h"
 
-void	ft_parent_process(t_pipe *p)
+void	ft_parent_process(t_prgm *vars)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->nb_cmd - 1)
+	while (i < vars->pipe_ct)
 	{
-		close(p->fd[i][0]);
-		close(p->fd[i][1]);
+		close(vars->p.fd[i][0]);
+		close(vars->p.fd[i][1]);
 		i++;
 	}
-	close(p->fd_args[0]);
-	close(p->fd_args[1]);
+	//close(vars->fd_args[0]);
+	//close(vars->fd_args[1]);
 	i = 0;
-	while (i < p->nb_cmd)
+	while (i < vars->pipe_ct)
 	{
-		wait(&p->status);
+		wait(&vars->p.status);
 		i++;
 	}
 	unlink("tmp.txt");
