@@ -13,16 +13,16 @@
 #include "../pipex.h"
 
 /* redirecting into fd according to the commands */
-void	ft_childs_process(t_pipe *p)
+void	ft_childs_process(t_prgm *vars)
 {
-	if (p->child == 0)
-		ft_exec_cmd_1(p);
-	else if (p->child > 0 && p->child < p->nb_cmd - 1)
+	if (vars->p.child == 0)
+		ft_exec_cmd_1(vars);
+	else if (vars->p.child > 0 && vars->p.child < vars->pipe_ct)
 	{
-		dup2(p->fd[p->child - 1][0], 0);
-		dup2(p->fd[p->child][1], 1);
+		dup2(vars->p.fd[vars->p.child - 1][0], 0);
+		dup2(vars->p.fd[vars->p.child][1], 1);
 	}
-	else if (p->child == p->nb_cmd - 1)
-		ft_exec_cmd_last(p);
-	ft_close_fds(p);
+	else if (vars->p.child == vars->pipe_ct)
+		ft_exec_cmd_last(vars);
+	ft_close_fds(vars);
 }

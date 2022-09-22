@@ -6,7 +6,11 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:55:22 by mochan            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/22 23:03:31 by fakouyat         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/21 00:23:56 by fakouyat         ###   ########.fr       */
+>>>>>>> facinet
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +26,7 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 # include <signal.h>
 

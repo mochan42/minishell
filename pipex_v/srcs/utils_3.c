@@ -12,14 +12,14 @@
 
 #include "../pipex.h"
 
-void	ft_generate_p(t_pipe *p)
+void	ft_generate_p(t_prgm *vars)
 {
 	int	i;
 
 	i = 0;
-	while (i < p->nb_cmd - 1)
+	while (i < vars->pipe_ct)
 	{
-		if (pipe(p->fd[i]) < 0)
+		if (pipe(vars->p.fd[i]) < 0)
 		{
 			perror("Error pipe ");
 			exit(0);
@@ -28,12 +28,12 @@ void	ft_generate_p(t_pipe *p)
 	}
 }
 
-int	ft_valid_nb_args_bonus(int argc)
-{
-	if (argc < 5)
-	{
-		ft_printf("Error : fews arguments\n");
-		return (0);
-	}
-	return (1);
-}
+// int	ft_valid_nb_args_bonus(int argc)
+// {
+// 	if (argc < 5)
+// 	{
+// 		ft_printf("Error : fews arguments\n");
+// 		return (0);
+// 	}
+// 	return (1);
+// }
