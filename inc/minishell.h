@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:55:22 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/22 21:44:44 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/22 23:03:31 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
-# include \
-</Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include \
-</Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 # include <signal.h>
 
