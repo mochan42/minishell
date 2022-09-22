@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/22 12:32:09 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:50:00 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 // 	return (tab);
 // }
 
-void	parsing_lvl1(t_prgm *vars)
+void	parsing_pipes(t_prgm *vars)
 {
 	int		i;
 	// char	**one_token;
@@ -45,13 +45,13 @@ void	parsing_lvl1(t_prgm *vars)
 	if (vars->pipe_ct > 0)
 	{
 		tab_token = ft_split(vars->cmd_line, '|');
-		vars->array_tokens = malloc(sizeof(t_token) * (vars->pipe_ct + 1));
+		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct + 1));
 		
 		i = 0;
 		while (i < vars->pipe_ct + 1)
 		{
-			vars->array_tokens[i].token_str = tab_token[i];
-			printf("token %d :%s\n", i, vars->array_tokens[i].token_str);
+			vars->tokens[i].t_str = tab_token[i];
+			printf("token %d :%s\n", i, vars->tokens[i].t_str);
 			i++;
 		}
 	}
@@ -59,49 +59,71 @@ void	parsing_lvl1(t_prgm *vars)
 	{
 		i = 0;
 		// one_token = ft_split(vars->cmd_line, ' ');
-		vars->array_tokens = malloc(sizeof(t_token) * 1);
-		vars->array_tokens[i].token_str = vars->cmd_line;
-		printf("token %d :%s\n", i, vars->array_tokens[i].token_str);
+		vars->tokens = malloc(sizeof(t_token) * 1);
+		vars->tokens[i].t_str = vars->cmd_line;
+		printf("token %d :%s\n", i, vars->tokens[i].t_str);
 		// free(one_token);
 	}
+	init_all_tokens(vars);
 }
 
-void	parsing_lvl2(t_prgm *vars)
+void	parsing_in_redir_heredoc(t_prgm *vars)
 {
 	int	i;
-	// int	j;
-	int len;
+	int	j;
 
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		// printf("Token %d\n", i);
-		// j = 0;
-		len = 0;
-		write(1, &vars->array_tokens[i].token_str, 1);
-		while (*vars->array_tokens[i].token_str != '\0')
+		j = 0;
+		while(vars->tokens[i].t_str[j] != '\0')
+			j++;
+		while (j != -1)
 		{
-			vars->array_tokens[i].token_str++;
-			len++;
-		}
-		printf("\n");
-		printf("len = %d\n", len);
-		printf("\n");
-		while (len != 0)
-		{
-			if (*vars->array_tokens[i].token_str == 'z')
+			if (j > 0 && vars->tokens[i].t_str[j] == '<' && vars->tokens[i].t_str[j-1] == '<')
 			{
-				vars->array_tokens[i].in = vars->array_tokens[i].token_str;
-				printf("\n");
-				write(1, &vars->array_tokens[i].token_str, 1);
-				printf("\n");
+				vars->tokens[i].in = "<<";
+				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
+				break;
+			}
+			else if (vars->tokens[i].t_str[j] == '<')
+			{
+				vars->tokens[i].in = "<";
+				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
 				break;
 			}
 			else
+				j--;
+		}
+		i++;
+	}
+}
+
+void	parsing_out_redir_heredoc(t_prgm *vars)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < vars->pipe_ct + 1)
+	{
+		j = 0;
+		while (vars->tokens[i].t_str[j] != '\0')
+		{
+			if (vars->tokens[i].t_str[j+1] != '\0' && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j+1] == '>')
 			{
-				vars->array_tokens[i].token_str--;
-				len--;
+				vars->tokens[i].out = ">>";
+				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
+				break;
 			}
+			else if (vars->tokens[i].t_str[j] == '>')
+			{
+				vars->tokens[i].out = ">";
+				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
+				break;
+			}
+			else
+				j++;
 		}
 		i++;
 	}
@@ -109,6 +131,7 @@ void	parsing_lvl2(t_prgm *vars)
 
 void	parsing(t_prgm *vars)
 {
-	parsing_lvl1(vars);
-	// parsing_lvl2(vars);
+	parsing_pipes(vars);
+	parsing_in_redir_heredoc(vars);
+	parsing_out_redir_heredoc(vars);
 }

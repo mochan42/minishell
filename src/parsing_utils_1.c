@@ -1,34 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parsing_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/22 19:41:34 by mochan           ###   ########.fr       */
+/*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
+/*   Updated: 2022/09/22 20:27:55 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+# include "../inc/minishell.h"
 
-void	free_table(char **table)
-{
-	int	i;
-
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
-	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
-}

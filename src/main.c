@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/22 12:34:14 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/22 19:41:07 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	input_loop(t_prgm *vars)
 
 	while (1)
 	{
-		vars->cmd_line = readline("minishell$");
+		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
 			return (0);
 		flag = 1;
@@ -47,7 +47,7 @@ int	input_loop(t_prgm *vars)
 			{
 				while (i < vars->pipe_ct + 1)
 				{
-					free(vars->array_tokens[i].token_str);
+					free(vars->tokens[i].t_str);
 					i++;
 				}
 			}
