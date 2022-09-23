@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = pipex.a
 
 LIBS = libs/
 
@@ -28,7 +28,7 @@ SRCS = srcs/check_input.c\
 	srcs/utils_2.c\
 	srcs/errors.c\
 	srcs/utils_3.c\
-	srcs/here_doc.c
+	srcs/pipex.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -40,13 +40,14 @@ $(NAME) :
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	make -C $(GNL)
-	$(CC) $(CFLAGS) main.c $(SRCS) $(LIBFT)libft.a $(FT_PRINTF)libftprintf.a $(GNL)gnl.a -o $(NAME)
+	$(CC) $(CFLAGS) -c $(SRCS) -L $(LIBFT)libft.a -L $(FT_PRINTF)libftprintf.a -L $(GNL)gnl.a
+	@mv -f ./*.o srcs/
+	ar rcs $(NAME) ${OBJS}
 
 bonus :
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	make -C $(GNL)
-	$(CC) $(CFLAGS) main_bonus.c $(SRCS) $(LIBFT)libft.a $(FT_PRINTF)libftprintf.a $(GNL)gnl.a -o $(NAME)
 
 clean :
 	make clean -C $(LIBFT)

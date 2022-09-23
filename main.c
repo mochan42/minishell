@@ -5,38 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 22:43:32 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/08/15 22:43:32 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/09/22 23:56:23 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/22 23:56:23 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "./minishell.h"
+int	input_loop(t_prgm *vars);
 
-int	main(int argc, char **argv, char **envp)
+int	main(int ac, char **av, char **env)
 {
-	t_pipe	p;
+	t_prgm	*ms;
 
-	ft_init_pipe(&p, argc, argv, envp);
-	if (ft_valid_nb_args(argc) == 0)
-		exit(0);
-	if (ft_valid_args(&p) == 0)
-		exit(0);
-	ft_generate_p(&p);
-	while (p.child < p.nb_cmd)
-	{
-		p.pid[p.child] = fork();
-		if (p.pid[p.child] < 0)
-		{
-			perror("Error fork ");
-			exit(0);
-		}
-		if (p.pid[p.child] == 0)
-		{
-			ft_childs_process(&p);
-			execve(p.cmds[p.child].bin_path, p.cmds[p.child].options, p.env);
-		}
-		p.child += 1;
-	}
-	ft_parent_process(&p);
+	(void)ac;
+	(void)av;
+	ms = malloc(sizeof(t_prgm) * 1);
+	ms->env = env;
+	initialise_ms(ms);
+	// print_dir();
+	//input_loop(ms);
+	//free_stuff(ms);
 	return (0);
 }

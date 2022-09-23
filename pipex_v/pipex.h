@@ -21,46 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-
-typedef struct s_env
-{
-	struct s_env	*next;
-	struct s_env	*prev;
-	char			*key;
-	char			*value;
-} 				t_env;
-typedef struct s_pipe
-{
-	int		fd[MAX_CMD][2];
-	int		child;
-	int		pid[MAX_CMD];
-	int		nb_cmd;
-	int		status;
-	t_env	envp;
-	char	error[MAX_CMD][100];
-	char	*tmp_file;
-	int		fd_hd;
-}				t_pipe;
-typedef struct s_token
-{
-	char	*in;
-	char	*out;
-	char	*infile;
-	char	*outfile;
-	char	*bin;
-	int		built_in;
-	char	**options;
-	char	*t_str;
-	char	*cmd;
-}				t_token;
-typedef struct s_prgm
-{
-	char	*cmd_line;
-	char	**env; //transform into a linked list
-	t_token	*tokens;
-	int		pipe_ct;
-	t_pipe	p;
-}	t_prgm;
+# include "../parsing/inc/parser.h"
 
 /* check_input.c */
 //int		ft_valid_nb_args(int argc);

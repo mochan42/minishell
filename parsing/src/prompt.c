@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/22 19:41:07 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/23 03:07:55 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/parser.h"
 
 // Function to print Current Directory.
 void	print_dir(void)
@@ -57,17 +57,17 @@ int	input_loop(t_prgm *vars)
 	return (0);
 }
 
-int	main(int ac, char **av, char **env)
-{
-	t_prgm	*ms;
+// int	main(int ac, char **av, char **env)
+// {
+// 	t_prgm	*ms;
 
-	(void)ac;
-	(void)av;
-	ms = malloc(sizeof(t_prgm) * 1);
-	ms->env = env;
-	init(ms);
-	// print_dir();
-	input_loop(ms);
-	free_stuff(ms);
-	return (0);
-}
+// 	(void)ac;
+// 	(void)av;
+// 	ms = malloc(sizeof(t_prgm) * 1);
+// 	ms->env = env;
+// 	init(ms);
+// print_dir();
+// 	input_loop(ms);
+// 	free_stuff(ms);
+// 	return (0);
+// }
