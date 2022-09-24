@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 23:57:45 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/22 23:57:45 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/05/01 16:13:20 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/05/01 16:13:20 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+/**---------------------------------------------------------------------------*/
+/* This functions is almost same with strchr, the only difference reversing
+*/
 
-# include "./libft/libft.h"
-# include "./parsing/inc/parser.h"
-# include "./pipex_v/pipex.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	int		size;
 
-int     ms_executor(t_prgm *vars);
-
-#endif
+	size = ft_strlen(s);
+	while (size >= 0)
+	{
+		if (s[size] == (char)c)
+			return ((char *)(s + size));
+		size--;
+	}
+	return (0);
+}

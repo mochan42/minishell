@@ -8,10 +8,14 @@ MACHINE				:= $(shell uname -s)
 CC					:= gcc
 CFLAGS				:= -Wall -Wextra -Werror
 
+
+LIB_MINISHELL		:= -I .
+LIB_READLINE_MAC	:= -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+
 RM					:= rm -rf
 
-PARSER				:= parsing
-EXEC				:= pipex_v
+PARSER				:= ./parsing
+EXEC				:= ./pipex_v
 
 # **************************************************************************** #
 # COLORS
@@ -33,7 +37,10 @@ ifeq ($(MACHINE), Darwin)
 	make -C $(PARSER)
 	@echo "$(BLUE)make $(EXEC)$(END_COLOR)"
 	make -C $(EXEC)
-	$(CC) $(CFLAGS) $(PARSER)/parsing.a $(EXEC)/pipex.a $(LIB_READLINE_MAC) main -o $(NAME)
+	$(CC) $(CFLAGS) -I . $(PARSER)/parsing.a $(EXEC)/pipex.a ./parsing/libft/libft.a \
+	./pipex_v/libs/ft_printf/libftprintf.a \
+	./pipex_v/libs/gnl/gnl.a \
+	 $(LIB_READLINE_MAC) main.c -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
 # -C	:	make option that tells make to change directory before execution.
 else
@@ -41,7 +48,7 @@ else
 	make -C $(PARSER)
 	@echo "$(BLUE)make $(EXEC)$(END_COLOR)"
 	make -C $(EXEC)
-	$(CC) $(CFLAGS) $(PARSER)/parsing.a $(EXEC)/pipex.a $(LIB_READLINE_LINUX) main.c -o $(NAME)
+	$(CC) $(CFLAGS) -L $(PARSER)/parsing.a -L $(EXEC)/pipex.a $(LIB_READLINE_LINUX) main.c -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
 # -C	:	make option that tells make to change directory before execution.
 endif
@@ -53,6 +60,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(OBJ_DIR)
 	make fclean -C $(PARSER)
 	make fclean -C $(EXEC)
 

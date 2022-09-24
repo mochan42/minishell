@@ -40,7 +40,7 @@ $(NAME) :
 	make -C $(LIBFT)
 	make -C $(FT_PRINTF)
 	make -C $(GNL)
-	$(CC) $(CFLAGS) -c $(SRCS) -L $(LIBFT)libft.a -L $(FT_PRINTF)libftprintf.a -L $(GNL)gnl.a
+	$(CC) $(CFLAGS) -c $(SRCS) -I $(LIBFT)libft.a -I $(FT_PRINTF)libftprintf.a -I $(GNL)gnl.a
 	@mv -f ./*.o srcs/
 	ar rcs $(NAME) ${OBJS}
 

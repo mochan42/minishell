@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/23 03:42:06 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:00:21 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ typedef struct s_prgm
 
 /*  init.c */
 // char		*find_path_in_envp(t_prgm vars);
-void		initialise_ms(t_prgm *vars);
+//void		initialise_ms(t_prgm *vars);
+void		init(t_prgm *vars);
 void		init_each_token(t_token *token);
 void		init_all_tokens(t_prgm *vars);
 

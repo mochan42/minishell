@@ -10,12 +10,14 @@ CFLAGS				:= -Wall -Wextra -Werror
 
 RM					:= rm -rf
 INCS				:= -I ./inc/
-LIB_READLINE_MAC	:= -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+LIB_READLINE_MAC	:= -I $(HOME)/goinfre/.brew/opt/readline/include/
+#LIB_READLINE_MAC	:= -I $(HOME)/goinfre/.brew/opt/readline/include/  
 LIB_READLINE_LINUX	:= -lreadline
 HEADER				:= ./inc/parser.h
 
 LIBFT_DIR			:= libft
-LIBFT_A				:= ./libft/libft.a
+LIBFT_A				:= ./libft/ #libft.a
+LIBFT_H				:= ./libft/libft.h
 
 SRC_DIR				:= ./src/
 OBJ_DIR				:= ./obj/
@@ -48,8 +50,9 @@ all : $(NAME)
 $(NAME):
 ifeq ($(MACHINE), Darwin)
 	@echo "$(BLUE)make $(LIBFT_DIR)$(END_COLOR)"
+	make -C $(LIBFT_DIR)
 	make bonus -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -c $(SRC) -L $(LIBFT_A) -L $(LIB_READLINE_MAC)
+	$(CC) $(CFLAGS) -c $(SRC)
 	@mv -f ./*.o src/
 	ar rcs $(NAME) ${OBJ}
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
