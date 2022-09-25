@@ -1,15 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_1.c                                  :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:30:57 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 18:14:40 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	(*del)(lst->content);
+	free(lst);
+}

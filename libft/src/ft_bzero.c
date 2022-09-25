@@ -1,15 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_1.c                                  :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:30:57 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 16:21:39 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:26:49 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
+void	ft_bzero(void *s, size_t n)
+{
+	int		i;
+	char	*s_int;
+
+	s_int = (char *)s;
+	i = 0;
+	while (i < (int)n)
+	{
+		*(s_int + i) = 0;
+		i++;
+	}
+}

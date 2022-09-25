@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 23:57:45 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/22 23:57:45 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/06/09 03:16:39 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/06/09 03:16:39 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../inc/helpers.h"
 
-# include "./libft/inc/libft.h"
-# include "./parsing/inc/parser.h"
-# include "./pipex_v/inc/pipex.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-
-
-
-#endif
+void	ft_print_char(int c, int *str_len)
+{
+	write(1, &c, 1);
+	*str_len += 1;
+}

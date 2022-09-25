@@ -6,10 +6,11 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/24 17:07:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/25 16:30:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 // char	**parse_for_pipe(t_prgm *vars)

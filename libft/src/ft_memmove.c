@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 18:35:07 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:48 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	i;
+	char	*dst_int;
+	char	*src_int;
+	size_t	i;
 
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	dst_int = (char *)dst;
+	src_int = (char *)src;
+	if (!dst && !src)
+		return (NULL);
+	if (src_int > dst_int)
 	{
-		free(table[i]);
-		i++;
+		i = 0;
+		while (i < len)
+		{
+			dst_int[i] = src_int[i];
+			i++;
+		}
+		return (dst_int);
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	while (len > 0)
+	{
+		dst_int[len - 1] = src_int[len - 1];
+		len--;
+	}
+	return (dst_int);
 }

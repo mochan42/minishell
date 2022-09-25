@@ -1,15 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_1.c                                  :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:30:57 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/11 22:50:52 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:36:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	int	i;
+	int	length;
+
+	if (!s)
+		return ;
+	i = 0;
+	length = ft_strlen(s);
+	while (i < length)
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}
