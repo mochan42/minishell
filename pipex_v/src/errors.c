@@ -35,7 +35,7 @@ void	ft_print_err_message(t_prgm *vars)
 	while (i < vars->pipe_ct)
 	{
 		if (vars->p.error[i][0] != '\0')
-			ft_printf("%s\n", vars->p.error[i]);
+			printf("%s\n", vars->p.error[i]);
 		i++;
 	}
 }

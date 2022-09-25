@@ -14,7 +14,6 @@
 # define PIPEX_H
 # define MAX_CMD  150
 # include "../../libft/inc/libft.h"
-# include "../../ft_printf/inc/ft_printf.h"
 # include "../../gnl/inc/get_next_line.h"
 # include "../../parsing/inc/parser.h"
 # include <stdlib.h>

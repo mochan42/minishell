@@ -33,7 +33,7 @@ void	ft_generate_p(t_prgm *vars)
 // {
 // 	if (argc < 5)
 // 	{
-// 		ft_printf("Error : fews arguments\n");
+// 		printf("Error : fews arguments\n");
 // 		return (0);
 // 	}
 // 	return (1);

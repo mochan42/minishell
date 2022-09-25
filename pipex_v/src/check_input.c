@@ -17,12 +17,12 @@
 // {
 // 	if (argc < 5)
 // 	{
-// 		ft_printf("Error : fews arguments\n");
+// 		printf("Error : fews arguments\n");
 // 		return (0);
 // 	}
 // 	if (argc > 5)
 // 	{
-// 		ft_printf("Error : too much arguments\n");
+// 		printf("Error : too much arguments\n");
 // 		return (0);
 // 	}
 // 	return (1);
