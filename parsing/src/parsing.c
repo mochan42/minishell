@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:30:52 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:22:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // 	return (tab);
 // }
 
-void	parsing_pipes(t_prgm *vars)
+void	split_pipes(t_prgm *vars)
 {
 	int		i;
 	// char	**one_token;
@@ -130,9 +130,48 @@ void	parsing_out_redir_heredoc(t_prgm *vars)
 	}
 }
 
+void	split_in_redir_heredoc(t_prgm *vars)
+{
+	int		i;
+	int		j;
+	char	***in_redir_heredoc_tab;
+	
+	in_redir_heredoc_tab = malloc(sizeof(char *) * (vars->pipe_ct + 1));
+	i = 0;
+	while (i < vars->pipe_ct + 1)
+	{
+		printf("i = %d \n", i);
+		if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<", 1) != NULL))
+		{
+			in_redir_heredoc_tab[i] = ft_split(vars->tokens[i].t_str, '<');
+			printf("\t< found\n");
+		}
+		else if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<<", 2) != NULL))
+		{
+			in_redir_heredoc_tab[i] = ft_split_2(vars->tokens[i].t_str, "<<");
+			printf("<< found\n");
+		}
+		else
+			in_redir_heredoc_tab[i] = &vars->tokens[i].t_str;
+		i++;
+	}
+	i = 0;
+	while (i < vars->pipe_ct + 1)
+	{
+		j = 0;
+		while (in_redir_heredoc_tab[i][j] != NULL)
+		{
+			printf("%s\n", in_redir_heredoc_tab[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	parsing(t_prgm *vars)
 {
-	parsing_pipes(vars);
+	split_pipes(vars);
 	parsing_in_redir_heredoc(vars);
 	parsing_out_redir_heredoc(vars);
+	split_in_redir_heredoc(vars);
 }

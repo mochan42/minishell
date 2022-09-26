@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/25 16:37:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:22:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,17 @@ void		free_stuff(t_prgm *vars);
 /* parsing.c */
 // char		**parse_for_pipe(t_prgm *vars);
 // char		**parse_for_space(t_prgm *vars);
+void		split_pipes(t_prgm *vars);
 void		parsing(t_prgm *vars);
-void		parsing_pipes(t_prgm *vars);
 void		parsing_in_redir_heredoc(t_prgm *vars);
 void		parsing_out_redir_heredoc(t_prgm *vars);
 char		*retrieve_infile(t_prgm *vars);
-// prompt.c
-int	input_loop(t_prgm *vars);
+
+/* parsing_utils_1.c */
+void		ft_fill_splited_array_2(char **array_split, char *s, char *needle);
+int			ft_nb_words_2(char const *s, char *needle);
+char		**ft_split_2(char const *s, char *needle);
+
+/* prompt.c */
+int			input_loop(t_prgm *vars);
 #endif

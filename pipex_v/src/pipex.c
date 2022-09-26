@@ -15,7 +15,12 @@
 
 int	ms_executor(t_prgm *vars)
 {
-	printf("vars->pipe_ct = %d\n", vars->pipe_ct);
+	char *args[2];
+
+	args[0] = "ls";
+	args[1] = NULL;
+	// printf("vars->pipe_ct = %d\n", vars->pipe_ct);
+	execve("/bin/ls", args, vars->env);
 	return (0);
 	ft_init_pipe(vars);
 	if (ft_valid_args(vars) == 0)
