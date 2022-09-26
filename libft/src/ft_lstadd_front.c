@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 16:05:47 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	i;
-
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
-	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	if (!new)
+		return ;
+	new->next = *(lst + 0);
+	*(lst + 0) = new;
 }

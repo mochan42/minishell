@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/25 19:52:55 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:27:22 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
-
-void	free_table(char **table)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
-	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

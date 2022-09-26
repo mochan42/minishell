@@ -5,22 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/16 14:39:49 by fakouyat          #+#    #+#              #
-#    Updated: 2022/08/16 14:39:49 by fakouyat         ###   ########.fr        #
+#    Created: 2022/08/16 14:47:53 by fakouyat          #+#    #+#              #
+#    Updated: 2022/08/16 14:47:53 by fakouyat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # **************************************************************************** #
 # VARIABLES
 
-NAME				:= pipex.a
+NAME				:= gnl.a
 
 CC					:= gcc
 CFLAGS				:= -Wall -Wextra -Werror
 
 RM					:= rm -rf
 INCS				:= -I ./inc/
-HEADER				:= ./inc/pipex_v.h
+HEADER				:= ./inc/get_next_line.h
 
 SRC_DIR				:= ./src/
 OBJ_DIR				:= ./obj/
@@ -36,9 +36,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	check_input.c utils.c parent.c exec_cmd.c\
-						childs_process.c utils_2.c errors.c utils_3.c\
-						pipex.c
+SRC_FILES				:= get_next_line.c get_next_line_utils.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 
@@ -53,6 +51,7 @@ all : $(NAME)
 $(NAME) : $(OBJ_DIR) $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
+# -C	:	make option that tells make to change directory before execution.
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS)  -c $< -o $@ $(INCS)
@@ -67,11 +66,11 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
-clean :
-	rm -rf $(OBJ)
+clean : 
+	$(RM) $(OBJ)
 
 fclean : clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 	$(RM) $(OBJ_DIR)
 
 re : fclean all

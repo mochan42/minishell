@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 23:57:45 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/22 23:57:45 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/08/31 18:47:09 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/08/31 18:47:09 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../minishell.h"
+//#include "../inc/pipex.h"
 
-# include "./libft/inc/libft.h"
-# include "./parsing/inc/parser.h"
-# include "./pipex_v/inc/pipex.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+void	ft_generate_p(t_prgm *vars)
+{
+	int	i;
 
+	i = 0;
+	while (i < vars->pipe_ct)
+	{
+		if (pipe(vars->p.fd[i]) < 0)
+		{
+			perror("Error pipe ");
+			exit(0);
+		}
+		i++;
+	}
+}
 
-
-#endif
+// int	ft_valid_nb_args_bonus(int argc)
+// {
+// 	if (argc < 5)
+// 	{
+// 		printf("Error : fews arguments\n");
+// 		return (0);
+// 	}
+// 	return (1);
+// }

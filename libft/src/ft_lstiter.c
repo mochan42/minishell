@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 19:26:23 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:18 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	while (lst)
 	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+		(*f)(lst->content);
+		lst = lst->next;
+	}	
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "./minishell.h"
-int	input_loop(t_prgm *vars);
+#include "./parsing/inc/parser.h"
 
 int	main(int ac, char **av, char **env)
 {
@@ -21,9 +21,9 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	ms = malloc(sizeof(t_prgm) * 1);
 	ms->env = env;
-	initialise_ms(ms);
+	init(ms);
 	// print_dir();
-	//input_loop(ms);
+	input_loop(ms);
 	//free_stuff(ms);
 	return (0);
 }

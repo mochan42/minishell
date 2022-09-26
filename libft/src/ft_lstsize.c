@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 16:24:35 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:38 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	size = 0;
+	while (lst)
 	{
-		free(table[i]);
-		i++;
+		lst = lst->next;
+		size++;
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	return (size);
 }

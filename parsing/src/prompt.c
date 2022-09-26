@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/23 03:07:55 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:25:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 // Function to print Current Directory.
@@ -26,6 +27,7 @@ int	input_loop(t_prgm *vars)
 {
 	int	flag;
 	int	i;
+	int pid;
 
 	while (1)
 	{
@@ -37,7 +39,11 @@ int	input_loop(t_prgm *vars)
 		{
 			add_history(vars->cmd_line);
 			parsing(vars);
-			ms_executer(vars);
+			pid = fork();
+			if (pid == 0)
+				ms_executor(vars);
+			else
+				wait(NULL);
 			flag = 0;
 		}
 		i = 0;

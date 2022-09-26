@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/03 18:51:16 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	i;
+	unsigned char	*s1_char;
+	unsigned char	*s2_char;
+	size_t			i;
 
+	s1_char = (unsigned char *)s1;
+	s2_char = (unsigned char *)s2;
 	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	while (i < n)
 	{
-		free(table[i]);
+		if (s1_char[i] != s2_char[i])
+			return (s1_char[i] - s2_char[i]);
 		i++;
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	return (0);
 }

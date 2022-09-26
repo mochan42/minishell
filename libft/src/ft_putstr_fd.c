@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/11 23:03:23 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:36:04 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+static int	ft_lenght_str(char *s)
 {
 	int	i;
 
 	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
-	{
-		free(table[i]);
+	while (s[i] != 0)
 		i++;
-	}
-	free(table);
+	return (i);
 }
 
-void	free_stuff(t_prgm *vars)
+void	ft_putstr_fd(char *s, int fd)
 {
-	free(vars->tokens);
-	free(vars);
+	if (!s)
+		return ;
+	write (fd, s, ft_lenght_str(s));
 }

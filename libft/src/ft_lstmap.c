@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/05/12 19:31:46 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:32 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	i;
+	t_list	*new_list;
+	t_list	*node;
 
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	new_list = 0;
+	while (lst)
 	{
-		free(table[i]);
-		i++;
+		node = ft_lstnew((*f)(lst->content));
+		if (node == NULL)
+		{
+			(*del)(node);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, node);
+		lst = lst->next;
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	return (new_list);
 }

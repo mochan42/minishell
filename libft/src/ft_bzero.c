@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 16:21:39 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:26:49 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
+#include "../inc/libft.h"
 
-void	free_table(char **table)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	int		i;
+	char	*s_int;
 
+	s_int = (char *)s;
 	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	while (i < (int)n)
 	{
-		free(table[i]);
+		*(s_int + i) = 0;
 		i++;
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
 }

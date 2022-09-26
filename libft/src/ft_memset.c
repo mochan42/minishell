@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:05 by mochan           ###   ########.fr       */
+/*   Created: 2022/04/26 15:27:57 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/09/25 15:35:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
-#include "../inc/parser.h"
-
-void	free_table(char **table)
+#include "../inc/libft.h"
+/**---------------------------------------------------------------------------*/
+/* This functions replace the first len content of b by int c and 
+	return a pointer to b
+*/
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
+	int		i;
+	char	*b_int;
 
 	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
+	b_int = (char *)b;
+	while (i < (int)len)
 	{
-		free(table[i]);
+		*(b_int + i) = (unsigned char)c;
 		i++;
 	}
-	free(table);
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tokens);
-	free(vars);
+	return (b_int);
 }
