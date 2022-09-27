@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/26 22:22:43 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/27 15:28:00 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,15 +141,16 @@ void	split_in_redir_heredoc(t_prgm *vars)
 	while (i < vars->pipe_ct + 1)
 	{
 		printf("i = %d \n", i);
-		if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<", 1) != NULL))
+		if (vars->tokens[i].in != NULL && ft_strlen(vars->tokens[i].in) == 1)
 		{
 			in_redir_heredoc_tab[i] = ft_split(vars->tokens[i].t_str, '<');
 			printf("\t< found\n");
 		}
-		else if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<<", 2) != NULL))
+
+		else if (vars->tokens[i].in != NULL && ft_strlen(vars->tokens[i].in) == 2)
 		{
 			in_redir_heredoc_tab[i] = ft_split_2(vars->tokens[i].t_str, "<<");
-			printf("<< found\n");
+			printf("\t<< found\n");
 		}
 		else
 			in_redir_heredoc_tab[i] = &vars->tokens[i].t_str;
