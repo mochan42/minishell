@@ -11,17 +11,44 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
 
+/**
+* Executing the first command :
+* check in : "", "<<", "<"
+* check infile
+* redirect | stop
+* check out "", ">>", "<"
+* check outfile
+* redirect | stop
+* let execute
+*/
 void	ft_exec_cmd_1(t_prgm *vars)
 {
-	(void)vars;
-	// if (p->fd_hd < 0)
-	// 	p->fd_args[0] = open(p->av[1], O_RDONLY, 0777);
-	// else
-	// p->fd_args[0] = p->fd_hd;
-	//dup2(p->fd_hd, 0);
-	//dup2(p->fd[0][1], 1);
+	//return ;
+	vars->tokens[0].in = "<<";
+	//vars->tokens[0].out = ">>";
+	if (vars->tokens[0].in == NULL)
+		;
+	else if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
+	{
+		ft_here_doc(vars, 0);
+		dup2(vars->tokens[0].fd_args[0], 0);
+	}
+	/**----Out---*/
+	if (vars->tokens[0].out == NULL)
+	{
+		if (vars->pipe_ct + 1 >= 2)
+			dup2(vars->p.fd[0][1], 1);
+	}
+	else
+	{
+		vars->tokens[0].outfile = *(ft_split(ft_strnstr(vars->tokens[0].t_str, ">>", ft_strlen(vars->tokens[0].t_str)) + 2, ' '));
+		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0)
+			vars->tokens[0].fd_args[1] = open(vars->tokens[0].outfile, O_CREAT | O_RDWR | O_APPEND, 0777);
+		else if (ft_strncmp(vars->tokens[0].out, ">", 1) == 0)
+			vars->tokens[0].fd_args[1] = open(vars->tokens[0].outfile, O_CREAT | O_RDWR | O_TRUNC, 0777);
+		dup2(vars->tokens[0].fd_args[1], 1);
+	}
 }
 
 void	ft_exec_cmd_last(t_prgm *vars)

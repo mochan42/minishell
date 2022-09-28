@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:01 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/28 03:56:27 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	init_each_token(t_token *token)
 {
 	token->in = NULL;
 	token->out = NULL;
-	token->infile = NULL;
-	token->outfile = NULL;
+	token->infile = "";
+	token->outfile = "";
 	token->bin = NULL;
 	token->built_in = 0;
 	token->options = NULL;

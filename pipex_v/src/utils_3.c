@@ -18,7 +18,7 @@ void	ft_generate_p(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct)
+	while (i < vars->pipe_ct + 1)
 	{
 		if (pipe(vars->p.fd[i]) < 0)
 		{

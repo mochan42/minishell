@@ -39,8 +39,6 @@ typedef struct s_pipe
 	int		status;
 	t_env	envp;
 	char	error[MAX_CMD][100];
-	char	*tmp_file;
-	int		fd_hd;
 }				t_pipe;
 
 typedef struct s_token
@@ -55,6 +53,7 @@ typedef struct s_token
 	char	*t_str;
 	char	*t_str_exp; 
 	char	*cmd;
+	int		fd_args[2];
 }				t_token;
 
 typedef struct s_prgm
@@ -96,7 +95,7 @@ void	ft_print_err_message(t_prgm *vars);
 void	ft_generate_p(t_prgm *vars);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
-//void	ft_here_doc(t_pipe *p);
+void	ft_here_doc(t_prgm *vars, int cmd);
 
 /* pipex.c */
 int		ms_executor(t_prgm *vars);

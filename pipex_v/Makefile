@@ -38,7 +38,7 @@ END_COLOR			:= \033[0;39m
 
 SRC_FILES			:=	check_input.c utils.c parent.c exec_cmd.c\
 						childs_process.c utils_2.c errors.c utils_3.c\
-						pipex.c
+						here_doc.c pipex.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 

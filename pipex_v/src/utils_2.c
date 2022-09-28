@@ -16,11 +16,8 @@
  /* must be analysed again*/
 void	ft_init_pipe(t_prgm *vars)
 {
-	//vars->p.nb_cmd = vars->pipe_ct + 1;
 	vars->p.child = 0;
 	//vars->p->env = ft_env_to_local_env(vars->env);
-	vars->p.tmp_file = (char *)ft_calloc(sizeof(char), 1);
-	vars->p.fd_hd = -1;
 }
 
 void	free_vars(t_prgm *vars)

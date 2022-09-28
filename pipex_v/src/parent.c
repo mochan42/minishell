@@ -18,7 +18,7 @@ void	ft_parent_process(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct)
+	while (i < vars->pipe_ct + 1)
 	{
 		close(vars->p.fd[i][0]);
 		close(vars->p.fd[i][1]);
@@ -27,7 +27,7 @@ void	ft_parent_process(t_prgm *vars)
 	//close(vars->fd_args[0]);
 	//close(vars->fd_args[1]);
 	i = 0;
-	while (i < vars->pipe_ct)
+	while (i < vars->pipe_ct + 1)
 	{
 		wait(&vars->p.status);
 		i++;

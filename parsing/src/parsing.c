@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:30:52 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/28 02:25:04 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	parsing_pipes(t_prgm *vars)
 			vars->pipe_ct += 1;
 		i++;
 	}
-	printf("pipe_ct = %d\n", vars->pipe_ct);
 	if (vars->pipe_ct > 0)
 	{
 		tab_token = ft_split(vars->cmd_line, '|');
@@ -52,7 +51,6 @@ void	parsing_pipes(t_prgm *vars)
 		while (i < vars->pipe_ct + 1)
 		{
 			vars->tokens[i].t_str = tab_token[i];
-			printf("token %d :%s\n", i, vars->tokens[i].t_str);
 			i++;
 		}
 	}
@@ -62,7 +60,6 @@ void	parsing_pipes(t_prgm *vars)
 		// one_token = ft_split(vars->cmd_line, ' ');
 		vars->tokens = malloc(sizeof(t_token) * 1);
 		vars->tokens[i].t_str = vars->cmd_line;
-		printf("token %d :%s\n", i, vars->tokens[i].t_str);
 		// free(one_token);
 	}
 	init_all_tokens(vars);
@@ -84,17 +81,14 @@ void	parsing_in_redir_heredoc(t_prgm *vars)
 			if (j > 0 && vars->tokens[i].t_str[j] == '<' && vars->tokens[i].t_str[j-1] == '<')
 			{
 				vars->tokens[i].in = "<<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
 				break;
 			}
 			else if (vars->tokens[i].t_str[j] == '<')
 			{
 				vars->tokens[i].in = "<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
 				break;
 			}
-			else
-				j--;
+			j--;
 		}
 		i++;
 	}
@@ -114,17 +108,14 @@ void	parsing_out_redir_heredoc(t_prgm *vars)
 			if (vars->tokens[i].t_str[j+1] != '\0' && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j+1] == '>')
 			{
 				vars->tokens[i].out = ">>";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
 				break;
 			}
 			else if (vars->tokens[i].t_str[j] == '>')
 			{
 				vars->tokens[i].out = ">";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
 				break;
 			}
-			else
-				j++;
+			j++;
 		}
 		i++;
 	}
