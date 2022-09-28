@@ -6,46 +6,31 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/27 15:28:00 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/28 13:23:24 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../../minishell.h"
 #include "../inc/parser.h"
 
-// char	**parse_for_pipe(t_prgm *vars)
-// {
-// 	char	**tab;
-
-// 	tab = ft_split(vars->cmd_line, '|');
-// 	return (tab);
-// }
-
-// char	**parse_for_space(t_prgm *vars)
-// {
-// 	char	**tab;
-
-// 	tab = ft_split(vars->cmd_line, ' ');
-// 	return (tab);
-// }
-
-void	split_pipes(t_prgm *vars)
+void	splitting_pipes(t_prgm *vars)
 {
 	int		i;
 	// char	**one_token;
 	char	**tab_token;
+	char	*pipes_loc;
 
 	i = 0;
-	while (vars->cmd_line[i] != '\0')
+	pipes_loc = find_pipes(vars->cmd_line);
+	while (pipes_loc[i] != '\0')
 	{
-		if (vars->cmd_line[i] == '|')
-			vars->pipe_ct += 1;
+		if (pipes_loc[i] == 'P')
+			vars->pipe_ct++;
 		i++;
 	}
-	printf("pipe_ct = %d\n", vars->pipe_ct);
 	if (vars->pipe_ct > 0)
 	{
-		tab_token = ft_split(vars->cmd_line, '|');
+		tab_token = ft_split_pipes(vars->cmd_line, 'P');
 		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct + 1));
 		
 		i = 0;
@@ -171,7 +156,7 @@ void	split_in_redir_heredoc(t_prgm *vars)
 
 void	parsing(t_prgm *vars)
 {
-	split_pipes(vars);
+	splitting_pipes(vars);
 	parsing_in_redir_heredoc(vars);
 	parsing_out_redir_heredoc(vars);
 	split_in_redir_heredoc(vars);
