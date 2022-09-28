@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/28 13:12:08 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/28 21:34:01 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,13 @@
 void		init(t_prgm *vars);
 void		init_each_token(t_token *token);
 void		init_all_tokens(t_prgm *vars);
+
+/* env.c */
+t_env		*init_env(t_prgm *vars);
+t_env		*last_node(t_env *node);
+t_env		*new_node(char *value);
+void		node_add_back(t_env **node, t_env *new);
+void		printlist(t_env *head);
 
 /* executer.c */
 // void		ms_executer(t_prgm *vars);

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:01 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/28 23:43:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ void	init_all_tokens(t_prgm *vars)
 void	init(t_prgm *vars)
 {
 	vars->pipe_ct = 0;
+	vars->env_head = NULL;
+	vars->env_head = init_env(vars);
 }
