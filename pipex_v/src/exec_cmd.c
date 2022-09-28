@@ -24,9 +24,7 @@
 */
 void	ft_exec_cmd_1(t_prgm *vars)
 {
-	//return ;
 	vars->tokens[0].in = "<<";
-	//vars->tokens[0].out = ">>";
 	if (vars->tokens[0].in == NULL)
 		;
 	else if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
@@ -37,7 +35,7 @@ void	ft_exec_cmd_1(t_prgm *vars)
 	/**----Out---*/
 	if (vars->tokens[0].out == NULL)
 	{
-		if (vars->pipe_ct + 1 >= 2)
+		if (vars->pipe_ct >= 1)
 			dup2(vars->p.fd[0][1], 1);
 	}
 	else
@@ -53,7 +51,6 @@ void	ft_exec_cmd_1(t_prgm *vars)
 
 void	ft_exec_cmd_last(t_prgm *vars)
 {
-	(void)vars;
 	// if (p->fd_hd < 0)
 	// 	p->fd_args[1] = open(p->av[p->ac - 1],
 	// 			O_CREAT | O_RDWR | O_TRUNC, 0777);
@@ -63,6 +60,27 @@ void	ft_exec_cmd_last(t_prgm *vars)
 	// dup2(p->fd[p->child - 1][0], 0);
 	// dup2(p->fd_args[1], 1);
 	// close(p->fd_args[1]);
+
+	//vars->tokens[vars->p.child].in = "<<";
+	if (vars->tokens[vars->p.child].in == NULL)
+		dup2(vars->p.fd[vars->p.child - 1][0], 0);
+	else if (ft_strncmp(vars->tokens[vars->p.child].in, "<<", 2) == 0)
+	{
+		ft_here_doc(vars, vars->p.child);
+		dup2(vars->tokens[vars->p.child].fd_args[0], 0);
+	}
+	/**----Out---*/
+	if (vars->tokens[vars->p.child].out == NULL)
+		;
+	else
+	{
+		vars->tokens[vars->p.child].outfile = *(ft_split(ft_strnstr(vars->tokens[vars->p.child].t_str, ">>", ft_strlen(vars->tokens[vars->p.child].t_str)) + 2, ' '));
+		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0)
+			vars->tokens[vars->p.child].fd_args[1] = open(vars->tokens[vars->p.child].outfile, O_CREAT | O_RDWR | O_APPEND, 0777);
+		else if (ft_strncmp(vars->tokens[vars->p.child].out, ">", 1) == 0)
+			vars->tokens[vars->p.child].fd_args[1] = open(vars->tokens[vars->p.child].outfile, O_CREAT | O_RDWR | O_TRUNC, 0777);
+		dup2(vars->tokens[vars->p.child].fd_args[1], 1);
+	}
 }
 
 void	ft_close_fds(t_prgm *vars)

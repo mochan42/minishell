@@ -20,6 +20,7 @@ void	ft_childs_process(t_prgm *vars)
 		ft_exec_cmd_1(vars);
 	else if (vars->p.child > 0 && vars->p.child < vars->pipe_ct)
 	{
+		/*redirect for multiple commands*/
 		dup2(vars->p.fd[vars->p.child - 1][0], 0);
 		dup2(vars->p.fd[vars->p.child][1], 1);
 	}
