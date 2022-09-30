@@ -20,13 +20,13 @@ void	ft_init_pipe(t_prgm *vars)
 	//vars->p->env = ft_env_to_local_env(vars->env);
 }
 
-void	free_vars(t_prgm *vars)
+void	free_vars_p(t_prgm *vars)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < vars->p.nb_cmd)
+	while (i < vars->pipe_ct + 1)
 	{
 		j = 0;
 		while (vars->tokens[i].options[j])

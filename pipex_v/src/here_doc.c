@@ -19,18 +19,17 @@ void	ft_here_doc(t_prgm *vars, int cmd)
     char    *delimiter;
     //char    *value;
 
-    delimiter = *(ft_split(ft_strnstr(vars->tokens[cmd].t_str, "<<", ft_strlen(vars->tokens[cmd].t_str)) + 2, ' '));
+    delimiter = vars->tokens[cmd].infile;
 	vars->tokens[cmd].fd_args[0] = open("tmp.txt", O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
-		tmp_read = readline("> ");
+		tmp_read = get_next_line(0);
 		if (ft_strncmp(delimiter, tmp_read, ft_strlen(delimiter)) == 0)
 		{
 			free(tmp_read);
 			break ;
 		}
 		write(vars->tokens[cmd].fd_args[0], tmp_read, ft_strlen(tmp_read));
-		write(vars->tokens[cmd].fd_args[0], "\n", 1);
 		free(tmp_read);
 	}
 	close(vars->tokens[cmd].fd_args[0]);

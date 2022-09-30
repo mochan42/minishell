@@ -71,7 +71,7 @@ int		ft_valid_args(t_prgm *vars);
 void	ft_check_files(t_prgm *vars);
 void	ft_check_full_cmd_pt(t_prgm *vars, char *tmp, int cmd);
 /* utils_2.c*/
-void	free_p(t_prgm *vars);
+void	free_vars_p(t_prgm *vars);
 int		len_path(char **paths);
 void	ft_parse_all(t_prgm *vars, char **pt);
 void	ft_init_pipe(t_prgm *vars);
@@ -93,6 +93,7 @@ int		ft_is_error(t_prgm *vars);
 void	ft_print_err_message(t_prgm *vars);
 /* util_3.c */
 void	ft_generate_p(t_prgm *vars);
+void	free_2_pt(char **pt);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
 void	ft_here_doc(t_prgm *vars, int cmd);

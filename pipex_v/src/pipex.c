@@ -25,8 +25,8 @@ int	ms_executor(t_prgm *vars)
 		if (vars->p.pid[vars->p.child] == 0)
 		{
 			ft_childs_process(vars);
-			*(vars->tokens[0].options + 1) = NULL; /* just for test */
-			execve(vars->tokens[vars->p.child].bin, vars->tokens[vars->p.child].options, vars->env);
+			if (ft_is_error(vars) == 1)
+				execve(vars->tokens[vars->p.child].bin, vars->tokens[vars->p.child].options, vars->env);
 		}
 		vars->p.child += 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/28 03:56:27 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/01 01:17:22 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 
 void	init_each_token(t_token *token)
 {
-	token->in = NULL;
-	token->out = NULL;
+	token->in = "";
+	token->out = "";
 	token->infile = "";
 	token->outfile = "";
 	token->bin = NULL;

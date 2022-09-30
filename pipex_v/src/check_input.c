@@ -64,7 +64,7 @@ int	ft_valid_args(t_prgm *vars)
 	d_pt = ft_get_path(vars->env);
 	pt = ft_split(&d_pt[5], ':');
 	ft_parse_all(vars, pt);
-	free(pt);
+	free_2_pt(pt);
 	if (ft_is_error(vars) == 1)
 		return (1);
 	ft_print_err_message(vars);

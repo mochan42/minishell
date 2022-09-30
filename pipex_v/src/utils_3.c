@@ -29,6 +29,19 @@ void	ft_generate_p(t_prgm *vars)
 	}
 }
 
+void	free_2_pt(char **pt)
+{
+	int i;
+
+	i = 0;
+	while (pt[i])
+	{
+		free(pt[i]);
+		i++;
+	}
+	free(pt);
+}
+
 // int	ft_valid_nb_args_bonus(int argc)
 // {
 // 	if (argc < 5)

@@ -24,63 +24,75 @@
 */
 void	ft_exec_cmd_1(t_prgm *vars)
 {
-	vars->tokens[0].in = "<<";
-	if (vars->tokens[0].in == NULL)
-		;
-	else if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
-	{
+	vars->tokens[0].in = "<";
+	vars->tokens[0].infile = "file";
+	//vars->tokens[0].outfile= "file2";
+
+	//vars->tokens[0].outfile = "file2";
+	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
 		ft_here_doc(vars, 0);
-		dup2(vars->tokens[0].fd_args[0], 0);
-	}
-	/**----Out---*/
-	if (vars->tokens[0].out == NULL)
+	else if (ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
 	{
-		if (vars->pipe_ct >= 1)
-			dup2(vars->p.fd[0][1], 1);
+		if (access(vars->tokens[0].infile, F_OK | R_OK) != 0)
+		{
+			ft_bzero(vars->p.error[0], 100);
+			ft_strcat(vars->p.error[0], strerror(errno));
+			ft_strcat(vars->p.error[0], " : ");
+			ft_strcat(vars->p.error[0], vars->tokens[0].infile);
+			ft_print_err_message(vars);
+		}
+		else
+			vars->tokens[0].fd_args[0] = open(vars->tokens[0].infile, O_RDONLY, 0777);
 	}
+	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
+		dup2(vars->tokens[0].fd_args[0], 0);
+	/**----Out---*/
+	if (*vars->tokens[0].out == '\0' && (vars->pipe_ct >= 1))
+		dup2(vars->p.fd[0][1], 1);
 	else
 	{
-		vars->tokens[0].outfile = *(ft_split(ft_strnstr(vars->tokens[0].t_str, ">>", ft_strlen(vars->tokens[0].t_str)) + 2, ' '));
 		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0)
 			vars->tokens[0].fd_args[1] = open(vars->tokens[0].outfile, O_CREAT | O_RDWR | O_APPEND, 0777);
 		else if (ft_strncmp(vars->tokens[0].out, ">", 1) == 0)
 			vars->tokens[0].fd_args[1] = open(vars->tokens[0].outfile, O_CREAT | O_RDWR | O_TRUNC, 0777);
-		dup2(vars->tokens[0].fd_args[1], 1);
+		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0 || ft_strncmp(vars->tokens[0].out, ">", 1) == 0)
+			dup2(vars->tokens[0].fd_args[1], 1);
 	}
 }
 
 void	ft_exec_cmd_last(t_prgm *vars)
 {
-	// if (p->fd_hd < 0)
-	// 	p->fd_args[1] = open(p->av[p->ac - 1],
-	// 			O_CREAT | O_RDWR | O_TRUNC, 0777);
-	// else
-	// 	p->fd_args[1] = open(p->av[p->ac - 1],
-	// 			O_CREAT | O_RDWR | O_APPEND, 0777);
-	// dup2(p->fd[p->child - 1][0], 0);
-	// dup2(p->fd_args[1], 1);
-	// close(p->fd_args[1]);
+	//vars->tokens[0].out = ">>";
+	//vars->tokens[0].infile = "file";
+	//vars->tokens[0].outfile= "file2";
 
-	//vars->tokens[vars->p.child].in = "<<";
-	if (vars->tokens[vars->p.child].in == NULL)
-		dup2(vars->p.fd[vars->p.child - 1][0], 0);
-	else if (ft_strncmp(vars->tokens[vars->p.child].in, "<<", 2) == 0)
+	//vars->tokens[0].outfile = "file2";
+	if (*vars->tokens[vars->pipe_ct].in == '\0')
+		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
+	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0)
+		ft_here_doc(vars, vars->pipe_ct);
+	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 	{
-		ft_here_doc(vars, vars->p.child);
-		dup2(vars->tokens[vars->p.child].fd_args[0], 0);
+		if (access(vars->tokens[vars->pipe_ct].infile, F_OK | R_OK) != 0)
+		{
+			ft_bzero(vars->p.error[vars->pipe_ct], 100);
+			ft_strcat(vars->p.error[vars->pipe_ct], strerror(errno));
+			ft_strcat(vars->p.error[vars->pipe_ct], " : ");
+			ft_strcat(vars->p.error[vars->pipe_ct], vars->tokens[vars->pipe_ct].infile);
+			ft_print_err_message(vars);
+		}
+		else
+			vars->tokens[vars->pipe_ct].fd_args[vars->pipe_ct] = open(vars->tokens[vars->pipe_ct].infile, O_RDONLY, 0777);
 	}
+	if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
+		dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);
 	/**----Out---*/
-	if (vars->tokens[vars->p.child].out == NULL)
-		;
-	else
-	{
-		vars->tokens[vars->p.child].outfile = *(ft_split(ft_strnstr(vars->tokens[vars->p.child].t_str, ">>", ft_strlen(vars->tokens[vars->p.child].t_str)) + 2, ' '));
-		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0)
-			vars->tokens[vars->p.child].fd_args[1] = open(vars->tokens[vars->p.child].outfile, O_CREAT | O_RDWR | O_APPEND, 0777);
-		else if (ft_strncmp(vars->tokens[vars->p.child].out, ">", 1) == 0)
-			vars->tokens[vars->p.child].fd_args[1] = open(vars->tokens[vars->p.child].outfile, O_CREAT | O_RDWR | O_TRUNC, 0777);
-		dup2(vars->tokens[vars->p.child].fd_args[1], 1);
-	}
+	if (ft_strncmp(vars->tokens[vars->pipe_ct].out, ">>", 2) == 0)
+		vars->tokens[vars->pipe_ct].fd_args[1] = open(vars->tokens[vars->pipe_ct].outfile, O_CREAT | O_RDWR | O_APPEND, 0777);
+	else if (ft_strncmp(vars->tokens[vars->pipe_ct].out, ">", 1) == 0)
+		vars->tokens[vars->pipe_ct].fd_args[1] = open(vars->tokens[vars->pipe_ct].outfile, O_CREAT | O_RDWR | O_TRUNC, 0777);
+	if (ft_strncmp(vars->tokens[vars->pipe_ct].out, ">>", 2) == 0 || ft_strncmp(vars->tokens[vars->pipe_ct].out, ">", 1) == 0)
+		dup2(vars->tokens[vars->pipe_ct].fd_args[1], 1);
 }
 
 void	ft_close_fds(t_prgm *vars)

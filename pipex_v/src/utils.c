@@ -55,6 +55,8 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 		tmp[1] = ft_strjoin(paths[i], tmp[0]);
 		if (access(tmp[1], F_OK | X_OK) == 0)
 		{
+			if (ft_strncmp(tmp[2], "Ok", 2) == 0)
+				free(vars->tokens[cmd].bin);
 			vars->tokens[cmd].bin = ft_strdup(tmp[1]);
 			tmp[2] = "OK";
 		}
