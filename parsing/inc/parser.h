@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/28 21:34:01 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:43:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,17 @@ void		printlist(t_env *head);
 void		free_table(char **table);
 void		free_stuff(t_prgm *vars);
 
+/* infile.c */
+void		find_infile(t_prgm *vars);
+
+/* outfile.c */
+void		find_outfile(t_prgm *vars);
+
 /* parsing.c */
 // char		**parse_for_pipe(t_prgm *vars);
 // char		**parse_for_space(t_prgm *vars);
 void		splitting_pipes(t_prgm *vars);
 void		parsing(t_prgm *vars);
-void		parsing_in_redir_heredoc(t_prgm *vars);
-void		parsing_out_redir_heredoc(t_prgm *vars);
 char		*retrieve_infile(t_prgm *vars);
 
 /* parsing_utils_1.c */

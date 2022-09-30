@@ -6,7 +6,7 @@
 #    By: mochan <mochan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 13:29:32 by mochan            #+#    #+#              #
-#    Updated: 2022/09/28 21:16:32 by mochan           ###   ########.fr        #
+#    Updated: 2022/09/30 16:59:06 by mochan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ END_COLOR			:= \033[0;39m
 # SOURCES
 
 SRC_FILES			:=	prompt.c init.c free.c parsing.c executer.c \
-						parsing_utils_1.c parsing_utils_2.c env.c
+						parsing_utils_1.c parsing_utils_2.c env.c \
+						infile.c outfile.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 

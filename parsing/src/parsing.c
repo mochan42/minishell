@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/28 23:43:56 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:43:30 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,68 +54,6 @@ void	splitting_pipes(t_prgm *vars)
 	init_all_tokens(vars);
 }
 
-void	parsing_in_redir_heredoc(t_prgm *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		j = 0;
-		while(vars->tokens[i].t_str[j] != '\0')
-			j++;
-		while (j != -1)
-		{
-			if (j > 0 && vars->tokens[i].t_str[j] == '<' && vars->tokens[i].t_str[j-1] == '<')
-			{
-				vars->tokens[i].in = "<<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
-				break;
-			}
-			else if (vars->tokens[i].t_str[j] == '<')
-			{
-				vars->tokens[i].in = "<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
-				break;
-			}
-			else
-				j--;
-		}
-		i++;
-	}
-}
-
-void	parsing_out_redir_heredoc(t_prgm *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		j = 0;
-		while (vars->tokens[i].t_str[j] != '\0')
-		{
-			if (vars->tokens[i].t_str[j+1] != '\0' && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j+1] == '>')
-			{
-				vars->tokens[i].out = ">>";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
-				break;
-			}
-			else if (vars->tokens[i].t_str[j] == '>')
-			{
-				vars->tokens[i].out = ">";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
-				break;
-			}
-			else
-				j++;
-		}
-		i++;
-	}
-}
-
 // void	split_in_redir_heredoc(t_prgm *vars)
 // {
 // 	int		i;
@@ -158,8 +96,8 @@ void	parsing_out_redir_heredoc(t_prgm *vars)
 void	parsing(t_prgm *vars)
 {
 	splitting_pipes(vars);
-	parsing_in_redir_heredoc(vars);
-	parsing_out_redir_heredoc(vars);
 	// split_in_redir_heredoc(vars); // we will not split by redirection, heredoc
-	printlist(vars->env_head);
+	// printlist(vars->env_head); // just for debugging purposes
+	find_infile(vars);
+	find_outfile(vars);
 }

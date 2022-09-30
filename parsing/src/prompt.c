@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/26 14:25:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 14:21:24 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	input_loop(t_prgm *vars)
 	int	flag;
 	int	i;
 	int pid;
-
+	// int	counter;
+	
+	// counter = 0;
 	while (1)
 	{
 		vars->cmd_line = readline("minishell ⚽️$");
@@ -59,6 +61,7 @@ int	input_loop(t_prgm *vars)
 			}
 			vars->pipe_ct = 0;
 		}
+		// counter++;
 	}
 	return (0);
 }

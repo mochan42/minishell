@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/28 23:40:59 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 12:15:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_env	*init_env(t_prgm *vars)
 		vars->env++;
 	}
 	printf("env_size = %d\n\n", env_size);
-	res = malloc(sizeof(char *) * (env_size + 1));
+	res = malloc(sizeof(char **) * (env_size + 1));
 	keys = malloc(sizeof(char *) * (env_size + 1));
 	values = malloc(sizeof(char *) * (env_size + 1));
 	res[env_size] = NULL;
