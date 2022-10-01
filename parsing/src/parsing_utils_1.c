@@ -6,11 +6,10 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/28 13:06:43 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:36:03 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 /* helper function to fill array of strings for ft_split_2 (split by string delimiter)*/

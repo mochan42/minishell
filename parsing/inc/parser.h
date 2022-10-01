@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/30 17:43:43 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/01 17:46:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@
 // t_pipe	p;
 // }	t_prgm;
 
-
-
 // typedef struct s_env
 // {
 // 	struct s_env	*next;
@@ -119,7 +117,6 @@
 //     char            *value;
 // }                 t_env;
 
-
 /* ########################################################################## */
 /* CONSTANTS */
 
@@ -127,6 +124,9 @@
 
 /* ########################################################################## */
 /* FUNCTIONS */
+
+/* cmd_arg_opt.c */
+void		find_cmd_opt_arg(t_prgm *vars);
 
 /*  init.c */
 // char		*find_path_in_envp(t_prgm vars);
@@ -142,12 +142,10 @@ t_env		*new_node(char *value);
 void		node_add_back(t_env **node, t_env *new);
 void		printlist(t_env *head);
 
-/* executer.c */
-// void		ms_executer(t_prgm *vars);
-
 /* free.c */
 void		free_table(char **table);
 void		free_stuff(t_prgm *vars);
+void		re_init_tokens(t_prgm *vars);
 
 /* infile.c */
 void		find_infile(t_prgm *vars);
@@ -169,10 +167,11 @@ char		**ft_split_2(char const *s, char *needle);
 
 /* parsing_utils_1.c */
 char		*find_pipes(char *s);
-void		ft_fill_splited_array_pipes(char **array_split, char *s, char *pipes_loc, char c);
+void		ft_fill_splited_array_pipes(char **array_split, char *s, \
+				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
-int			is_doubleQuote(char c);
+int			is_double_quote(char c);
 int			is_pipe(char c);
 
 /* prompt.c */

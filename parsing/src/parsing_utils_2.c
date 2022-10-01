@@ -6,11 +6,10 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/28 20:42:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:49:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 int	ft_nb_words_ms(char const *s, char c)
@@ -32,51 +31,29 @@ int	ft_nb_words_ms(char const *s, char c)
 	return (result);
 }
 
-int	is_pipe(char c)
-{
-	int	i;
-
-	if (c == '|')
-		i = 1;
-	else
-		i = 0;
-	return (i);
-}
-
-int	is_doubleQuote(char c)
-{
-	int	i;
-
-	if (c == '\"')
-		i = 1;
-	else
-		i = 0;
-	return (i);
-}
-
 char	*find_pipes(char *s)
 {
 	char	*pipes_loc;
 	int		len;
 	int		i;
 	int		res;
-	int		b_openDoubleQuote;
+	int		b_open_double_quote;
 
 	len = ft_strlen(s) + 1;
 	i = 0;
-	b_openDoubleQuote = 0;
+	b_open_double_quote = 0;
 	pipes_loc = malloc(sizeof(char) * len);
 	while (s[i] != '\0')
 	{
 		res = is_pipe(s[i]);
-		if (is_doubleQuote(s[i]))
+		if (is_double_quote(s[i]))
 		{
-			if (b_openDoubleQuote == 0)
-				b_openDoubleQuote = 1;
-			else if (b_openDoubleQuote == 1)
-				b_openDoubleQuote = 0;
+			if (b_open_double_quote == 0)
+				b_open_double_quote = 1;
+			else if (b_open_double_quote == 1)
+				b_open_double_quote = 0;
 		}
-		if (is_pipe(s[i]) && b_openDoubleQuote == 0)
+		if (is_pipe(s[i]) && b_open_double_quote == 0)
 			pipes_loc[i] = 'P';
 		else
 			pipes_loc[i] = '.';
@@ -86,14 +63,15 @@ char	*find_pipes(char *s)
 	return (pipes_loc);
 }
 
-void	ft_fill_splited_array_pipes(char **array_split, char *s, char *pipes_loc, char c)
+void	ft_fill_splited_array_pipes(char **array_split, char *s, \
+		char *pipes_loc, char c)
 {
 	int	word_start;
 	int	i;
 	int	length;
 	int	word;
 	int	len_s;
-	
+
 	i = 0;
 	word = 0;
 	len_s = (int)ft_strlen(s);

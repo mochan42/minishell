@@ -6,11 +6,10 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 14:21:24 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:36:12 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 // Function to print Current Directory.
@@ -26,11 +25,8 @@ void	print_dir(void)
 int	input_loop(t_prgm *vars)
 {
 	int	flag;
-	int	i;
-	int pid;
-	// int	counter;
-	
-	// counter = 0;
+	int	pid;
+
 	while (1)
 	{
 		vars->cmd_line = readline("minishell ⚽️$");
@@ -48,35 +44,8 @@ int	input_loop(t_prgm *vars)
 				wait(NULL);
 			flag = 0;
 		}
-		i = 0;
 		if (flag == 0)
-		{
-			if (vars->pipe_ct > 0)
-			{
-				while (i < vars->pipe_ct + 1)
-				{
-					free(vars->tokens[i].t_str);
-					i++;
-				}
-			}
-			vars->pipe_ct = 0;
-		}
-		// counter++;
+			re_init_tokens(vars);
 	}
 	return (0);
 }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	t_prgm	*ms;
-
-// 	(void)ac;
-// 	(void)av;
-// 	ms = malloc(sizeof(t_prgm) * 1);
-// 	ms->env = env;
-// 	init(ms);
-// print_dir();
-// 	input_loop(ms);
-// 	free_stuff(ms);
-// 	return (0);
-// }

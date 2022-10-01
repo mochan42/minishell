@@ -6,11 +6,10 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 17:43:30 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/01 17:52:39 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 void	splitting_pipes(t_prgm *vars)
@@ -100,4 +99,5 @@ void	parsing(t_prgm *vars)
 	// printlist(vars->env_head); // just for debugging purposes
 	find_infile(vars);
 	find_outfile(vars);
+	find_cmd_opt_arg(vars);
 }

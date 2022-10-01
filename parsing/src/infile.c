@@ -6,11 +6,10 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 17:39:20 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:35:53 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
 void	find_infile(t_prgm *vars)
@@ -55,7 +54,7 @@ void	find_infile(t_prgm *vars)
 				ptr_infile--;
 			}
 		}
-		if (ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
+		if (vars->tokens[i].in != NULL && ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
 		{
 			while (vars->tokens[i].t_str[j] == ' ' || vars->tokens[i].t_str[j] == '\t')
 			{
@@ -71,7 +70,7 @@ void	find_infile(t_prgm *vars)
 			printf("input type[%d]= %s\n", i, vars->tokens[i].in);
 			printf("infile[%d]=%s\n", i, vars->tokens[i].infile);
 		}
-		else if (ft_strncmp(vars->tokens[i].in, "<", 1) == 0)
+		else if (vars->tokens[i].in != NULL && ft_strncmp(vars->tokens[i].in, "<", 1) == 0)
 		{
 			while (vars->tokens[i].t_str[j] == ' ' || vars->tokens[i].t_str[j] == '\t')
 			{
