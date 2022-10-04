@@ -6,46 +6,31 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/26 22:22:43 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/01 17:52:39 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
-// char	**parse_for_pipe(t_prgm *vars)
-// {
-// 	char	**tab;
-
-// 	tab = ft_split(vars->cmd_line, '|');
-// 	return (tab);
-// }
-
-// char	**parse_for_space(t_prgm *vars)
-// {
-// 	char	**tab;
-
-// 	tab = ft_split(vars->cmd_line, ' ');
-// 	return (tab);
-// }
-
-void	split_pipes(t_prgm *vars)
+void	splitting_pipes(t_prgm *vars)
 {
 	int		i;
 	// char	**one_token;
 	char	**tab_token;
+	char	*pipes_loc;
 
 	i = 0;
-	while (vars->cmd_line[i] != '\0')
+	pipes_loc = find_pipes(vars->cmd_line);
+	while (pipes_loc[i] != '\0')
 	{
-		if (vars->cmd_line[i] == '|')
-			vars->pipe_ct += 1;
+		if (pipes_loc[i] == 'P')
+			vars->pipe_ct++;
 		i++;
 	}
-	printf("pipe_ct = %d\n", vars->pipe_ct);
+	printf("vars->pipe_ct = %d\n", vars->pipe_ct);
 	if (vars->pipe_ct > 0)
 	{
-		tab_token = ft_split(vars->cmd_line, '|');
+		tab_token = ft_split_pipes(vars->cmd_line, 'P');
 		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct + 1));
 		
 		i = 0;
@@ -68,110 +53,51 @@ void	split_pipes(t_prgm *vars)
 	init_all_tokens(vars);
 }
 
-void	parsing_in_redir_heredoc(t_prgm *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		j = 0;
-		while(vars->tokens[i].t_str[j] != '\0')
-			j++;
-		while (j != -1)
-		{
-			if (j > 0 && vars->tokens[i].t_str[j] == '<' && vars->tokens[i].t_str[j-1] == '<')
-			{
-				vars->tokens[i].in = "<<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
-				break;
-			}
-			else if (vars->tokens[i].t_str[j] == '<')
-			{
-				vars->tokens[i].in = "<";
-				printf("vars->tokens[%d].in %s\n", i, vars->tokens[i].in);
-				break;
-			}
-			else
-				j--;
-		}
-		i++;
-	}
-}
-
-void	parsing_out_redir_heredoc(t_prgm *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		j = 0;
-		while (vars->tokens[i].t_str[j] != '\0')
-		{
-			if (vars->tokens[i].t_str[j+1] != '\0' && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j+1] == '>')
-			{
-				vars->tokens[i].out = ">>";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
-				break;
-			}
-			else if (vars->tokens[i].t_str[j] == '>')
-			{
-				vars->tokens[i].out = ">";
-				printf("vars->tokens[%d].out = %s\n", i, vars->tokens[i].out);
-				break;
-			}
-			else
-				j++;
-		}
-		i++;
-	}
-}
-
-void	split_in_redir_heredoc(t_prgm *vars)
-{
-	int		i;
-	int		j;
-	char	***in_redir_heredoc_tab;
+// void	split_in_redir_heredoc(t_prgm *vars)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	***in_redir_heredoc_tab;
 	
-	in_redir_heredoc_tab = malloc(sizeof(char *) * (vars->pipe_ct + 1));
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		printf("i = %d \n", i);
-		if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<", 1) != NULL))
-		{
-			in_redir_heredoc_tab[i] = ft_split(vars->tokens[i].t_str, '<');
-			printf("\t< found\n");
-		}
-		else if (vars->tokens[i].in != NULL && (ft_strnstr(vars->tokens[i].in, "<<", 2) != NULL))
-		{
-			in_redir_heredoc_tab[i] = ft_split_2(vars->tokens[i].t_str, "<<");
-			printf("<< found\n");
-		}
-		else
-			in_redir_heredoc_tab[i] = &vars->tokens[i].t_str;
-		i++;
-	}
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		j = 0;
-		while (in_redir_heredoc_tab[i][j] != NULL)
-		{
-			printf("%s\n", in_redir_heredoc_tab[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
+// 	in_redir_heredoc_tab = malloc(sizeof(char *) * (vars->pipe_ct + 1));
+// 	i = 0;
+// 	while (i < vars->pipe_ct + 1)
+// 	{
+// 		printf("i = %d \n", i);
+// 		if (vars->tokens[i].in != NULL && ft_strlen(vars->tokens[i].in) == 1)
+// 		{
+// 			in_redir_heredoc_tab[i] = ft_split(vars->tokens[i].t_str, '<');
+// 			printf("\t< found\n");
+// 		}
+
+// 		else if (vars->tokens[i].in != NULL && ft_strlen(vars->tokens[i].in) == 2)
+// 		{
+// 			in_redir_heredoc_tab[i] = ft_split_2(vars->tokens[i].t_str, "<<");
+// 			printf("\t<< found\n");
+// 		}
+// 		else
+// 			in_redir_heredoc_tab[i] = &vars->tokens[i].t_str;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < vars->pipe_ct + 1)
+// 	{
+// 		j = 0;
+// 		while (in_redir_heredoc_tab[i][j] != NULL)
+// 		{
+// 			printf("%s\n", in_redir_heredoc_tab[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	parsing(t_prgm *vars)
 {
-	split_pipes(vars);
-	parsing_in_redir_heredoc(vars);
-	parsing_out_redir_heredoc(vars);
-	split_in_redir_heredoc(vars);
+	splitting_pipes(vars);
+	// split_in_redir_heredoc(vars); // we will not split by redirection, heredoc
+	// printlist(vars->env_head); // just for debugging purposes
+	find_infile(vars);
+	find_outfile(vars);
+	find_cmd_opt_arg(vars);
 }

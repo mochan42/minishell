@@ -6,101 +6,13 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/26 22:22:15 by mochan           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:36:03 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
-
-// int	ft_memcmp(const void *s1, const void *s2, size_t n)
-// {
-// 	unsigned char	*s1_char;
-// 	unsigned char	*s2_char;
-// 	size_t			i;
-
-// 	s1_char = (unsigned char *)s1;
-// 	s2_char = (unsigned char *)s2;
-// 	i = 0;
-// 	while (i < n)
-// 	{
-// 		if (s1_char[i] != s2_char[i])
-// 			return (s1_char[i] - s2_char[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
-// {
-// 	size_t	len_needle;
-// 	char	*haystack_char;
-
-// 	haystack_char = (char *)haystack;
-// 	if (needle[0] == '\0')
-// 		return (haystack_char);
-// 	len_needle = ft_strlen(needle);
-// 	while (*haystack_char && len >= len_needle)
-// 	{
-// 		if (*haystack_char == *needle
-// 			&& !(ft_memcmp(haystack_char, needle, len_needle)))
-// 			return (haystack_char);
-// 		haystack_char++;
-// 		len--;
-// 	}
-// 	return (NULL);
-// }
-
-// int	ft_strncmp(const char *s1, const char *s2, size_t n)
-// {
-// 	size_t	i;
-
-// 	if (n == 0)
-// 		return (0);
-// 	i = 0;
-// 	while (i + 1 < n && s1[i] != 0)
-// 	{
-// 		if (s1[i] != s2[i])
-// 			break ;
-// 		i++;
-// 	}
-// 	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
-// }
-
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	char	*sub_str;
-// 	size_t	i;
-// 	size_t	s_len;
-
-// 	s_len = ft_strlen(s);
-// 	i = 0;
-// 	if (s_len < len)
-// 		sub_str = (char *)malloc(sizeof(char) * 1);
-// 	else
-// 		sub_str = (char *)malloc(sizeof(char) * (len + 1));
-// 	if (!sub_str)
-// 		return (NULL);
-// 	while (i < len && start < s_len)
-// 	{
-// 		sub_str[i] = s[start];
-// 		i++;
-// 		start++;
-// 	}
-// 	sub_str[i] = 0;
-// 	return (sub_str);
-// }
-
+/* helper function to fill array of strings for ft_split_2 (split by string delimiter)*/
 void	ft_fill_splited_array_2(char **array_split, char *s, char *needle)
 {
 	int		word_start;
@@ -110,11 +22,13 @@ void	ft_fill_splited_array_2(char **array_split, char *s, char *needle)
 	int		len_needle;
 	int		j;
 	char	*ptr;
+	int		len_s;
 
 	len_needle = ft_strlen(needle);
+	len_s = ft_strlen(s);
 	i = 0;
 	word = 0;
-	while (i < (int)ft_strlen(s))
+	while (i < len_s && s[i] != '\0')
 	{
 		i = 0;
 		ptr = ft_substr(s, i, len_needle);
@@ -122,7 +36,7 @@ void	ft_fill_splited_array_2(char **array_split, char *s, char *needle)
 		{
 			word_start = i;
 			length = 0;
-			while (ft_strncmp(ptr, needle, len_needle) != 0 && *ptr != 0)
+			while (ft_strncmp(ptr, needle, len_needle) != 0 && *ptr != 0 && s[i] != '\0')
 			{
 				i++;
 				length++;
@@ -137,16 +51,19 @@ void	ft_fill_splited_array_2(char **array_split, char *s, char *needle)
 			word++;
 		}
 		j = 0;
-		while (j < len_needle)
+		while (j < len_needle && *s)
 		{
 			ptr++;
 			s++;
 			j++;
+			i++;
 		}
+		i = 0;
 	}
 	array_split[word] = 0;
 }
 
+/* helper function to count words for ft_split_2 (split by string delimiter)*/
 int	ft_nb_words_2(char const *s, char *needle)
 {
 	int	i;
@@ -184,6 +101,7 @@ int	ft_nb_words_2(char const *s, char *needle)
 	return (result);
 }
 
+/*function to split a string "s" by string delimiter "needle"*/
 char	**ft_split_2(char const *s, char *needle)
 {
 	char	**array_result;
@@ -198,3 +116,6 @@ char	**ft_split_2(char const *s, char *needle)
 		return (NULL);
 	return (array_result);
 }
+
+
+
