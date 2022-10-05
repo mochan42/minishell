@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/01 01:17:22 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/06 01:12:36 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void	init_all_tokens(t_prgm *vars)
 void	init(t_prgm *vars)
 {
 	vars->pipe_ct = 0;
+	ft_bzero(vars->curr_dir, MAX_LEN_DIR);
 }

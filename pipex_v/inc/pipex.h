@@ -13,6 +13,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 # define MAX_CMD  150
+# define MAX_LEN_DIR 300
 # include "../../libft/inc/libft.h"
 # include "../../gnl/inc/get_next_line.h"
 # include "../../parsing/inc/parser.h"
@@ -63,6 +64,7 @@ typedef struct s_prgm
 	t_token	*tokens;
 	int		pipe_ct;
 	t_pipe	p;
+	char	curr_dir[MAX_LEN_DIR];
 }	t_prgm;
 
 /* check_input.c */
@@ -97,7 +99,10 @@ void	free_2_pt(char **pt);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
 void	ft_here_doc(t_prgm *vars, int cmd);
-
+/* builtins.c*/
+void	execbuilt_in(t_prgm *vars);
+void    ft_cd(t_prgm *vars);
+void	ft_pwd(t_prgm *vars);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 

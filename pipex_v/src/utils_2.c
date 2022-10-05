@@ -16,7 +16,7 @@
  /* must be analysed again*/
 void	ft_init_pipe(t_prgm *vars)
 {
-	vars->p.child = 0;
+	vars->p.child = 0;;
 	//vars->p->env = ft_env_to_local_env(vars->env);
 }
 
@@ -34,7 +34,8 @@ void	free_vars_p(t_prgm *vars)
 			free(vars->tokens[i].options[j]);
 			j++;
 		}
-		free(vars->tokens[i].bin);
+		if (vars->tokens[i].bin)
+			free(vars->tokens[i].bin);
 		free(vars->tokens[i].options);
 		i++;
 	}

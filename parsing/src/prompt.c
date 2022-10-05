@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/27 22:37:38 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/06 01:10:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ void	print_dir(void)
 // Function to take input
 int	input_loop(t_prgm *vars)
 {
-	int	flag;
-	int	i;
-	int pid;
+	int		flag;
+	int		i;
+	int		pid;
+	char	repo[MAX_LEN_DIR];
+	int		tmp_fd;
+	char	*tmp;
 	
 	while (1)
 	{
+		if (vars->curr_dir[0] == '\0')
+			ft_strlcpy(vars->curr_dir, getcwd(repo, MAX_LEN_DIR), MAX_LEN_DIR);
 		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
 			return (0);
@@ -43,7 +48,17 @@ int	input_loop(t_prgm *vars)
 			if (pid == 0)
 				ms_executor(vars);
 			else
-				wait(NULL); 
+				wait(NULL);
+			tmp_fd = open("cwd.txt", O_RDONLY);
+			ft_bzero(vars->curr_dir, MAX_LEN_DIR);
+			tmp = get_next_line(tmp_fd);
+			if(tmp)
+			{
+				ft_strlcpy(vars->curr_dir, tmp, MAX_LEN_DIR);
+				free(tmp);
+			}
+			close(tmp_fd);
+			unlink("cwd.txt");
 			flag = 0;
 		}
 		i = 0;

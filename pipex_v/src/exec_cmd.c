@@ -24,8 +24,8 @@
 */
 void	ft_exec_cmd_1(t_prgm *vars)
 {
-	vars->tokens[0].in = "<";
-	vars->tokens[0].infile = "file";
+	vars->tokens[0].built_in = 1;
+	//vars->tokens[0].infile = "file";
 	//vars->tokens[0].outfile= "file2";
 
 	//vars->tokens[0].outfile = "file2";

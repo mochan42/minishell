@@ -31,7 +31,7 @@ char	*ft_get_path(char **envp)
 void	ft_set_cmd_error_msg(t_prgm *vars, char **tmp, int cmd)
 {
 	if ((ft_strncmp(*tmp, "OK", 2) != 0)
-		&& (vars->p.error[cmd][0] == 0))
+		&& (vars->p.error[cmd][0] == 0) && vars->tokens[cmd].built_in == 0)
 	{
 		ft_strcat(vars->p.error[cmd], "command not found : ");
 		ft_strcat(vars->p.error[cmd], vars->tokens[cmd].options[0]); /*must find apropriate cmd*/
