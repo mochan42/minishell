@@ -26,7 +26,6 @@
 typedef struct s_env
 {
 	struct s_env	*next;
-	struct s_env	*prev;
 	char			*key;
 	char			*value;
 } 				t_env;
@@ -38,7 +37,7 @@ typedef struct s_pipe
 	int		pid[MAX_CMD];
 	int		nb_cmd;
 	int		status;
-	t_env	envp;
+	t_env	*envp;
 	char	error[MAX_CMD][100];
 }				t_pipe;
 
@@ -103,6 +102,7 @@ void	ft_here_doc(t_prgm *vars, int cmd);
 void	execbuilt_in(t_prgm *vars);
 void    ft_cd(t_prgm *vars);
 void	ft_pwd(t_prgm *vars);
+void	ft_env(t_prgm *vars);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 

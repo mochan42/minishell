@@ -37,10 +37,31 @@ void	ft_pwd(t_prgm *vars)
     printf("\033[0;37m");
 }
 
-// void	ft_env(t_prgm *vars)
-// {
+void	ft_env(t_prgm *vars)
+{
+	(void)vars;
+	printf("In progress!");
+	// int	i;
+	// char **cur_env;
 
-// }
+	// i = 0;
+	// while (vars->env[i])
+	// {
+	// 	cur_env = ft_split(vars->env[i], '=');
+	// 	vars->p.envp->key = ft_strdup(cur_env[0]);
+	// 	vars->p.envp->value = ft_strdup(cur_env[1]);
+	// 	vars->p.envp->next = NULL;
+	// 	if (i > 0)
+	// 	{
+			
+	// 	}
+	// 	free(cur_env[0]);
+	// 	free(cur_env[1]);
+	// 	free(cur_env);
+	// 	i++;
+	// }
+
+}
 
 void	execbuilt_in(t_prgm *vars)
 {
@@ -48,6 +69,8 @@ void	execbuilt_in(t_prgm *vars)
         ft_cd(vars);
     else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "pwd", 3) == 0)
         ft_pwd(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "env", 3) == 0)
+		ft_env(vars);
     exit(0);
 }
 
