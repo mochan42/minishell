@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/12 17:57:24 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:57:48 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	print_dir(void)
 int	input_loop(t_prgm *vars)
 {
 	int		flag;
-	int		i;
 	int		pid;
 	char	repo[MAX_LEN_DIR];
 	int		tmp_fd;

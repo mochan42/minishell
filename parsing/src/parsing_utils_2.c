@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 18:49:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:04:50 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*find_pipes(char *s)
 			else if (b_open_double_quote == 1)
 				b_open_double_quote = 0;
 		}
-		if (is_pipe(s[i]) && b_open_double_quote == 0)
+		if (res && b_open_double_quote == 0)
 			pipes_loc[i] = 'P';
 		else
 			pipes_loc[i] = '.';

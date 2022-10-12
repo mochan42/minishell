@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 18:35:29 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/12 21:11:29 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ t_env	*init_env(t_prgm *vars)
 	head = NULL;// do not move this line down otherwise the program wont work.
 	tmp = vars->env;// do not move this line down otherwise the program wont work.
 	env_size = 0;
-	while (*vars->env != NULL)
+	while (vars->env[i] != NULL)
 	{
 		env_size++;
-		vars->env++;
+		i++;
 	}
 	printf("env_size = %d\n\n", env_size);
 	res = malloc(sizeof(char **) * (env_size + 1));
