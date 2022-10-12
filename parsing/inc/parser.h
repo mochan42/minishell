@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/09/25 16:37:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/01 17:46:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@
 // t_pipe	p;
 // }	t_prgm;
 
-
-
 // typedef struct s_env
 // {
 // 	struct s_env	*next;
@@ -119,7 +117,6 @@
 //     char            *value;
 // }                 t_env;
 
-
 /* ########################################################################## */
 /* CONSTANTS */
 
@@ -128,6 +125,9 @@
 /* ########################################################################## */
 /* FUNCTIONS */
 
+/* cmd_arg_opt.c */
+void		find_cmd_opt_arg(t_prgm *vars);
+
 /*  init.c */
 // char		*find_path_in_envp(t_prgm vars);
 //void		initialise_ms(t_prgm *vars);
@@ -135,21 +135,45 @@ void		init(t_prgm *vars);
 void		init_each_token(t_token *token);
 void		init_all_tokens(t_prgm *vars);
 
-/* executer.c */
-// void		ms_executer(t_prgm *vars);
+/* env.c */
+t_env		*init_env(t_prgm *vars);
+t_env		*last_node(t_env *node);
+t_env		*new_node(char *value);
+void		node_add_back(t_env **node, t_env *new);
+void		printlist(t_env *head);
 
 /* free.c */
 void		free_table(char **table);
 void		free_stuff(t_prgm *vars);
+void		re_init_tokens(t_prgm *vars);
+
+/* infile.c */
+void		find_infile(t_prgm *vars);
+
+/* outfile.c */
+void		find_outfile(t_prgm *vars);
 
 /* parsing.c */
 // char		**parse_for_pipe(t_prgm *vars);
 // char		**parse_for_space(t_prgm *vars);
+void		splitting_pipes(t_prgm *vars);
 void		parsing(t_prgm *vars);
-void		parsing_pipes(t_prgm *vars);
-void		parsing_in_redir_heredoc(t_prgm *vars);
-void		parsing_out_redir_heredoc(t_prgm *vars);
 char		*retrieve_infile(t_prgm *vars);
-// prompt.c
-int	input_loop(t_prgm *vars);
+
+/* parsing_utils_1.c */
+void		ft_fill_splited_array_2(char **array_split, char *s, char *needle);
+int			ft_nb_words_2(char const *s, char *needle);
+char		**ft_split_2(char const *s, char *needle);
+
+/* parsing_utils_1.c */
+char		*find_pipes(char *s);
+void		ft_fill_splited_array_pipes(char **array_split, char *s, \
+				char *pipes_loc, char c);
+int			ft_nb_words_ms(char const *s, char c);
+char		**ft_split_pipes(char const *s, char c);
+int			is_double_quote(char c);
+int			is_pipe(char c);
+
+/* prompt.c */
+int			input_loop(t_prgm *vars);
 #endif

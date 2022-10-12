@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   parsing_utils_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 18:55:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/25 16:31:11 by mochan           ###   ########.fr       */
+/*   Created: 2022/09/30 18:49:17 by mochan            #+#    #+#             */
+/*   Updated: 2022/09/30 18:49:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../minishell.h"
 #include "../inc/parser.h"
 
-void	ms_executer(t_prgm *vars)
+int	is_pipe(char c)
 {
-	(void)vars;
-	// printf("number of pipe(s) : %d\n", vars->pipe_ct);
-	printf("executer placeholder\n");
+	int	i;
+
+	if (c == '|')
+		i = 1;
+	else
+		i = 0;
+	return (i);
+}
+
+int	is_double_quote(char c)
+{
+	int	i;
+
+	if (c == '\"')
+		i = 1;
+	else
+		i = 0;
+	return (i);
 }

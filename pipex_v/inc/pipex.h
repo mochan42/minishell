@@ -60,6 +60,7 @@ typedef struct s_prgm
 {
 	char	*cmd_line;
 	char	**env; //transform into a linked list
+	t_env	*env_head;
 	t_token	*tokens;
 	int		pipe_ct;
 	t_pipe	p;

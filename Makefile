@@ -49,6 +49,7 @@ ifeq ($(MACHINE), Darwin)
 	make -C $(PARSER)
 	@echo "$(BLUE)make $(EXEC)$(END_COLOR)"
 	make -C $(EXEC)
+	@echo "$(BLUE)make $(NAME)$(END_COLOR)"
 	$(CC) $(CFLAGS) -I . $(LIBFT_A) $(GNL_A) $(PARSER_A) $(EXEC_A) $(LIB_READLINE_MAC) main.c -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
 # -C	:	make option that tells make to change directory before execution.
@@ -61,6 +62,7 @@ else
 	make -C $(PARSER)
 	@echo "$(BLUE)make $(EXEC)$(END_COLOR)"
 	make -C $(EXEC)
+	@echo "$(BLUE)make $(NAME)$(END_COLOR)"
 	$(CC) $(CFLAGS) main.c -I . $(PARSER_A) $(EXEC_A) $(LIBFT_A) $(GNL_A)  $(LIB_READLINE_LINUX) -o $(NAME)
 #	$(CC) $(CFLAGS) -L $(PARSER)/parsing.a -L $(EXEC)/pipex.a $(LIB_READLINE_LINUX) main.c -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
