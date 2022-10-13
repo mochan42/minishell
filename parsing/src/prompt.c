@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/12 18:57:48 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:56:03 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	input_loop(t_prgm *vars)
 	char	repo[MAX_LEN_DIR];
 	int		tmp_fd;
 	char	*tmp;
-	
+
 	while (1)
 	{
 		if (vars->curr_dir[0] == '\0')

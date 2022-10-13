@@ -66,6 +66,7 @@ typedef struct s_prgm
 	int		pipe_ct;
 	t_pipe	p;
 	char	curr_dir[MAX_LEN_DIR];
+	char	*builts[7];
 }	t_prgm;
 
 /* check_input.c */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/12 21:11:29 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:23:19 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,11 @@ t_env	*init_env(t_prgm *vars)
 void	printlist(t_env *head)
 {
 	t_env	*temporary;
-	int		i;
 
-	i = 0;
 	temporary = head;
 	while (temporary != NULL)
 	{
-		printf("key[%d]		: %s\n", i, temporary->key);
-		printf("value[%d]	: %s\n", i, temporary->value);
-		i++;
+		printf("%s=%s\n", temporary->key, temporary->value);
 		temporary = temporary->next;
 	}
 	printf("\n");

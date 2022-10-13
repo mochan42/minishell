@@ -64,6 +64,16 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 		free(tmp[1]);
 		i++;
 	}
+	i = 0;
+	while (i < 7)
+	{
+		if (ft_strncmp(vars->tokens[cmd].options[0], vars->builts[i], ft_strlen(vars->tokens[cmd].options[0])) == 0)
+		{
+			vars->tokens[cmd].built_in = 1;
+			break;
+		}
+		i++;
+	}
 	ft_set_cmd_error_msg(vars, &tmp[2], cmd);
 	ft_check_full_cmd_pt(vars, tmp[2], cmd);
 }

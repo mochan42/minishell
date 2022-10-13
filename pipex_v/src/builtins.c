@@ -39,8 +39,7 @@ void	ft_pwd(t_prgm *vars)
 
 void	ft_env(t_prgm *vars)
 {
-	(void)vars;
-	printf("In progress!");
+	printlist(vars->env_head);
 	// int	i;
 	// char **cur_env;
 
@@ -60,7 +59,6 @@ void	ft_env(t_prgm *vars)
 	// 	free(cur_env);
 	// 	i++;
 	// }
-
 }
 
 void	execbuilt_in(t_prgm *vars)
@@ -71,6 +69,6 @@ void	execbuilt_in(t_prgm *vars)
         ft_pwd(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "env", 3) == 0)
 		ft_env(vars);
-    exit(0);
+	exit (0);
 }
 
