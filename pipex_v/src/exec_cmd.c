@@ -24,7 +24,7 @@
 */
 void	ft_exec_cmd_1(t_prgm *vars)
 {
-	vars->tokens[0].built_in = 1;
+	// vars->tokens[0].built_in = 1;
 	//vars->tokens[0].infile = "file";
 	//vars->tokens[0].outfile= "file2";
 
@@ -70,7 +70,12 @@ void	ft_exec_cmd_last(t_prgm *vars)
 	if (*vars->tokens[vars->pipe_ct].in == '\0')
 		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0)
+	{
+		wait(NULL);
+		printf("here\n");
+		exit(0);
 		ft_here_doc(vars, vars->pipe_ct);
+	}
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 	{
 		if (access(vars->tokens[vars->pipe_ct].infile, F_OK | R_OK) != 0)
@@ -82,7 +87,7 @@ void	ft_exec_cmd_last(t_prgm *vars)
 			ft_print_err_message(vars);
 		}
 		else
-			vars->tokens[vars->pipe_ct].fd_args[vars->pipe_ct] = open(vars->tokens[vars->pipe_ct].infile, O_RDONLY, 0777);
+			vars->tokens[vars->pipe_ct].fd_args[0] = open(vars->tokens[vars->pipe_ct].infile, O_RDONLY, 0777);
 	}
 	if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 		dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);

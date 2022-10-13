@@ -61,7 +61,8 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		vars->tokens[i].options = ft_split(vars->tokens[i].t_str, ' ');
+		// vars->tokens[i].options = ft_split(vars->tokens[i].t_str, ' ');
+		vars->tokens[i].options = ft_split(vars->tokens[i].cmd, ' ');
 		ft_parse(vars, pt, i);
 		i++;
 	}

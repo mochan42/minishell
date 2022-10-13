@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_opt_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/11 11:12:07 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/10/13 19:10:05 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ void	find_cmd_opt_arg(t_prgm *vars)
 	{
 		j = 0;
 		ptr_coa = vars->tokens[i].t_str;
-		if (vars->tokens[i].in != NULL && vars->tokens[i].out != NULL)
+		// printf("vars->tokens[%d].t_str :%s\n", i, vars->tokens[0].t_str);
+		// printf("ptr_coa :%s\n", ptr_coa);
+		// printf("vars->tokens[%d].in: %s\n", i, vars->tokens[i].in);
+		// printf("vars->tokens[%d].out: %s\n", i, vars->tokens[i].out);
+		// exit (0);
+		if (*vars->tokens[i].in != '\0' && *vars->tokens[i].out != '\0')
 		{
 			while(vars->tokens[i].t_str[j] != '\0') // go to the end of the cmd line string
 			{
@@ -131,7 +136,7 @@ void	find_cmd_opt_arg(t_prgm *vars)
 				}
 			}
 		}
-		else if (vars->tokens[i].in != NULL && vars->tokens[i].out == NULL)
+		else if (*vars->tokens[i].in != '\0' && *vars->tokens[i].out == '\0')
 		{
 			while(vars->tokens[i].t_str[j] != '\0') // go to the end of the cmd line string
 			{
@@ -184,7 +189,7 @@ void	find_cmd_opt_arg(t_prgm *vars)
 				printf("vars->tokens[%d].cmd :%s\n", i, vars->tokens[i].cmd);
 			}		
 		}
-		else if (vars->tokens[i].in == NULL && vars->tokens[i].out != NULL)
+		else if (*vars->tokens[i].in == '\0' && *vars->tokens[i].out != '\0')
 		{
 			int len_cmd;
 
@@ -199,7 +204,7 @@ void	find_cmd_opt_arg(t_prgm *vars)
 			vars->tokens[i].cmd = ft_substr(ptr_coa, 0, len_cmd);
 			printf("vars->tokens[%d].cmd :%s\n", i, vars->tokens[i].cmd);
 		}
-		else if (vars->tokens[i].in == NULL && vars->tokens[i].out == NULL)
+		else if (*vars->tokens[i].in == '\0' && *vars->tokens[i].out == '\0')
 		{
 			vars->tokens[i].cmd = ft_substr(ptr_coa, 0, ft_strlen(ptr_coa));
 			printf("vars->tokens[%d].cmd :%s\n", i, vars->tokens[i].cmd);

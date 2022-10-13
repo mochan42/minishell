@@ -16,7 +16,7 @@
 int	ms_executor(t_prgm *vars)
 {
 	ft_init_pipe(vars);
-	vars->tokens[0].built_in = 1;
+	// vars->tokens[0].built_in = 1;
 	if (ft_valid_args(vars) == 0)
 	 	exit(0);
 	ft_generate_p(vars);
