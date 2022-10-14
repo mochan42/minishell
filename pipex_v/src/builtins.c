@@ -69,6 +69,5 @@ void	execbuilt_in(t_prgm *vars)
         ft_pwd(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "env", 3) == 0)
 		ft_env(vars);
-	exit (0);
 }
 

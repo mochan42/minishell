@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/13 22:56:03 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/14 10:43:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,16 @@ int	input_loop(t_prgm *vars)
 		{
 			add_history(vars->cmd_line);
 			parsing(vars);
-			pid = fork();
-			if (pid == 0)
+			if (vars->tokens[0].built_in == 1)
 				ms_executor(vars);
 			else
-				wait(NULL);
+			{
+				pid = fork();
+				if (pid == 0)
+					ms_executor(vars);
+				else
+					wait(NULL);
+			}
 			tmp_fd = open("cwd.txt", O_RDONLY);
 			ft_bzero(vars->curr_dir, MAX_LEN_DIR);
 			tmp = get_next_line(tmp_fd);
