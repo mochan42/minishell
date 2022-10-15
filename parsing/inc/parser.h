@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/01 17:46:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/15 14:15:45 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_env		*last_node(t_env *node);
 t_env		*new_node(char *value);
 void		node_add_back(t_env **node, t_env *new);
 void		printlist(t_env *head);
+int			ft_list_size(t_env *begin_list);
 
 /* free.c */
 void		free_table(char **table);

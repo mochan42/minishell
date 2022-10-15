@@ -38,7 +38,6 @@ typedef struct s_pipe
 	int		pid[MAX_CMD];
 	int		nb_cmd;
 	int		status;
-	t_env	*envp;
 	char	error[MAX_CMD][100];
 }				t_pipe;
 
@@ -65,7 +64,6 @@ typedef struct s_prgm
 	t_token	*tokens;
 	int		pipe_ct;
 	t_pipe	p;
-	char	curr_dir[MAX_LEN_DIR];
 	char	*builts[7];
 }	t_prgm;
 
@@ -106,6 +104,8 @@ void	execbuilt_in(t_prgm *vars);
 void    ft_cd(t_prgm *vars);
 void	ft_pwd(t_prgm *vars);
 void	ft_env(t_prgm *vars);
+void	ft_export(t_prgm *vars);
+void	ft_exit(t_prgm *vars);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 

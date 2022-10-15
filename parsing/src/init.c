@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/13 21:50:07 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/14 11:27:43 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	init_all_tokens(t_prgm *vars)
 void	init(t_prgm *vars)
 {
 	vars->pipe_ct = 0;
-	ft_bzero(vars->curr_dir, MAX_LEN_DIR);
 	vars->env_head = NULL;
 	vars->env_head = init_env(vars);
 	vars->builts[0] = "cd";

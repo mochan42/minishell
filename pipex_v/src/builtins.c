@@ -15,50 +15,133 @@
 /* find the appropriate command, then execut it
 * cd, echo, export, unset, pwd, env, exit
 */
+static char	*get_our_env(t_prgm *vars)
+{
+	t_env	*envp;
+
+	envp = vars->env_head;
+	while (envp)
+	{
+		 if (ft_strncmp(envp->key, "PWD",3) == 0)
+		 	return (envp->value);
+		envp = envp->next;
+	}
+	return (NULL);
+}
 void	ft_cd(t_prgm *vars)
 {
+	char *oldpwd;
+	t_env *envp;
 	char repo[MAX_LEN_DIR];
-	int fd;
+	int flag;
 
-	fd = open("cwd.txt", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	flag = 0;
+	envp = vars->env_head;
+	oldpwd = get_our_env(vars);
 	if (!vars->tokens[vars->p.child].options[1])
-		chdir("");
+		chdir(getenv("HOME"));
 	else
 		chdir(vars->tokens[vars->p.child].options[1]);
-	ft_bzero(vars->curr_dir, MAX_LEN_DIR);
-	ft_strlcpy(vars->curr_dir, getcwd(repo, MAX_LEN_DIR), MAX_LEN_DIR);
-	write(fd, vars->curr_dir, ft_strlen(vars->curr_dir));
-	close(fd);
+	while (envp)
+	{
+		if (ft_strncmp(envp->key, "OLDPWD", 6) == 0)
+		{
+			envp->value = ft_strdup(oldpwd);
+			flag += 1;
+		}
+		else if (ft_strncmp(envp->key, "PWD",3) == 0)
+		{
+			ft_bzero(repo, MAX_LEN_DIR);
+			envp->value = ft_strdup(getcwd(repo, MAX_LEN_DIR));
+			flag += 1;
+		}
+		if (flag == 2)
+			return ;
+		envp = envp->next;
+	}
+
 }
 
 void	ft_pwd(t_prgm *vars)
 {
-    printf("\033[0;34m%s:\n", vars->curr_dir);
+	char repo[MAX_LEN_DIR];
+	
+	(void)vars;
+    printf("\033[0;34m%s:\n", getcwd(repo, MAX_LEN_DIR));
     printf("\033[0;37m");
 }
 
 void	ft_env(t_prgm *vars)
 {
 	printlist(vars->env_head);
-	// int	i;
-	// char **cur_env;
+}
 
-	// i = 0;
-	// while (vars->env[i])
-	// {
-	// 	cur_env = ft_split(vars->env[i], '=');
-	// 	vars->p.envp->key = ft_strdup(cur_env[0]);
-	// 	vars->p.envp->value = ft_strdup(cur_env[1]);
-	// 	vars->p.envp->next = NULL;
-	// 	if (i > 0)
-	// 	{
-			
-	// 	}
-	// 	free(cur_env[0]);
-	// 	free(cur_env[1]);
-	// 	free(cur_env);
-	// 	i++;
-	// }
+static int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != 0 && s2[i] != 0)
+	{
+		if (s1[i] != s2[i])
+			break ;
+		i++;
+	}
+	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
+}
+
+void	ft_export(t_prgm *vars)
+{
+	t_env	*envp;
+	char	***env_ord;	
+	char	**tmp_env;
+	int		env_size;	
+	int		i;
+	int		j;
+
+	envp = vars->env_head;
+	env_size = ft_list_size(envp);
+	env_ord = (char ***)malloc(sizeof(char **) * env_size);
+	i = 0;
+	// transform to array
+	while (envp)
+	{
+		env_ord[i] = malloc(sizeof(char *) * 2);
+		env_ord[i][0] = envp->key;
+		env_ord[i][1] = envp->value;
+		envp = envp->next;
+		i++;
+	}
+	i = 0;
+	//sorting
+	while (i < env_size - 1)
+	{
+		j = i + 1;
+		while (j < env_size)
+		{
+			if (ft_strcmp(env_ord[i][0], env_ord[j][0]) > 0)
+			{
+				tmp_env = env_ord[i];
+				env_ord[i] = env_ord[j];
+				env_ord[j] = tmp_env;
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	// print
+	while (i < env_size)
+	{
+		printf("declare -x %s=\"%s\"\n",env_ord[i][0], env_ord[i][1]);
+		i++;
+	}
+}
+
+void	ft_exit(t_prgm *vars)
+{
+	(void)vars;
+	printf("In progress\n");
 }
 
 void	execbuilt_in(t_prgm *vars)
@@ -69,5 +152,9 @@ void	execbuilt_in(t_prgm *vars)
         ft_pwd(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "env", 3) == 0)
 		ft_env(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "export", 6) == 0)
+		ft_export(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "exit", 4) == 0)
+		ft_exit(vars);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/14 10:43:33 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:27:15 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ int	input_loop(t_prgm *vars)
 {
 	int		flag;
 	int		pid;
-	char	repo[MAX_LEN_DIR];
-	int		tmp_fd;
-	char	*tmp;
 
 	while (1)
 	{
-		if (vars->curr_dir[0] == '\0')
-			ft_strlcpy(vars->curr_dir, getcwd(repo, MAX_LEN_DIR), MAX_LEN_DIR);
 		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
 			return (0);
@@ -52,16 +47,6 @@ int	input_loop(t_prgm *vars)
 				else
 					wait(NULL);
 			}
-			tmp_fd = open("cwd.txt", O_RDONLY);
-			ft_bzero(vars->curr_dir, MAX_LEN_DIR);
-			tmp = get_next_line(tmp_fd);
-			if(tmp)
-			{
-				ft_strlcpy(vars->curr_dir, tmp, MAX_LEN_DIR);
-				free(tmp);
-			}
-			close(tmp_fd);
-			unlink("cwd.txt");
 			flag = 0;
 		}
 		if (flag == 0)
