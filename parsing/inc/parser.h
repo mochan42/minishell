@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/01 17:46:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/16 23:37:54 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,13 @@
 /* cmd_arg_opt.c */
 void		find_cmd_opt_arg(t_prgm *vars);
 
+/* dollar_sign.c */
+char		*ft_concat(char *str1, const char *str2);
+int			count_dlr_sign(char *s);
+void		err_msg_quotes_not_closed(void);
+void		ids_cmd_opt_arg(t_prgm *vars);
+void		interpret_dollar_sign(t_prgm *vars);
+
 /*  init.c */
 // char		*find_path_in_envp(t_prgm vars);
 //void		initialise_ms(t_prgm *vars);
@@ -165,14 +172,19 @@ void		ft_fill_splited_array_2(char **array_split, char *s, char *needle);
 int			ft_nb_words_2(char const *s, char *needle);
 char		**ft_split_2(char const *s, char *needle);
 
-/* parsing_utils_1.c */
+/* parsing_utils_2.c */
 char		*find_pipes(char *s);
 void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
+
+/* parsing_utils_3.c */
+int			count_double_quotes(char *s);
+int			count_single_quotes(char *s);
 int			is_double_quote(char c);
 int			is_pipe(char c);
+int			is_single_quote(char c);
 
 /* prompt.c */
 int			input_loop(t_prgm *vars);
