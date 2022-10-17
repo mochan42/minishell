@@ -93,12 +93,31 @@ static int	ft_strcmp(const char *s1, const char *s2)
 void	ft_export(t_prgm *vars)
 {
 	t_env	*envp;
+	t_env	*new_ev;
 	char	***env_ord;	
 	char	**tmp_env;
 	int		env_size;	
 	int		i;
 	int		j;
+	char	*delim;
 
+	i = 0;
+	while (vars->tokens[vars->p.child].options[1 + i])
+	{
+		delim = ft_strchr(vars->tokens[vars->p.child].options[1 + i], '=');
+		if (delim)
+		{
+			new_ev = new_node(ft_substr(vars->tokens[vars->p.child].options[1 + i], 0, delim - vars->tokens[vars->p.child].options[1 + i]));
+			if (delim + 1)
+				new_ev->value = ft_strdup(delim + 1);
+			else
+				new_ev->value = "";
+		}
+		else
+			new_ev = new_node(vars->tokens[vars->p.child].options[1 + i]);
+		node_add_back(&vars->env_head, new_ev);
+		i++;
+	}
 	envp = vars->env_head;
 	env_size = ft_list_size(envp);
 	env_ord = (char ***)malloc(sizeof(char **) * env_size);
@@ -133,7 +152,10 @@ void	ft_export(t_prgm *vars)
 	// print
 	while (i < env_size)
 	{
-		printf("declare -x %s=\"%s\"\n",env_ord[i][0], env_ord[i][1]);
+		if(env_ord[i][1])
+			printf("declare -x %s=\"%s\"\n",env_ord[i][0], env_ord[i][1]);
+		else
+			printf("declare -x %s\n",env_ord[i][0]);	
 		i++;
 	}
 }
@@ -141,7 +163,35 @@ void	ft_export(t_prgm *vars)
 void	ft_exit(t_prgm *vars)
 {
 	(void)vars;
-	printf("In progress\n");
+	printf("logout\n");
+	exit(0);
+}
+
+void	ft_echo(t_prgm *vars)
+{
+	if (vars->tokens[vars->p.child].options[1])
+		printf("%s",vars->tokens[vars->p.child].options[1]);
+}
+
+void	ft_unset(t_prgm *vars)
+{
+	t_env *env;
+	t_env *tmp;
+	env = vars->env_head;
+	if (vars->tokens[vars->p.child].options[1])
+	{
+		while (env)
+		{
+			if (env->next && ft_strcmp((env->next)->key, vars->tokens[vars->p.child].options[1]) == 0)
+			{
+				tmp = (env->next)->next;
+				free(env->next);
+				env->next = tmp;
+				break;
+			}
+			env = env->next;
+		}
+	}
 }
 
 void	execbuilt_in(t_prgm *vars)
@@ -156,5 +206,9 @@ void	execbuilt_in(t_prgm *vars)
 		ft_export(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "exit", 4) == 0)
 		ft_exit(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "unset", 5) == 0)
+		ft_unset(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "echo", 4) == 0)
+		ft_echo(vars);
 }
 

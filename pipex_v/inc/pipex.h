@@ -106,6 +106,8 @@ void	ft_pwd(t_prgm *vars);
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
 void	ft_exit(t_prgm *vars);
+void	ft_unset(t_prgm *vars);
+void	ft_echo(t_prgm *vars);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 

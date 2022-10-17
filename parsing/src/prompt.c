@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/14 11:27:15 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:00:13 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	input_loop(t_prgm *vars)
 		if (!vars->cmd_line)
 			return (0);
 		flag = 1;
-		if (vars->cmd_line)
+		if (vars->cmd_line[0] && vars->cmd_line[0] != '\n')
 		{
 			add_history(vars->cmd_line);
 			parsing(vars);
