@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/17 10:00:13 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:24:18 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_dir(void)
 int	input_loop(t_prgm *vars)
 {
 	int		flag;
-	int		pid;
+	//int		pid;
 
 	while (1)
 	{
@@ -37,16 +37,7 @@ int	input_loop(t_prgm *vars)
 		{
 			add_history(vars->cmd_line);
 			parsing(vars);
-			if (vars->tokens[0].built_in == 1)
-				ms_executor(vars);
-			else
-			{
-				pid = fork();
-				if (pid == 0)
-					ms_executor(vars);
-				else
-					wait(NULL);
-			}
+			ms_executor(vars);
 			flag = 0;
 		}
 		if (flag == 0)

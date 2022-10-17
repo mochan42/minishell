@@ -38,7 +38,7 @@ void	ft_cd(t_prgm *vars)
 	flag = 0;
 	envp = vars->env_head;
 	oldpwd = get_our_env(vars);
-	if (!vars->tokens[vars->p.child].options[1])
+	if (!vars->tokens[vars->p.child].options[1] || *vars->tokens[vars->p.child].options[1] == '~')
 		chdir(getenv("HOME"));
 	else
 		chdir(vars->tokens[vars->p.child].options[1]);

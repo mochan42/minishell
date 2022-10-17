@@ -70,12 +70,7 @@ void	ft_exec_cmd_last(t_prgm *vars)
 	if (*vars->tokens[vars->pipe_ct].in == '\0')
 		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0)
-	{
-		wait(NULL);
-		printf("here\n");
-		exit(0);
 		ft_here_doc(vars, vars->pipe_ct);
-	}
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 	{
 		if (access(vars->tokens[vars->pipe_ct].infile, F_OK | R_OK) != 0)

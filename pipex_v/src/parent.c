@@ -32,5 +32,5 @@ void	ft_parent_process(t_prgm *vars)
 		wait(&vars->p.status);
 		i++;
 	}
-	unlink("tmp.txt");
+	
 }
