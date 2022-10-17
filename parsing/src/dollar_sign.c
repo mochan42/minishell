@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/17 00:05:32 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/17 17:19:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	ids_cmd_opt_arg(t_prgm *vars)
 		free(tmp);
 		free(array_ds_vars);
 		free(array_no_ds);
+		// free(array_concat);
 		i++;
 	}
 }

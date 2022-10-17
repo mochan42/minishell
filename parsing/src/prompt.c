@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/16 21:37:53 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/17 17:12:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	input_loop(t_prgm *vars)
 		if (!vars->cmd_line)
 			return (0);
 		flag = 1;
-		if (vars->cmd_line)
+		if (vars->cmd_line[0] && vars->cmd_line[0] != '\n')
 		{
 			add_history(vars->cmd_line);
 			parsing(vars);
