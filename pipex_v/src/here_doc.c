@@ -25,14 +25,15 @@ void	ft_here_doc(t_prgm *vars, int cmd)
 	vars->tokens[cmd].fd_args[0] = open("tmp.txt", O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
-		tmp_read = get_next_line(0);
+		tmp_read = readline("> ");
 		if (ft_strncmp(delimiter, tmp_read, ft_strlen(delimiter)) == 0)
 		{
 			free(tmp_read);
 			break ;
 		}
-		ft_putstr_fd(tmp_read, vars->tokens[cmd].fd_args[0]);
+		write(vars->tokens[cmd].fd_args[0], tmp_read, ft_strlen(tmp_read));
 		free(tmp_read);
+		write(vars->tokens[cmd].fd_args[0], "\n", 1);
 	}
 	close(vars->tokens[cmd].fd_args[0]);
 	vars->tokens[cmd].fd_args[0] = open("tmp.txt", O_RDONLY);

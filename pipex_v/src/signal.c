@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 01:15:41 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/08/18 01:15:41 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/10/18 15:53:59 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/10/18 15:53:59 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
 
-void	ft_parent_process(t_prgm *vars)
+void    new_prompt(int sign_num)
 {
-	int	i;
+    if (SIGINT == sign_num)
+    {
+        write(1, "\n", 1);
+        rl_replace_line("", 0);
+        rl_on_new_line();
+        rl_redisplay();
+    }
+    
+}
 
-	i = 0;
-	while (i < vars->pipe_ct)
-	{
-		close(vars->p.fd[i][0]);
-		close(vars->p.fd[i][1]);
-		i++;
-	}
-	//close(vars->fd_args[0]);
-	//close(vars->fd_args[1]);
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		waitpid(vars->p.pid[vars->p.child - 1], &vars->p.status, 0);
-		i++;
-	}
-	
+void    exit_shell(int sign_num)
+{
+    if (sign_num == SIGQUIT)
+    {
+        printf("logout !");
+        exit(0);
+    }
 }

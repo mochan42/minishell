@@ -22,6 +22,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 typedef struct s_env
 {
@@ -102,13 +103,17 @@ void	ft_here_doc(t_prgm *vars, int cmd);
 /* builtins.c*/
 void	execbuilt_in(t_prgm *vars);
 void    ft_cd(t_prgm *vars);
-void	ft_pwd(t_prgm *vars);
+void	ft_pwd();
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
 void	ft_exit(t_prgm *vars);
 void	ft_unset(t_prgm *vars);
 void	ft_echo(t_prgm *vars);
+int		is_our_env_path(t_prgm *vars);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
-
+/* signal .c */
+void    new_prompt(int sign_num);
+void    exit_shell(int sign_num);
+void    end_state(int sign_num);
 #endif

@@ -28,6 +28,21 @@ static char	*get_our_env(t_prgm *vars)
 	}
 	return (NULL);
 }
+
+int	is_our_env_path(t_prgm *vars)
+{
+	t_env	*envp;
+
+	envp = vars->env_head;
+	while (envp)
+	{
+		 if (ft_strncmp(envp->key, "PATH", 4) == 0)
+		 	return (1);
+		envp = envp->next;
+	}
+	return (0);
+}
+
 void	ft_cd(t_prgm *vars)
 {
 	char *oldpwd;
@@ -62,11 +77,10 @@ void	ft_cd(t_prgm *vars)
 
 }
 
-void	ft_pwd(t_prgm *vars)
+void	ft_pwd()
 {
 	char repo[MAX_LEN_DIR];
 	
-	(void)vars;
     printf("\033[0;34m%s:\n", getcwd(repo, MAX_LEN_DIR));
     printf("\033[0;37m");
 }
@@ -150,27 +164,45 @@ void	ft_export(t_prgm *vars)
 	}
 	i = 0;
 	// print
-	while (i < env_size)
+	if (!vars->tokens[vars->p.child].options[1])
 	{
-		if(env_ord[i][1])
-			printf("declare -x %s=\"%s\"\n",env_ord[i][0], env_ord[i][1]);
-		else
-			printf("declare -x %s\n",env_ord[i][0]);	
-		i++;
+		while (i < env_size)
+		{
+			if(env_ord[i][1])
+				printf("declare -x %s=\"%s\"\n",env_ord[i][0], env_ord[i][1]);
+			else
+				printf("declare -x %s\n",env_ord[i][0]);	
+			i++;
+		}
 	}
 }
 
 void	ft_exit(t_prgm *vars)
 {
 	(void)vars;
-	printf("logout\n");
+	printf("exit !\n");
 	exit(0);
 }
 
 void	ft_echo(t_prgm *vars)
 {
-	if (vars->tokens[vars->p.child].options[1])
-		printf("%s",vars->tokens[vars->p.child].options[1]);
+	int i;
+	char end;
+
+	end = '\n';
+	if (vars->tokens[vars->p.child].options[1] && ft_strcmp(vars->tokens[vars->p.child].options[1], "-n") == 0)
+	{
+		i = 1;
+		end = '\0';
+	}
+	else
+		i = 0;
+	while (vars->tokens[vars->p.child].options[1 + i])
+	{
+		printf("%s", vars->tokens[vars->p.child].options[1 + i]);
+		i++;
+	}
+	printf("%c", end);
 }
 
 void	ft_unset(t_prgm *vars)
@@ -196,19 +228,16 @@ void	ft_unset(t_prgm *vars)
 
 void	execbuilt_in(t_prgm *vars)
 {
-    if (ft_strncmp(vars->tokens[vars->p.child].options[0], "cd", 2) == 0)
-        ft_cd(vars);
-    else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "pwd", 3) == 0)
-        ft_pwd(vars);
+    if (ft_strncmp(vars->tokens[vars->p.child].options[0], "pwd", 3) == 0)
+        ft_pwd();
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "env", 3) == 0)
 		ft_env(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "export", 6) == 0)
 		ft_export(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "exit", 4) == 0)
 		ft_exit(vars);
-	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "unset", 5) == 0)
-		ft_unset(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "echo", 4) == 0)
 		ft_echo(vars);
+	exit(0);
 }
 
