@@ -77,7 +77,5 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char *tmp, int cmd)
 			i++;
 		}
 		free(tmp_cmd);
-		if (access(vars->tokens[cmd].bin, F_OK | X_OK) == 0)
-			ft_bzero(vars->p.error[cmd], 100);
 	}
 }

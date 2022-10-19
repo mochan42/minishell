@@ -249,7 +249,10 @@ void	ft_echo(t_prgm *vars)
 		i = 0;
 	while (vars->tokens[vars->p.child].options[1 + i])
 	{
-		printf("%s", vars->tokens[vars->p.child].options[1 + i]);
+		if (ft_strcmp(vars->tokens[vars->p.child].options[1 + i], "$?") == 0)
+			ft_exit_code(0, 0);
+		else
+			printf("%s", vars->tokens[vars->p.child].options[1 + i]);
 		i++;
 	}
 	printf("%c", end);

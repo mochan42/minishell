@@ -34,8 +34,9 @@ void	ft_set_cmd_error_msg(t_prgm *vars, char **tmp, int cmd)
 		&& (vars->p.error[cmd][0] == 0) && vars->tokens[cmd].built_in == 0)
 	{
 		ft_strcat(vars->p.error[cmd], "command not found : ");
-		ft_strcat(vars->p.error[cmd], vars->tokens[cmd].options[0]); /*must find apropriate cmd*/
-	}
+		ft_strcat(vars->p.error[cmd], vars->tokens[cmd].options[0]);
+		ft_exit_code(127, 1);
+	} 
 }
 
 // must be rewritten 
@@ -64,7 +65,6 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 		free(tmp[1]);
 		i++;
 	}
-	ft_set_cmd_error_msg(vars, &tmp[2], cmd);
 	ft_check_full_cmd_pt(vars, tmp[2], cmd);
 }
 

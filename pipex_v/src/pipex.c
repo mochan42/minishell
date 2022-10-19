@@ -21,12 +21,18 @@ void	ft_execve_cmds(t_prgm *vars)
 	else if (ft_is_error(vars) == 1)
 	{
 		if (is_our_env_path(vars) == 1)
-			execve(vars->tokens[vars->p.child].bin,
-				vars->tokens[vars->p.child].options, vars->env);
+		{
+			if (execve(vars->tokens[vars->p.child].bin,
+				vars->tokens[vars->p.child].options, vars->env) == -1)
+			{
+				printf("Command not found : %s\n", vars->tokens[vars->p.child].options[0]);
+				exit(127);
+			}
+		}
 		else
 		{
 			printf("Environment PATH doesn't exist\n");
-			exit(0);
+			exit(127);
 		}
 	}
 	exit(0);
@@ -68,6 +74,7 @@ int	ms_executor(t_prgm *vars)
 			if (vars->p.pid[vars->p.child] == 0)
 				ft_execve_cmds(vars);
 		}
+		ft_bzero(vars->p.error[vars->p.child], 100);
 		vars->p.child += 1;
 	}
 	ft_parent_process(vars);

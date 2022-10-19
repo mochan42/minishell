@@ -66,7 +66,6 @@ typedef struct s_prgm
 	int		pipe_ct;
 	t_pipe	p;
 	char	*builts[7];
-	int		exit_status;
 }	t_prgm;
 
 /* check_input.c */
@@ -102,6 +101,7 @@ void	ft_print_err_message(t_prgm *vars);
 /* util_3.c */
 void	ft_generate_p(t_prgm *vars);
 void	free_2_pt(char **pt);
+void	ft_exit_code(int ex_code, int mode);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
 void	ft_here_doc(t_prgm *vars, int cmd);

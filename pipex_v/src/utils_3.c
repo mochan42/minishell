@@ -42,12 +42,12 @@ void	free_2_pt(char **pt)
 	free(pt);
 }
 
-// int	ft_valid_nb_args_bonus(int argc)
-// {
-// 	if (argc < 5)
-// 	{
-// 		printf("Error : fews arguments\n");
-// 		return (0);
-// 	}
-// 	return (1);
-// }
+void	ft_exit_code(int ex_code, int mode)
+{
+	static	int code;
+
+	if (mode == 0)
+		printf("%d", code);
+	else
+		code = ex_code;
+}

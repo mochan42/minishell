@@ -17,7 +17,6 @@
 void	ft_init_pipe(t_prgm *vars)
 {
 	vars->p.child = 0;
-	vars->exit_status = 0;
 	//vars->p->env = ft_env_to_local_env(vars->env);
 }
 

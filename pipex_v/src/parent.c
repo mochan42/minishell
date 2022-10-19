@@ -29,8 +29,9 @@ void	ft_parent_process(t_prgm *vars)
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		waitpid(vars->p.pid[vars->p.child - 1], &vars->p.status, 0);
+		wait(&vars->p.status);
 		i++;
 	}
+	ft_exit_code(WEXITSTATUS(vars->p.status), 1);
 	free_vars_p(vars);
 }
