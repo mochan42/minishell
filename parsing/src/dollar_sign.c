@@ -6,194 +6,92 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/17 21:30:34 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/19 20:39:54 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-int	count_dlr_sign(char *s)
+void	concatenate_strings_helper_1(t_prgm *v)
 {
-	int	nb_dlr_sign;
-
-	nb_dlr_sign = 0;
-	if (!s)
-		return (0);
-	while (*s++)
+	v->ct1[5] = 0;
+	v->array_concat = malloc(sizeof(char *) * (v->ct1[2] + 2));
+	v->array_concat[v->ct1[2] + 1] = NULL;
+	while (v->ct1[5] < v->ct1[2])
 	{
-		if (*s == '$')
-			nb_dlr_sign++;
+		v->array_concat[v->ct1[5]] = ft_concat(v->array_no_ds[v->ct1[5]], \
+			v->array_ds_vars[v->ct1[5]]);
+		v->ct1[5]++;
 	}
-	return (nb_dlr_sign);
 }
 
-void	err_msg_quotes_not_closed(void)
+void	concatenate_strings(t_prgm *v)
 {
-	printf("Quotes not closed.\n");
-	exit (0);
-}
-
-char	*ft_concat(char *str1, const char *str2)
-{
-	size_t	i;
-	size_t	dst_str1;
-	size_t	dst_str2;
-	size_t	dst_ttl;
-	char	*concatenated_str;
-
-	dst_str1 = ft_strlen(str1);
-	dst_str2 = ft_strlen(str2);
-	dst_ttl = dst_str1 + dst_str2;
-	concatenated_str = malloc(sizeof(char) * (dst_ttl + 1));
-	ft_bzero(concatenated_str, dst_ttl);
-	concatenated_str[dst_ttl] = '\0';
-	i = 0;
-	while (str1[i] != '\0' && i < dst_str1)
-	{
-		concatenated_str[i] = str1[i];
-		i++;
-	}
-	i = 0;
-	while (str2[i] != '\0' && i < dst_str2)
-	{
-		concatenated_str[dst_str1 + i] = str2[i];
-		i++;
-	}
-	return (concatenated_str);
-}
-
-
-void	ids_cmd_opt_arg(t_prgm *vars)
-{
-	int		i;
-	int		j;
-	int		nb_dlr_sign_token;
-	char	*tmp;
-	char	**array_ds_vars;
-	int		start;
-	int		len;
-	int		index;
-	char	**array_no_ds;
-	char	**array_concat;
 	char	*res;
-	// int		b_open_double_quote;
-	// int		b_open_single_quote;
 
-	i = 0;
-	while (i < vars->pipe_ct + 1)
+	concatenate_strings_helper_1(v);
+	v->ct1[5] = 0;
+	while (v->ct1[5] < v->ct1[2])
 	{
-		if ((count_double_quotes(vars->tokens[i].cmd) % 2 == 1) ||\
-			(count_single_quotes(vars->tokens[i].cmd) % 2 == 1))
+		printf("token[%d] array_concat[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_concat[v->ct1[5]]);
+		v->ct1[5]++;
+	}
+	if (v->array_concat[0] != NULL)
+		res = ft_strdup(v->array_concat[0]);
+	v->ct1[5] = 1;
+	while (v->ct1[5] < v->ct1[2])
+	{
+		res = ft_concat(res, v->array_concat[v->ct1[5]]);
+		v->ct1[5]++;
+	}
+	printf("res - 1 :%s\n", res);
+	if (v->array_no_ds[v->ct1[2]] != NULL)
+		res = ft_concat(res, v->array_no_ds[v->ct1[2]]);
+	printf("res - 2 :%s\n", res);
+	free(v->tokens[v->ct1[0]].cmd);
+	v->tokens[v->ct1[0]].cmd = ft_strdup(res);
+	printf("vars->tokens[%d].cmd :%s\n", v->ct1[0], v->tokens[v->ct1[0]].cmd);
+	free(res);
+}
+
+void	free_dollar_sign(t_prgm *v)
+{
+	free(v->tmp);
+	free(v->array_ds_vars);
+	free(v->array_no_ds);
+	free(v->array_concat);
+}
+
+/* int		i; //ct1[0] : counter to go through each token (token = string 
+within pipes)
+int		j; //ct1[1] : counter to go through each char of each token
+int		nb_dlr_sign_token; //ct1[2] : counter for number of dollar sign
+ for each token
+int		start; //ct1[3] : counter for start of string to copy used
+ in ft_substr
+int		len; //ct1[4] : length of a string to copy used in ft_substr
+int		index; //ct1[5] : counter for each string of the array of string */
+void	ids_cmd_opt_arg(t_prgm *v)
+{
+	v->ct1[0] = 0;
+	while (v->ct1[0] < v->pipe_ct + 1)
+	{
+		if ((cnt_dquotes(v->tokens[v->ct1[0]].cmd) % 2 == 1) || \
+			(cnt_squotes(v->tokens[v->ct1[0]].cmd) % 2 == 1))
 			err_msg_quotes_not_closed();
-		nb_dlr_sign_token = count_dlr_sign(vars->tokens[i].cmd);
-		printf("\nnb_dlr_sign_token %d= %d\n", i, nb_dlr_sign_token);
-		if (nb_dlr_sign_token > 0)
+		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].cmd);
+		printf("\nnb_dlr_sign_token %d= %d\n", v->ct1[0], v->ct1[2]);
+		if (v->ct1[2] > 0)
 		{
-			array_ds_vars = malloc(sizeof(char *) * (nb_dlr_sign_token + 1));
-			array_ds_vars[nb_dlr_sign_token] = NULL;
-			tmp = ft_strdup(vars->tokens[i].cmd);
-			j = 0;
-			index = 0;
-			while (tmp[j] != '\0')
-			{
-				if (tmp[j] == '$')
-				{
-					j++;
-					start = j;
-					len = 0;
-					while ((tmp[j] >= 'a' && tmp[j] <= 'z') || (tmp[j] >= 'A' && tmp[j] <= 'Z') || (tmp[j] >= '0' && tmp[j] <= '9'))
-					{
-						j++;
-						len++;
-					}
-					array_ds_vars[index] = ft_substr(tmp, start, len);
-					printf("token[%d] array_ds_vars (raw)[%d] :%s\n", i, index, array_ds_vars[index]);
-					index++;
-				}
-				else
-					j++;
-			}
+			extract_ds_vars(v);
 			printf("\n");
-			j = 0;
-			while (j < nb_dlr_sign_token)
-			{
-				t_env *tmp_node;
-				
-				tmp_node = vars->env_head;
-				while (tmp_node != NULL)
-				{
-					if (ft_strncmp(array_ds_vars[j], tmp_node->key, ft_strlen(array_ds_vars[j])) == 0)
-					{
-						free(array_ds_vars[j]);
-						array_ds_vars[j] = ft_strdup(tmp_node->value);
-					}
-					tmp_node = tmp_node->next;
-				}
-				printf("token[%d] array_ds_vars (translated)[%d]:%s\n", i, j, array_ds_vars[j]);
-				j++;
-			}
+			translate_var(v);
 			printf("\n");
-			array_no_ds = malloc(sizeof(char *) * (nb_dlr_sign_token + 2));
-			array_no_ds[nb_dlr_sign_token + 1] = NULL;
-			j = 0;
-			index = 0;
-			while (tmp[j] != '\0' && index < (nb_dlr_sign_token + 1))
-			{
-				if (tmp[j] == '$')
-				{
-					j++;
-					while ((tmp[j] >= 'a' && tmp[j] <= 'z') || (tmp[j] >= 'A' && tmp[j] <= 'Z') || (tmp[j] >= '0' && tmp[j] <= '9'))
-						j++;
-				}
-				else
-				{
-					start = j;
-					len = 0;
-					while(tmp[j] != '$')
-					{
-						j++;
-						len++;
-					}
-					array_no_ds[index] = ft_substr(tmp, start, len);
-					printf("token[%d] array_no_ds[%d] :%s\n", i, index, array_no_ds[index]);
-					index++;
-				}
-			}
-			index = 0;
-			array_concat = malloc(sizeof(char *) * (nb_dlr_sign_token + 2));
-			array_concat[nb_dlr_sign_token + 1] = NULL;
-			while (index < (nb_dlr_sign_token))
-			{
-				array_concat[index] = ft_concat(array_no_ds[index], array_ds_vars[index]);
-				index++;
-			}
-			index = 0;
-			while(index < (nb_dlr_sign_token + 1))
-			{
-				printf("token[%d] array_concat[%d] :%s\n", i, index, array_concat[index]);
-				index++;
-			}
-			if (array_concat[0] != NULL)
-				res = ft_strdup(array_concat[0]);
-			index = 1;
-			while (index < (nb_dlr_sign_token))
-			{
-				res = ft_concat(res, array_concat[index]);
-				index++;
-			}
-			if (array_no_ds[nb_dlr_sign_token] != NULL)
-				res = ft_concat(res, array_no_ds[nb_dlr_sign_token]);
-			printf("res :%s\n", res);
-			free(vars->tokens[i].cmd);
-			vars->tokens[i].cmd = ft_strdup(res);
-			printf("vars->tokens[%d].cmd :%s\n", i, vars->tokens[i].cmd);
-			free(tmp);
-			free(array_ds_vars);
-			free(array_no_ds);
-			free(res);
-			free(array_concat);
+			extract_string_no_ds(v);
+			concatenate_strings(v);
+			free_dollar_sign(v);
 		}
-		i++;
+		v->ct1[0]++;
 	}
 }
 

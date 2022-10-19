@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/16 23:37:54 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/19 20:32:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,17 @@
 void		find_cmd_opt_arg(t_prgm *vars);
 
 /* dollar_sign.c */
-char		*ft_concat(char *str1, const char *str2);
-int			count_dlr_sign(char *s);
-void		err_msg_quotes_not_closed(void);
+void		concatenate_strings_helper_1(t_prgm *v);
+void		concatenate_strings(t_prgm *v);
+void		extract_string_no_ds_helper(t_prgm *v);
+void		extract_string_no_ds(t_prgm *v);
 void		ids_cmd_opt_arg(t_prgm *vars);
 void		interpret_dollar_sign(t_prgm *vars);
+
+/* dollar_sign_2.c */
+void		extract_ds_vars_helper(t_prgm *v);
+void		extract_ds_vars(t_prgm *vars);
+void		translate_var(t_prgm *v);
 
 /*  init.c */
 // char		*find_path_in_envp(t_prgm vars);
@@ -180,11 +186,17 @@ int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
 
 /* parsing_utils_3.c */
-int			count_double_quotes(char *s);
-int			count_single_quotes(char *s);
+int			cnt_dquotes(char *s);
+int			cnt_squotes(char *s);
 int			is_double_quote(char c);
 int			is_pipe(char c);
 int			is_single_quote(char c);
+
+/* parsing_utils_4.c */
+int			cnt_dlr(char *s);
+void		err_msg_quotes_not_closed(void);
+void		extract_ds_vars_helper(t_prgm *v);
+char		*ft_concat(char *str1, const char *str2);
 
 /* prompt.c */
 int			input_loop(t_prgm *vars);

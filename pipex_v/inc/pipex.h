@@ -67,6 +67,11 @@ typedef struct s_prgm
 	t_pipe	p;
 	char	curr_dir[MAX_LEN_DIR];
 	char	*builts[7];
+	int		ct1[6]; // 6 counters for dollar sign expansion of command option arguments
+	char	**array_ds_vars;
+	char	**array_no_ds;
+	char	**array_concat;
+	char	*tmp;
 }	t_prgm;
 
 /* check_input.c */

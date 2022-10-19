@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 18:49:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/15 14:32:01 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:44:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_single_quote(char c)
 	return (i);
 }
 
-int	count_double_quotes(char *s)
+int	cnt_dquotes(char *s)
 {
 	int	nb_d_quotes;
 
@@ -59,7 +59,7 @@ int	count_double_quotes(char *s)
 	return (nb_d_quotes);
 }
 
-int	count_single_quotes(char *s)
+int	cnt_squotes(char *s)
 {
 	int	nb_s_quotes;
 
