@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/14 10:37:29 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:13:02 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	find_cmd_opt_arg(t_prgm *vars)
 					// printf("end len_coa :%d\n", len_coa);
 					vars->tokens[i].cmd = ft_substr(ptr_coa, start_coa, len_coa);
 					printf("vars->tokens[%d].cmd :%s\n", i, vars->tokens[i].cmd);
-					
 				}
 				else
 				{
@@ -214,7 +213,7 @@ void	find_cmd_opt_arg(t_prgm *vars)
 		z = 0;
 		while (z < 7)
 		{
-			if (ft_strncmp(*(ft_split(vars->tokens[i].cmd, ' ')), vars->builts[z], ft_strlen(vars->builts[z])) == 0)
+			if (ft_strcmp(*(ft_split(vars->tokens[i].cmd, ' ')), vars->builts[z]) == 0)
 			{
 				vars->tokens[i].built_in = 1;
 				break;

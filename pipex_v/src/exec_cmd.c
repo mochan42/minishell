@@ -25,29 +25,15 @@
 void	ft_exec_cmd_1(t_prgm *vars)
 {
 	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
-	{
 		ft_here_doc(vars, 0);
-	}
 	else if (ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
-	{
-		if (access(vars->tokens[0].infile, F_OK | R_OK) != 0)
-		{
-			ft_bzero(vars->p.error[0], 100);
-			ft_strcat(vars->p.error[0], strerror(errno));
-			ft_strcat(vars->p.error[0], " : ");
-			ft_strcat(vars->p.error[0], vars->tokens[0].infile);
-			ft_print_err_message(vars);
-		}
-		else
-			vars->tokens[0].fd_args[0] = open(vars->tokens[0].infile, O_RDONLY, 0777);
-	}
+		ft_infile_checking(vars);
 	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
 	{
 		dup2(vars->tokens[0].fd_args[0], 0);
 		close(vars->tokens[0].fd_args[0]);
 		unlink("tmp.txt");
 	}
-	/**----Out---*/
 	if (*vars->tokens[0].out == '\0' && (vars->pipe_ct >= 1))
 		dup2(vars->p.fd[0][1], 1);
 	else
@@ -63,32 +49,12 @@ void	ft_exec_cmd_1(t_prgm *vars)
 
 void	ft_exec_cmd_last(t_prgm *vars)
 {
-	//vars->tokens[0].out = ">>";
-	//vars->tokens[0].infile = "file";
-	//vars->tokens[0].outfile= "file2";
-
-	//vars->tokens[0].outfile = "file2";
 	if (*vars->tokens[vars->pipe_ct].in == '\0')
 		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0)
-	{
-		while (!get_next_line(dup(vars->p.fd[vars->pipe_ct - 1][0])))
-				;
-		ft_here_doc(vars, vars->pipe_ct);
-	}
+		ft_mid_heredoc(vars);
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
-	{
-		if (access(vars->tokens[vars->pipe_ct].infile, F_OK | R_OK) != 0)
-		{
-			ft_bzero(vars->p.error[vars->pipe_ct], 100);
-			ft_strcat(vars->p.error[vars->pipe_ct], strerror(errno));
-			ft_strcat(vars->p.error[vars->pipe_ct], " : ");
-			ft_strcat(vars->p.error[vars->pipe_ct], vars->tokens[vars->pipe_ct].infile);
-			ft_print_err_message(vars);
-		}
-		else
-			vars->tokens[vars->pipe_ct].fd_args[0] = open(vars->tokens[vars->pipe_ct].infile, O_RDONLY, 0777);
-	}
+		ft_infile_checking(vars);
 	if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 	{
 		dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);

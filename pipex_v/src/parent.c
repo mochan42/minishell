@@ -32,5 +32,5 @@ void	ft_parent_process(t_prgm *vars)
 		waitpid(vars->p.pid[vars->p.child - 1], &vars->p.status, 0);
 		i++;
 	}
-	
+	free_vars_p(vars);
 }

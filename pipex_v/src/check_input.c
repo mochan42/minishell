@@ -11,22 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
-
-// int	ft_valid_nb_args(int argc)
-// {
-// 	if (argc < 5)
-// 	{
-// 		printf("Error : fews arguments\n");
-// 		return (0);
-// 	}
-// 	if (argc > 5)
-// 	{
-// 		printf("Error : too much arguments\n");
-// 		return (0);
-// 	}
-// 	return (1);
-// }
 
 // void	ft_check_files(t_prgm *vars)
 // {
@@ -55,12 +39,13 @@
 // 		ft_put_error_outfile(p, strerror(errno));
 // }
 
+//ft_check_files(p);
+/*possible use of files check in advance */
 int	ft_valid_args(t_prgm *vars)
 {
 	char	*d_pt;
 	char	**pt;
 
-	//ft_check_files(p);
 	d_pt = ft_get_path(vars->env);
 	pt = ft_split(&d_pt[5], ':');
 	ft_parse_all(vars, pt);

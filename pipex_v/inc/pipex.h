@@ -66,6 +66,7 @@ typedef struct s_prgm
 	int		pipe_ct;
 	t_pipe	p;
 	char	*builts[7];
+	int		exit_status;
 }	t_prgm;
 
 /* check_input.c */
@@ -91,6 +92,10 @@ void	ft_exec_cmd_last(t_prgm *vars);
 void	ft_close_fds(t_prgm *vars);
 /* childs_process.c */
 void	ft_childs_process(t_prgm *vars);
+void	ft_in_redirect(t_prgm *vars);
+void	ft_mid_heredoc(t_prgm *vars);
+void	ft_redirect_out(t_prgm	*vars);
+void	ft_infile_checking(t_prgm *vars);
 /* errors.c */
 int		ft_is_error(t_prgm *vars);
 void	ft_print_err_message(t_prgm *vars);
@@ -103,17 +108,24 @@ void	ft_here_doc(t_prgm *vars, int cmd);
 /* builtins.c*/
 void	execbuilt_in(t_prgm *vars);
 void    ft_cd(t_prgm *vars);
-void	ft_pwd();
+void	ft_pwd(void);
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
 void	ft_exit(t_prgm *vars);
 void	ft_unset(t_prgm *vars);
 void	ft_echo(t_prgm *vars);
 int		is_our_env_path(t_prgm *vars);
+void	ft_update_env(t_env *envp, char *oldpwd);
+int		ft_strcmp(const char *s1, const char *s2);
+void	ft_export_new_key(t_prgm *vars);
+void	ft_t_env_to_array(t_env *envp, char ***env_ord);
+void	ft_print_exported_env(char ***env_ord, int env_size);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
+void	ft_execve_cmds(t_prgm *vars);
 /* signal .c */
 void    new_prompt(int sign_num);
 void    exit_shell(int sign_num);
 void    end_state(int sign_num);
+void    erase_prompt(void);
 #endif

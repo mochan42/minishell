@@ -12,21 +12,23 @@
 
 #include "../../minishell.h"
 
+void    erase_prompt(void)
+{
+    write(1, "\n", 1);
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    rl_redisplay();
+}
+
 void    new_prompt(int sign_num)
 {
     if (SIGINT == sign_num)
-    {
-        write(1, "\n", 1);
-        rl_replace_line("", 0);
-        rl_on_new_line();
-        rl_redisplay();
-    }
-    
+         erase_prompt();
 }
 
 void    exit_shell(int sign_num)
 {
-    if (sign_num == SIGQUIT)
+    if (SIGQUIT == sign_num)
     {
         printf("logout !");
         exit(0);

@@ -16,13 +16,11 @@
 void	ft_here_doc(t_prgm *vars, int cmd)
 {
 	char	*tmp_read;
-    char    *delimiter;
+	char	*delimiter;
 
-    delimiter = vars->tokens[cmd].infile;
-	// printf("delimiter :%s\n", delimiter);
-	// printf("heredoc_file :%s\n", heredoc_file);
-	// exit (0);
-	vars->tokens[cmd].fd_args[0] = open("tmp.txt", O_RDWR | O_CREAT | O_APPEND, 0666);
+	delimiter = vars->tokens[cmd].infile;
+	vars->tokens[cmd].fd_args[0] = open("tmp.txt",
+			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
 		tmp_read = readline("> ");
