@@ -81,7 +81,6 @@ typedef struct s_prgm
 	char	*ptr_coa;
 	int		start_coa;
 	int		len_coa;
-	int		len_cmd;
 }	t_prgm;
 
 /* check_input.c */

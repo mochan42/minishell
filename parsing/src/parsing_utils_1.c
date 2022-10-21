@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 20:27:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 18:36:03 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 23:23:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	ft_fill_splited_array_2(char **array_split, char *s, char *needle)
 /* helper function to count words for ft_split_2 (split by string delimiter)*/
 int	ft_nb_words_2(char const *s, char *needle)
 {
-	int	i;
-	int	result;
-	int	len_needle;
-	const char *ptr;
-	int j;
+	int			i;
+	int			result;
+	int			len_needle;
+	const char	*ptr;
+	int			j;
 
 	if (!s)
 		return (0);
@@ -81,7 +81,7 @@ int	ft_nb_words_2(char const *s, char *needle)
 	result = 0;
 	while (i <= (int)ft_strlen(s))
 	{
-		if (((ft_strnstr(ptr, needle, len_needle) != NULL && needle != NULL) || s[i] == 0) && i!= 0)
+		if (((ft_strnstr(ptr, needle, len_needle) != NULL && needle != NULL) || s[i] == 0) && i != 0)
 		{
 			result++;
 			i = i + len_needle + 1;
@@ -116,6 +116,3 @@ char	**ft_split_2(char const *s, char *needle)
 		return (NULL);
 	return (array_result);
 }
-
-
-

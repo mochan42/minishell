@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/21 22:13:35 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 23:19:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,27 +125,33 @@
 /* ########################################################################## */
 /* FUNCTIONS */
 
-/* cmd_arg_opt.c */
+/* cmd_opt_arg.c */
 void		find_cmd_opt_arg(t_prgm *vars);
-void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
-void		go_to_string_end(t_prgm *vars);
-void		jump_white_spaces(t_prgm *vars);
-void		jump_infile(t_prgm *vars);
-void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
-void		jump_cmd_opt_arg_output_redirect(t_prgm *vars);
-void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
-void		move_forward_by_one_char(t_prgm *vars);
-void		move_backwards_by_one_char(t_prgm *vars);
-void		jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars);
-void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
-void		extract_cmd_opt_arg_input_redirection_only(t_prgm *vars);
-void		check_if_cmd_is_builtin(t_prgm *vr, int i);
-void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
-void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
 void		find_cmd_opt_arg_both_redirections(t_prgm *vars);
 void		find_cmd_opt_arg_input_redirection_only(t_prgm *vars);
-void		find_cmd_opt_arg_output_redirection_only(t_prgm *vars);
 void		find_cmd_opt_arg_no_redirection_(t_prgm *vars);
+void		find_cmd_opt_arg_output_redirection_only(t_prgm *vars);
+
+/* cmd_opt_arg_utils_1.c */
+void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
+void		go_to_string_end(t_prgm *vars);
+void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
+void		jump_infile(t_prgm *vars);
+void		jump_white_spaces(t_prgm *vars);
+
+/* cmd_opt_arg_utils_2.c */
+void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
+void		jump_cmd_opt_arg_output_redirect(t_prgm *vars);
+void		jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars);
+void		move_backwards_by_one_char(t_prgm *vars);
+void		move_forward_by_one_char(t_prgm *vars);
+
+/* cmd_opt_arg_utils_3.c */
+void		check_if_cmd_is_builtin(t_prgm *vr, int i);
+void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
+void		extract_cmd_opt_arg_input_redirection_only(t_prgm *vars);
+void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
+void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
 
 /* dollar_sign.c */
 void		concatenate_strings_helper_1(t_prgm *v);
@@ -223,5 +229,7 @@ void		extract_ds_vars_helper(t_prgm *v);
 char		*ft_concat(char *str1, const char *str2);
 
 /* prompt.c */
+void		high_level_tasks(t_prgm *vars);
+void		high_level_tasks_helper(t_prgm *vars);
 int			input_loop(t_prgm *vars);
 #endif

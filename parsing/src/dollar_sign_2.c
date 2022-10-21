@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/19 20:32:48 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 22:48:28 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	extract_ds_vars(t_prgm *v)
 			}
 			v->array_ds_vars[v->ct1[5]] = ft_substr(v->tmp, v->ct1[3], \
 				v->ct1[4]);
-			printf("token[%d] array_ds_vars (raw)[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_ds_vars[v->ct1[5]]);
+			printf("token[%d] array_ds_vars (raw)[%d] :%s\n", v->ct1[0], \
+				v->ct1[5], v->array_ds_vars[v->ct1[5]]);
 			v->ct1[5]++;
 		}
 		else
@@ -67,7 +68,8 @@ void	translate_var(t_prgm *v)
 			}
 			tmp_node = tmp_node->next;
 		}
-		printf("token[%d] array_ds_vars (translated)[%d]:%s\n", v->ct1[0], v->ct1[1], v->array_ds_vars[v->ct1[1]]);
+		printf("token[%d] array_ds_vars (translated)[%d]:%s\n", v->ct1[0], \
+			v->ct1[1], v->array_ds_vars[v->ct1[1]]);
 		v->ct1[1]++;
 	}
 }
@@ -104,7 +106,6 @@ void	extract_string_no_ds(t_prgm *v)
 			}
 			v->array_no_ds[v->ct1[5]] = \
 				ft_substr(v->tmp, v->ct1[3], v->ct1[4]);
-			printf("token[%d] array_no_ds[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_no_ds[v->ct1[5]]);
 			v->ct1[5]++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/19 20:39:54 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 22:47:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	concatenate_strings(t_prgm *v)
 	v->ct1[5] = 0;
 	while (v->ct1[5] < v->ct1[2])
 	{
-		printf("token[%d] array_concat[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_concat[v->ct1[5]]);
 		v->ct1[5]++;
 	}
 	if (v->array_concat[0] != NULL)

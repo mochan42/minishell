@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/09/30 18:35:59 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 23:21:00 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	find_outfile(t_prgm *vars)
 {
 	int		i;
 	int		j;
-	char*	ptr_outfile;
+	char	*ptr_outfile;
 	int		start;
 	int		len_word;
 
@@ -27,26 +27,26 @@ void	find_outfile(t_prgm *vars)
 		start = 0;
 		len_word = 0;
 		ptr_outfile = vars->tokens[i].t_str;
-		while(vars->tokens[i].t_str[j] != '\0')
+		while (vars->tokens[i].t_str[j] != '\0')
 		{
 			j++;
 			ptr_outfile++;
 		}
 		while (j != -1)
 		{
-			if (j > 0 && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j-1] == '>')
+			if (j > 0 && vars->tokens[i].t_str[j] == '>' && vars->tokens[i].t_str[j - 1] == '>')
 			{
 				vars->tokens[i].out = ">>";
 				j++;
 				ptr_outfile++;
-				break;
+				break ;
 			}
 			else if (vars->tokens[i].t_str[j] == '>')
 			{
 				vars->tokens[i].out = ">";
 				j++;
 				ptr_outfile++;
-				break;
+				break ;
 			}
 			else
 			{

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:32:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/21 22:32:53 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 23:26:21 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars)
 	while (vars->tokens[vars->i].t_str[vars->j] != '>')
 	{
 		vars->j++;
-		vars->len_cmd++;
+		vars->len_coa++;
 	}
 }
