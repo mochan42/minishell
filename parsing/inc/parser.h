@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/19 20:32:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 22:13:35 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,25 @@
 
 /* cmd_arg_opt.c */
 void		find_cmd_opt_arg(t_prgm *vars);
+void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
+void		go_to_string_end(t_prgm *vars);
+void		jump_white_spaces(t_prgm *vars);
+void		jump_infile(t_prgm *vars);
+void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
+void		jump_cmd_opt_arg_output_redirect(t_prgm *vars);
+void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
+void		move_forward_by_one_char(t_prgm *vars);
+void		move_backwards_by_one_char(t_prgm *vars);
+void		jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars);
+void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
+void		extract_cmd_opt_arg_input_redirection_only(t_prgm *vars);
+void		check_if_cmd_is_builtin(t_prgm *vr, int i);
+void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
+void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
+void		find_cmd_opt_arg_both_redirections(t_prgm *vars);
+void		find_cmd_opt_arg_input_redirection_only(t_prgm *vars);
+void		find_cmd_opt_arg_output_redirection_only(t_prgm *vars);
+void		find_cmd_opt_arg_no_redirection_(t_prgm *vars);
 
 /* dollar_sign.c */
 void		concatenate_strings_helper_1(t_prgm *v);
@@ -149,7 +168,12 @@ void		init_each_token(t_token *token);
 void		init_all_tokens(t_prgm *vars);
 
 /* env.c */
+void		init_env_init(t_prgm *vars);
+void		init_env_split(t_prgm *vars);
 t_env		*init_env(t_prgm *vars);
+
+/* env_utils_1.c */
+int			ft_list_size(t_env *begin_list);
 t_env		*last_node(t_env *node);
 t_env		*new_node(char *value);
 void		node_add_back(t_env **node, t_env *new);
@@ -170,8 +194,8 @@ void		find_outfile(t_prgm *vars);
 // char		**parse_for_pipe(t_prgm *vars);
 // char		**parse_for_space(t_prgm *vars);
 void		splitting_pipes(t_prgm *vars);
+void		splitting_pipes_no_pipes(t_prgm *vars);
 void		parsing(t_prgm *vars);
-char		*retrieve_infile(t_prgm *vars);
 
 /* parsing_utils_1.c */
 void		ft_fill_splited_array_2(char **array_split, char *s, char *needle);

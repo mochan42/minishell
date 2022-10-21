@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/14 23:16:49 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/19 22:11:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_each_token(t_token *token)
 void	init_all_tokens(t_prgm *vars)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
@@ -71,7 +71,7 @@ void	init(t_prgm *vars)
 	vars->env_head = NULL;
 	vars->env_head = init_env(vars);
 	vars->builts[0] = "cd";
-	vars->builts[1] = "echox"; // wrote echox to use echo as execve
+	vars->builts[1] = "echox"; // write echox to use echo as execve
 	vars->builts[2] = "env";
 	vars->builts[3] = "exit";
 	vars->builts[4] = "export";

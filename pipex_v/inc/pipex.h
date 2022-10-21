@@ -72,6 +72,16 @@ typedef struct s_prgm
 	char	**array_no_ds;
 	char	**array_concat;
 	char	*tmp;
+	char	**array_tmp;
+	char	**keys;
+	char	**values;
+	char	***res;
+	int		i;
+	int		j;
+	char	*ptr_coa;
+	int		start_coa;
+	int		len_coa;
+	int		len_cmd;
 }	t_prgm;
 
 /* check_input.c */
