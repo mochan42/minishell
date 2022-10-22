@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/22 15:45:30 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/22 22:04:19 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	find_infile(t_prgm *vars)
 		find_infile_go_to_string_end(vars);
 		find_infile_identify_input_redirection_type(vars);
 		find_infile_extract_infile(vars);
+		printf("vars->tokens[%d].infile :%s\n", vars->i1, \
+			vars->tokens[vars->i1].infile);
 		vars->i1++;
 	}
 }

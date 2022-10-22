@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/22 16:34:50 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/22 21:59:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	find_outfile_identify_output_redirection_type(t_prgm *vars)
 {
-	while (vars->j2 != -1)
+	while (vars->j2 >= 0)
 	{
 		if (vars->j2 > 0 && vars->tokens[vars->i2].t_str[vars->j2] == '>' && \
 			vars->tokens[vars->i2].t_str[vars->j2 - 1] == '>')
@@ -55,8 +55,6 @@ void	find_outfile_extract_heredoc_outfile(t_prgm *vars)
 	}
 	vars->tokens[vars->i2].outfile = ft_substr(vars->ptr_outfile, \
 		vars->start_outfile, vars->len_outfile);
-	printf("output type[%d]= %s\n", vars->i2, vars->tokens[vars->i2].out);
-	printf("outfile[%d]=%s\n", vars->i2, vars->tokens[vars->i2].outfile);
 }
 
 void	find_outfile_extract_redirection_outfile(t_prgm *vars)
@@ -75,8 +73,6 @@ void	find_outfile_extract_redirection_outfile(t_prgm *vars)
 	}
 	vars->tokens[vars->i2].outfile = ft_substr(vars->ptr_outfile, \
 		vars->start_outfile, vars->len_outfile);
-	printf("output type[%d]= %s\n", vars->i2, vars->tokens[vars->i2].out);
-	printf("outfile[%d]=%s\n", vars->i2, vars->tokens[vars->i2].outfile);
 }
 
 void	find_outfile_extract_outfile(t_prgm *vars)
@@ -97,7 +93,9 @@ void	find_outfile(t_prgm *vars)
 		find_outfile_init(vars);
 		find_outfile_go_to_string_end(vars);
 		find_outfile_identify_output_redirection_type(vars);
-		find_outfile_extract_redirection_outfile(vars);
+		find_outfile_extract_outfile(vars);
+		printf("vars->tokens[%d].outfile :%s\n", vars->i2, \
+			vars->tokens[vars->i2].outfile);
 		vars->i2++;
 	}
 }
