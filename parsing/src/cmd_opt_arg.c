@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/21 23:26:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:35:28 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 
 void	find_cmd_opt_arg_output_redirection_only(t_prgm *vars)
 {
+	vars->len_coa = 0;
 	jump_cmd_opt_arg_when_output_redirection_only(vars);
 	printf("vars->tokens[%d].t_str[%d] :%c\n", vars->i, vars->j, \
 		vars->tokens[vars->i].t_str[vars->j]);
-	printf("len_cmd = %d\n", vars->len_coa);
+	printf("len_coa = %d\n", vars->len_coa);
 	vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, 0, vars->len_coa);
 	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
 }

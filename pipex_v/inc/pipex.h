@@ -81,6 +81,16 @@ typedef struct s_prgm
 	char	*ptr_coa;
 	int		start_coa;
 	int		len_coa;
+	int		i1;
+	int		j1;
+	char	*ptr_infile;
+	int		start_infile;
+	int		len_infile;
+	int		i2;
+	int		j2;
+	char	*ptr_outfile;
+	int		start_outfile;
+	int		len_outfile;
 }	t_prgm;
 
 /* check_input.c */

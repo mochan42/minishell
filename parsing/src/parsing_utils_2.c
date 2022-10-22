@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/12 19:04:50 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:57:31 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,14 @@ int	ft_nb_words_ms(char const *s, char c)
 char	*find_pipes(char *s)
 {
 	char	*pipes_loc;
-	int		len;
 	int		i;
-	int		res;
 	int		b_open_double_quote;
 
-	len = ft_strlen(s) + 1;
 	i = 0;
 	b_open_double_quote = 0;
-	pipes_loc = malloc(sizeof(char) * len);
+	pipes_loc = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	while (s[i] != '\0')
 	{
-		res = is_pipe(s[i]);
 		if (is_double_quote(s[i]))
 		{
 			if (b_open_double_quote == 0)
@@ -53,48 +49,43 @@ char	*find_pipes(char *s)
 			else if (b_open_double_quote == 1)
 				b_open_double_quote = 0;
 		}
-		if (res && b_open_double_quote == 0)
+		if (is_pipe(s[i]) && b_open_double_quote == 0)
 			pipes_loc[i] = 'P';
 		else
 			pipes_loc[i] = '.';
 		i++;
 	}
-	pipes_loc[len] = '\0';
+	pipes_loc[i + 1] = '\0';
 	return (pipes_loc);
 }
 
 void	ft_fill_splited_array_pipes(char **array_split, char *s, \
 		char *pipes_loc, char c)
 {
+	int	counter[2];
 	int	word_start;
-	int	i;
 	int	length;
-	int	word;
-	int	len_s;
 
-	i = 0;
-	word = 0;
-	len_s = (int)ft_strlen(s);
-	while (i < len_s)
+	counter[0] = 0;
+	counter[1] = 0;
+	while (counter[0] < (int)ft_strlen(s))
 	{
-		if (pipes_loc[i] != c)
+		if (pipes_loc[counter[0]] != c)
 		{
-			word_start = i;
+			word_start = counter[0];
 			length = 0;
-			while (pipes_loc[i] != 0 && pipes_loc[i] != c)
+			while (pipes_loc[counter[0]] != 0 && pipes_loc[counter[0]] != c)
 			{
 				length++;
-				i++;
+				counter[0]++;
 			}
-			array_split[word] = (char *)ft_substr(s, word_start, length);
-			word++;
+			array_split[counter[1]] = (char *)ft_substr(s, word_start, length);
+			counter[1]++;
 		}
 		else
-		{
-			i++;
-		}
+			counter[0]++;
 	}
-	array_split[word] = NULL;
+	array_split[counter[1]] = NULL;
 }
 
 char	**ft_split_pipes(char const *s, char c)

@@ -22,8 +22,6 @@ int	main(int ac, char **av, char **env)
 	ms = malloc(sizeof(t_prgm) * 1);
 	ms->env = env;
 	init(ms);
-	// print_dir();
 	input_loop(ms);
-	//free_stuff(ms);
 	return (0);
 }
