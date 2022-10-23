@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 16:21:31 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 16:54:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 void	find_cmd_opt_arg_both_redirections(t_prgm *vars)
 {
-	go_to_string_end(vars);
-	go_to_beginning_cmd_opt_arg(vars);
-	if ((vars->tokens[vars->i].in != NULL && \
-		ft_strncmp(vars->tokens[vars->i].in, "<<", 2) == 0) || \
-		(vars->tokens[vars->i].in != NULL && \
-		ft_strncmp(vars->tokens[vars->i].in, "<", 1) == 0))
-		extract_cmd_opt_arg_both_redirections(vars);
+	jump_white_spaces(vars);
+	if (vars->ptr_coa[vars->j] == '<')
+	{
+		go_to_string_end(vars);
+		go_to_beginning_cmd_opt_arg(vars);
+		if ((vars->tokens[vars->i].in != NULL && \
+			ft_strncmp(vars->tokens[vars->i].in, "<<", 2) == 0) || \
+			(vars->tokens[vars->i].in != NULL && \
+			ft_strncmp(vars->tokens[vars->i].in, "<", 1) == 0))
+			extract_cmd_opt_arg_both_redirections(vars);
+	}
+	else
+		extract_cmd_opt_arg_start_both_redirections_outfile2infile(vars);
 }
 
 void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
