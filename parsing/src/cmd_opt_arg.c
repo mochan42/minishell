@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 14:27:48 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 16:21:31 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,7 @@ void	find_cmd_opt_arg_both_redirections(t_prgm *vars)
 
 void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 {
-	printf("token[%d] before jump space vars->j =%d\n", vars->i, vars->j);
-	printf("token[%d] vars->ptr_coa :%s\n", vars->i, vars->ptr_coa);
 	jump_white_spaces(vars);
-	printf("token[%d] after jump space vars->i =%d\n", vars->i, vars->i);
-	printf("token[%d] after jump space vars->j =%d\n", vars->i, vars->j);
-	printf("token[%d] after jump space ptr_coa[%d] =%c\n", vars->i, vars->j, \
-		vars->ptr_coa[vars->j]);
 	if (vars->ptr_coa[vars->j] == '<')
 	{
 		go_to_string_end(vars);
@@ -47,14 +41,20 @@ void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 }
 
 void	find_cmd_opt_arg_output_redirection_only(t_prgm *vars)
-{
-	vars->len_coa = 0;
-	jump_cmd_opt_arg_when_output_redirection_only(vars);
-	printf("vars->tokens[%d].t_str[%d] :%c\n", vars->i, vars->j, \
-		vars->tokens[vars->i].t_str[vars->j]);
-	printf("len_coa = %d\n", vars->len_coa);
-	vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, 0, vars->len_coa);
-	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
+{	
+	jump_white_spaces(vars);
+	if (vars->ptr_coa[vars->j] != '>')
+	{
+		vars->len_coa = 0;
+		jump_cmd_opt_arg_when_output_redirection_only(vars);
+		printf("vars->tokens[%d].t_str[%d] :%c\n", vars->i, vars->j, \
+			vars->tokens[vars->i].t_str[vars->j]);
+		printf("len_coa = %d\n", vars->len_coa);
+		vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, 0, vars->len_coa);
+		printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
+	}
+	else if (vars->ptr_coa[vars->j] == '>')
+		extract_cmd_opt_arg_start_output_redirection_only(vars);
 }
 
 void	find_cmd_opt_arg_no_redirection_(t_prgm *vars)

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/23 14:25:59 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 16:18:24 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
 
 /* cmd_opt_arg_utils_4.c */
 void		extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars);
+void		extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars);
+void		jump_outfile(t_prgm *vars);
 
 /* dollar_sign.c */
 void		concatenate_strings_helper_1(t_prgm *v);

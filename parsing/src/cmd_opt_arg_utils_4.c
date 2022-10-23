@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 13:28:59 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 14:27:03 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 16:21:16 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,41 @@ void	extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars)
 	}
 	vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, vars->start_coa, \
 		vars->len_coa);
+	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
+}
+
+void	jump_output_redirection_sign(t_prgm *vars)
+{
+	while (vars->tokens[vars->i].t_str[vars->j] == '>')
+	{
+		vars->start_coa++;
+		vars->j++;
+		vars->ptr_coa++;
+	}
+}
+
+void	jump_outfile(t_prgm *vars)
+{
+	while ((vars->tokens[vars->i].t_str[vars->j] != ' ' && \
+		vars->tokens[vars->i].t_str[vars->j] != '\0'))
+	{
+		vars->j++;
+		vars->ptr_coa++;
+	}
+}
+
+void	extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars)
+{
+	vars->start_coa = 0;
+	jump_output_redirection_sign(vars);
+	jump_white_spaces(vars);
+	jump_outfile(vars);
+	jump_white_spaces(vars);
+	while (vars->tokens[vars->i].t_str[vars->j] != '\0')
+	{
+		vars->len_coa++;
+		vars->j++;
+	}
+	vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, 0, vars->len_coa);
 	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
 }
