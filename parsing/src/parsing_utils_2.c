@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/22 17:57:31 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 18:38:25 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,23 @@ int	ft_nb_words_ms(char const *s, char c)
 
 char	*find_pipes(char *s)
 {
-	char	*pipes_loc;
-	int		i;
-	int		b_open_double_quote;
+	t_finding_pipes	true_pipes;
 
-	i = 0;
-	b_open_double_quote = 0;
-	pipes_loc = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	while (s[i] != '\0')
+	init_true_pipes(&true_pipes, s);
+	while (true_pipes.s[true_pipes.i] != '\0')
 	{
-		if (is_double_quote(s[i]))
-		{
-			if (b_open_double_quote == 0)
-				b_open_double_quote = 1;
-			else if (b_open_double_quote == 1)
-				b_open_double_quote = 0;
-		}
-		if (is_pipe(s[i]) && b_open_double_quote == 0)
-			pipes_loc[i] = 'P';
+		check_if_double_quote_open_or_closed(&true_pipes);
+		check_if_single_quote_open_or_closed(&true_pipes);
+		if (is_pipe(true_pipes.s[true_pipes.i]) && \
+			true_pipes.b_open_double_quote == 0 && \
+			true_pipes.b_open_single_quote == 0)
+			true_pipes.pipes_loc[true_pipes.i] = 'P';
 		else
-			pipes_loc[i] = '.';
-		i++;
+			true_pipes.pipes_loc[true_pipes.i] = '.';
+		true_pipes.i++;
 	}
-	pipes_loc[i + 1] = '\0';
-	return (pipes_loc);
+	true_pipes.pipes_loc[true_pipes.i + 1] = '\0';
+	return (true_pipes.pipes_loc);
 }
 
 void	ft_fill_splited_array_pipes(char **array_split, char *s, \

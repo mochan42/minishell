@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/23 17:05:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 18:39:39 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@
 
 /* ########################################################################## */
 /* STRUCTURES */
+
+typedef struct s_finding_pipes
+{
+	char	*s;
+	char	*pipes_loc;
+	int		i;
+	int		b_open_double_quote;
+	int		b_open_single_quote;
+}				t_finding_pipes;
 
 /* ########################################################################## */
 /* CONSTANTS */
@@ -141,6 +150,7 @@ void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
+void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 
 /* parsing_utils_3.c */
 int			cnt_dquotes(char *s);
@@ -154,6 +164,11 @@ int			cnt_dlr(char *s);
 void		err_msg_quotes_not_closed(void);
 void		extract_ds_vars_helper(t_prgm *v);
 char		*ft_concat(char *str1, const char *str2);
+
+/* parsing_utils_5.c */
+void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
+void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
+void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 
 /* prompt.c */
 void		high_level_tasks(t_prgm *vars);
