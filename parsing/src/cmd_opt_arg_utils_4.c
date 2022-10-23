@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 13:28:59 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 17:00:55 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 17:06:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars)
 	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
 }
 
-void	extract_cmd_opt_arg_start_both_redirections_outfile2infile(t_prgm *vars)
+void	extract_cmd_opt_arg_start_both_redirections_out2in(t_prgm *vars)
 {
 	vars->start_coa = 0;
 	vars->len_coa = 0;
