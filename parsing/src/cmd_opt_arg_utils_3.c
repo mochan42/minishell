@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:33:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/21 22:34:03 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:28:07 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	extract_cmd_opt_arg_both_redirections(t_prgm *vars)
 		extract_coa_at_string_middle_both_redirections(vars);
 }
 
-void	extract_cmd_opt_arg_input_redirection_only(t_prgm *vars)
+void	extract_cmd_opt_arg_middle_input_redirection_only(t_prgm *vars)
 {
 	jump_white_spaces(vars);
 	jump_infile(vars);

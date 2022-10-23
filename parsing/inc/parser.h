@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/22 18:39:30 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:25:59 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ void		move_forward_by_one_char(t_prgm *vars);
 /* cmd_opt_arg_utils_3.c */
 void		check_if_cmd_is_builtin(t_prgm *vr, int i);
 void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
-void		extract_cmd_opt_arg_input_redirection_only(t_prgm *vars);
+void		extract_cmd_opt_arg_middle_input_redirection_only(t_prgm *vars);
 void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
 void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
+
+/* cmd_opt_arg_utils_4.c */
+void		extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars);
 
 /* dollar_sign.c */
 void		concatenate_strings_helper_1(t_prgm *v);

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/22 18:35:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:27:48 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,25 @@ void	find_cmd_opt_arg_both_redirections(t_prgm *vars)
 
 void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 {
-	go_to_string_end(vars);
-	find_beginning_of_cmd_opt_arg(vars);
-	if ((vars->tokens[vars->i].in != NULL && \
-		ft_strncmp(vars->tokens[vars->i].in, "<<", 2) == 0) || \
-		(vars->tokens[vars->i].in != NULL && \
-		ft_strncmp(vars->tokens[vars->i].in, "<", 1) == 0))
-		extract_cmd_opt_arg_input_redirection_only(vars);
+	printf("token[%d] before jump space vars->j =%d\n", vars->i, vars->j);
+	printf("token[%d] vars->ptr_coa :%s\n", vars->i, vars->ptr_coa);
+	jump_white_spaces(vars);
+	printf("token[%d] after jump space vars->i =%d\n", vars->i, vars->i);
+	printf("token[%d] after jump space vars->j =%d\n", vars->i, vars->j);
+	printf("token[%d] after jump space ptr_coa[%d] =%c\n", vars->i, vars->j, \
+		vars->ptr_coa[vars->j]);
+	if (vars->ptr_coa[vars->j] == '<')
+	{
+		go_to_string_end(vars);
+		find_beginning_of_cmd_opt_arg(vars);
+		if ((vars->tokens[vars->i].in != NULL && \
+			ft_strncmp(vars->tokens[vars->i].in, "<<", 2) == 0) || \
+			(vars->tokens[vars->i].in != NULL && \
+			ft_strncmp(vars->tokens[vars->i].in, "<", 1) == 0))
+			extract_cmd_opt_arg_middle_input_redirection_only(vars);
+	}
+	else
+		extract_cmd_opt_arg_start_input_redirection_only(vars);
 }
 
 void	find_cmd_opt_arg_output_redirection_only(t_prgm *vars)
