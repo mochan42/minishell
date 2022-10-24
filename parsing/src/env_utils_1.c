@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 21:17:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/19 21:18:17 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/24 18:22:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,3 @@ int	ft_list_size(t_env *begin_list)
 	return (counter);
 }
 
-/* printlist:
-*	print the values of the nodes of a linked list.
-*	useful function to check if the linked list is created, sorted, etc.
-*	not required for the project.
-*/
-void	printlist(t_env *head)
-{
-	t_env	*temporary;
-
-	temporary = head;
-	while (temporary != NULL)
-	{
-		printf("%s=%s\n", temporary->key, temporary->value);
-		temporary = temporary->next;
-	}
-	printf("\n");
-}

@@ -62,7 +62,6 @@ void	ft_cd(t_prgm *vars)
 		}
 	}
 	ft_update_env(envp, oldpwd);
-	free(oldpwd);
 }
 
 void	ft_update_env(t_env *envp, char *oldpwd)
