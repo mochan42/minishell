@@ -60,6 +60,11 @@ void	ft_cd(t_prgm *vars)
 			perror(vars->tokens[vars->p.child].options[1]);
 			return ;
 		}
+		if (vars->pipe_ct > 0)
+		{
+			chdir(oldpwd);
+			return ;
+		}
 	}
 	ft_update_env(envp, oldpwd);
 }
@@ -91,6 +96,7 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 			return ;
 		envp = envp->next;
 	}
+
 }
 
 void	ft_pwd(void)
@@ -253,6 +259,8 @@ void	ft_echo(t_prgm *vars)
 		else
 			printf("%s", vars->tokens[vars->p.child].options[1 + i]);
 		i++;
+		if (vars->tokens[vars->p.child].options[1 + i])
+			printf(" ");
 	}
 	printf("%c", end);
 }
