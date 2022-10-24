@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/15 14:15:45 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:15:25 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 /* INCLUDES */
+/* ########################################################################## */
 # include "../../libft/inc/libft.h"
 # include "../../pipex_v/inc/pipex.h"
 # include <unistd.h>
@@ -30,92 +31,14 @@
 /* ########################################################################## */
 /* STRUCTURES */
 
-// typedef struct s_env
-// {
-// 	struct s_env	*next;
-// 	struct s_env	*prev;
-// 	char			*key;
-// 	char			*value;
-// }	t_env;
-
-// typedef struct s_pipe
-// {
-// 	int			fd[MAX_CMD][2];
-// 	int			child;
-// 	int			pid[MAX_CMD];
-// 	int			nb_cmd;
-// 	int			status;
-// 	t_env		envp;
-// 	char		error[MAX_CMD][100];
-// 	char		*tmp_file;
-// 	int			fd_hd;
-// }	t_pipe;
-
-// typedef struct s_token
-// {
-// 	char	*in; //specify if it is < or <<
-// 	char	*out; //specify if it is > or >>
-// 	char	*infile; // TO DO 
-// 	char	*outfile; // TO DO 
-// 	char	*bin;
-// 	int		built_in; // 0 is exec, 1 is built-in
-// 	char	**options; // TO DO : cmd + options;
-// 	char	*t_str;
-// 	char	*t_str_exp; // TO DO
-// 	char	*cmd; // TO DO : only cmd
-// }	t_token;
-
-// typedef struct s_prgm
-// {
-// 	char	*cmd_line;
-// 	char	**env; //transform into a linked list
-// 	t_token	*tokens;
-// 	int		pipe_ct;
-// t_pipe	p;
-// }	t_prgm;
-
-// typedef struct s_env
-// {
-// 	struct s_env	*next;
-// 	struct s_env	*prev;
-// 	char			*key;
-// 	char			*value;
-// } 				t_env;
-
-// typedef struct s_pipe
-// {
-// 	int		fd[MAX_CMD][2];
-// 	int		child;
-// 	int		pid[MAX_CMD];
-// 	int		nb_cmd;
-// 	int		status;
-// 	t_env	envp;
-// 	char	error[MAX_CMD][100];
-// 	char	*tmp_file;
-// 	int		fd_hd;
-// }				t_pipe;
-
-// typedef struct s_token
-// {
-// 	char	*in;
-// 	char	*out;
-// 	char	*infile;
-// 	char	*outfile;
-// 	char	*bin;
-// 	int		built_in;
-// 	char	**options;
-// 	char	*t_str;
-// 	char	*t_str_exp; 
-// 	char	*cmd;
-// }				t_token;
-
-// typedef struct s_env
-// {
-//     struct s_env    *next;
-//     struct s_env    *prev;
-//     char            *key;
-//     char            *value;
-// }                 t_env;
+typedef struct s_finding_pipes
+{
+	char	*s;
+	char	*pipes_loc;
+	int		i;
+	int		b_open_double_quote;
+	int		b_open_single_quote;
+}				t_finding_pipes;
 
 /* ########################################################################## */
 /* CONSTANTS */
@@ -125,18 +48,65 @@
 /* ########################################################################## */
 /* FUNCTIONS */
 
-/* cmd_arg_opt.c */
+/* cmd_opt_arg.c */
 void		find_cmd_opt_arg(t_prgm *vars);
+void		find_cmd_opt_arg_both_redirections(t_prgm *vars);
+void		find_cmd_opt_arg_input_redirection_only(t_prgm *vars);
+void		find_cmd_opt_arg_no_redirection_(t_prgm *vars);
+void		find_cmd_opt_arg_output_redirection_only(t_prgm *vars);
+
+/* cmd_opt_arg_utils_1.c */
+void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
+void		go_to_string_end(t_prgm *vars);
+void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
+void		jump_infile(t_prgm *vars);
+void		jump_white_spaces(t_prgm *vars);
+
+/* cmd_opt_arg_utils_2.c */
+void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
+void		jump_cmd_opt_arg_output_redirect(t_prgm *vars);
+void		jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars);
+void		move_backwards_by_one_char(t_prgm *vars);
+void		move_forward_by_one_char(t_prgm *vars);
+
+/* cmd_opt_arg_utils_3.c */
+void		check_if_cmd_is_builtin(t_prgm *vr, int i);
+void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
+void		extract_cmd_opt_arg_middle_input_redirection_only(t_prgm *vars);
+void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
+void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
+
+/* cmd_opt_arg_utils_4.c */
+void		extract_cmd_opt_arg_start_both_redirections_out2in(t_prgm *vars);
+void		extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars);
+void		extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars);
+void		jump_outfile(t_prgm *vars);
+
+/* dollar_sign.c */
+void		concatenate_strings_helper_1(t_prgm *v);
+void		concatenate_strings(t_prgm *v);
+void		extract_string_no_ds_helper(t_prgm *v);
+void		extract_string_no_ds(t_prgm *v);
+void		ids_cmd_opt_arg(t_prgm *vars);
+void		interpret_dollar_sign(t_prgm *vars);
+
+/* dollar_sign_2.c */
+void		extract_ds_vars_helper(t_prgm *v);
+void		extract_ds_vars(t_prgm *vars);
+void		translate_var(t_prgm *v);
 
 /*  init.c */
-// char		*find_path_in_envp(t_prgm vars);
-//void		initialise_ms(t_prgm *vars);
 void		init(t_prgm *vars);
 void		init_each_token(t_token *token);
 void		init_all_tokens(t_prgm *vars);
 
 /* env.c */
+void		init_env_init(t_prgm *vars);
+void		init_env_split(t_prgm *vars);
 t_env		*init_env(t_prgm *vars);
+
+/* env_utils_1.c */
+int			ft_list_size(t_env *begin_list);
 t_env		*last_node(t_env *node);
 t_env		*new_node(char *value);
 void		node_add_back(t_env **node, t_env *new);
@@ -150,31 +120,58 @@ void		re_init_tokens(t_prgm *vars);
 
 /* infile.c */
 void		find_infile(t_prgm *vars);
+void		find_infile_extract_heredoc_infile(t_prgm *vars);
+void		find_infile_extract_infile(t_prgm *vars);
+void		find_infile_extract_redirection_infile(t_prgm *vars);
+void		find_infile_identify_input_redirection_type(t_prgm *vars);
+
+/* infile_utils_1.c */
+void		find_infile_init(t_prgm *vars);
+void		find_infile_go_to_string_end(t_prgm *vars);
 
 /* outfile.c */
 void		find_outfile(t_prgm *vars);
+void		find_outfile_identify_output_redirection_type(t_prgm *vars);
+void		find_outfile_extract_outfile(t_prgm *vars);
+void		find_outfile_extract_redirection_outfile(t_prgm *vars);
+void		find_outfile_extract_heredoc_outfile(t_prgm *vars);
+
+/* outfile_utils_1.c */
+void		find_outfile_init(t_prgm *vars);
+void		find_outfile_go_to_string_end(t_prgm *vars);
 
 /* parsing.c */
-// char		**parse_for_pipe(t_prgm *vars);
-// char		**parse_for_space(t_prgm *vars);
 void		splitting_pipes(t_prgm *vars);
+void		splitting_pipes_no_pipes(t_prgm *vars);
 void		parsing(t_prgm *vars);
-char		*retrieve_infile(t_prgm *vars);
 
-/* parsing_utils_1.c */
-void		ft_fill_splited_array_2(char **array_split, char *s, char *needle);
-int			ft_nb_words_2(char const *s, char *needle);
-char		**ft_split_2(char const *s, char *needle);
-
-/* parsing_utils_1.c */
+/* parsing_utils_2.c */
 char		*find_pipes(char *s);
 void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
+void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
+
+/* parsing_utils_3.c */
+int			cnt_dquotes(char *s);
+int			cnt_squotes(char *s);
 int			is_double_quote(char c);
 int			is_pipe(char c);
+int			is_single_quote(char c);
+
+/* parsing_utils_4.c */
+int			cnt_dlr(char *s);
+void		err_msg_quotes_not_closed(void);
+void		extract_ds_vars_helper(t_prgm *v);
+char		*ft_concat(char *str1, const char *str2);
+
+/* parsing_utils_5.c */
+void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
+void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
+void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 
 /* prompt.c */
+void		high_level_tasks(t_prgm *vars);
 int			input_loop(t_prgm *vars);
 #endif

@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/17 09:22:25 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:13:28 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
-
-// char	*find_path_in_envp(t_prgm vars)
-// {
-// 	char	*path_name;
-// 	char	*path_env;
-// 	char	*test;
-// 	int		len_path_env;
-
-// 	path_name = "PATH=";
-// 	path_env = NULL;
-// 	test = NULL;
-// 	len_path_env = 0;
-// 	while (*(vars.env))
-// 	{
-// 		test = ft_strnstr(*(vars.env), path_name, 5);
-// 		if (test)
-// 		{
-// 			path_env = *(vars.env);
-// 			len_path_env = ft_strlen(path_env);
-// 			break ;
-// 		}
-// 		else
-// 			(*(vars.env))++;
-// 	}
-// 	path_env = ft_substr(path_env, 5, len_path_env);
-// 	return (path_env);
-// }
 
 void	init_each_token(t_token *token)
 {
@@ -55,7 +28,7 @@ void	init_each_token(t_token *token)
 void	init_all_tokens(t_prgm *vars)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
@@ -64,13 +37,14 @@ void	init_all_tokens(t_prgm *vars)
 	}
 }
 
+// write echox to use echo as execve
 void	init(t_prgm *vars)
 {
 	vars->pipe_ct = 0;
 	vars->env_head = NULL;
 	vars->env_head = init_env(vars);
 	vars->builts[0] = "cd";
-	vars->builts[1] = "echo";
+	vars->builts[1] = "echox";
 	vars->builts[2] = "env";
 	vars->builts[3] = "exit";
 	vars->builts[4] = "export";

@@ -3,29 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/17 14:24:18 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:12:17 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-// Function to print Current Directory.
-void	print_dir(void)
+void	high_level_tasks(t_prgm *vars)
 {
-	char	cwd[1024];
+	int		pid;
 
-	getcwd(cwd, sizeof(cwd));
-	printf("\nDir: %s\n", cwd);
+	add_history(vars->cmd_line);
+	parsing(vars);
+	if (vars->tokens[0].built_in == 1)
+		ms_executor(vars);
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+			ms_executor(vars);
+		else
+			wait(NULL);
+	}
 }
 
 // Function to take input
 int	input_loop(t_prgm *vars)
 {
 	int		flag;
-	//int		pid;
 
 	while (1)
 	{
@@ -35,9 +43,7 @@ int	input_loop(t_prgm *vars)
 		flag = 1;
 		if (vars->cmd_line[0] && vars->cmd_line[0] != '\n')
 		{
-			add_history(vars->cmd_line);
-			parsing(vars);
-			ms_executor(vars);
+			high_level_tasks(vars);
 			flag = 0;
 		}
 		if (flag == 0)

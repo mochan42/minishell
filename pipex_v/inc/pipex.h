@@ -66,6 +66,30 @@ typedef struct s_prgm
 	int		pipe_ct;
 	t_pipe	p;
 	char	*builts[7];
+	int		ct1[6]; // 6 counters for dollar sign expansion of command option arguments
+	char	**array_ds_vars;
+	char	**array_no_ds;
+	char	**array_concat;
+	char	*tmp;
+	char	**array_tmp;
+	char	**keys;
+	char	**values;
+	char	***res;
+	int		i;
+	int		j;
+	char	*ptr_coa;
+	int		start_coa;
+	int		len_coa;
+	int		i1;
+	int		j1;
+	char	*ptr_infile;
+	int		start_infile;
+	int		len_infile;
+	int		i2;
+	int		j2;
+	char	*ptr_outfile;
+	int		start_outfile;
+	int		len_outfile;
 }	t_prgm;
 
 /* check_input.c */
