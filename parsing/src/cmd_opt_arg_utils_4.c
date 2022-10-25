@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 13:28:59 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 17:06:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/25 19:12:29 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars)
 {
 	vars->start_coa = 0;
 	jump_output_redirection_sign(vars);
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	jump_outfile(vars);
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	while (vars->tokens[vars->i].t_str[vars->j] != '\0')
 	{
 		vars->len_coa++;
@@ -69,9 +69,9 @@ void	extract_cmd_opt_arg_start_both_redirections_out2in(t_prgm *vars)
 	vars->start_coa = 0;
 	vars->len_coa = 0;
 	jump_output_redirection_sign(vars);
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	jump_outfile(vars);
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	while (vars->tokens[vars->i].t_str[vars->j] != '<')
 	{
 		vars->len_coa++;
