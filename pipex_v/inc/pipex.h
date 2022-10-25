@@ -47,8 +47,11 @@ typedef struct s_pipe
 typedef struct s_token
 {
 	char	*in;
+	int		nb_in;
+	char	**array_in;
 	char	*out;
 	char	*infile;
+	char	**array_infiles;
 	char	*outfile;
 	char	*bin;
 	int		built_in;
@@ -85,6 +88,7 @@ typedef struct s_prgm
 	int		i1;
 	int		j1;
 	char	*ptr_infile;
+	char	*ptr_array_infiles;
 	int		start_infile;
 	int		len_infile;
 	int		i2;

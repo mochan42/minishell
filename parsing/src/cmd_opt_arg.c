@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 17:26:25 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:15:08 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/25 19:21:55 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	find_cmd_opt_arg_both_redirections(t_prgm *vars)
 {
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	if (vars->ptr_coa[vars->j] == '<')
 	{
 		go_to_string_end(vars);
@@ -31,7 +31,7 @@ void	find_cmd_opt_arg_both_redirections(t_prgm *vars)
 
 void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 {
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	if (vars->ptr_coa[vars->j] == '<')
 	{
 		go_to_string_end(vars);
@@ -48,7 +48,7 @@ void	find_cmd_opt_arg_input_redirection_only(t_prgm *vars)
 
 void	find_cmd_opt_arg_output_redirection_only(t_prgm *vars)
 {	
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	if (vars->ptr_coa[vars->j] != '>')
 	{
 		vars->len_coa = 0;
@@ -66,7 +66,7 @@ void	find_cmd_opt_arg_output_redirection_only(t_prgm *vars)
 void	find_cmd_opt_arg_no_redirection_(t_prgm *vars)
 {
 	vars->start_coa = 0;
-	jump_white_spaces(vars);
+	jump_white_spaces(vars, "ptr_coa");
 	vars->tokens[vars->i].cmd = ft_substr(vars->ptr_coa, vars->start_coa, \
 		ft_strlen(vars->ptr_coa) - vars->start_coa);
 	printf("vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
