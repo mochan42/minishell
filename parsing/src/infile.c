@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/25 18:54:40 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/25 19:42:11 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ void	find_infile(t_prgm *vars)
 	while (vars->i1 < vars->pipe_ct + 1)
 	{
 		find_infile_init(vars);
-		// find_infile_identify_input_redirection_types_array(vars);
+		find_infile_identify_input_redirection_types_array(vars);
 		find_infile_go_to_string_end(vars);
 		find_infile_identify_input_redirection_type(vars);
 		find_infile_extract_infile(vars);
