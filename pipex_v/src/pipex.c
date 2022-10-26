@@ -24,10 +24,11 @@ void	ft_execve_cmds(t_prgm *vars)
 		{
 			if (execve(vars->tokens[vars->p.child].bin,
 				vars->tokens[vars->p.child].options, vars->env) == -1)
-			{
-				printf("Command not found : %s\n", vars->tokens[vars->p.child].options[0]);
-				exit(127);
-			}
+				{
+					printf(" ");
+					exit(127);
+				}
+				
 		}
 		else
 		{

@@ -47,11 +47,8 @@ typedef struct s_pipe
 typedef struct s_token
 {
 	char	*in;
-	int		nb_in;
-	char	**array_in;
 	char	*out;
 	char	*infile;
-	char	**array_infiles;
 	char	*outfile;
 	char	*bin;
 	int		built_in;
@@ -88,7 +85,6 @@ typedef struct s_prgm
 	int		i1;
 	int		j1;
 	char	*ptr_infile;
-	char	*ptr_array_infiles;
 	int		start_infile;
 	int		len_infile;
 	int		i2;
@@ -102,7 +98,7 @@ typedef struct s_prgm
 //int		ft_valid_nb_args(int argc);
 int		ft_valid_args(t_prgm *vars);
 void	ft_check_files(t_prgm *vars);
-void	ft_check_full_cmd_pt(t_prgm *vars, char *tmp, int cmd);
+void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd);
 /* utils_2.c*/
 void	free_vars_p(t_prgm *vars);
 int		len_path(char **paths);
@@ -116,15 +112,15 @@ void	ft_set_cmd_error_msg(t_prgm *vars, char **tmp, int cmd);
 /* parent.c */
 void	ft_parent_process(t_prgm *vars);
 /* exec_cmd.c*/
-void	ft_exec_cmd_1(t_prgm *vars);
-void	ft_exec_cmd_last(t_prgm *vars);
+void	ft_exec_cmd_1(t_prgm *vars, int *let_error);
+void	ft_exec_cmd_last(t_prgm *vars, int *let_error);
 void	ft_close_fds(t_prgm *vars);
 /* childs_process.c */
 void	ft_childs_process(t_prgm *vars);
-void	ft_in_redirect(t_prgm *vars);
+void	ft_in_redirect(t_prgm *vars, int *let_error);
 void	ft_mid_heredoc(t_prgm *vars);
 void	ft_redirect_out(t_prgm	*vars);
-void	ft_infile_checking(t_prgm *vars);
+void	ft_infile_checking(t_prgm *vars, int *let_error);
 /* errors.c */
 int		ft_is_error(t_prgm *vars);
 void	ft_print_err_message(t_prgm *vars);
@@ -135,6 +131,7 @@ void	ft_exit_code(int ex_code, int mode);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
 void	ft_here_doc(t_prgm *vars, int cmd);
+char	*ft_creat_tmp_file(void);
 /* builtins.c*/
 void	execbuilt_in(t_prgm *vars);
 void    ft_cd(t_prgm *vars);

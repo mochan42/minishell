@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:31:09 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/25 15:19:05 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/21 22:31:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,15 @@ void	go_to_beginning_cmd_opt_arg(t_prgm *vars)
 	}
 }
 
-void	jump_white_spaces(t_prgm *vars, char *s)
+void	jump_white_spaces(t_prgm *vars)
 {
-	if (ft_strncmp(s, "ptr_coa", 7) == 0)
+	while (vars->tokens[vars->i].t_str[vars->j] == ' ' || \
+		vars->tokens[vars->i].t_str[vars->j] == '\t')
 	{
-		while (vars->tokens[vars->i].t_str[vars->j] == ' ' || \
-			vars->tokens[vars->i].t_str[vars->j] == '\t')
-		{
-			vars->j++;
-			vars->ptr_coa++;
-		}
-	}
-	else if (ft_strncmp(s, "ptr_array_infiles", 17) == 0)
-	{
-		while (vars->tokens[vars->i1].t_str[vars->j1] == ' ' || \
-			vars->tokens[vars->i1].t_str[vars->j1] == '\t')
-		{
-			vars->j1++;
-			vars->ptr_array_infiles++;
-		}
+		vars->j++;
+		vars->ptr_coa++;
 	}
 }
-
 
 void	jump_infile(t_prgm *vars)
 {

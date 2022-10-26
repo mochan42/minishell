@@ -52,16 +52,15 @@ int	ft_valid_args(t_prgm *vars)
 	free_2_pt(pt);
 	if (ft_is_error(vars) == 1)
 		return (1);
-	ft_print_err_message(vars);
 	return (0);
 }
 
-void	ft_check_full_cmd_pt(t_prgm *vars, char *tmp, int cmd)
+void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 {
 	char	**tmp_cmd;
 	int		i;
 
-	if (ft_strncmp(tmp, "OK", 2) == 0)
+	if (ft_strncmp(*tmp, "OK", 2) == 0)
 		return ;
 	if (ft_strchr(vars->tokens[cmd].options[0], '/'))
 	{
@@ -77,5 +76,7 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char *tmp, int cmd)
 			i++;
 		}
 		free(tmp_cmd);
+		if (vars->tokens[cmd].bin && access(vars->tokens[cmd].bin, F_OK | X_OK) == 0)
+			*tmp = "OK";
 	}
 }

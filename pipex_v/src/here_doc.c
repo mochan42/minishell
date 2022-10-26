@@ -13,13 +13,39 @@
 #include "../../minishell.h"
 //#include "../inc/pipex.h"
 
+char	*ft_creat_tmp_file(void)
+{
+	char	*tmp;
+	char	*tmp_2;
+	int		i;
+
+	i = 0;
+	tmp = ft_strdup("__tmp__here_doc__");
+	tmp_2 = NULL;
+	while (access(tmp, F_OK) == 0)
+	{
+		if (tmp_2)
+			free(tmp_2);
+		tmp_2 = ft_strdup(tmp);
+		free(tmp);
+		tmp = ft_strjoin(tmp_2, ft_itoa(i));
+		i++;
+	}
+	if (tmp_2)
+		free(tmp_2);
+	return (tmp);
+}
+
 void	ft_here_doc(t_prgm *vars, int cmd)
 {
 	char	*tmp_read;
 	char	*delimiter;
+	char	*tmp;
 
+	tmp = ft_creat_tmp_file();
 	delimiter = vars->tokens[cmd].infile;
-	vars->tokens[cmd].fd_args[0] = open("tmp.txt",
+	
+	vars->tokens[cmd].fd_args[0] = open(tmp,
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
@@ -34,6 +60,7 @@ void	ft_here_doc(t_prgm *vars, int cmd)
 		write(vars->tokens[cmd].fd_args[0], "\n", 1);
 	}
 	close(vars->tokens[cmd].fd_args[0]);
-	vars->tokens[cmd].fd_args[0] = open("tmp.txt", O_RDONLY);
-	unlink("tmp.txt");
+	vars->tokens[cmd].fd_args[0] = open(tmp, O_RDONLY);
+	unlink(tmp);
+	free(tmp);
 }

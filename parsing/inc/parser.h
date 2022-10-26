@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/25 20:09:46 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:20:12 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
 void		go_to_string_end(t_prgm *vars);
 void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
 void		jump_infile(t_prgm *vars);
-void		jump_white_spaces(t_prgm *vars, char *s);
+void		jump_white_spaces(t_prgm *vars);
 
 /* cmd_opt_arg_utils_2.c */
 void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
@@ -78,7 +78,7 @@ void		extract_cmd_opt_arg_middle_input_redirection_only(t_prgm *vars);
 void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
 void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
 
-/* cmd_opt_arg_utils_4.c */
+/* cmd_opt_utils_4.c */
 void		extract_cmd_opt_arg_start_both_redirections_out2in(t_prgm *vars);
 void		extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars);
 void		extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars);
@@ -126,14 +126,6 @@ void		find_infile_extract_heredoc_infile(t_prgm *vars);
 void		find_infile_extract_infile(t_prgm *vars);
 void		find_infile_extract_redirection_infile(t_prgm *vars);
 void		find_infile_identify_input_redirection_type(t_prgm *vars);
-
-void		find_infile_identify_input_redirection_types_array(t_prgm *vars);
-void		count_input_redirections(t_prgm *vars);
-void		init_array_input_redirection_types(t_prgm *vars);
-void		fill_in_array_input_redirection_types(t_prgm *vars);
-void		print_input_redirection_types(t_prgm *vars);
-void		init_array_infiles(t_prgm *vars);
-void		fill_in_array_infiles(t_prgm *vars);
 
 /* infile_utils_1.c */
 void		find_infile_init(t_prgm *vars);

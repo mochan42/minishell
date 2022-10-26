@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/25 11:28:17 by mochan           ###   ########.fr       */
+/*   Updated: 2022/10/24 18:22:28 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	init_each_token(t_token *token)
 {
 	token->in = "";
-	token->nb_in = 0;
-	token->array_in = NULL;
 	token->out = "";
 	token->infile = "";
 	token->outfile = "";
@@ -51,5 +49,4 @@ void	init(t_prgm *vars)
 	vars->builts[4] = "export";
 	vars->builts[5] = "pwd";
 	vars->builts[6] = "unset";
-	vars->ptr_array_infiles = NULL;
 }
