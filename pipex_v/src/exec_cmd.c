@@ -25,7 +25,7 @@
 void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 {
 	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0)
-		ft_here_doc(vars, 0);
+		;
 	else if (ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
 		ft_infile_checking(vars, let_error);
 	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
@@ -57,8 +57,8 @@ void	ft_exec_cmd_last(t_prgm *vars, int *let_error)
 {
 	if (*vars->tokens[vars->pipe_ct].in == '\0')
 		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
-	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0)
-		ft_mid_heredoc(vars);
+	else if (ft_strncmp(vars->tokens[vars->p.child].in, "<<", 2) == 0)
+		;
 	else if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)
 		ft_infile_checking(vars, let_error);
 	if (ft_strncmp(vars->tokens[vars->pipe_ct].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[vars->pipe_ct].in, "<", 1) == 0)

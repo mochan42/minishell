@@ -39,7 +39,7 @@ void	ft_in_redirect(t_prgm *vars, int *let_error)
 	if (*vars->tokens[vars->p.child].in == '\0')
 		dup2(vars->p.fd[vars->p.child - 1][0], 0);
 	else if (ft_strncmp(vars->tokens[vars->p.child].in, "<<", 2) == 0)
-		ft_mid_heredoc(vars);
+		;
 	else if (ft_strncmp(vars->tokens[vars->p.child].in, "<", 1) == 0)
 		ft_infile_checking(vars, let_error);
 	if (ft_strncmp(vars->tokens[vars->p.child].in, "<<", 2) == 0 || ft_strncmp(vars->tokens[vars->p.child].in, "<", 1) == 0)

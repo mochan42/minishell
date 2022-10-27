@@ -24,11 +24,7 @@ void	ft_execve_cmds(t_prgm *vars)
 		{
 			if (execve(vars->tokens[vars->p.child].bin,
 				vars->tokens[vars->p.child].options, vars->env) == -1)
-				{
-					printf(" ");
 					exit(127);
-				}
-				
 		}
 		else
 		{
@@ -62,6 +58,15 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 
 int	ms_executor(t_prgm *vars)
 {
+	int	i;
+
+	i = 0;
+	while (i < vars->pipe_ct + 1)
+	{
+		if (ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
+			ft_here_doc(vars, i);
+		i++;
+	}
 	ft_init_pipe(vars);
 	ft_valid_args(vars);
 	ft_generate_p(vars);
