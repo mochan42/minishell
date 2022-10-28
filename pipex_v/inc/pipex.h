@@ -139,7 +139,7 @@ void	ft_pwd(void);
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
 void	ft_exit(t_prgm *vars);
-void	ft_unset(t_prgm *vars);
+void	ft_unset(t_prgm *vars, char *var);
 void	ft_echo(t_prgm *vars);
 int		is_our_env_path(t_prgm *vars);
 void	ft_update_env(t_env *envp, char *oldpwd);

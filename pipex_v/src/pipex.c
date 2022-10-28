@@ -50,7 +50,7 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 		ft_exit(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0],
 			"unset", 5) == 0)
-		ft_unset(vars);
+		ft_unset(vars, NULL);
 	else
 		i = 0;
 	return (i);
@@ -63,13 +63,24 @@ int	ms_executor(t_prgm *vars)
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		if (ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
-			ft_here_doc(vars, i);
+		if (ft_strcmp(vars->tokens[i].cmd, "") == 0)
+		{
+			printf("syntax error near unexpected token\n");
+			ft_exit_code(2, 1);
+			return (0);
+		}
 		i++;
 	}
 	ft_init_pipe(vars);
 	ft_valid_args(vars);
 	ft_generate_p(vars);
+	i = 0;
+	while (i < vars->pipe_ct + 1)
+	{
+		if (ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
+			ft_here_doc(vars, i);
+		i++;
+	}
 	while (vars->p.child < vars->pipe_ct + 1)
 	{
 		if (ft_is_env_buil_ins(vars) == 1)

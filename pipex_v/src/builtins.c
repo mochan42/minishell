@@ -15,14 +15,14 @@
 /* find the appropriate command, then execut it
 * cd, echo, export, unset, pwd, env, exit
 */
-char	*get_our_env(t_prgm *vars)
+char	*get_our_env(t_prgm *vars, char *var)
 {
 	t_env	*envp;
 
 	envp = vars->env_head;
 	while (envp)
 	{
-		if (ft_strncmp(envp->key, "PWD", 3) == 0)
+		if (ft_strcmp(envp->key, var) == 0 && envp->value)
 			return (envp->value);
 		envp = envp->next;
 	}
@@ -49,7 +49,7 @@ void	ft_cd(t_prgm *vars)
 	t_env	*envp;
 
 	envp = vars->env_head;
-	oldpwd = get_our_env(vars);
+	oldpwd = get_our_env(vars, "PWD");
 	if (!vars->tokens[vars->p.child].options[1]
 		|| *vars->tokens[vars->p.child].options[1] == '~')
 		chdir(getenv("HOME"));
@@ -58,6 +58,7 @@ void	ft_cd(t_prgm *vars)
 		if (chdir(vars->tokens[vars->p.child].options[1]) == -1)
 		{
 			perror(vars->tokens[vars->p.child].options[1]);
+			ft_exit_code(1, 1);
 			return ;
 		}
 		if (vars->pipe_ct > 0)
@@ -131,16 +132,19 @@ void	ft_export_new_key(t_prgm *vars)
 	int		i;
 	t_env	*new_ev;
 	char	*delim;
+	int		curr;
+	char	*value;
 
-	i = 0;
-	while (vars->tokens[vars->p.child].options[1 + i])
+	i = 1;
+	curr = vars->p.child;
+	while (vars->tokens[curr].options[i])
 	{
-		delim = ft_strchr(vars->tokens[vars->p.child].options[1 + i], '=');
+		delim = ft_strchr(vars->tokens[curr].options[i], '=');
 		if (delim)
 		{
 			new_ev = new_node(
-					ft_substr(vars->tokens[vars->p.child].options[1 + i],
-						0, delim - vars->tokens[vars->p.child].options[1 + i]
+					ft_substr(vars->tokens[curr].options[i],
+						0, delim - vars->tokens[curr].options[i]
 						));
 			if (delim + 1)
 				new_ev->value = ft_strdup(delim + 1);
@@ -148,7 +152,11 @@ void	ft_export_new_key(t_prgm *vars)
 				new_ev->value = "";
 		}
 		else
-			new_ev = new_node(vars->tokens[vars->p.child].options[1 + i]);
+			new_ev = new_node(ft_strdup(vars->tokens[curr].options[i]));
+		value = get_our_env(vars, new_ev->key);
+		if (value && !new_ev->value)
+			new_ev->value = value;
+		ft_unset(vars, new_ev->key);
 		node_add_back(&vars->env_head, new_ev);
 		i++;
 	}
@@ -233,8 +241,15 @@ void	ft_export(t_prgm *vars)
 
 void	ft_exit(t_prgm *vars)
 {
-	(void)vars;
+	int	i;
 	printf("exit !\n");
+	i = 0;
+	while (1)
+	{
+		if (vars->p.pid[i] == 0)
+			exit(0);
+		i++;
+	}
 	exit(0);
 }
 
@@ -254,7 +269,7 @@ void	ft_echo(t_prgm *vars)
 		i = 0;
 	while (vars->tokens[vars->p.child].options[1 + i])
 	{
-		if (ft_strcmp(vars->tokens[vars->p.child].options[1 + i], "$?") == 0)
+		if (ft_strcmp(vars->tokens[vars->p.child].options[1 + i], "??") == 0)
 			ft_exit_code(0, 0);
 		else
 			printf("%s", vars->tokens[vars->p.child].options[1 + i]);
@@ -265,19 +280,20 @@ void	ft_echo(t_prgm *vars)
 	printf("%c", end);
 }
 
-void	ft_unset(t_prgm *vars)
+void	ft_unset(t_prgm *vars, char *var)
 {
 	t_env	*env;
 	t_env	*tmp;
+	int		i;
 
-	env = vars->env_head;
-	if (vars->tokens[vars->p.child].options[1])
+	if (var)
 	{
+		env = vars->env_head;
 		while (env)
 		{
 			if (env->next
 				&& ft_strcmp((env->next)->key,
-							vars->tokens[vars->p.child].options[1]) == 0)
+							var) == 0)
 			{
 				tmp = (env->next)->next;
 				free(env->next);
@@ -286,6 +302,26 @@ void	ft_unset(t_prgm *vars)
 			}
 			env = env->next;
 		}
+		return ;
+	}
+	i = 1;
+	while (vars->tokens[vars->p.child].options[i])
+	{
+		env = vars->env_head;
+		while (env)
+		{
+			if (env->next
+				&& ft_strcmp((env->next)->key,
+							vars->tokens[vars->p.child].options[i]) == 0)
+			{
+				tmp = (env->next)->next;
+				free(env->next);
+				env->next = tmp;
+				break ;
+			}
+			env = env->next;
+		}
+		i++;
 	}
 }
 

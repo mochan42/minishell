@@ -46,29 +46,29 @@ void	ft_echo(t_prgm *vars)
 	printf("%c", end);
 }
 
-void	ft_unset(t_prgm *vars)
-{
-	t_env	*env;
-	t_env	*tmp;
+// void	ft_unset(t_prgm *vars, vars)
+// {
+// 	t_env	*env;
+// 	t_env	*tmp;
 
-	env = vars->env_head;
-	if (vars->tokens[vars->p.child].options[1])
-	{
-		while (env)
-		{
-			if (env->next
-				&& ft_strcmp((env->next)->key,
-					vars->tokens[vars->p.child].options[1]) == 0)
-			{
-				tmp = (env->next)->next;
-				free(env->next);
-				env->next = tmp;
-				break ;
-			}
-			env = env->next;
-		}
-	}
-}
+// 	env = vars->env_head;
+// 	if (vars->tokens[vars->p.child].options[1])
+// 	{
+// 		while (env)
+// 		{
+// 			if (env->next
+// 				&& ft_strcmp((env->next)->key,
+// 					vars->tokens[vars->p.child].options[1]) == 0)
+// 			{
+// 				tmp = (env->next)->next;
+// 				free(env->next);
+// 				env->next = tmp;
+// 				break ;
+// 			}
+// 			env = env->next;
+// 		}
+// 	}
+// }
 
 void	execbuilt_in(t_prgm *vars)
 {
