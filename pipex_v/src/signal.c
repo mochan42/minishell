@@ -28,9 +28,6 @@ void    new_prompt(int sign_num)
 
 void    exit_shell(int sign_num)
 {
-    if (SIGQUIT == sign_num)
-    {
-        printf("logout !");
-        exit(0);
-    }
+    kill(0, sign_num);
+    printf("logout !");
 }

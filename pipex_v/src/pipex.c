@@ -65,6 +65,14 @@ int	ms_executor(t_prgm *vars)
 	{
 		if (ft_strcmp(vars->tokens[i].cmd, "") == 0)
 		{
+			if (ft_strcmp(vars->tokens[i].outfile, "") != 0)
+			{
+				unlink(vars->tokens[i].outfile);
+				vars->tokens[i].fd_args[0] = open(vars->tokens[i].outfile, O_CREAT | O_TRUNC, 0777);
+				ft_exit_code(0, 1);
+				i++;
+				continue ;
+			}
 			printf("syntax error near unexpected token\n");
 			ft_exit_code(2, 1);
 			return (0);
@@ -77,6 +85,12 @@ int	ms_executor(t_prgm *vars)
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
+		if (((ft_strcmp(vars->tokens[i].in, "<<") == 0 || ft_strcmp(vars->tokens[i].in, "<") == 0) && ft_strcmp(vars->tokens[i].infile, "") == 0)
+		|| ((ft_strcmp(vars->tokens[i].out, ">>") == 0 || ft_strcmp(vars->tokens[i].out, ">") == 0) && ft_strcmp(vars->tokens[i].outfile, "") == 0))
+		{
+			printf("syntax error near unexpected token `newline'");
+			return (0);
+		}
 		if (ft_strncmp(vars->tokens[i].in, "<<", 2) == 0)
 			ft_here_doc(vars, i);
 		i++;

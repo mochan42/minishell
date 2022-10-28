@@ -241,16 +241,13 @@ void	ft_export(t_prgm *vars)
 
 void	ft_exit(t_prgm *vars)
 {
-	int	i;
-	printf("exit !\n");
-	i = 0;
-	while (1)
-	{
-		if (vars->p.pid[i] == 0)
-			exit(0);
-		i++;
-	}
+	static int	i;
+	if (i == 0)
+		printf("exit !\n");
+	kill(0, SIGKILL);
 	exit(0);
+	i++;
+	return ft_exit(vars);
 }
 
 void	ft_echo(t_prgm *vars)
