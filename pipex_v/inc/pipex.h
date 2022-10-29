@@ -147,6 +147,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	ft_export_new_key(t_prgm *vars);
 void	ft_t_env_to_array(t_env *envp, char ***env_ord);
 void	ft_print_exported_env(char ***env_ord, int env_size);
+char	*get_our_env(t_prgm *vars, char *var);
+t_env   *ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 void	ft_execve_cmds(t_prgm *vars);

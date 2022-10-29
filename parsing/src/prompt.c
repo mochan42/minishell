@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/28 17:41:13 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/10/29 02:08:23 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	high_level_tasks(t_prgm *vars)
 int	input_loop(t_prgm *vars)
 {
 	int		flag;
-
+	
 	while (1)
 	{
 		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
-			return (0);
+			ft_exit(vars);
 		flag = 1;
 		if (vars->cmd_line[0] && vars->cmd_line[0] != '\n')
 		{
