@@ -31,7 +31,7 @@ void	ft_generate_p(t_prgm *vars)
 
 void	free_2_pt(char **pt)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pt[i])
@@ -44,7 +44,7 @@ void	free_2_pt(char **pt)
 
 void	ft_exit_code(int ex_code, int mode)
 {
-	static	int code;
+	static int	code;
 
 	if (mode == 0)
 		printf("%d", code);

@@ -36,7 +36,7 @@ void	ft_set_cmd_error_msg(t_prgm *vars, char **tmp, int cmd)
 		ft_strcat(vars->p.error[cmd], "command not found : ");
 		ft_strcat(vars->p.error[cmd], vars->tokens[cmd].options[0]);
 		ft_exit_code(127, 1);
-	} 
+	}
 }
 
 // must be rewritten 

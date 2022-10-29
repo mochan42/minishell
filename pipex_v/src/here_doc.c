@@ -44,7 +44,6 @@ void	ft_here_doc(t_prgm *vars, int cmd)
 
 	tmp = ft_strjoin(ft_creat_tmp_file(), ft_itoa(cmd));
 	delimiter = vars->tokens[cmd].infile;
-	
 	vars->tokens[cmd].fd_args[0] = open(tmp,
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)

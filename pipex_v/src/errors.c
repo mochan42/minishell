@@ -32,7 +32,6 @@ void	ft_print_err_message(t_prgm *vars)
 	int	i;
 
 	i = 0;
-
 	while (i < vars->pipe_ct + 1)
 	{
 		if (vars->p.error[i][0] != '\0')

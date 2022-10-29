@@ -12,19 +12,6 @@
 
 #include "../../minishell.h"
 
-void	ft_pwd(void)
-{
-	char	repo[MAX_LEN_DIR];
-
-	printf("\033[0;34m%s:\n", getcwd(repo, MAX_LEN_DIR));
-	printf("\033[0;37m");
-}
-
-void	ft_env(t_prgm *vars)
-{
-	printlist(vars->env_head);
-}
-
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
@@ -39,19 +26,17 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
 }
 
-t_env   *ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr)
+t_env	*ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr)
 {
-    t_env   *node;
+	t_env	*node;
 
-    node = new_node(
-					ft_substr(vars->tokens[curr].options[i],
-						0, delim - vars->tokens[curr].options[i]
-						));
-			if (delim + 1)
-				node->value = ft_strdup(delim + 1);
-			else
-				node->value = ft_strdup("");
-        return (node);
+	node = new_node(ft_substr(vars->tokens[curr].options[i],
+				0, delim - vars->tokens[curr].options[i]));
+	if (delim + 1)
+		node->value = ft_strdup(delim + 1);
+	else
+		node->value = ft_strdup("");
+	return (node);
 }
 
 void	ft_export_new_key(t_prgm *vars)
@@ -60,10 +45,10 @@ void	ft_export_new_key(t_prgm *vars)
 	t_env	*new_ev;
 	char	*delim;
 	char	*value;
-    int     curr;
+	int		curr;
 
 	i = 1;
-    curr = vars->p.child;
+	curr = vars->p.child;
 	while (vars->tokens[curr].options[i])
 	{
 		delim = ft_strchr(vars->tokens[curr].options[i], '=');
@@ -73,7 +58,7 @@ void	ft_export_new_key(t_prgm *vars)
 			new_ev = new_node(ft_strdup(vars->tokens[curr].options[i]));
 		value = get_our_env(vars, new_ev->key);
 		if (value && !new_ev->value)
-            new_ev->value = ft_strdup(value);
+			new_ev->value = ft_strdup(value);
 		ft_unset(vars, new_ev->key);
 		node_add_back(&vars->env_head, new_ev);
 		i++;

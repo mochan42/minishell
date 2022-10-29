@@ -25,44 +25,29 @@ void	ft_env(t_prgm *vars)
 	printlist(vars->env_head);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	execbuilt_in(t_prgm *vars)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] != 0 && s2[i] != 0)
-	{
-		if (s1[i] != s2[i])
-			break ;
-		i++;
-	}
-	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
+	if (ft_strcmp(vars->tokens[vars->p.child].options[0], "pwd") == 0)
+		ft_pwd();
+	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "env") == 0)
+		ft_env(vars);
+	else if (
+		ft_strcmp(vars->tokens[vars->p.child].options[0], "export") == 0
+	)
+		ft_export(vars);
+	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "echo") == 0)
+		ft_echo(vars);
+	exit(0);
 }
 
-void	ft_export_new_key(t_prgm *vars)
+void	ft_exit(t_prgm *vars)
 {
-	int		i;
-	t_env	*new_ev;
-	char	*delim;
+	static int	i;
 
-	i = 0;
-	while (vars->tokens[vars->p.child].options[1 + i])
-	{
-		delim = ft_strchr(vars->tokens[vars->p.child].options[1 + i], '=');
-		if (delim)
-		{
-			new_ev = new_node(
-					ft_substr(vars->tokens[vars->p.child].options[1 + i],
-						0, delim - vars->tokens[vars->p.child].options[1 + i]
-						));
-			if (delim + 1)
-				new_ev->value = ft_strdup(delim + 1);
-			else
-				new_ev->value = "";
-		}
-		else
-			new_ev = new_node(vars->tokens[vars->p.child].options[1 + i]);
-		node_add_back(&vars->env_head, new_ev);
-		i++;
-	}
+	if (i == 0)
+		printf("exit !\n");
+	kill(0, SIGKILL);
+	exit(0);
+	i++;
+	return (ft_exit(vars));
 }

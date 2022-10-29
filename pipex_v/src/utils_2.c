@@ -11,13 +11,10 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
 
- /* must be analysed again*/
 void	ft_init_pipe(t_prgm *vars)
 {
 	vars->p.child = 0;
-	//vars->p->env = ft_env_to_local_env(vars->env);
 }
 
 void	free_vars_p(t_prgm *vars)
@@ -53,7 +50,6 @@ int	len_path(char **paths)
 	return (i);
 }
 
-// must be analysed deeply
 void	ft_parse_all(t_prgm *vars, char **pt)
 {
 	int	i;
@@ -61,7 +57,6 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		// vars->tokens[i].options = ft_split(vars->tokens[i].t_str, ' ');
 		vars->tokens[i].options = ft_split(vars->tokens[i].cmd, ' ');
 		ft_parse(vars, pt, i);
 		i++;

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
 
 void	ft_parent_process(t_prgm *vars)
 {
@@ -24,8 +23,6 @@ void	ft_parent_process(t_prgm *vars)
 		close(vars->p.fd[i][1]);
 		i++;
 	}
-	//close(vars->fd_args[0]);
-	//close(vars->fd_args[1]);
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{

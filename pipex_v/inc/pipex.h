@@ -149,9 +149,12 @@ void	ft_t_env_to_array(t_env *envp, char ***env_ord);
 void	ft_print_exported_env(char ***env_ord, int env_size);
 char	*get_our_env(t_prgm *vars, char *var);
 t_env   *ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr);
+int		ft_unset_single_var(t_prgm *vars, char *var);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
 void	ft_execve_cmds(t_prgm *vars);
+int		ft_anticipate_heredoc(t_prgm *vars);
+int		ft_only_outfile(t_prgm *vars);
 /* signal .c */
 void    new_prompt(int sign_num);
 void    exit_shell(int sign_num);
