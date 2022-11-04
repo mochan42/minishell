@@ -27,7 +27,7 @@ void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 	int	i;
 
 	i = 0;
-	
+
 	if (vars->tokens[0].in == NULL)
 		;
 	while(i < vars->tokens[0].nb_input)
@@ -37,8 +37,8 @@ void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 		if (vars->tokens[0].in[i] == IN_HEREDOC
 			|| vars->tokens[0].in[i] == IN_REDIRECT)
 		{
-			dup2(vars->tokens[0].fd_args[0], 0);
-			close(vars->tokens[0].fd_args[0]);
+			dup2(vars->tokens[0].fd_args[i][0], 0);
+			close(vars->tokens[0].fd_args[i][0]);
 		}
 		i++;
 	}
@@ -51,15 +51,15 @@ void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 	while (i < vars->tokens[0].nb_output)
 	{
 		if (vars->tokens[0].out[i] == OUT_APPEND)
-			vars->tokens[0].fd_args[1] = open(
+			vars->tokens[0].fd_args[i][1] = open(
 					vars->tokens[0].outfile[i], O_RDWR | O_CREAT | O_APPEND, 0777);
 		else if (vars->tokens[0].out[i] == OUT_REDIRECT)
-			vars->tokens[0].fd_args[1] = open(
+			vars->tokens[0].fd_args[i][1] = open(
 					vars->tokens[0].outfile[i], O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if (vars->tokens[0].out[i] == OUT_APPEND
 			|| vars->tokens[0].out[i] == OUT_REDIRECT)
 		{
-			dup2(vars->tokens[0].fd_args[1], 1);
+			dup2(vars->tokens[0].fd_args[i][1], 1);
 			if (vars->pipe_ct > vars->p.child
 				&& vars->tokens[vars->p.child + 1].in[i] == IN_HEREDOC)
 				dup2(vars->p.fd[0][1], 1);
@@ -84,8 +84,8 @@ void	ft_exec_cmd_last(t_prgm *vars, int *let_error)
 		if (vars->tokens[vars->pipe_ct].in[i] == IN_HEREDOC
 			|| vars->tokens[vars->pipe_ct].in[i] == IN_REDIRECT)
 		{
-			dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);
-			close(vars->tokens[vars->pipe_ct].fd_args[0]);
+			dup2(vars->tokens[vars->pipe_ct].fd_args[i][0], 0);
+			close(vars->tokens[vars->pipe_ct].fd_args[i][0]);
 		}
 		i++;
 	}
@@ -96,16 +96,16 @@ void	ft_exec_cmd_last(t_prgm *vars, int *let_error)
 	while (i < vars->tokens[vars->pipe_ct].nb_output)
 	{
 		if (vars->tokens[vars->pipe_ct].out[i] == OUT_APPEND)
-			vars->tokens[vars->pipe_ct].fd_args[1] = open(
+			vars->tokens[vars->pipe_ct].fd_args[i][1] = open(
 				vars->tokens[vars->pipe_ct].outfile[i],
 				O_RDWR | O_CREAT | O_APPEND, 0777);
 		else if (vars->tokens[vars->pipe_ct].out[i] == OUT_REDIRECT)
-			vars->tokens[vars->pipe_ct].fd_args[1] = open(
+			vars->tokens[vars->pipe_ct].fd_args[i][1] = open(
 				vars->tokens[vars->pipe_ct].outfile[i],
 				O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if (vars->tokens[vars->pipe_ct].out[i] == OUT_APPEND
 			|| vars->tokens[vars->pipe_ct].out[i] == OUT_REDIRECT)
-			dup2(vars->tokens[vars->pipe_ct].fd_args[1], 1);
+			dup2(vars->tokens[vars->pipe_ct].fd_args[i][1], 1);
 		i++;
 	}
 }

@@ -44,7 +44,7 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 
 	tmp = ft_strjoin(ft_creat_tmp_file(), ft_itoa(cmd));
 	delimiter = vars->tokens[cmd].infile[j];
-	vars->tokens[cmd].fd_args[0] = open(tmp,
+	vars->tokens[cmd].fd_args[j][0] = open(tmp,
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
@@ -54,12 +54,12 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 			free(tmp_read);
 			break ;
 		}
-		write(vars->tokens[cmd].fd_args[0], tmp_read, ft_strlen(tmp_read));
+		write(vars->tokens[cmd].fd_args[j][0], tmp_read, ft_strlen(tmp_read));
 		free(tmp_read);
-		write(vars->tokens[cmd].fd_args[0], "\n", 1);
+		write(vars->tokens[cmd].fd_args[j][0], "\n", 1);
 	}
-	close(vars->tokens[cmd].fd_args[0]);
-	vars->tokens[cmd].fd_args[0] = open(tmp, O_RDONLY);
+	close(vars->tokens[cmd].fd_args[j][0]);
+	vars->tokens[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
 	unlink(tmp);
 	free(tmp);
 }

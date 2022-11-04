@@ -58,8 +58,8 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 
 int	ms_executor(t_prgm *vars)
 {
-	if (ft_only_outfile(vars) == 1)
-		return (0);
+	// if (ft_only_outfile(vars) == 1)
+	// 	return (0);
 	ft_init_pipe(vars);
 	ft_valid_args(vars);
 	ft_generate_p(vars);
@@ -93,16 +93,16 @@ int	ft_anticipate_heredoc(t_prgm *vars)
 		j = 0;
 		while (j < vars->tokens[i].nb_input)
 		{
-			if (((vars->tokens[i].in[j] == IN_HEREDOC
-					|| vars->tokens[i].in[j] == IN_REDIRECT)
-				&& ft_strcmp(vars->tokens[i].infile[j], "") == 0)
-			|| ((vars->tokens[i].out[0] == OUT_APPEND
-					|| vars->tokens[i].out[0] == OUT_REDIRECT)
-				&& ft_strcmp(vars->tokens[i].outfile[0], "") == 0))
-			{
-				printf("syntax error near unexpected token `newline'");
-				return (1);
-			}
+			// if (((vars->tokens[i].in[j] == IN_HEREDOC
+			// 		|| vars->tokens[i].in[j] == IN_REDIRECT)
+			// 	&& *vars->tokens[i].infile[j] == '\0')
+			// || ((vars->tokens[i].out[j] == OUT_APPEND
+			// 		|| vars->tokens[i].out[j] == OUT_REDIRECT)
+			// 	&& *vars->tokens[i].outfile[j] == '\0'))
+			// {
+			// 	printf("syntax error near unexpected token `newline'");
+			// 	return (1);
+			// }
 			if (vars->tokens[i].in[j] == IN_HEREDOC)
 				ft_here_doc(vars, i, j);
 			printf("i = %d\n", i);
@@ -113,29 +113,29 @@ int	ft_anticipate_heredoc(t_prgm *vars)
 	return (0);
 }
 
-int	ft_only_outfile(t_prgm *vars)
-{
-	int	i;
+// int	ft_only_outfile(t_prgm *vars)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < vars->pipe_ct + 1)
-	{
-		if (ft_strcmp(vars->tokens[i].cmd, "") == 0)
-		{
-			if (ft_strcmp(*vars->tokens[i].outfile, "") != 0)
-			{
-				unlink(*vars->tokens[i].outfile);
-				vars->tokens[i].fd_args[0] = open(*vars->tokens[i].outfile,
-						O_CREAT | O_TRUNC, 0777);
-				ft_exit_code(0, 1);
-				i++;
-				continue ;
-			}
-			printf("syntax error near unexpected token\n");
-			ft_exit_code(2, 1);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (i < vars->pipe_ct + 1)
+// 	{
+// 		if (ft_strcmp(vars->tokens[i].cmd, "") == 0)
+// 		{
+// 			if (ft_strcmp(*vars->tokens[i].outfile, "") != 0)
+// 			{
+// 				unlink(*vars->tokens[i].outfile);
+// 				vars->tokens[i].fd_args[0] = open(*vars->tokens[i].outfile,
+// 						O_CREAT | O_TRUNC, 0777);
+// 				ft_exit_code(0, 1);
+// 				i++;
+// 				continue ;
+// 			}
+// 			printf("syntax error near unexpected token\n");
+// 			ft_exit_code(2, 1);
+// 			return (1);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }

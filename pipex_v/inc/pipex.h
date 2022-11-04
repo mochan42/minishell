@@ -62,7 +62,7 @@ typedef struct s_token
 	char	*t_str;
 	char	*t_str_exp; 
 	char	*cmd;
-	int		fd_args[2];
+	int		fd_args[50][2];
 	int		nb_input;
 	int		nb_output;
 }				t_token;
