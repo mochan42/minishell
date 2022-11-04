@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/04 19:32:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/04 20:41:37 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,12 @@ void	extract_infiles(t_prgm *vars)
 	k = 0;
 	vars->tokens[vars->i1].nb_input = count_input(vars);
 	printf("nb of input =%d\n", vars->tokens[vars->i1].nb_input);
-	vars->tokens[vars->i1].in = malloc(sizeof(int) * (vars->tokens[vars->i1].nb_input + 1));
-	vars->tokens[vars->i1].infile = malloc(sizeof(char *) * (vars->tokens[vars->i1].nb_input + 1));
-	vars->tokens[vars->i1].infile[vars->tokens[vars->i1].nb_input] = NULL;
+	if (vars->tokens[vars->i1].nb_input > 0)
+	{
+		vars->tokens[vars->i1].in = malloc(sizeof(int) * (vars->tokens[vars->i1].nb_input + 1));
+		vars->tokens[vars->i1].infile = malloc(sizeof(char *) * (vars->tokens[vars->i1].nb_input + 1));
+		vars->tokens[vars->i1].infile[vars->tokens[vars->i1].nb_input] = NULL;
+	}
 	while (vars->tokens[vars->i1].t_str[j] != '\0')
 	{
 		if (j > 0)

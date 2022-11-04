@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/04 19:33:27 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/04 20:42:44 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,12 @@ void	extract_outfiles(t_prgm *vars)
 	k = 0;
 	vars->tokens[vars->i2].nb_output = count_output(vars);
 	printf("nb of output =%d\n", vars->tokens[vars->i2].nb_output);
-	vars->tokens[vars->i2].out = malloc(sizeof(int) * (vars->tokens[vars->i2].nb_output + 1));
-	vars->tokens[vars->i2].outfile = malloc(sizeof(char *) * (vars->tokens[vars->i2].nb_output + 1));
-	vars->tokens[vars->i2].outfile[vars->tokens[vars->i2].nb_output] = NULL;
+	if (vars->tokens[vars->i2].nb_output > 0)
+	{
+		vars->tokens[vars->i2].out = malloc(sizeof(int) * (vars->tokens[vars->i2].nb_output + 1));
+		vars->tokens[vars->i2].outfile = malloc(sizeof(char *) * (vars->tokens[vars->i2].nb_output + 1));
+		vars->tokens[vars->i2].outfile[vars->tokens[vars->i2].nb_output] = NULL;
+	}
 	while (vars->tokens[vars->i2].t_str[j] != '\0')
 	{
 		if (j > 0)
