@@ -42,12 +42,14 @@ void	execbuilt_in(t_prgm *vars)
 
 void	ft_exit(t_prgm *vars)
 {
-	static int	i;
+	// static int	i;
 
-	if (i == 0)
-		printf("exit !\n");
-	kill(0, SIGKILL);
+	// if (i == 0)
+	(void)vars;
+	printf("exit fgzhuji!\n");
+	// if (vars->p.child == 0)
+	// kill(vars->p.child, SIGKILL);
 	exit(0);
-	i++;
-	return (ft_exit(vars));
+	// i++;
+	// return (ft_exit(vars));
 }

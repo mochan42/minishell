@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/10/25 20:20:12 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:56:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,11 @@ void		find_infile_extract_infile(t_prgm *vars);
 void		find_infile_extract_redirection_infile(t_prgm *vars);
 void		find_infile_identify_input_redirection_type(t_prgm *vars);
 
+int			count_input(t_prgm *vars);
+void		extract_infiles(t_prgm *vars);
+void		skip_white_spaces(t_prgm *vars, int *start, int cnt);
+void		subs_infile(t_prgm *vars, int *start, int index);
+
 /* infile_utils_1.c */
 void		find_infile_init(t_prgm *vars);
 void		find_infile_go_to_string_end(t_prgm *vars);
@@ -137,6 +142,9 @@ void		find_outfile_identify_output_redirection_type(t_prgm *vars);
 void		find_outfile_extract_outfile(t_prgm *vars);
 void		find_outfile_extract_redirection_outfile(t_prgm *vars);
 void		find_outfile_extract_heredoc_outfile(t_prgm *vars);
+
+int			count_output(t_prgm *vars);
+void 		extract_outfile(t_prgm *vars);
 
 /* outfile_utils_1.c */
 void		find_outfile_init(t_prgm *vars);

@@ -14,6 +14,12 @@
 # define PIPEX_H
 # define MAX_CMD  150
 # define MAX_LEN_DIR 300
+# define IN_STD 10
+# define IN_REDIRECT 11
+# define IN_HEREDOC 12
+# define OUT_STD 20
+# define OUT_REDIRECT 21
+# define OUT_APPEND 22
 # include "../../libft/inc/libft.h"
 # include "../../gnl/inc/get_next_line.h"
 # include "../../parsing/inc/parser.h"
@@ -23,8 +29,8 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-// # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-// # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
 
 typedef struct s_env
 {
@@ -46,10 +52,10 @@ typedef struct s_pipe
 
 typedef struct s_token
 {
-	char	*in;
-	char	*out;
-	char	*infile;
-	char	*outfile;
+	int		*in; // for each token, indicates how many input files there are
+	int		*out;
+	char	**infile;
+	char	**outfile;
 	char	*bin;
 	int		built_in;
 	char	**options;
@@ -57,6 +63,8 @@ typedef struct s_token
 	char	*t_str_exp; 
 	char	*cmd;
 	int		fd_args[2];
+	int		nb_input;
+	int		nb_output;
 }				t_token;
 
 typedef struct s_prgm
@@ -130,7 +138,7 @@ void	free_2_pt(char **pt);
 void	ft_exit_code(int ex_code, int mode);
 //int		ft_valid_nb_args_bonus(int argc);
 /* here_doc.c */
-void	ft_here_doc(t_prgm *vars, int cmd);
+void	ft_here_doc(t_prgm *vars, int cmd, int j);
 char	*ft_creat_tmp_file(void);
 /* builtins.c*/
 void	execbuilt_in(t_prgm *vars);

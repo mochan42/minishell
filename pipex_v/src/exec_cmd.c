@@ -24,68 +24,90 @@
 */
 void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 {
-	if (ft_strcmp(vars->tokens[0].in, "<<") == 0)
+	int	i;
+
+	i = 0;
+	
+	if (vars->tokens[0].in == NULL)
 		;
-	else if (ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
-		ft_infile_checking(vars, let_error);
-	if (ft_strncmp(vars->tokens[0].in, "<<", 2) == 0
-		|| ft_strncmp(vars->tokens[0].in, "<", 1) == 0)
+	while(i < vars->tokens[0].nb_input)
 	{
-		dup2(vars->tokens[0].fd_args[0], 0);
-		close(vars->tokens[0].fd_args[0]);
+		if (vars->tokens[0].in[i] == IN_REDIRECT)
+			ft_infile_checking(vars, let_error);
+		if (vars->tokens[0].in[i] == IN_HEREDOC
+			|| vars->tokens[0].in[i] == IN_REDIRECT)
+		{
+			dup2(vars->tokens[0].fd_args[0], 0);
+			close(vars->tokens[0].fd_args[0]);
+		}
+		i++;
 	}
 	ft_print_err_message(vars);
 	if (*let_error != 1)
 		ft_bzero(vars->p.error[vars->p.child], 100);
-	if (*vars->tokens[0].out == '\0' && (vars->pipe_ct >= 1))
+	if (vars->tokens[0].out == NULL && (vars->pipe_ct >= 1))
 		dup2(vars->p.fd[0][1], 1);
-	else
+	i = 0;
+	while (i < vars->tokens[0].nb_output)
 	{
-		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0)
+		if (vars->tokens[0].out[i] == OUT_APPEND)
 			vars->tokens[0].fd_args[1] = open(
-					vars->tokens[0].outfile, O_RDWR | O_CREAT | O_APPEND, 0777);
-		else if (ft_strncmp(vars->tokens[0].out, ">", 1) == 0)
+					vars->tokens[0].outfile[i], O_RDWR | O_CREAT | O_APPEND, 0777);
+		else if (vars->tokens[0].out[i] == OUT_REDIRECT)
 			vars->tokens[0].fd_args[1] = open(
-					vars->tokens[0].outfile, O_RDWR | O_CREAT | O_TRUNC, 0777);
-		if (ft_strncmp(vars->tokens[0].out, ">>", 2) == 0
-			|| ft_strncmp(vars->tokens[0].out, ">", 1) == 0)
+					vars->tokens[0].outfile[i], O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if (vars->tokens[0].out[i] == OUT_APPEND
+			|| vars->tokens[0].out[i] == OUT_REDIRECT)
 		{
 			dup2(vars->tokens[0].fd_args[1], 1);
 			if (vars->pipe_ct > vars->p.child
-				&& ft_strncmp(vars->tokens[vars->p.child + 1].in, "<<", 2) == 0)
+				&& vars->tokens[vars->p.child + 1].in[i] == IN_HEREDOC)
 				dup2(vars->p.fd[0][1], 1);
 		}
+		i++;
 	}
 }
 
 void	ft_exec_cmd_last(t_prgm *vars, int *let_error)
 {
-	if (*vars->tokens[vars->pipe_ct].in == '\0')
+	int	i;
+
+	i = 0;
+	if (vars->tokens[vars->pipe_ct].in == NULL)
 		dup2(vars->p.fd[vars->pipe_ct - 1][0], 0);
-	else if (ft_strcmp(vars->tokens[vars->p.child].in, "<<") == 0)
-		;
-	else if (ft_strcmp(vars->tokens[vars->pipe_ct].in, "<") == 0)
-		ft_infile_checking(vars, let_error);
-	if (ft_strcmp(vars->tokens[vars->pipe_ct].in, "<<") == 0
-		|| ft_strcmp(vars->tokens[vars->pipe_ct].in, "<") == 0)
+	while (i < vars->tokens[vars->pipe_ct].nb_input)
 	{
-		dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);
-		close(vars->tokens[vars->pipe_ct].fd_args[0]);
+		if (vars->tokens[vars->p.child].in[i] == IN_HEREDOC)
+			;
+		else if (vars->tokens[vars->pipe_ct].in[i] == IN_REDIRECT)
+			ft_infile_checking(vars, let_error);
+		if (vars->tokens[vars->pipe_ct].in[i] == IN_HEREDOC
+			|| vars->tokens[vars->pipe_ct].in[i] == IN_REDIRECT)
+		{
+			dup2(vars->tokens[vars->pipe_ct].fd_args[0], 0);
+			close(vars->tokens[vars->pipe_ct].fd_args[0]);
+		}
+		i++;
 	}
 	ft_print_err_message(vars);
 	if (*let_error != 1)
 		ft_bzero(vars->p.error[vars->p.child], 100);
-	if (ft_strcmp(vars->tokens[vars->pipe_ct].out, ">>") == 0)
-		vars->tokens[vars->pipe_ct].fd_args[1] = open(
-				vars->tokens[vars->pipe_ct].outfile,
+	i = 0;
+	while (i < vars->tokens[vars->pipe_ct].nb_output)
+	{
+		if (vars->tokens[vars->pipe_ct].out[i] == OUT_APPEND)
+			vars->tokens[vars->pipe_ct].fd_args[1] = open(
+				vars->tokens[vars->pipe_ct].outfile[i],
 				O_RDWR | O_CREAT | O_APPEND, 0777);
-	else if (ft_strcmp(vars->tokens[vars->pipe_ct].out, ">") == 0)
-		vars->tokens[vars->pipe_ct].fd_args[1] = open(
-				vars->tokens[vars->pipe_ct].outfile,
+		else if (vars->tokens[vars->pipe_ct].out[i] == OUT_REDIRECT)
+			vars->tokens[vars->pipe_ct].fd_args[1] = open(
+				vars->tokens[vars->pipe_ct].outfile[i],
 				O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (ft_strcmp(vars->tokens[vars->pipe_ct].out, ">>") == 0
-		|| ft_strcmp(vars->tokens[vars->pipe_ct].out, ">") == 0)
-		dup2(vars->tokens[vars->pipe_ct].fd_args[1], 1);
+		if (vars->tokens[vars->pipe_ct].out[i] == OUT_APPEND
+			|| vars->tokens[vars->pipe_ct].out[i] == OUT_REDIRECT)
+			dup2(vars->tokens[vars->pipe_ct].fd_args[1], 1);
+		i++;
+	}
 }
 
 void	ft_close_fds(t_prgm *vars)

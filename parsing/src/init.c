@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:22:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/04 18:28:38 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	init_each_token(t_token *token)
 {
-	token->in = "";
-	token->out = "";
-	token->infile = "";
-	token->outfile = "";
+	token->in = NULL;
+	token->out = NULL;
+	token->infile = NULL;
+	token->outfile = NULL;
 	token->bin = NULL;
 	token->built_in = 0;
 	token->options = NULL;

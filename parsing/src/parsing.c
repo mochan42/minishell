@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:13:12 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/04 19:35:58 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	parsing(t_prgm *vars)
 	splitting_pipes(vars);
 	find_infile(vars);
 	find_outfile(vars);
-	find_cmd_opt_arg(vars);
-	interpret_dollar_sign(vars);
+	// find_cmd_opt_arg(vars);
+	// interpret_dollar_sign(vars);
 }

@@ -36,14 +36,14 @@ char	*ft_creat_tmp_file(void)
 	return (tmp);
 }
 
-void	ft_here_doc(t_prgm *vars, int cmd)
+void	ft_here_doc(t_prgm *vars, int cmd, int j)
 {
 	char	*tmp_read;
 	char	*delimiter;
 	char	*tmp;
 
 	tmp = ft_strjoin(ft_creat_tmp_file(), ft_itoa(cmd));
-	delimiter = vars->tokens[cmd].infile;
+	delimiter = vars->tokens[cmd].infile[j];
 	vars->tokens[cmd].fd_args[0] = open(tmp,
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
