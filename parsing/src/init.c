@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 12:09:29 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 21:44:38 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	init(t_prgm *vars)
 	vars->builts[4] = "export";
 	vars->builts[5] = "pwd";
 	vars->builts[6] = "unset";
+	vars->ptr_array_infiles = NULL;
 }

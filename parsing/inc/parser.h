@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/05 21:06:44 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 21:49:15 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
 void		go_to_string_end(t_prgm *vars);
 void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
 void		jump_infile(t_prgm *vars);
-void		jump_white_spaces(t_prgm *vars);
+void		jump_white_spaces(t_prgm *vars, char *s);
 
 /* cmd_opt_arg_utils_2.c */
 void		find_beginning_of_cmd_opt_arg(t_prgm *vars);

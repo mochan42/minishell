@@ -93,6 +93,7 @@ typedef struct s_prgm
 	int		i1;
 	int		j1;
 	char	*ptr_infile;
+	char	*ptr_array_infiles;
 	int		start_infile;
 	int		len_infile;
 	int		i2;
