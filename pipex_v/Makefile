@@ -38,7 +38,7 @@ END_COLOR			:= \033[0;39m
 
 SRC_FILES			:=	check_input.c utils.c parent.c exec_cmd.c\
 						childs_process.c utils_2.c errors.c utils_3.c\
-						here_doc.c builtins.c builtins_1.c builtins_2.c\
+						here_doc.c builtins_1.c builtins_2.c\
 						builtins_3.c builtins_4.c signal.c builtins_5.c\
 						pipex.c
 

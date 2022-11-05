@@ -53,11 +53,22 @@ int	len_path(char **paths)
 void	ft_parse_all(t_prgm *vars, char **pt)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
 		vars->tokens[i].options = ft_split(vars->tokens[i].cmd, ' ');
+		j = 0;
+		while (j < 7)
+		{
+			if (ft_strcmp(vars->tokens[i].options[0], vars->builts[j]) == 0)
+			{
+				vars->tokens[i].built_in = 1;
+				break ;
+			}
+			j++;
+		}
 		ft_parse(vars, pt, i);
 		i++;
 	}

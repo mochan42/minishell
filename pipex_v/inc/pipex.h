@@ -76,7 +76,7 @@ typedef struct s_prgm
 	int		pipe_ct;
 	t_pipe	p;
 	char	*builts[7];
-	int		ct1[6]; // 6 counters for dollar sign expansion of command option arguments
+	int		ct1[7]; // 7 counters for dollar sign expansion of command option arguments
 	char	**array_ds_vars;
 	char	**array_no_ds;
 	char	**array_concat;

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/04 18:56:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 21:06:44 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ int			cnt_dlr(char *s);
 void		err_msg_quotes_not_closed(void);
 void		extract_ds_vars_helper(t_prgm *v);
 char		*ft_concat(char *str1, const char *str2);
+void		ft_str_replace(char **str, char *subs_to_r, char *r_by);
 
 /* parsing_utils_5.c */
 void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);

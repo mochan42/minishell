@@ -17,7 +17,9 @@ void	ft_execve_cmds(t_prgm *vars)
 {
 	ft_childs_process(vars);
 	if (vars->tokens[vars->p.child].built_in == 1)
+	{
 		execbuilt_in(vars);
+	}
 	else if (ft_is_error(vars) == 1)
 	{
 		if (is_our_env_path(vars) == 1)
@@ -39,7 +41,7 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (ft_strncmp(vars->tokens[vars->p.child].options[0], "cd", 2) == 0)
 		ft_cd(vars);
 	else if (ft_strncmp(vars->tokens[vars->p.child].options[0], "export", 6)
