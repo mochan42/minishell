@@ -60,7 +60,7 @@ typedef struct s_token
 	int		built_in;
 	char	**options;
 	char	*t_str;
-	char	*t_str_exp; 
+	char	*t_str_og;
 	char	*cmd;
 	int		fd_args[50][2];
 	int		nb_input;

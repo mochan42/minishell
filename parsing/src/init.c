@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:44:38 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:42:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_each_token(t_token *token)
 	token->bin = NULL;
 	token->built_in = 0;
 	token->options = NULL;
-	token->t_str_exp = NULL;
 	token->cmd = NULL;
 }
 

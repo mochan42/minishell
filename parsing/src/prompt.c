@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/29 13:03:37 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/05 22:30:13 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	high_level_tasks(t_prgm *vars)
 {
 	int		pid;
-
+	
 	add_history(vars->cmd_line);
 	parsing(vars);
 	if (vars->tokens[0].built_in == 1)

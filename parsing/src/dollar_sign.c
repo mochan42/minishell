@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:25:56 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:32:40 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ids_cmd_opt_arg(t_prgm *v)
 			// concatenate_strings(v);
 			// free_dollar_sign(v);
 		}
+		printf("v->tokens[%d].t_str_og :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str_og);
 		v->ct1[0]++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:43:52 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/05 22:42:27 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	splitting_pipes(t_prgm *vars)
 		i = 0;
 		while (i < vars->pipe_ct + 1)
 		{
-			vars->tokens[i].t_str = tab_token[i];
+			vars->tokens[i].t_str = ft_strdup(tab_token[i]);
+			vars->tokens[i].t_str_og = ft_strdup(tab_token[i]);
 			i++;
 		}
 	}
