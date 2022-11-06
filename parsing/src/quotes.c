@@ -6,107 +6,11 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 15:28:50 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 17:15:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str != '\0')
-	{
-		str++;
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	char	*s_cpy;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	s_cpy = (char *)malloc(sizeof(char *) * (i + 1));
-	if (!s_cpy)
-		return (0);
-	s_cpy[i] = '\0';
-	while (i > 0)
-	{
-		s_cpy[i - 1] = s[i - 1];
-		i--;
-	}
-	return (s_cpy);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*sub_str;
-	size_t	i;
-	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	i = 0;
-	if (s_len < len)
-		sub_str = (char *)malloc(sizeof(char) * 1);
-	else
-		sub_str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub_str)
-		return (NULL);
-	while (i < len && start < s_len)
-	{
-		sub_str[i] = s[start];
-		i++;
-		start++;
-	}
-	sub_str[i] = 0;
-	return (sub_str);
-}
-
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
-{
-	unsigned char	*s1_char;
-	unsigned char	*s2_char;
-	size_t			i;
-
-	s1_char = (unsigned char *)s1;
-	s2_char = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
-	{
-		if (s1_char[i] != s2_char[i])
-			return (s1_char[i] - s2_char[i]);
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
-{
-	size_t	len_needle;
-	char	*haystack_char;
-
-	haystack_char = (char *)haystack;
-	if (needle[0] == '\0')
-		return (haystack_char);
-	len_needle = ft_strlen(needle);
-	while (*haystack_char && len >= len_needle)
-	{
-		if (*haystack_char == *needle
-			&& !(ft_memcmp(haystack_char, needle, len_needle)))
-			return (haystack_char);
-		haystack_char++;
-		len--;
-	}
-	return (NULL);
-}
+#include "../inc/parser.h"
 
 int	cnt_quotes(char *s, char c)
 {
@@ -122,13 +26,12 @@ int	cnt_quotes(char *s, char c)
 	return (nb_quotes);
 }
 
-
 int	**ft_ref_quote(char *s, char c)
 {
-	int	size_array;
-	int	**tab;
-	int	i;
-	int	j;
+	int		size_array;
+	int		**tab;
+	int		i;
+	size_t	j;
 	
 	i = 0;
 	size_array = cnt_quotes(s, c);
@@ -166,7 +69,6 @@ int	**ft_ref_quote(char *s, char c)
 	return NULL;
 }
 
-/* are the number of quotes even?*/
 int	is_quote_closed(char *s, char c)
 {
 	int	**quotes;
@@ -186,7 +88,6 @@ int	is_quote_closed(char *s, char c)
 	}
 	return (1);
 }
-
 
 int	*is_between_quotes(char *s, char *subs, char c)
 {
@@ -219,90 +120,60 @@ int	*is_between_quotes(char *s, char *subs, char c)
 	return (NULL);
 }
 
-/*  */
 int	are_quotes_closed(char *s)
 {
-	int	**quotes;
-	int	are_closed;
-	int	size_array;
 	int	i;
+	int	quote_opened;
+	char c;
 	
-	are_closed = 0;
+	i = 0;
+	quote_opened = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == '"' || s[i] == '\'')
+		{
+			c = s[i];
+			quote_opened = 1;
+			i++;
+			while(s[i] != c && s[i] != '\0')
+			{
+				if (s[i + 1] != '\0' && s[i + 1] == c)
+				{
+					quote_opened = 0;
+					i++;
+					break ;
+				}
+				i++;
+			}
+		}
+		i++;
+	}
+	// printf("quote_opened =%d\n", quote_opened);
+	return (quote_opened);
+}
+
+int	expand_ds(char *s, char *subs)
+{
+	int	**quotes;
+	int	i;
+	int	size_array;
+	int	*level[3];
+
 	size_array = cnt_quotes(s, '"');
 	if (size_array % 2 != 0)
 		size_array += 1;
 	quotes = ft_ref_quote(s, '"');
-	are_closed = is_quote_closed(s, '"');
-	if (are_closed == 0)
-	{
-		i = 0;
-		while (i < size_array / 2)
-		{
-			if (i == 0 && quotes[i][1] == -1)
-				return (0);
-			else
-			{
-				if (quotes[i][1] == -1)
-				{
-					if (is_between_quotes(s, ft_substr(&s[quotes[i][1]], 0, 1), '\'') == NULL &&
-						((is_between_quotes(s, ft_substr(&s[quotes[i - 1][1]], 0, 1), '\'') != NULL &&
-						 is_between_quotes(s, ft_substr(&s[quotes[i - 1][0]], 0, 1), '\'') != NULL
-						) ||
-						(is_between_quotes(s, ft_substr(&s[quotes[i - 1][1]], 0, 1), '\'') == NULL &&
-						 is_between_quotes(s, ft_substr(&s[quotes[i - 1][0]], 0, 1), '\'') == NULL
-						)
-						))
-						return (0);
-				}
-			}
-			i++;
-		}
-	}
-	// else if (!(is_between_quotes(s, ft_substr(&s[quotes[size_array / 2 - 1][0]], 0, 1), '\'') != NULL && 
-	// 			is_between_quotes(s, ft_substr(&s[quotes[size_array / 2 - 1][1]], 0, 1), '\'') != NULL)
-	// 		)
-	// 	return (0);
-	return (1);
-}
-
-
-int	main(void)
-{
-	int	**quotes;
-	char *str;
-	int	i;
-	int	nb_quotes;
-	int	size_array;
-	int	*level[3];
-
-	str = "Hello \"\'World toto\"\' !\n";
-	size_array = cnt_quotes(str, '"');
-	if (size_array % 2 != 0)
-		size_array += 1;
-	quotes = ft_ref_quote(str, '"');
 	i = 0;
-	while (i < size_array / 2)
-	{
-		printf("quotes[%d][0]=%d\n", i, quotes[i][0]);
-		printf("quotes[%d][1]=%d\n", i, quotes[i][1]);
-		i++;
-	}
-	if (are_quotes_closed(str) == 0)
-	{
-		printf("Quotes not closed\n");
-		return (0);
-	}
-	level[0] = is_between_quotes(str, "World", '\'');
+	level[0] = is_between_quotes(s, subs, '\'');
 	if (level[0] != NULL)
 	{
-		level[1] = is_between_quotes(str, ft_substr(&str[level[0][0]], 0, 1), '"');
-		level[2] = is_between_quotes(str, ft_substr(&str[level[0][1]], 0, 1), '"');
+		level[1] = is_between_quotes(s, ft_substr(&s[level[0][0]], 0, 1), '"');
+		level[2] = is_between_quotes(s, ft_substr(&s[level[0][1]], 0, 1), '"');
 		if (level[1] != NULL || level[2] != NULL)
-			printf("EXPAND\n");
+			return (1);
 		else
-			printf("NO EXPAND\n");
+			return (0);
 	}
 	else
-		printf("EXPAND\n");
-	return (0);
+		return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 22:31:26 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 16:52:26 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,20 @@ void	translate_var(t_prgm *v)
 	while (v->ct1[6] < v->ct1[2])
 	{
 		tmp_node = v->env_head;
-		while (tmp_node != NULL)
+		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, v->array_ds_vars[v->ct1[6]]) == 1)
 		{
-			if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
+			while (tmp_node != NULL)
 			{
-				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value));
-				flag = 1;
+				if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
+				{
+					ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value));
+					flag = 1;
+				}
+				tmp_node = tmp_node->next;
 			}
-			tmp_node = tmp_node->next;
+			if (flag == 0)
+				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""));
 		}
-		if (flag == 0)
-			ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""));
 		v->ct1[6]++;
 	}
 }
