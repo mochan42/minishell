@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 00:14:13 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:51:19 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,14 +187,16 @@ int	are_quotes_closed(char *s, char c)
 	return (0);
 }
 
-int	is_between_quotes(char *s, char *subs, char c)
+int	*is_between_quotes(char *s, char *subs, char c)
 {
-	int	j;
-	int	**quotes;
-	int	size_array;
-	char *tmp;
-
+	int		j;
+	int		**quotes;
+	int		size_array;
+	char	*tmp;
+	int		*res;
+	
 	size_array = cnt_quotes(s, c);
+	res = malloc(sizeof(int) * 2);
 	if (size_array % 2 != 0)
 		size_array += 1;
 	quotes = ft_ref_quote(s, c);
@@ -205,11 +207,15 @@ int	is_between_quotes(char *s, char *subs, char c)
 		{
 			tmp = ft_substr(s, quotes[j][0], quotes[j][1] - quotes[j][0]);
 			if (ft_strnstr(tmp, subs, ft_strlen(tmp)))
-				return (1);
+			{
+				res[0] = quotes[j][0];
+				res[0] = quotes[j][1];
+				return (res);
+			}
 		}
 		j++;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	main(void)
@@ -219,8 +225,9 @@ int	main(void)
 	int	i;
 	int	nb_quotes;
 	int	size_array;
+	int	*level[3];
 
-	str = "Hello \"World  toto !\n";
+	str = "Hello \'\"World\"\'  toto !\n";
 	size_array = cnt_quotes(str, '"');
 	if (size_array % 2 != 0)
 		size_array += 1;
@@ -233,7 +240,15 @@ int	main(void)
 		i++;
 	}
 	printf("are quotes closed (0 = yes, 1 = no):%d\n", are_quotes_closed(str, '"'));
-	printf("is this word between Dquotes (0 = no, 1 = yes):%d\n", is_between_quotes(str, "World", '"'));
-	printf("is this word between Squotes (0 = no, 1 = yes):%d\n", is_between_quotes(str, "World", '\''));
+	level[0] = is_between_quotes(str, "World", '"');
+	if (level[0] != NULL)
+	{
+		level[1] = is_between_quotes(str, ft_substr(&str[level[0][0]], 0, 1), '\'');
+		level[2] = is_between_quotes(str, ft_substr(&str[level[0][1]], 0, 1), '\'');
+		if (level[1] != NULL && level[2] != NULL && level[1][0] == level[2][0])
+			printf("NO EXPAND");
+		else
+			printf("EXPAND");
+	}
 	return (0);
 }
