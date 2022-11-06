@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:19:17 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 23:44:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,34 @@ char	*ft_concat(char *str1, const char *str2)
 	}
 	return (concatenated_str);
 }
+
+char	*ft_strnstr_ms(const char *haystack, const char *needle, size_t len, int occ)
+{
+	size_t	len_needle;
+	char	*haystack_char;
+	int		occ_copy;
+	
+	occ_copy = 0;
+	haystack_char = (char *)haystack;
+	if (needle[0] == '\0')
+		return (haystack_char);
+	len_needle = ft_strlen(needle);
+	while (*haystack_char && len >= len_needle)
+	{
+		if (*haystack_char == *needle
+			&& !(ft_memcmp(haystack_char, needle, len_needle)))
+		{
+			if (occ == occ_copy)
+				return (haystack_char);
+			else
+				occ_copy++;
+		}
+		haystack_char++;
+		len--;
+	}
+	return (NULL);
+}
+
 
 void	ft_str_replace(char **str, char *subs_to_r, char *r_by)
 {

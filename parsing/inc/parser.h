@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/06 16:42:25 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 20:32:57 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,8 @@ int			input_loop(t_prgm *vars);
 /* quotes.c */
 int			cnt_quotes(char *s, char c);
 int			**ft_ref_quote(char *s, char c);
-int			is_quote_closed(char *s, char c);
+// int			is_quote_closed(char *s, char c);
 int			*is_between_quotes(char *s, char *subs, char c);
-int			are_quotes_closed(char *s);
+int			are_quotes_closed_V2(char *s);
 int			expand_ds(char *s, char *subs);
 #endif

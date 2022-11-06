@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 22:32:40 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 21:10:02 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ void	ids_cmd_opt_arg(t_prgm *v)
 	v->ct1[0] = 0;
 	while (v->ct1[0] < v->pipe_ct + 1)
 	{
-		if ((cnt_dquotes(v->tokens[v->ct1[0]].cmd) % 2 == 1) || \
-			(cnt_squotes(v->tokens[v->ct1[0]].cmd) % 2 == 1))
-			err_msg_quotes_not_closed();
+		// if ((cnt_dquotes(v->tokens[v->ct1[0]].cmd) % 2 == 1) || \
+		// 	(cnt_squotes(v->tokens[v->ct1[0]].cmd) % 2 == 1))
+			// err_msg_quotes_not_closed();
 		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].cmd);
 		// printf("\nnb_dlr_sign_token %d= %d\n", v->ct1[0], v->ct1[2]);
 		if (v->ct1[2] > 0)
@@ -107,7 +107,7 @@ void	ids_cmd_opt_arg(t_prgm *v)
 			// concatenate_strings(v);
 			// free_dollar_sign(v);
 		}
-		printf("v->tokens[%d].t_str_og :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str_og);
+		// printf("v->tokens[%d].t_str_og :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str_og);
 		v->ct1[0]++;
 	}
 }
@@ -118,7 +118,7 @@ void	interpret_dollar_sign(t_prgm *vars)
 	vars->i = 0;
 	while (vars->i < vars->pipe_ct + 1)
 	{
-		printf("\tCHECK\t: vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
+		// printf("\tCHECK\t: vars->tokens[%d].cmd :%s\n", vars->i, vars->tokens[vars->i].cmd);
 		vars->i++;
 	}
 }

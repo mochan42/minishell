@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 16:52:26 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 23:25:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	translate_var(t_prgm *v)
 {
 	t_env	*tmp_node;
 	int		flag;
-
+	
 	v->ct1[6] = 0; // maybe use another counter instead of ct1[1]?
 	flag = 0;
 	while (v->ct1[6] < v->ct1[2])
@@ -63,6 +63,7 @@ void	translate_var(t_prgm *v)
 		tmp_node = v->env_head;
 		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, v->array_ds_vars[v->ct1[6]]) == 1)
 		{
+			printf("EXPAND\n");
 			while (tmp_node != NULL)
 			{
 				if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
@@ -75,6 +76,8 @@ void	translate_var(t_prgm *v)
 			if (flag == 0)
 				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""));
 		}
+		else
+			printf("NO EXPAND\n");
 		v->ct1[6]++;
 	}
 }

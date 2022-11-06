@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 17:24:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/06 21:08:23 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	input_loop(t_prgm *vars)
 		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
 			ft_exit(vars);
-		printf("vars->cmd_line :%s\n", vars->cmd_line);
-		if (are_quotes_closed(vars->cmd_line) == 1)
+		if (are_quotes_closed_V2(vars->cmd_line) == 1)
 		{
 			printf("Quotes are not closed.\n");
 			flag = 0;
