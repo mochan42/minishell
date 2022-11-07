@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 13:47:13 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 19:13:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,14 @@ void	ids_cmd_opt_arg(t_prgm *v)
 			extract_ds_vars(v);
 			// printf("\n");
 			translate_var(v);
-			printf("v->tokens[%d].cmd :%s\n", v->ct1[0], v->tokens[v->ct1[0]].cmd);
+			// printf("v->tokens[%d].cmd :%s\n", v->ct1[0], v->tokens[v->ct1[0]].cmd);
 			// printf("\n");
 			// extract_string_no_ds(v);
 			// concatenate_strings(v);
 			// free_dollar_sign(v);
 		}
 		// printf("v->tokens[%d].t_str_og :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str_og);
+		printf("v->tokens[%d].cmd :%s\n", v->ct1[0], v->tokens[v->ct1[0]].cmd);
 		v->ct1[0]++;
 	}
 }

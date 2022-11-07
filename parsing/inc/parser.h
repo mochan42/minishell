@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/07 12:02:15 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 19:01:43 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,12 @@ void		ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref);
 void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
 void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
 void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
+char		*trim_quotes(char *s);
+
+/* parsing_utils_6.c */
+int			ft_nb_words_cmd(char const *s, char c);
+void		ft_fill_splited_array_cmd(char **array_split, char *s, char c);
+char		**ft_split_cmd(char const *s, char c);
 
 /* prompt.c */
 void		high_level_tasks(t_prgm *vars);

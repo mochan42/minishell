@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:38:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/23 18:38:35 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 18:04:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,43 @@ void	check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp)
 		else if (vars_tp->b_open_single_quote == 1)
 			vars_tp->b_open_single_quote = 0;
 	}
+}
+
+char	*trim_quotes(char *s)
+{
+	int	i;
+	int	quote_opened;
+	char c;
+	char	*res;
+	int		j;
+	
+	i = 0;
+	j = 0;
+	quote_opened = 0;
+	res = malloc(sizeof(char) * ft_strlen(s));
+	while (s[i] != '\0')
+	{
+		if (s[i] == '"' || s[i] == '\'')
+		{
+			c = s[i];
+			quote_opened = 1;
+			i++;
+			while (s[i] != '\0' && s[i] != c)
+			{
+				res[j] = s[i];
+				i++;
+				j++;
+			}
+			if (quote_opened == 1 && s[i] != '\0')
+				quote_opened = 0;
+		}
+		else
+		{
+			res[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	res[j] = '\0';
+	return (res);
 }

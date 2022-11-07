@@ -6,7 +6,7 @@
 #    By: mochan <mochan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 13:29:32 by mochan            #+#    #+#              #
-#    Updated: 2022/11/06 20:58:43 by mochan           ###   ########.fr        #
+#    Updated: 2022/11/07 19:02:02 by mochan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ END_COLOR			:= \033[0;39m
 
 SRC_FILES			:=	prompt.c init.c free.c \
 						parsing.c parsing_utils_2.c parsing_utils_3.c \
-						parsing_utils_4.c parsing_utils_5.c \
+						parsing_utils_4.c parsing_utils_5.c parsing_utils_6.c\
 						env.c env_utils_1.c \
 						infile.c infile_utils_1.c \
 						outfile.c outfile_utils_1.c\

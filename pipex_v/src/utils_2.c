@@ -54,11 +54,22 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 {
 	int	i;
 	int	j;
+	int	z;
+	char *tmp;
 
 	i = 0;
+	z = 0;
 	while (i < vars->pipe_ct + 1)
 	{
-		vars->tokens[i].options = ft_split(vars->tokens[i].cmd, ' ');
+		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');
+		while (vars->tokens[i].options[z])
+		{
+			tmp = trim_quotes(vars->tokens[i].options[z]);
+			free(vars->tokens[i].options[z]);
+			vars->tokens[i].options[z] = ft_strdup(tmp);
+			free(tmp);
+			z++;
+		}
 		j = 0;
 		while (j < 7)
 		{
