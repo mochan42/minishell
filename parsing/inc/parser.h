@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/06 20:32:57 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 12:02:15 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int			cnt_dlr(char *s);
 void		err_msg_quotes_not_closed(void);
 void		extract_ds_vars_helper(t_prgm *v);
 char		*ft_concat(char *str1, const char *str2);
-void		ft_str_replace(char **str, char *subs_to_r, char *r_by);
+void		ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref);
 
 /* parsing_utils_5.c */
 void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
@@ -190,7 +190,7 @@ int			input_loop(t_prgm *vars);
 int			cnt_quotes(char *s, char c);
 int			**ft_ref_quote(char *s, char c);
 // int			is_quote_closed(char *s, char c);
-int			*is_between_quotes(char *s, char *subs, char c);
+int			*is_between_quotes(char *s, char c, int ref);
 int			are_quotes_closed_V2(char *s);
-int			expand_ds(char *s, char *subs);
+int			expand_ds(char *s, int ref);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 23:25:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 12:02:02 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	extract_ds_vars(t_prgm *v)
 	{
 		if (v->tmp[v->ct1[1]] == '$')
 		{
+			v->tokens[v->ct1[0]].ref_dollar[v->ct1[5]] = v->ct1[1];
 			v->ct1[1]++;
 			v->ct1[3] = v->ct1[1];
 			v->ct1[4] = 0;
@@ -56,25 +57,25 @@ void	translate_var(t_prgm *v)
 	t_env	*tmp_node;
 	int		flag;
 	
-	v->ct1[6] = 0; // maybe use another counter instead of ct1[1]?
+	v->ct1[6] = 0;
 	flag = 0;
 	while (v->ct1[6] < v->ct1[2])
 	{
 		tmp_node = v->env_head;
-		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, v->array_ds_vars[v->ct1[6]]) == 1)
+		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]) == 1)
 		{
 			printf("EXPAND\n");
 			while (tmp_node != NULL)
 			{
 				if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
 				{
-					ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value));
+					ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 					flag = 1;
 				}
 				tmp_node = tmp_node->next;
 			}
 			if (flag == 0)
-				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""));
+				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 		}
 		else
 			printf("NO EXPAND\n");

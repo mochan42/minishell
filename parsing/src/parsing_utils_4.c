@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 23:44:43 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:15:54 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ char	*ft_strnstr_ms(const char *haystack, const char *needle, size_t len, int oc
 }
 
 
-void	ft_str_replace(char **str, char *subs_to_r, char *r_by)
+void	ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref)
 {
 	char	*ptr;
 	char	*left;
 	char	*right;
 	char	*tmp[2];
 
-	ptr = ft_strnstr(*str, subs_to_r, ft_strlen(*str));
+	ptr = ft_strnstr(*str + ref, subs_to_r, ft_strlen(*str));
 	// printf("ptr	:%s\n", ptr);
 	left = ft_substr(*str, 0, ptr - *str);
 	// printf("left	:%s\n", left);

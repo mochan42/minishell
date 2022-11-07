@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 21:07:59 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 13:03:19 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,13 @@ int	**ft_ref_quote(char *s, char c)
 // 	return (1);
 // }
 
-int	*is_between_quotes(char *s, char *subs, char c)
+int	*is_between_quotes(char *s, char c, int ref)
 {
 	int		j;
 	int		**quotes;
 	int		size_array;
-	char	*tmp;
 	int		*res;
-	
+
 	size_array = cnt_quotes(s, c);
 	res = malloc(sizeof(int) * 2);
 	if (size_array % 2 != 0)
@@ -107,8 +106,7 @@ int	*is_between_quotes(char *s, char *subs, char c)
 	{
 		if (quotes[j][0] != -1 && quotes[j][1] != -1)
 		{
-			tmp = ft_substr(s, quotes[j][0], quotes[j][1] - quotes[j][0]);
-			if (ft_strnstr(tmp, subs, ft_strlen(tmp)))
+			if (ref > quotes[j][0] && ref < quotes[j][1])
 			{
 				res[0] = quotes[j][0];
 				res[1] = quotes[j][1];
@@ -177,23 +175,19 @@ int	are_quotes_closed_V2(char *s)
 // 	return (quote_opened);
 // }
 
-int	expand_ds(char *s, char *subs)
+int	expand_ds(char *s, int ref)
 {
-	int	**quotes;
-	int	i;
 	int	size_array;
 	int	*level[3];
 
 	size_array = cnt_quotes(s, '"');
 	if (size_array % 2 != 0)
 		size_array += 1;
-	quotes = ft_ref_quote(s, '"');
-	i = 0;
-	level[0] = is_between_quotes(s, subs, '\'');
+	level[0] = is_between_quotes(s, '\'', ref);
 	if (level[0] != NULL)
 	{
-		level[1] = is_between_quotes(s, ft_substr(&s[level[0][0]], 0, 1), '"');
-		level[2] = is_between_quotes(s, ft_substr(&s[level[0][1]], 0, 1), '"');
+		level[1] = is_between_quotes(s, '"', level[0][0]);
+		level[2] = is_between_quotes(s, '"', level[0][1]);
 		if (level[1] != NULL || level[2] != NULL)
 			return (1);
 		else

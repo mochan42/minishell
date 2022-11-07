@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/06 21:10:02 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 13:47:13 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ids_cmd_opt_arg(t_prgm *v)
 		// 	(cnt_squotes(v->tokens[v->ct1[0]].cmd) % 2 == 1))
 			// err_msg_quotes_not_closed();
 		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].cmd);
+		v->tokens[v->ct1[0]].ref_dollar = malloc(sizeof(int) * v->ct1[2]);
 		// printf("\nnb_dlr_sign_token %d= %d\n", v->ct1[0], v->ct1[2]);
 		if (v->ct1[2] > 0)
 		{

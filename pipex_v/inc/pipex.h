@@ -65,6 +65,7 @@ typedef struct s_token
 	int		fd_args[50][2];
 	int		nb_input;
 	int		nb_output;
+	int		*ref_dollar;
 }				t_token;
 
 typedef struct s_prgm
