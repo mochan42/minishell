@@ -41,10 +41,13 @@ void	execbuilt_in(t_prgm *vars)
 
 void	ft_exit(t_prgm *vars)
 {
-	int	i = 1;
+	int	i;
+	int	j;
+
+	i = 1;
 	while (vars->tokens[vars->p.child].options[i])
 	{
-		int	j = 0;
+		j = 0;
 		if (i > 1)
 		{
 			printf("too many arguments\n");
@@ -54,7 +57,8 @@ void	ft_exit(t_prgm *vars)
 		while (vars->tokens[vars->p.child].options[i][j])
 		{
 			if (!(vars->tokens[vars->p.child].options[i][j] >= '0'
-				&& vars->tokens[vars->p.child].options[i][j] <= '9'))
+				&& vars->tokens[vars->p.child].options[i][j] <= '9')
+				&& vars->tokens[vars->p.child].options[i][j] != '-')
 			{
 				printf("numeric argument required : %s\n", vars->tokens[vars->p.child].options[i]);
 				ft_exit_code(255, 1);
@@ -64,6 +68,8 @@ void	ft_exit(t_prgm *vars)
 		}
 		i++;
 	}
+	if (vars->tokens[vars->p.child].options[i])
+		ft_exit_code(ft_atoi(vars->tokens[vars->p.child].options[i]), 1);
 	vars->exit = 1;
 	printf("Exit, BYE!!!!!!\n");
 }

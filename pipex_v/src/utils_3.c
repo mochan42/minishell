@@ -49,5 +49,9 @@ void	ft_exit_code(int ex_code, int mode)
 	if (mode == 0)
 		printf("%d", code);
 	else
-		code = ex_code;
+	{
+		if (ex_code < 0)
+			ex_code *= - 1,
+		code = ex_code % 256;
+	}
 }
