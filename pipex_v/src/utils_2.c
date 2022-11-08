@@ -12,11 +12,6 @@
 
 #include "../../minishell.h"
 
-void	ft_init_pipe(t_prgm *vars)
-{
-	vars->p.child = 0;
-}
-
 void	free_vars_p(t_prgm *vars)
 {
 	int	i;
@@ -58,9 +53,9 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	char *tmp;
 
 	i = 0;
-	z = 0;
 	while (i < vars->pipe_ct + 1)
 	{
+		z = 0;
 		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');
 		while (vars->tokens[i].options[z])
 		{

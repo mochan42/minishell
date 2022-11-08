@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 22:09:52 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:30:42 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	translate_var(t_prgm *v)
 		tmp_node = v->env_head;
 		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]) == 1)
 		{
-			printf("EXPAND\n");
 			while (tmp_node != NULL)
 			{
 				if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
@@ -81,8 +80,6 @@ void	translate_var(t_prgm *v)
 			else if (flag == 0)
 				ft_str_replace(&v->tokens[v->ct1[0]].t_str, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 		}
-		else
-			printf("NO EXPAND\n");
 		v->ct1[6]++;
 	}
 }

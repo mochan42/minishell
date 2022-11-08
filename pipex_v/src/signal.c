@@ -22,7 +22,6 @@ void	erase_prompt(void)
 
 void	new_prompt(int sign_num)
 {
-	ft_putstr_fd("\b\b", 1);
 	if (SIGINT == sign_num)
 		erase_prompt();
 }

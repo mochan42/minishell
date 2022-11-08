@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:22:48 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:35:25 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_env_init(t_prgm *vars)
 		env_size++;
 		i++;
 	}
-	printf("env_size = %d\n\n", env_size);
 	vars->res = malloc(sizeof(char **) * (env_size + 1));
 	vars->keys = malloc(sizeof(char *) * (env_size + 1));
 	vars->values = malloc(sizeof(char *) * (env_size + 1));

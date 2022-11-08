@@ -29,8 +29,8 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 
 typedef struct s_env
 {
@@ -62,7 +62,7 @@ typedef struct s_token
 	char	*t_str;
 	char	*t_str_og;
 	char	*cmd;
-	int		fd_args[100][2];
+	int		fd_args[200][2];
 	int		nb_input;
 	int		nb_output;
 	int		*ref_dollar;
@@ -102,6 +102,7 @@ typedef struct s_prgm
 	char	*ptr_outfile;
 	int		start_outfile;
 	int		len_outfile;
+	int		exit;
 }	t_prgm;
 
 /* check_input.c */
@@ -167,7 +168,5 @@ int		ft_anticipate_heredoc(t_prgm *vars);
 int		ft_only_outfile(t_prgm *vars);
 /* signal .c */
 void    new_prompt(int sign_num);
-void    exit_shell(int sign_num);
-void    end_state(int sign_num);
 void    erase_prompt(void);
 #endif

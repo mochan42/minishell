@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:44:11 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:37:39 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	extract_outfiles(t_prgm *vars)
 	index = 0;
 	k = 0;
 	vars->tokens[vars->i2].nb_output = count_output(vars);
-	printf("nb of output =%d\n", vars->tokens[vars->i2].nb_output);
 	if (vars->tokens[vars->i2].nb_output > 0)
 	{
 		vars->tokens[vars->i2].out = malloc(sizeof(int) * (vars->tokens[vars->i2].nb_output + 1));
@@ -149,36 +148,26 @@ void	extract_outfiles(t_prgm *vars)
 			{
 				start = j+1;
 				vars->tokens[vars->i2].out[index] = OUT_APPEND;
-				printf("\tvars->tokens[%d].out[%d] =%d\n", vars->i2, index, vars->tokens[vars->i2].out[index]);
 				skip_white_spaces(vars, &start, vars->i2);
 				subs_outfile(vars, &start, index);
-				printf("\tvars->tokens[%d].outfile[%d] :%s\n", vars->i2, index, vars->tokens[vars->i2].outfile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i2].cmd[k++] = ' ';
-				// printf("\t>> vars->tokens[%d].cmd :%s\n", vars->i2, vars->tokens[vars->i2].cmd);
-
 			}
 			else if (vars->tokens[vars->i2].t_str[j - 1] == '>')
 			{
 				start = j;
 				vars->tokens[vars->i2].out[index] = OUT_REDIRECT;
-				printf("\tvars->tokens[%d].out[%d] =%d\n", vars->i2, index, vars->tokens[vars->i2].out[index]);
-				// printf("HERE\n");
-				// exit (0);
 				skip_white_spaces(vars, &start, vars->i2);
 				subs_outfile(vars, &start, index);
-				printf("\tvars->tokens[%d].outfile[%d] :%s\n", vars->i2, index, vars->tokens[vars->i2].outfile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i2].cmd[k++] = ' ';
-				// printf("\t> vars->tokens[%d].cmd :%s\n", vars->i2, vars->tokens[vars->i2].cmd);
 			}
 			else
 			{
 				if (vars->tokens[vars->i2].t_str[j] != '>')
 					vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
-				// printf("\t 1 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i2, j, vars->tokens[vars->i2].t_str[j]);
 				j++;
 			}
 		}
@@ -186,13 +175,10 @@ void	extract_outfiles(t_prgm *vars)
 		{
 			if (vars->tokens[vars->i2].t_str[j] != '>')
 				vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
-			// printf("2 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i2, j, vars->tokens[vars->i2].t_str[j]);
 			j++;
 		}
-		// printf("j = %d\n", j);
 	}
 	vars->tokens[vars->i2].cmd[k] = '\0';
-	printf("vars->tokens[%d].cmd :%s\n", vars->i2, vars->tokens[vars->i2].cmd);
 }
 
 
@@ -203,16 +189,10 @@ void	find_outfile(t_prgm *vars)
 	{
 		free(vars->tokens[vars->i2].t_str);
 		vars->tokens[vars->i2].t_str = ft_strdup(vars->tokens[vars->i2].cmd);
-		// printf("OUTFILE : vars->tokens[%d].t_str :%s\n", vars->i2, vars->tokens[vars->i2].t_str);
 		free(vars->tokens[vars->i2].cmd);
 		vars->tokens[vars->i2].cmd = malloc(sizeof(char) * (ft_strlen(vars->tokens[vars->i2].t_str) + 1));
 		find_outfile_init(vars);
 		extract_outfiles(vars);
-		// find_outfile_go_to_string_end(vars);
-		// find_outfile_identify_output_redirection_type(vars);
-		// find_outfile_extract_outfile(vars);
-		// printf("vars->tokens[%d].outfile :%s\n", vars->i2, \
-		// 	vars->tokens[vars->i2].outfile);
 		vars->i2++;
 	}
 }

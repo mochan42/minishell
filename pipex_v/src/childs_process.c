@@ -37,7 +37,6 @@ void	ft_infile_checking(t_prgm *vars, int *let_error)
 				ft_strcat(vars->p.error[vars->p.child],
 					vars->tokens[vars->p.child].infile[i]);
 				*let_error = 1;
-				printf("HERE2\n");
 				ft_exit_code(1, 1);
 			}
 			else

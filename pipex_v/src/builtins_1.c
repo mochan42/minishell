@@ -37,21 +37,33 @@ void	execbuilt_in(t_prgm *vars)
 		ft_export(vars);
 	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "echo") == 0)
 		ft_echo(vars);
-	ft_exit_code(0, 1);
-	exit(0);
 }
 
 void	ft_exit(t_prgm *vars)
 {
-	// static int	i;
-
-	// if (i == 0)
-	(void)vars;
-	printf("exit\n");
-	// if (vars->p.child == 0)
-	// kill(vars->p.child, SIGKILL);
-	kill(vars->p.child, SIGTERM);
-	exit(0);
-	// i++;
-	// return (ft_exit(vars));
+	int	i = 1;
+	while (vars->tokens[vars->p.child].options[i])
+	{
+		int	j = 0;
+		if (i > 1)
+		{
+			printf("too many arguments\n");
+			ft_exit_code(1, 1);
+			return ;
+		}
+		while (vars->tokens[vars->p.child].options[i][j])
+		{
+			if (!(vars->tokens[vars->p.child].options[i][j] >= '0'
+				&& vars->tokens[vars->p.child].options[i][j] <= '9'))
+			{
+				printf("numeric argument required : %s\n", vars->tokens[vars->p.child].options[i]);
+				ft_exit_code(255, 1);
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+	vars->exit = 1;
+	printf("Exit, BYE!!!!!!\n");
 }
