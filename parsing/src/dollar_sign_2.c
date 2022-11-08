@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 12:02:02 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 22:09:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	extract_ds_vars_helper(t_prgm *v)
 	if (!v->array_ds_vars)
 		return ;
 	v->array_ds_vars[v->ct1[2]] = NULL;
-	v->tmp = ft_strdup(v->tokens[v->ct1[0]].cmd);
+	v->tmp = ft_strdup(v->tokens[v->ct1[0]].t_str);
 	v->ct1[1] = 0;
 	v->ct1[5] = 0;
 }
@@ -37,7 +37,7 @@ void	extract_ds_vars(t_prgm *v)
 			while ((v->tmp[v->ct1[1]] >= 'a' && v->tmp[v->ct1[1]] <= 'z') \
 				|| (v->tmp[v->ct1[1]] >= 'A' && v->tmp[v->ct1[1]] <= 'Z') \
 				|| (v->tmp[v->ct1[1]] >= '0' && v->tmp[v->ct1[1]] <= '9')
-				|| (v->tmp[v->ct1[1]] == '_'))
+				|| (v->tmp[v->ct1[1]] == '_') || (v->tmp[v->ct1[1]] == '?'))
 			{
 				v->ct1[1]++;
 				v->ct1[4]++;
@@ -69,13 +69,17 @@ void	translate_var(t_prgm *v)
 			{
 				if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
 				{
-					ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
+					ft_str_replace(&v->tokens[v->ct1[0]].t_str, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(tmp_node->value), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 					flag = 1;
 				}
 				tmp_node = tmp_node->next;
 			}
-			if (flag == 0)
-				ft_str_replace(&v->tokens[v->ct1[0]].cmd, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
+			if (flag == 0 && ft_strcmp(ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), "$?") == 0)
+			{
+				ft_str_replace(&v->tokens[v->ct1[0]].t_str, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup("$?"), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
+			}
+			else if (flag == 0)
+				ft_str_replace(&v->tokens[v->ct1[0]].t_str, ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 		}
 		else
 			printf("NO EXPAND\n");

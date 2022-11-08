@@ -34,6 +34,8 @@ void	ft_execve_cmds(t_prgm *vars)
 			exit(127);
 		}
 	}
+	if (vars->tokens[vars->p.child].built_in != 1)
+		exit (1);
 	exit(0);
 }
 

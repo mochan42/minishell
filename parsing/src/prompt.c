@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 13:24:58 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 23:38:23 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	input_loop(t_prgm *vars)
 	
 	while (1)
 	{
+		signal(SIGINT, new_prompt);
+		signal(SIGQUIT, SIG_IGN);
 		vars->cmd_line = readline("minishell ⚽️$");
 		if (!vars->cmd_line)
 			ft_exit(vars);

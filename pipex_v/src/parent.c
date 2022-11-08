@@ -29,7 +29,8 @@ void	ft_parent_process(t_prgm *vars)
 		wait(&vars->p.status);
 		i++;
 	}
-	if (vars->tokens[vars->p.child - 1].built_in == 0)
+	vars->p.child -= 1; 
+	if (vars->tokens[vars->p.child].built_in == 0 || is_our_env_path(vars) == 1)
 		ft_exit_code(WEXITSTATUS(vars->p.status), 1);
 	free_vars_p(vars);
 }

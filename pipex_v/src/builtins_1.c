@@ -37,6 +37,7 @@ void	execbuilt_in(t_prgm *vars)
 		ft_export(vars);
 	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "echo") == 0)
 		ft_echo(vars);
+	ft_exit_code(0, 1);
 	exit(0);
 }
 
@@ -46,9 +47,10 @@ void	ft_exit(t_prgm *vars)
 
 	// if (i == 0)
 	(void)vars;
-	printf("exit fgzhuji!\n");
+	printf("exit\n");
 	// if (vars->p.child == 0)
 	// kill(vars->p.child, SIGKILL);
+	kill(vars->p.child, SIGTERM);
 	exit(0);
 	// i++;
 	// return (ft_exit(vars));

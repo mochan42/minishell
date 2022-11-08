@@ -19,8 +19,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	signal(SIGINT, new_prompt);
-	signal(SIGQUIT, new_prompt);
 	ms = malloc(sizeof(t_prgm) * 1);
 	ms->env = env;
 	init(ms);

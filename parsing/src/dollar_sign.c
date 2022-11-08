@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 19:13:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:41:12 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ids_cmd_opt_arg(t_prgm *v)
 		// if ((cnt_dquotes(v->tokens[v->ct1[0]].cmd) % 2 == 1) || \
 		// 	(cnt_squotes(v->tokens[v->ct1[0]].cmd) % 2 == 1))
 			// err_msg_quotes_not_closed();
-		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].cmd);
+		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].t_str);
 		v->tokens[v->ct1[0]].ref_dollar = malloc(sizeof(int) * v->ct1[2]);
 		// printf("\nnb_dlr_sign_token %d= %d\n", v->ct1[0], v->ct1[2]);
 		if (v->ct1[2] > 0)
@@ -109,7 +109,7 @@ void	ids_cmd_opt_arg(t_prgm *v)
 			// free_dollar_sign(v);
 		}
 		// printf("v->tokens[%d].t_str_og :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str_og);
-		printf("v->tokens[%d].cmd :%s\n", v->ct1[0], v->tokens[v->ct1[0]].cmd);
+		printf("v->tokens[%d].t_str :%s\n", v->ct1[0], v->tokens[v->ct1[0]].t_str);
 		v->ct1[0]++;
 	}
 }

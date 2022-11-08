@@ -15,13 +15,14 @@
 void	erase_prompt(void)
 {
 	write(1, "\n", 1);
-	rl_replace_line("", 0);
+	rl_replace_line("", 1);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
 void	new_prompt(int sign_num)
 {
+	ft_putstr_fd("\b\b", 1);
 	if (SIGINT == sign_num)
 		erase_prompt();
 }

@@ -12,7 +12,7 @@
 
 #ifndef PIPEX_H
 # define PIPEX_H
-# define MAX_CMD  150
+# define MAX_CMD  200
 # define MAX_LEN_DIR 300
 # define IN_STD 10
 # define IN_REDIRECT 11
@@ -62,7 +62,7 @@ typedef struct s_token
 	char	*t_str;
 	char	*t_str_og;
 	char	*cmd;
-	int		fd_args[50][2];
+	int		fd_args[100][2];
 	int		nb_input;
 	int		nb_output;
 	int		*ref_dollar;

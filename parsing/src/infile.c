@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/05 21:46:08 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:24:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,10 +161,10 @@ void	extract_infiles(t_prgm *vars)
 			{
 				start = j+1;
 				vars->tokens[vars->i1].in[index] = IN_HEREDOC;
-				printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
+				// printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
 				skip_white_spaces(vars, &start, vars->i1);
 				subs_infile(vars, &start, index);
-				printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
+				// printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i1].cmd[k++] = ' ';
@@ -175,10 +175,10 @@ void	extract_infiles(t_prgm *vars)
 			{
 				start = j;
 				vars->tokens[vars->i1].in[index] = IN_REDIRECT;
-				printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
+				// printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
 				skip_white_spaces(vars, &start, vars->i1);
 				subs_infile(vars, &start, index);
-				printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
+				// printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i1].cmd[k++] = ' ';
@@ -202,7 +202,7 @@ void	extract_infiles(t_prgm *vars)
 		// printf("j = %d\n", j);
 	}
 	vars->tokens[vars->i1].cmd[k] = '\0';
-	printf("vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
+	// printf("vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
 }
 
 void	find_infile(t_prgm *vars)
