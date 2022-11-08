@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 21:24:46 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 20:20:08 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,18 @@ int	count_input(t_prgm *vars)
 	nb_input = 0;
 	while(vars->tokens[vars->i1].t_str[j] != '\0')
 	{
-		if (vars->tokens[vars->i1].t_str[j] == '<')
+		if (vars->tokens[vars->i1].t_str[j] == '<' && \
+			(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
+			 is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL))
 			nb_input++;
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i1].t_str[j-1] == '<' && vars->tokens[vars->i1].t_str[j] == '<')
+			if (vars->tokens[vars->i1].t_str[j - 1] == '<' && vars->tokens[vars->i1].t_str[j] == '<' &&\
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j - 1) == NULL && \
+				 is_between_quotes(vars->tokens[vars->i1].t_str, '"', j - 1) == NULL) && \
+				 (is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
+			 		is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL)
+				)
 				nb_input--;
 		}
 		j++;
@@ -157,21 +164,27 @@ void	extract_infiles(t_prgm *vars)
 	{
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i1].t_str[j] == '<' && vars->tokens[vars->i1].t_str[j - 1] == '<')
+			if (vars->tokens[vars->i1].t_str[j] == '<' && vars->tokens[vars->i1].t_str[j - 1] == '<' &&\
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j - 1) == NULL && \
+				is_between_quotes(vars->tokens[vars->i1].t_str, '"', j - 1) == NULL) && \
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
+			 	is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL))
 			{
 				start = j+1;
 				vars->tokens[vars->i1].in[index] = IN_HEREDOC;
 				// printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
 				skip_white_spaces(vars, &start, vars->i1);
 				subs_infile(vars, &start, index);
-				// printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
+				printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i1].cmd[k++] = ' ';
-				// printf("\t<< vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
+				printf("\t<< vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
 
 			}
-			else if (vars->tokens[vars->i1].t_str[j - 1] == '<')
+			else if (vars->tokens[vars->i1].t_str[j - 1] == '<' && \
+						(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
+			 			is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL))
 			{
 				start = j;
 				vars->tokens[vars->i1].in[index] = IN_REDIRECT;
@@ -186,7 +199,10 @@ void	extract_infiles(t_prgm *vars)
 			}
 			else
 			{
-				if (vars->tokens[vars->i1].t_str[j] != '<')
+				if (vars->tokens[vars->i1].t_str[j] != '<' || \
+					(vars->tokens[vars->i1].t_str[j] == '<' && 
+					(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) != NULL || \
+			 		is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) != NULL)))
 					vars->tokens[vars->i1].cmd[k++] = vars->tokens[vars->i1].t_str[j];
 				// printf("\t 1 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i1, j, vars->tokens[vars->i1].t_str[j]);
 				j++;
@@ -194,7 +210,10 @@ void	extract_infiles(t_prgm *vars)
 		}
 		else
 		{
-			if (vars->tokens[vars->i1].t_str[j] != '<')
+			if (vars->tokens[vars->i1].t_str[j] != '<' || \
+				(vars->tokens[vars->i1].t_str[j] == '<' && 
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) != NULL || \
+			 	is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) != NULL)))
 				vars->tokens[vars->i1].cmd[k++] = vars->tokens[vars->i1].t_str[j];
 			// printf("2 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i1, j, vars->tokens[vars->i1].t_str[j]);
 			j++;
