@@ -45,6 +45,8 @@ void	ft_exit(t_prgm *vars)
 	int	j;
 
 	i = 1;
+	if (vars->pipe_ct > 0)
+		return ;
 	while (vars->tokens[vars->p.child].options[i])
 	{
 		j = 0;
