@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 18:50:21 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:23:46 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	extract_ds_vars(t_prgm *v)
 			}
 			v->array_ds_vars[v->ct1[5]] = ft_substr(v->tmp, v->ct1[3], \
 				v->ct1[4]);
-			// printf("token[%d] array_ds_vars (raw)[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_ds_vars[v->ct1[5]]);
 			v->ct1[5]++;
 		}
 		else
@@ -56,7 +55,7 @@ void	translate_var(t_prgm *v)
 {
 	t_env	*tmp_node;
 	int		flag;
-	
+
 	v->ct1[6] = 0;
 	flag = 0;
 	while (v->ct1[6] < v->ct1[2])
@@ -119,7 +118,6 @@ void	extract_string_no_ds(t_prgm *v)
 			}
 			v->array_no_ds[v->ct1[5]] = \
 				ft_substr(v->tmp, v->ct1[3], v->ct1[4]);
-			// printf("token[%d] array_no_ds[%d] :%s\n", v->ct1[0], v->ct1[5], v->array_no_ds[v->ct1[5]]);
 			v->ct1[5]++;
 		}
 	}

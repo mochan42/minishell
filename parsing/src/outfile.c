@@ -6,118 +6,44 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 13:55:37 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:33:22 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-// void	find_outfile_identify_output_redirection_type(t_prgm *vars)
-// {
-// 	while (vars->j2 >= 0)
-// 	{
-// 		if (vars->j2 > 0 && vars->tokens[vars->i2].t_str[vars->j2] == '>' && \
-// 			vars->tokens[vars->i2].t_str[vars->j2 - 1] == '>')
-// 		{
-// 			vars->tokens[vars->i2].out = OUT_APPEND;
-// 			vars->j2++;
-// 			vars->ptr_outfile++;
-// 			break ;
-// 		}
-// 		else if (vars->tokens[vars->i2].t_str[vars->j2] == '>')
-// 		{
-// 			vars->tokens[vars->i2].out = OUT_REDIRECT;
-// 			vars->j2++;
-// 			vars->ptr_outfile++;
-// 			break ;
-// 		}
-// 		else
-// 		{
-// 			vars->j2--;
-// 			vars->ptr_outfile--;
-// 		}
-// 	}
-// }
-
-// void	find_outfile_extract_heredoc_outfile(t_prgm *vars)
-// {
-// 	while (vars->tokens[vars->i2].t_str[vars->j2] == ' ' || \
-// 		vars->tokens[vars->i2].t_str[vars->j2] == '\t')
-// 	{
-// 		vars->j2++;
-// 		vars->start_outfile++;
-// 	}
-// 	while ((vars->tokens[vars->i2].t_str[vars->j2] != ' ' && \
-// 		vars->tokens[vars->i2].t_str[vars->j2] != '\0'))
-// 	{
-// 		vars->j2++;
-// 		vars->len_outfile++;
-// 	}
-// 	vars->tokens[vars->i2].outfile = ft_substr(vars->ptr_outfile, \
-// 		vars->start_outfile, vars->len_outfile);
-// }
-
-// void	find_outfile_extract_redirection_outfile(t_prgm *vars)
-// {
-// 	while (vars->tokens[vars->i2].t_str[vars->j2] == ' ' || \
-// 		vars->tokens[vars->i2].t_str[vars->j2] == '\t')
-// 	{
-// 		vars->j2++;
-// 		vars->start_outfile++;
-// 	}
-// 	while ((vars->tokens[vars->i2].t_str[vars->j2] != ' ' && \
-// 		vars->tokens[vars->i2].t_str[vars->j2] != '\0'))
-// 	{
-// 		vars->j2++;
-// 		vars->len_outfile++;
-// 	}
-// 	vars->tokens[vars->i2].outfile = ft_substr(vars->ptr_outfile, \
-// 		vars->start_outfile, vars->len_outfile);
-// }
-
-// void	find_outfile_extract_outfile(t_prgm *vars)
-// {
-// 	if (vars->tokens[vars->i2].out != OUT_STD && \
-// 		vars->tokens[vars->i2].out == OUT_APPEND)
-// 		find_outfile_extract_heredoc_outfile(vars);
-// 	else if (vars->tokens[vars->i2].out != OUT_STD && \
-// 		vars->tokens[vars->i2].out == OUT_REDIRECT)
-// 		find_outfile_extract_redirection_outfile(vars);
-// }
-
-int		count_output(t_prgm *vars)
+int	count_output(t_prgm *vars)
 {
 	int	j;
 	int	nb_output;
 
 	j = 0;
 	nb_output = 0;
-	while(vars->tokens[vars->i2].t_str[j] != '\0')
+	while (vars->tokens[vars->i2].t_str[j] != '\0')
 	{
 		if (vars->tokens[vars->i2].t_str[j] == '>' && \
-			(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			 is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
+			(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
+			is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
 			nb_output++;
 		if (j > 0)
 		{
-			if ((vars->tokens[vars->i2].t_str[j - 1] == '>' && vars->tokens[vars->i2].t_str[j] == '>') &&\
+			if ((vars->tokens[vars->i2].t_str[j - 1] == '>' && vars->tokens[vars->i2].t_str[j] == '>') && \
 				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
-				 is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
-				 (is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			 		is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL)
-				)
+				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
+				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
+				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
 				nb_output--;
 		}
 		j++;
 	}
-	return(nb_output);
+	return (nb_output);
 }
 
 void	subs_outfile(t_prgm *vars, int *start, int index)
 {
-	int len_outfile;
+	int	len_outfile;
 	int	j;
-	
+
 	len_outfile = 0;
 	j = *start;
 	skip_white_spaces(vars, start, vars->i2);
@@ -151,13 +77,13 @@ void	extract_outfiles(t_prgm *vars)
 	{
 		if (j > 0)
 		{
-			if ((vars->tokens[vars->i2].t_str[j] == '>' && vars->tokens[vars->i2].t_str[j - 1] == '>')\
+			if ((vars->tokens[vars->i2].t_str[j] == '>' && vars->tokens[vars->i2].t_str[j - 1] == '>') \
 				&& ((is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
 				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
 				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
-			 	is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL)))
+				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL)))
 			{
-				start = j+1;
+				start = j + 1;
 				vars->tokens[vars->i2].out[index] = OUT_APPEND;
 				skip_white_spaces(vars, &start, vars->i2);
 				subs_outfile(vars, &start, index);
@@ -166,8 +92,8 @@ void	extract_outfiles(t_prgm *vars)
 				vars->tokens[vars->i2].cmd[k++] = ' ';
 			}
 			else if (vars->tokens[vars->i2].t_str[j - 1] == '>' && \
-						(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j - 1) == NULL && \
-			 			is_between_quotes(vars->tokens[vars->i2].t_str, '"',j - 1) == NULL))
+						(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
+						is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL))
 			{
 				start = j;
 				vars->tokens[vars->i2].out[index] = OUT_REDIRECT;
@@ -180,7 +106,7 @@ void	extract_outfiles(t_prgm *vars)
 			else
 			{
 				if (vars->tokens[vars->i2].t_str[j] != '>' || \
-					(vars->tokens[vars->i2].t_str[j] == '>' && 
+					(vars->tokens[vars->i2].t_str[j] == '>' && \
 					(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
 					|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
 					vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
@@ -190,7 +116,7 @@ void	extract_outfiles(t_prgm *vars)
 		else
 		{
 			if (vars->tokens[vars->i2].t_str[j] != '>' || \
-				(vars->tokens[vars->i2].t_str[j] == '>' && 
+				(vars->tokens[vars->i2].t_str[j] == '>' && \
 				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
 				|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
 				vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
@@ -199,7 +125,6 @@ void	extract_outfiles(t_prgm *vars)
 	}
 	vars->tokens[vars->i2].cmd[k] = '\0';
 }
-
 
 void	find_outfile(t_prgm *vars)
 {
