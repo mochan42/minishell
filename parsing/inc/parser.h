@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/08 20:58:39 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:47:59 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
 // # include <readline/readline.h>
 // # include <readline/history.h>
 # include <signal.h>

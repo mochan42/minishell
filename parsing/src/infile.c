@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:30:58 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:55:23 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	subs_infile(t_prgm *vars, int *start, int index)
 		len_infile++;
 		j++;
 	}
-	vars->tokens[vars->i1].infile[index] = ft_substr(vars->tokens[vars->i1].t_str, *start, len_infile++);
+	vars->tokens[vars->i1].infile[index] = trim_quotes(ft_substr(vars->tokens[vars->i1].t_str, *start, len_infile++));
 	*start += len_infile - 1;
 }
 

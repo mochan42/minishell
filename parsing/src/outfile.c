@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:12:52 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:55:37 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 		len_outfile++;
 		j++;
 	}
-	vars->tokens[vars->i2].outfile[index] = ft_substr(vars->tokens[vars->i2].t_str, *start, len_outfile++);
+	vars->tokens[vars->i2].outfile[index] = trim_quotes(ft_substr(vars->tokens[vars->i2].t_str, *start, len_outfile++));
 	*start += len_outfile - 1;
 }
 

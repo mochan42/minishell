@@ -28,8 +28,10 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
 typedef struct s_env
 {
 	struct s_env	*next;
