@@ -50,16 +50,45 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	int	i;
 	int	j;
 	int	z;
+	int	ct_red;
 	char *tmp;
 
 	i = 0;
 	while (i < vars->pipe_ct + 1)
 	{
 		z = 0;
+		ct_red = 0;
 		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');
 		if (vars->tokens[i].options[z] == NULL)
 		{
+			// here we check if infile or outfile
 			vars->tok_error = 1;
+			if (vars->tokens[i].infile != NULL)
+			{
+				while (vars->tokens[i].infile[ct_red] != NULL)
+				{
+					if (vars->tokens[i].in[ct_red] == IN_HEREDOC)
+						ft_here_doc(vars, i, ct_red);
+					else if (access(vars->tokens[i].infile[ct_red], F_OK) != 0)
+						printf("No such file directory : %s\n", vars->tokens[i].infile[ct_red]);
+					ct_red++;
+					vars->tok_error += 1;
+				}
+			}
+			ct_red = 0;
+			if (vars->tokens[i].outfile != NULL)
+			{
+				while (vars->tokens[i].outfile[ct_red] != NULL)
+				{
+					if (vars->tokens[i].out[ct_red] == OUT_REDIRECT && access(vars->tokens[i].outfile[ct_red], F_OK) == 0)
+					{
+						unlink(vars->tokens[i].outfile[ct_red]);
+						open(vars->tokens[i].outfile[ct_red], O_RDWR | O_CREAT, 0666);
+					}
+					ct_red++;
+					vars->tok_error += 1;
+				}
+			}
 			return ;
 		}
 		while (vars->tokens[i].options[z])

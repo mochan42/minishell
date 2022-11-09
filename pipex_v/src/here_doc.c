@@ -49,6 +49,8 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 	while (1)
 	{
 		tmp_read = readline("> ");
+		if (!tmp_read)
+			break ;
 		if (ft_strncmp(delimiter, tmp_read, ft_strlen(delimiter)) == 0)
 		{
 			free(tmp_read);

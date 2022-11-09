@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:30:58 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:00:22 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,13 @@ void	subs_infile(t_prgm *vars, int *start, int index)
 	skip_white_spaces(vars, start, vars->i1);
 	while (vars->tokens[vars->i1].t_str[j] != '\0' && (vars->tokens[vars->i1].t_str[j] != ' ' && vars->tokens[vars->i1].t_str[j] != '\t'))
 	{
+		if ((vars->tokens[vars->i1].t_str[j] == '<' || vars->tokens[vars->i1].t_str[j] == '>')
+			&& (is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j) == NULL
+			&& is_between_quotes(vars->tokens[vars->i1].t_str, '"', j) == NULL))
+		{
+			vars->tok_error = 1;
+			return ;
+		}
 		len_infile++;
 		j++;
 	}
@@ -160,7 +167,7 @@ void	extract_infiles(t_prgm *vars)
 	k = 0;
 	j = 0;
 	start = 0;
-	while (vars->tokens[vars->i1].t_str[j] != '\0')
+	while (vars->tokens[vars->i1].t_str[j] != '\0' && vars->tok_error != 1)
 	{
 		if (j > 0)
 		{
@@ -224,10 +231,7 @@ void	find_infile(t_prgm *vars)
 		find_infile_init(vars);
 		extract_infiles(vars);
 		if ((vars->tokens[vars->i1].in != NULL && vars->tokens[vars->i1].infile == NULL) || vars->tok_error == 1)
-		{
-			printf("syntax error near unexpected token\n");
 			vars->tok_error = 1;
-		}
 		// find_infile_go_to_string_end(vars);
 		// find_infile_identify_input_redirection_type(vars);
 		// find_infile_extract_infile(vars);

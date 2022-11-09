@@ -37,9 +37,14 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 	{
 		tmp_cmd = ft_split(vars->tokens[cmd].options[0], '/');
 		i = len_path(tmp_cmd);
+		if (i == 0 || !tmp_cmd[0])
+		{
+			vars->tok_error = 1;
+			return ;
+		}
 		vars->tokens[cmd].bin = ft_strdup(vars->tokens[cmd].options[0]);
 		free(vars->tokens[cmd].options[0]);
-		vars->tokens[cmd].options[0] = ft_strdup(tmp_cmd[i -1]);
+		vars->tokens[cmd].options[0] = ft_strdup(tmp_cmd[i - 1]);
 		i = 0;
 		while (tmp_cmd[i])
 		{

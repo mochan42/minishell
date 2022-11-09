@@ -59,9 +59,12 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 
 int	ms_executor(t_prgm *vars)
 {
-	ft_valid_args(vars);
-	if (vars->tok_error == 1)
+	if (vars->tok_error != 1)
+		ft_valid_args(vars);
+	if (vars->tok_error >= 1)
 	{
+		if (vars->tok_error > 1)
+			return (0);
 		printf("syntax error near unexpected token\n");
 		return (0);
 	}

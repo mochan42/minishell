@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:13:56 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:01:00 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	parsing(t_prgm *vars)
 	find_infile(vars);
 	if (vars->tok_error != 1)
 		find_outfile(vars);
-	// find_cmd_opt_arg(vars);
+	if (vars->tok_error == 1)
+		printf("syntax error near unexpected token\n");
 }

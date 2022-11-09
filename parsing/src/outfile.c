@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:12:52 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:03:01 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,13 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 	skip_white_spaces(vars, start, vars->i2);
 	while (vars->tokens[vars->i2].t_str[j] != '\0' && (vars->tokens[vars->i2].t_str[j] != ' ' && vars->tokens[vars->i2].t_str[j] != '\t'))
 	{
+		if ((vars->tokens[vars->i2].t_str[j] == '<' || vars->tokens[vars->i2].t_str[j] == '>')
+			&& (is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL
+			&& is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
+		{
+			vars->tok_error = 1;
+			return ;
+		}
 		len_outfile++;
 		j++;
 	}
@@ -147,7 +154,7 @@ void	extract_outfiles(t_prgm *vars)
 		vars->tokens[vars->i2].outfile = malloc(sizeof(char *) * (vars->tokens[vars->i2].nb_output + 1));
 		vars->tokens[vars->i2].outfile[vars->tokens[vars->i2].nb_output] = NULL;
 	}
-	while (vars->tokens[vars->i2].t_str[j] != '\0')
+	while (vars->tokens[vars->i2].t_str[j] != '\0' && vars->tok_error != 1)
 	{
 		if (j > 0)
 		{
