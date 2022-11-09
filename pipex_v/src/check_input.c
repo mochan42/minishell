@@ -26,6 +26,16 @@ int	ft_valid_args(t_prgm *vars)
 	return (0);
 }
 
+int	ft_catch_empty_cmd(t_prgm *vars, char **tmp_cmd, int i)
+{
+	if (i == 0 || !tmp_cmd[0])
+	{
+		vars->tok_error = 1;
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 {
 	char	**tmp_cmd;
@@ -37,11 +47,8 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 	{
 		tmp_cmd = ft_split(vars->tokens[cmd].options[0], '/');
 		i = len_path(tmp_cmd);
-		if (i == 0 || !tmp_cmd[0])
-		{
-			vars->tok_error = 1;
+		if (ft_catch_empty_cmd(vars, tmp_cmd, i) == 1)
 			return ;
-		}
 		vars->tokens[cmd].bin = ft_strdup(vars->tokens[cmd].options[0]);
 		free(vars->tokens[cmd].options[0]);
 		vars->tokens[cmd].options[0] = ft_strdup(tmp_cmd[i - 1]);

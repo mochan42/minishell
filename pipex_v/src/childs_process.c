@@ -11,14 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-//#include "../inc/pipex.h"
-
-// void	ft_mid_heredoc(t_prgm *vars)
-// {
-// 	while (!get_next_line(dup(vars->p.fd[vars->p.child - 1][0])))
-// 		;
-// 	ft_here_doc(vars, vars->p.child);
-// }
 
 void	ft_infile_checking(t_prgm *vars, int *let_error)
 {
@@ -81,23 +73,19 @@ void	ft_redirect_out(t_prgm	*vars)
 	{
 		if (vars->tokens[vars->p.child].out[i] == OUT_APPEND)
 			vars->tokens[vars->p.child].fd_args[i][1] = open(
-				vars->tokens[vars->p.child].outfile[i],
-				O_CREAT | O_RDWR | O_APPEND, 0777);
+					vars->tokens[vars->p.child].outfile[i],
+					O_CREAT | O_RDWR | O_APPEND, 0777);
 		else if (vars->tokens[vars->p.child].out[i] == OUT_REDIRECT)
 			vars->tokens[vars->p.child].fd_args[i][1] = open(
-				vars->tokens[vars->p.child].outfile[i],
-				O_CREAT | O_RDWR | O_TRUNC, 0777);
+					vars->tokens[vars->p.child].outfile[i],
+					O_CREAT | O_RDWR | O_TRUNC, 0777);
 		if (vars->tokens[vars->p.child].out[i] == OUT_APPEND
 			|| vars->tokens[vars->p.child].out[i] == OUT_REDIRECT)
 		{
 			dup2(vars->tokens[vars->p.child].fd_args[i][1], 1);
-			// if (vars->pipe_ct > vars->p.child
-			// 	&& ft_strncmp(vars->tokens[vars->p.child + 1].in, "<<", 2) == 0)
-			// 	dup2(vars->p.fd[vars->p.child][1], 1);
 		}
 		i++;
 	}
-
 }
 
 /* redirecting into fd according to the commands */

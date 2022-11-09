@@ -39,37 +39,62 @@ void	execbuilt_in(t_prgm *vars)
 		ft_echo(vars);
 }
 
-void	ft_exit(t_prgm *vars)
+int	is_numeric(char c)
 {
-	int	i;
+	if (!(c >= '0' && c <= '9') && c != '-')
+		return (1);
+	return (0);
+}
+
+int	ft_assert_numeric(t_prgm *vars, int indice)
+{
 	int	j;
 
+	j = 0;
+	while (vars->tokens[vars->p.child].options[indice][j])
+	{
+		if (is_numeric(
+				vars->tokens[vars->p.child].options[indice][j]) == 1)
+		{
+			printf("numeric argument required : %s\n",
+				vars->tokens[vars->p.child].options[indice]);
+			ft_exit_code(255, 1);
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
+int	ft_check_ex_options(t_prgm *vars)
+{
+	int	i;
+
 	i = 1;
-	if (vars->pipe_ct > 0)
-		return ;
 	while (vars->tokens[vars->p.child].options[i])
 	{
-		j = 0;
 		if (i > 1)
 		{
 			printf("too many arguments\n");
 			ft_exit_code(1, 1);
-			return ;
+			return (1);
 		}
-		while (vars->tokens[vars->p.child].options[i][j])
-		{
-			if (!(vars->tokens[vars->p.child].options[i][j] >= '0'
-				&& vars->tokens[vars->p.child].options[i][j] <= '9')
-				&& vars->tokens[vars->p.child].options[i][j] != '-')
-			{
-				printf("numeric argument required : %s\n", vars->tokens[vars->p.child].options[i]);
-				ft_exit_code(255, 1);
-				return ;
-			}
-			j++;
-		}
+		if (ft_assert_numeric(vars, i) == 1)
+			return (1);
 		i++;
 	}
+	return (0);
+}
+
+void	ft_exit(t_prgm *vars)
+{
+	int	i;
+
+	i = 1;
+	if (vars->pipe_ct > 0)
+		return ;
+	if (ft_check_ex_options(vars) == 1)
+		return ;
 	if (vars->tokens[vars->p.child].options[i])
 		ft_exit_code(ft_atoi(vars->tokens[vars->p.child].options[i]), 1);
 	vars->exit = 1;

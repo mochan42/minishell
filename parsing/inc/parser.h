@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/09 22:55:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 00:06:06 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <sys/wait.h>
 // # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
 // # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
@@ -41,7 +41,6 @@ typedef struct s_finding_pipes
 	int		b_open_double_quote;
 	int		b_open_single_quote;
 }				t_finding_pipes;
-
 /* ########################################################################## */
 /* CONSTANTS */
 
