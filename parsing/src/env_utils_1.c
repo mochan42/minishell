@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 21:17:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 20:57:33 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:24:25 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ int	ft_list_size(t_env *begin_list)
 	}
 	return (counter);
 }
-

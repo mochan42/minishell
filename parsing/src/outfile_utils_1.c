@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:34:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/04 18:14:31 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:18:04 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	find_outfile_init(t_prgm *vars)
 	vars->j2 = 0;
 	vars->start_outfile = 0;
 	vars->len_outfile = 0;
-	// vars->ptr_outfile = vars->tokens[vars->i2].t_str;
 }
 
 void	find_outfile_go_to_string_end(t_prgm *vars)

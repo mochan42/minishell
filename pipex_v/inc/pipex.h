@@ -9,6 +9,9 @@
 /*   Updated: 2022/08/16 13:15:05 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* INCLUDES */
+/* ########################################################################## */
 #ifndef PIPEX_H
 # define PIPEX_H
 # define MAX_CMD  200
@@ -32,8 +35,10 @@
 // # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
 # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+
+/* ########################################################################## */
+/* STRUCTURES */
+
 typedef struct s_env
 {
 	struct s_env	*next;
@@ -107,6 +112,9 @@ typedef struct s_prgm
 	int		exit;
 	int		tok_error;
 }	t_prgm;
+
+/* ########################################################################## */
+/* FUNCTIONS */
 
 /* check_input.c */
 //int		ft_valid_nb_args(int argc);

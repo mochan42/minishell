@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 02:53:42 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:42:39 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	input_loop(t_prgm *vars)
 		ft_exit_shell(vars);
 	else if (*vars->cmd_line == '\0')
 		return (0);
-	else 
+	else
 	{
-		if (are_quotes_closed_V2(vars->cmd_line) == 1)
+		if (are_quotes_closed_v3(vars->cmd_line) == 1)
 			printf("Quotes are not closed.\n");
 		else
 			high_level_tasks(vars);

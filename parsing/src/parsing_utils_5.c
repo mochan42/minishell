@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:38:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 18:04:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:35:26 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp)
 
 char	*trim_quotes(char *s)
 {
-	int	i;
-	int	quote_opened;
-	char c;
+	int		i;
+	int		quote_opened;
+	char	c;
 	char	*res;
 	int		j;
-	
+
 	i = 0;
 	j = 0;
 	quote_opened = 0;

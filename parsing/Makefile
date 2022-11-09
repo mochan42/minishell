@@ -6,7 +6,7 @@
 #    By: mochan <mochan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 13:29:32 by mochan            #+#    #+#              #
-#    Updated: 2022/11/07 19:02:02 by mochan           ###   ########.fr        #
+#    Updated: 2022/11/09 22:14:09 by mochan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,6 @@ SRC_FILES			:=	prompt.c init.c free.c \
 						env.c env_utils_1.c \
 						infile.c infile_utils_1.c \
 						outfile.c outfile_utils_1.c\
-						cmd_opt_arg.c cmd_opt_arg_utils_1.c \
-						cmd_opt_arg_utils_2.c cmd_opt_arg_utils_3.c \
-						cmd_opt_arg_utils_4.c \
 						dollar_sign.c dollar_sign_2.c \
 						quotes.c
 
@@ -87,4 +84,3 @@ re: fclean all
 	@echo "$(GREEN) Cleaned all and rebuild $(NAME)!$(END_COLOR)"
 
 .PHONY: all clean fclean re
-

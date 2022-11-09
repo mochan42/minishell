@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/09 22:49:49 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:55:28 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,43 +45,8 @@ typedef struct s_finding_pipes
 /* ########################################################################## */
 /* CONSTANTS */
 
-
 /* ########################################################################## */
 /* FUNCTIONS */
-
-/* cmd_opt_arg.c */
-void		find_cmd_opt_arg(t_prgm *vars);
-void		find_cmd_opt_arg_both_redirections(t_prgm *vars);
-void		find_cmd_opt_arg_input_redirection_only(t_prgm *vars);
-void		find_cmd_opt_arg_no_redirection_(t_prgm *vars);
-void		find_cmd_opt_arg_output_redirection_only(t_prgm *vars);
-
-/* cmd_opt_arg_utils_1.c */
-void		go_to_beginning_cmd_opt_arg(t_prgm *vars);
-void		go_to_string_end(t_prgm *vars);
-void		jump_cmd_opt_arg_input_redirect(t_prgm *vars);
-void		jump_infile(t_prgm *vars);
-void		jump_white_spaces(t_prgm *vars, char *s);
-
-/* cmd_opt_arg_utils_2.c */
-void		find_beginning_of_cmd_opt_arg(t_prgm *vars);
-void		jump_cmd_opt_arg_output_redirect(t_prgm *vars);
-void		jump_cmd_opt_arg_when_output_redirection_only(t_prgm *vars);
-void		move_backwards_by_one_char(t_prgm *vars);
-void		move_forward_by_one_char(t_prgm *vars);
-
-/* cmd_opt_arg_utils_3.c */
-void		check_if_cmd_is_builtin(t_prgm *vr, int i);
-void		extract_cmd_opt_arg_both_redirections(t_prgm *vars);
-void		extract_cmd_opt_arg_middle_input_redirection_only(t_prgm *vars);
-void		extract_coa_at_string_middle_both_redirections(t_prgm *vars);
-void		extract_coa_at_string_start_both_redirections(t_prgm *vars);
-
-/* cmd_opt_utils_4.c */
-void		extract_cmd_opt_arg_start_both_redirections_out2in(t_prgm *vars);
-void		extract_cmd_opt_arg_start_input_redirection_only(t_prgm *vars);
-void		extract_cmd_opt_arg_start_output_redirection_only(t_prgm *vars);
-void		jump_outfile(t_prgm *vars);
 
 /* dollar_sign.c */
 void		concatenate_strings_helper_1(t_prgm *v);
@@ -120,14 +85,9 @@ void		free_stuff(t_prgm *vars);
 void		re_init_tokens(t_prgm *vars);
 
 /* infile.c */
-void		find_infile(t_prgm *vars);
-void		find_infile_extract_heredoc_infile(t_prgm *vars);
-void		find_infile_extract_infile(t_prgm *vars);
-void		find_infile_extract_redirection_infile(t_prgm *vars);
-void		find_infile_identify_input_redirection_type(t_prgm *vars);
-
 int			count_input(t_prgm *vars);
 void		extract_infiles(t_prgm *vars);
+void		find_infile(t_prgm *vars);
 void		skip_white_spaces(t_prgm *vars, int *start, int cnt);
 void		subs_infile(t_prgm *vars, int *start, int index);
 
@@ -136,14 +96,10 @@ void		find_infile_init(t_prgm *vars);
 void		find_infile_go_to_string_end(t_prgm *vars);
 
 /* outfile.c */
-void		find_outfile(t_prgm *vars);
-void		find_outfile_identify_output_redirection_type(t_prgm *vars);
-void		find_outfile_extract_outfile(t_prgm *vars);
-void		find_outfile_extract_redirection_outfile(t_prgm *vars);
-void		find_outfile_extract_heredoc_outfile(t_prgm *vars);
-
 int			count_output(t_prgm *vars);
-void 		extract_outfile(t_prgm *vars);
+void		extract_outfile(t_prgm *vars);
+void		find_outfile(t_prgm *vars);
+void		subs_outfile(t_prgm *vars, int *start, int index);
 
 /* outfile_utils_1.c */
 void		find_outfile_init(t_prgm *vars);
@@ -194,8 +150,7 @@ int			input_loop(t_prgm *vars);
 /* quotes.c */
 int			cnt_quotes(char *s, char c);
 int			**ft_ref_quote(char *s, char c);
-// int			is_quote_closed(char *s, char c);
 int			*is_between_quotes(char *s, char c, int ref);
-int			are_quotes_closed_V2(char *s);
+int			are_quotes_closed_v3(char *s);
 int			expand_ds(char *s, int ref);
 #endif

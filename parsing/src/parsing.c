@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 21:01:00 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:57:07 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	splitting_pipes(t_prgm *vars)
 		{
 			vars->tokens[i].t_str = ft_strdup(tab_token[i]);
 			vars->tokens[i].t_str_og = ft_strdup(tab_token[i]);
-			// printf("PARSING v->tokens[%d].t_str_og :%s\n", i, vars->tokens[i].t_str_og);
 			i++;
 		}
 	}
