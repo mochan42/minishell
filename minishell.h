@@ -12,7 +12,6 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
 # include "./libft/inc/libft.h"
 # include "./parsing/inc/parser.h"
 # include "./pipex_v/inc/pipex.h"
@@ -20,5 +19,4 @@
 // # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
 # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-
 #endif

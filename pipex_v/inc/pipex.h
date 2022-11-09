@@ -9,7 +9,6 @@
 /*   Updated: 2022/08/16 13:15:05 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef PIPEX_H
 # define PIPEX_H
 # define MAX_CMD  200
@@ -31,7 +30,6 @@
 # include <signal.h>
 # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
 # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-
 typedef struct s_env
 {
 	struct s_env	*next;
