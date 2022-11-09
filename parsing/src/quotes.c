@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 22:44:33 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 23:46:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	*is_between_quotes(char *s, char c, int ref)
 		}
 		j++;
 	}
+	quotes = NULL;
 	return (NULL);
 }
 
@@ -102,23 +103,26 @@ int	are_quotes_closed_v3(char *s)
 	int		i;
 	int		quote_opened;
 	char	c;
+	char	*tmp;
 
 	i = 0;
 	quote_opened = 0;
-	while (s[i] != '\0')
+	tmp = ft_strdup(s);
+	while (tmp[i] != '\0')
 	{
-		if (s[i] == (char) '"' || s[i] == (char) '\'')
+		if (tmp[i] == (char) '"' || tmp[i] == (char) '\'')
 		{
-			c = s[i];
+			c = tmp[i];
 			quote_opened = 1;
 			i++;
-			while (s[i] != '\0' && s[i] != c)
+			while (tmp[i] != '\0' && tmp[i] != c)
 				i++;
-			if (quote_opened == 1 && s[i] != '\0')
+			if (quote_opened == 1 && tmp[i] != '\0')
 				quote_opened = 0;
 		}
 		i++;
 	}
+	free(tmp);
 	return (quote_opened);
 }
 

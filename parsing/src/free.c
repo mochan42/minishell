@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 22:12:32 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/09 23:44:47 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ void	re_init_tokens(t_prgm *vars)
 		while (i < vars->pipe_ct + 1)
 		{
 			free(vars->tokens[i].t_str);
+			vars->tokens[i].t_str = NULL;
 			i++;
 		}
+	}
+	else
+	{
+		free(vars->tokens[i].t_str);
+		vars->tokens[i].t_str = NULL;
 	}
 	vars->pipe_ct = 0;
 }
