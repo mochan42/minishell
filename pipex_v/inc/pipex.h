@@ -29,8 +29,8 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 
 typedef struct s_env
 {
@@ -103,6 +103,7 @@ typedef struct s_prgm
 	int		start_outfile;
 	int		len_outfile;
 	int		exit;
+	int		tok_error;
 }	t_prgm;
 
 /* check_input.c */
@@ -150,6 +151,7 @@ void	ft_pwd(void);
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
 void	ft_exit(t_prgm *vars);
+void	ft_exit_shell(t_prgm *vars);
 void	ft_unset(t_prgm *vars, char *var);
 void	ft_echo(t_prgm *vars);
 int		is_our_env_path(t_prgm *vars);

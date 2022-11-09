@@ -60,6 +60,11 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 int	ms_executor(t_prgm *vars)
 {
 	ft_valid_args(vars);
+	if (vars->tok_error == 1)
+	{
+		printf("syntax error near unexpected token\n");
+		return (0);
+	}
 	ft_generate_p(vars);
 	if (ft_anticipate_heredoc(vars) == 1)
 		return (0);

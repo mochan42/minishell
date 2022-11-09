@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 20:20:08 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 02:30:58 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	count_input(t_prgm *vars)
 			nb_input++;
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i1].t_str[j - 1] == '<' && vars->tokens[vars->i1].t_str[j] == '<' &&\
+			if ((vars->tokens[vars->i1].t_str[j - 1] == '<' && vars->tokens[vars->i1].t_str[j] == '<') &&\
 				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j - 1) == NULL && \
 				 is_between_quotes(vars->tokens[vars->i1].t_str, '"', j - 1) == NULL) && \
 				 (is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
@@ -149,60 +149,53 @@ void	extract_infiles(t_prgm *vars)
 	int	index;
 	int	k;
 
-	j = 0;
-	index = 0;
-	k = 0;
 	vars->tokens[vars->i1].nb_input = count_input(vars);
-	printf("nb of input =%d\n", vars->tokens[vars->i1].nb_input);
 	if (vars->tokens[vars->i1].nb_input > 0)
 	{
 		vars->tokens[vars->i1].in = malloc(sizeof(int) * (vars->tokens[vars->i1].nb_input + 1));
 		vars->tokens[vars->i1].infile = malloc(sizeof(char *) * (vars->tokens[vars->i1].nb_input + 1));
 		vars->tokens[vars->i1].infile[vars->tokens[vars->i1].nb_input] = NULL;
 	}
+	index = 0;
+	k = 0;
+	j = 0;
+	start = 0;
 	while (vars->tokens[vars->i1].t_str[j] != '\0')
 	{
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i1].t_str[j] == '<' && vars->tokens[vars->i1].t_str[j - 1] == '<' &&\
-				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j - 1) == NULL && \
+			if ((vars->tokens[vars->i1].t_str[j] == '<' && vars->tokens[vars->i1].t_str[j - 1] == '<')\
+				&& ((is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j - 1) == NULL && \
 				is_between_quotes(vars->tokens[vars->i1].t_str, '"', j - 1) == NULL) && \
-				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
-			 	is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL))
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j) == NULL && \
+			 	is_between_quotes(vars->tokens[vars->i1].t_str, '"', j) == NULL)))
 			{
 				start = j+1;
 				vars->tokens[vars->i1].in[index] = IN_HEREDOC;
-				// printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
 				skip_white_spaces(vars, &start, vars->i1);
 				subs_infile(vars, &start, index);
-				printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i1].cmd[k++] = ' ';
-				printf("\t<< vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
-
 			}
 			else if (vars->tokens[vars->i1].t_str[j - 1] == '<' && \
-						(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) == NULL && \
-			 			is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) == NULL))
+						(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j - 1) == NULL && \
+			 			is_between_quotes(vars->tokens[vars->i1].t_str, '"',j - 1) == NULL))
 			{
 				start = j;
 				vars->tokens[vars->i1].in[index] = IN_REDIRECT;
-				// printf("\tvars->tokens[%d].in[%d] =%d\n", vars->i1, index, vars->tokens[vars->i1].in[index]);
 				skip_white_spaces(vars, &start, vars->i1);
 				subs_infile(vars, &start, index);
-				// printf("\tvars->tokens[%d].infile[%d] :%s\n", vars->i1, index, vars->tokens[vars->i1].infile[index]);
 				index++;
 				j = start;
 				vars->tokens[vars->i1].cmd[k++] = ' ';
-				// printf("\t< vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
 			}
 			else
 			{
 				if (vars->tokens[vars->i1].t_str[j] != '<' || \
 					(vars->tokens[vars->i1].t_str[j] == '<' && 
-					(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) != NULL || \
-			 		is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) != NULL)))
+					(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j) != NULL \
+					|| is_between_quotes(vars->tokens[vars->i1].t_str, '"', j) != NULL)))
 					vars->tokens[vars->i1].cmd[k++] = vars->tokens[vars->i1].t_str[j];
 				// printf("\t 1 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i1, j, vars->tokens[vars->i1].t_str[j]);
 				j++;
@@ -212,18 +205,16 @@ void	extract_infiles(t_prgm *vars)
 		{
 			if (vars->tokens[vars->i1].t_str[j] != '<' || \
 				(vars->tokens[vars->i1].t_str[j] == '<' && 
-				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'',j) != NULL || \
-			 	is_between_quotes(vars->tokens[vars->i1].t_str, '"',j) != NULL)))
+				(is_between_quotes(vars->tokens[vars->i1].t_str, '\'', j) != NULL \
+				|| is_between_quotes(vars->tokens[vars->i1].t_str, '"', j) != NULL)))
 				vars->tokens[vars->i1].cmd[k++] = vars->tokens[vars->i1].t_str[j];
 			// printf("2 else vars->tokens[%d].t_str[%d]	:%c\n", vars->i1, j, vars->tokens[vars->i1].t_str[j]);
 			j++;
 		}
-		// printf("j = %d\n", j);
 	}
+	
 	vars->tokens[vars->i1].cmd[k] = '\0';
-	// printf("vars->tokens[%d].cmd :%s\n", vars->i1, vars->tokens[vars->i1].cmd);
 }
-
 void	find_infile(t_prgm *vars)
 {
 	vars->i1 = 0;
@@ -231,11 +222,16 @@ void	find_infile(t_prgm *vars)
 	{
 		vars->tokens[vars->i1].cmd = malloc(sizeof(char) * (ft_strlen(vars->tokens[vars->i1].t_str) + 1));
 		find_infile_init(vars);
-		// find_infile_go_to_string_end(vars);
 		extract_infiles(vars);
+		if ((vars->tokens[vars->i1].in != NULL && vars->tokens[vars->i1].infile == NULL) || vars->tok_error == 1)
+		{
+			printf("syntax error near unexpected token\n");
+			vars->tok_error = 1;
+		}
+		// find_infile_go_to_string_end(vars);
 		// find_infile_identify_input_redirection_type(vars);
 		// find_infile_extract_infile(vars);
-		// printf("vars->tokens[%d].infile :%s\n", vars->i1, \
+		// printf("vars->tokens[%d].infile :%s\n", vars->i1,
 		// 	vars->tokens[vars->i1].infile);
 		vars->i1++;
 	}

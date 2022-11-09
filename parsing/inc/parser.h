@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/08 19:22:38 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 20:58:39 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 // # include <readline/readline.h>
 // # include <readline/history.h>
 # include <signal.h>
@@ -108,7 +108,7 @@ t_env		*init_env(t_prgm *vars);
 int			ft_list_size(t_env *begin_list);
 t_env		*last_node(t_env *node);
 t_env		*new_node(char *value);
-void		node_add_back(t_env **node, t_env *new);
+void		node_add_back(t_env **node, t_env *n_node);
 void		printlist(t_env *head);
 int			ft_list_size(t_env *begin_list);
 

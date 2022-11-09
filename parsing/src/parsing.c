@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 20:06:09 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 02:13:56 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	parsing(t_prgm *vars)
 	splitting_pipes(vars);
 	interpret_dollar_sign(vars);
 	find_infile(vars);
-	find_outfile(vars);
+	if (vars->tok_error != 1)
+		find_outfile(vars);
 	// find_cmd_opt_arg(vars);
 }

@@ -73,3 +73,9 @@ void	ft_exit(t_prgm *vars)
 	vars->exit = 1;
 	printf("Exit, BYE!!!!!!\n");
 }
+
+void	ft_exit_shell(t_prgm *vars)
+{
+	vars->exit = 1;
+	printf("Exit, BYE!!!!!!\n");
+}

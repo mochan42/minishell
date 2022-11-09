@@ -57,6 +57,11 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	{
 		z = 0;
 		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');
+		if (vars->tokens[i].options[z] == NULL)
+		{
+			vars->tok_error = 1;
+			return ;
+		}
 		while (vars->tokens[i].options[z])
 		{
 			tmp = trim_quotes(vars->tokens[i].options[z]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 21:17:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:22:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/08 20:57:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ t_env	*new_node(char *key)
 /* *new_node:
 *	Create a new node at the end of the linked list.
 */
-void	node_add_back(t_env **node, t_env *new)
+void	node_add_back(t_env **node, t_env *n_node)
 {
 	t_env	*p;
 
 	if (*node == NULL)
-		*node = new;
+		*node = n_node;
 	else
 	{
 		p = last_node(*node);
-		p->next = new;
+		p->next = n_node;
 	}
 }
 

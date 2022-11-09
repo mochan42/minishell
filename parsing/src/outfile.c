@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 20:01:59 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/09 02:12:52 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,16 @@ int		count_output(t_prgm *vars)
 	{
 		if (vars->tokens[vars->i2].t_str[j] == '>' && \
 			(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
+			 is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
 			nb_output++;
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i2].t_str[j - 1] == '>' && vars->tokens[vars->i2].t_str[j] == '>' && \
+			if ((vars->tokens[vars->i2].t_str[j - 1] == '>' && vars->tokens[vars->i2].t_str[j] == '>') &&\
 				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
-				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			 	is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
+				 is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
+				 (is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
+			 		is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL)
+				)
 				nb_output--;
 		}
 		j++;
@@ -140,7 +141,6 @@ void	extract_outfiles(t_prgm *vars)
 	index = 0;
 	k = 0;
 	vars->tokens[vars->i2].nb_output = count_output(vars);
-	printf("nb of output =%d\n", vars->tokens[vars->i2].nb_output);
 	if (vars->tokens[vars->i2].nb_output > 0)
 	{
 		vars->tokens[vars->i2].out = malloc(sizeof(int) * (vars->tokens[vars->i2].nb_output + 1));
@@ -151,11 +151,11 @@ void	extract_outfiles(t_prgm *vars)
 	{
 		if (j > 0)
 		{
-			if (vars->tokens[vars->i2].t_str[j] == '>' && vars->tokens[vars->i2].t_str[j - 1] == '>' &&\
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
+			if ((vars->tokens[vars->i2].t_str[j] == '>' && vars->tokens[vars->i2].t_str[j - 1] == '>')\
+				&& ((is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
 				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			 	is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
+				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
+			 	is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL)))
 			{
 				start = j+1;
 				vars->tokens[vars->i2].out[index] = OUT_APPEND;
@@ -166,8 +166,8 @@ void	extract_outfiles(t_prgm *vars)
 				vars->tokens[vars->i2].cmd[k++] = ' ';
 			}
 			else if (vars->tokens[vars->i2].t_str[j - 1] == '>' && \
-						(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) == NULL && \
-			 			is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) == NULL))
+						(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j - 1) == NULL && \
+			 			is_between_quotes(vars->tokens[vars->i2].t_str, '"',j - 1) == NULL))
 			{
 				start = j;
 				vars->tokens[vars->i2].out[index] = OUT_REDIRECT;
@@ -181,8 +181,8 @@ void	extract_outfiles(t_prgm *vars)
 			{
 				if (vars->tokens[vars->i2].t_str[j] != '>' || \
 					(vars->tokens[vars->i2].t_str[j] == '>' && 
-					(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) != NULL || \
-			 		is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) != NULL)))
+					(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
+					|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
 					vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
 				j++;
 			}
@@ -191,8 +191,8 @@ void	extract_outfiles(t_prgm *vars)
 		{
 			if (vars->tokens[vars->i2].t_str[j] != '>' || \
 				(vars->tokens[vars->i2].t_str[j] == '>' && 
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'',j) != NULL || \
-			 	is_between_quotes(vars->tokens[vars->i2].t_str, '"',j) != NULL)))
+				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
+				|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
 				vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
 			j++;
 		}
@@ -212,6 +212,11 @@ void	find_outfile(t_prgm *vars)
 		vars->tokens[vars->i2].cmd = malloc(sizeof(char) * (ft_strlen(vars->tokens[vars->i2].t_str) + 1));
 		find_outfile_init(vars);
 		extract_outfiles(vars);
+		if (vars->tokens[vars->i2].out != NULL && vars->tokens[vars->i2].outfile == NULL)
+		{
+			printf("syntax error near unexpected token\n");
+			vars->tok_error = 1;
+		}
 		vars->i2++;
 	}
 }
