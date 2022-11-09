@@ -19,14 +19,14 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	signal(SIGINT, new_prompt);
-	signal(SIGQUIT, SIG_IGN);
 	ms = malloc(sizeof(t_prgm) * 1);
 	ms->env = env;
 	init(ms);
 	ms->exit = 0;
 	while (ms->exit == 0)
 	{
+		signal(SIGINT, new_prompt);
+		signal(SIGQUIT, SIG_IGN);
 		input_loop(ms);
 	}
 	return (0);
