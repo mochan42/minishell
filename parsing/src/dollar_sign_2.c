@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 03:20:41 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:24:11 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,35 +56,33 @@ void	extract_ds_vars(t_prgm *v)
 	}
 }
 
-void	find_var_value(t_prgm *v, t_env *tmp_node, int *flag)
+
+void	translate_var_helper(t_prgm *v, t_env *tmp_node, int flag)
 {
 	while (tmp_node != NULL)
 	{
 		if (ft_strcmp(v->array_ds_vars[v->ct1[6]], tmp_node->key) == 0)
 		{
-			ft_str_replace(&v->tokens[v->ct1[0]].t_str,
-				ft_strjoin("$", v->array_ds_vars[v->ct1[6]]),
-				ft_strdup(tmp_node->value),
+			ft_str_replace(&v->tokens[v->ct1[0]].t_str, \
+				ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), \
+				ft_strdup(tmp_node->value), \
 				v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
-			*flag = 1;
+			flag = 1;
 		}
 		tmp_node = tmp_node->next;
 	}
-}
-
-void	ft_update_tokens(t_prgm *v, int flag)
-{
-	if (flag == 0 && ft_strcmp(ft_strjoin("$",
-				v->array_ds_vars[v->ct1[6]]), "$?") == 0)
+	if (flag == 0 && ft_strcmp(ft_strjoin("$", \
+		v->array_ds_vars[v->ct1[6]]), "$?") == 0)
 	{
-		ft_str_replace(&v->tokens[v->ct1[0]].t_str,
-			ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), ft_strdup("$?"),
+		ft_str_replace(&v->tokens[v->ct1[0]].t_str, \
+			ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), \
+			ft_strdup("$?"), \
 			v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 	}
 	else if (flag == 0)
-		ft_str_replace(&v->tokens[v->ct1[0]].t_str,
-			ft_strjoin("$", v->array_ds_vars[v->ct1[6]]),
-			ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
+		ft_str_replace(&v->tokens[v->ct1[0]].t_str, \
+		ft_strjoin("$", v->array_ds_vars[v->ct1[6]]), \
+		ft_strdup(""), v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]);
 }
 
 void	translate_var(t_prgm *v)
@@ -97,57 +95,9 @@ void	translate_var(t_prgm *v)
 	while (v->ct1[6] < v->ct1[2])
 	{
 		tmp_node = v->env_head;
-		if (expand_ds(v->tokens[v->ct1[0]].t_str_og,
-				v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]) == 1)
-		{
-			find_var_value(v, tmp_node, &flag);
-			ft_update_tokens(v, flag);
-		}
+		if (expand_ds(v->tokens[v->ct1[0]].t_str_og, \
+			v->tokens[v->ct1[0]].ref_dollar[v->ct1[6]]) == 1)
+			translate_var_helper(v, tmp_node, flag);
 		v->ct1[6]++;
-	}
-}
-
-void	extract_string_no_ds_helper(t_prgm *v)
-{
-	v->array_no_ds = malloc(sizeof(char *) * (v->ct1[2] + 2));
-	if (!v->array_no_ds)
-		return ;
-	v->array_no_ds[v->ct1[2] + 1] = NULL;
-	v->ct1[1] = 0;
-	v->ct1[5] = 0;
-}
-
-void	ft_validate_var_name(t_prgm *v)
-{
-	while ((v->tmp[v->ct1[1]] >= 'a' && v->tmp[v->ct1[1]] <= 'z') \
-		|| (v->tmp[v->ct1[1]] >= 'A' && v->tmp[v->ct1[1]] <= 'Z') \
-		|| (v->tmp[v->ct1[1]] >= '0' && v->tmp[v->ct1[1]] <= '9')
-		|| (v->tmp[v->ct1[1]] == '_'))
-		v->ct1[1]++;
-}
-
-void	extract_string_no_ds(t_prgm *v)
-{
-	extract_string_no_ds_helper(v);
-	while (v->tmp[v->ct1[1]] != '\0' && v->ct1[5] < (v->ct1[2] + 1))
-	{
-		if (v->tmp[v->ct1[1]] == '$')
-		{
-			v->ct1[1]++;
-			ft_validate_var_name(v);
-		}
-		else
-		{
-			v->ct1[3] = v->ct1[1];
-			v->ct1[4] = 0;
-			while (v->tmp[v->ct1[1]] != '$' && v->tmp[v->ct1[1]] != '\0')
-			{
-				v->ct1[1]++;
-				v->ct1[4]++;
-			}
-			v->array_no_ds[v->ct1[5]] = \
-				ft_substr(v->tmp, v->ct1[3], v->ct1[4]);
-			v->ct1[5]++;
-		}
 	}
 }

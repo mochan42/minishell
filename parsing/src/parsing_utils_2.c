@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 03:10:53 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:20:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ char	*find_pipes(char *s)
 	init_true_pipes(&true_pipes, s);
 	while (true_pipes.s[true_pipes.i] != '\0')
 	{
-		check_if_double_quote_open_or_closed(&true_pipes);
-		check_if_single_quote_open_or_closed(&true_pipes);
 		if (is_pipe(true_pipes.s[true_pipes.i]) && \
-			true_pipes.b_open_double_quote == 0 && \
-			true_pipes.b_open_single_quote == 0)
+			is_between_quotes(true_pipes.s, '"', true_pipes.i) == NULL && \
+			is_between_quotes(true_pipes.s, '\'', true_pipes.i) == NULL)
 			true_pipes.pipes_loc[true_pipes.i] = 'P';
 		else
 			true_pipes.pipes_loc[true_pipes.i] = '.';

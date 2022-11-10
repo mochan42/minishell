@@ -87,8 +87,6 @@ typedef struct s_prgm
 	char	*builts[7];
 	int		ct1[7]; // 7 counters for dollar sign expansion of command option arguments
 	char	**array_ds_vars;
-	char	**array_no_ds;
-	char	**array_concat;
 	char	*tmp;
 	char	**array_tmp;
 	char	**keys;
@@ -96,20 +94,9 @@ typedef struct s_prgm
 	char	***res;
 	int		i;
 	int		j;
-	char	*ptr_coa;
-	int		start_coa;
-	int		len_coa;
-	int		i1;
-	int		j1;
-	char	*ptr_infile;
-	char	*ptr_array_infiles;
-	int		start_infile;
-	int		len_infile;
-	int		i2;
-	int		j2;
-	char	*ptr_outfile;
-	int		start_outfile;
-	int		len_outfile;
+	int		k;
+	int		start;
+	int		index;
 	int		exit;
 	int		tok_error;
 }	t_prgm;
