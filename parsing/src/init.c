@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 01:49:29 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:12:52 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ void	init(t_prgm *vars)
 	vars->builts[4] = "export";
 	vars->builts[5] = "pwd";
 	vars->builts[6] = "unset";
-	vars->ptr_array_infiles = NULL;
 	vars->tok_error = 0;
 }

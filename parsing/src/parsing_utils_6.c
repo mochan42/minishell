@@ -6,76 +6,67 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:59:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/07 19:09:33 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:53:27 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-int	ft_nb_words_cmd(char const *s, char c)
+void	init_true_pipes(t_finding_pipes *vars_tp, char *s)
 {
-	int	i;
-	int	result;
+	vars_tp->s = ft_strdup(s);
+	vars_tp->pipes_loc = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	vars_tp->i = 0;
+	vars_tp->b_open_double_quote = 0;
+	vars_tp->b_open_single_quote = 0;
+}
 
-	if (!s)
-		return (0);
-	i = 0;
-	result = 0;
-	while (i <= (int)ft_strlen(s))
+void	init_fill_splitted_array_cmd(t_fill_splitted_array_cmd *tmp, char c)
+{
+	tmp->word = 0;
+	tmp->flag = -1;
+	tmp->i = 0;
+	tmp->c = c;
+}
+
+void	ft_fill_splited_array_cmd_helper(t_fill_splitted_array_cmd *tmp, \
+	char **array_split, char *s)
+{
+	tmp->word_start = tmp->i;
+	tmp->length = 0;
+	tmp->flag = 0;
+	while (s[tmp->i] != 0 && tmp->flag == 0)
 	{
-		if ((s[i] == c || s[i] == 0) && i != 0 && (s[i - 1] != 0)
-			&& s[i - 1] != c)
+		if (s[tmp->i] == tmp->c && \
+			is_between_quotes((char *)s, '"', tmp->i) == NULL && \
+			is_between_quotes((char *)s, '\'', tmp->i) == NULL)
 		{
-			if (is_between_quotes((char *)s, '"', i) == NULL && is_between_quotes((char *)s, '\'', i) == NULL)
-			{
-				result++;
-			}
+			tmp->flag = 1;
+			tmp->i--;
 		}
-		i++;
+		else
+		{
+			tmp->flag = 0;
+			tmp->length++;
+		}
+		tmp->i++;
 	}
-	return (result);
+	array_split[tmp->word] = (char *)ft_substr(s, tmp->word_start, tmp->length);
+	tmp->word++;
 }
 
 void	ft_fill_splited_array_cmd(char **array_split, char *s, char c)
 {
-	int	word_start;
-	int	i;
-	int	lenght;
-	int	word;
-	int	flag;
+	t_fill_splitted_array_cmd	tmp;
 
-	i = 0;
-	word = 0;
-	flag = -1;
-	while (i < (int)ft_strlen(s))
+	init_fill_splitted_array_cmd(&tmp, c);
+	while (tmp.i < (int)ft_strlen(s))
 	{
-		if (s[i] != c)
-		{
-			word_start = i;
-			lenght = 0;
-			flag = 0;
-			while (s[i] != 0 && flag == 0)
-			{
-				if (s[i] == c && \
-					is_between_quotes((char *)s, '"', i) == NULL && \
-					is_between_quotes((char *)s, '\'', i) == NULL)
-				{
-					flag = 1;
-					i--;
-				}
-				else
-				{
-					flag = 0;
-					lenght++;
-				}
-				i++;
-			}
-			array_split[word] = (char *)ft_substr(s, word_start, lenght);
-			word++;
-		}
-		i++;
+		if (s[tmp.i] != c)
+			ft_fill_splited_array_cmd_helper(&tmp, array_split, s);
+		tmp.i++;
 	}
-	array_split[word] = 0;
+	array_split[tmp.word] = 0;
 }
 
 char	**ft_split_cmd(char const *s, char c)

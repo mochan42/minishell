@@ -6,38 +6,11 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 22:57:40 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:57:39 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
-
-int	count_output(t_prgm *vars)
-{
-	int	j;
-	int	nb_output;
-
-	j = 0;
-	nb_output = 0;
-	while (vars->tokens[vars->i2].t_str[j] != '\0')
-	{
-		if (vars->tokens[vars->i2].t_str[j] == '>' && \
-			(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
-			is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
-			nb_output++;
-		if (j > 0)
-		{
-			if ((vars->tokens[vars->i2].t_str[j - 1] == '>' && vars->tokens[vars->i2].t_str[j] == '>') && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
-				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
-				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
-				nb_output--;
-		}
-		j++;
-	}
-	return (nb_output);
-}
 
 void	subs_outfile(t_prgm *vars, int *start, int index)
 {
@@ -46,12 +19,15 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 
 	len_outfile = 0;
 	j = *start;
-	skip_white_spaces(vars, start, vars->i2);
-	while (vars->tokens[vars->i2].t_str[j] != '\0' && (vars->tokens[vars->i2].t_str[j] != ' ' && vars->tokens[vars->i2].t_str[j] != '\t'))
+	skip_white_spaces(vars, start, vars->i);
+	while (vars->tokens[vars->i].t_str[j] != '\0' && \
+		(vars->tokens[vars->i].t_str[j] != ' ' && \
+		vars->tokens[vars->i].t_str[j] != '\t'))
 	{
-		if ((vars->tokens[vars->i2].t_str[j] == '<' || vars->tokens[vars->i2].t_str[j] == '>')
-			&& (is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL
-			&& is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL))
+		if ((vars->tokens[vars->i].t_str[j] == '<' || \
+			vars->tokens[vars->i].t_str[j] == '>')
+			&& (is_between_quotes(vars->tokens[vars->i].t_str, '\'', j) == NULL \
+			&& is_between_quotes(vars->tokens[vars->i].t_str, '"', j) == NULL))
 		{
 			vars->tok_error = 1;
 			return ;
@@ -59,96 +35,65 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 		len_outfile++;
 		j++;
 	}
-	vars->tokens[vars->i2].outfile[index] = trim_quotes(ft_substr(vars->tokens[vars->i2].t_str, *start, len_outfile++));
+	vars->tokens[vars->i].outfile[index] = trim_quotes \
+		(ft_substr(vars->tokens[vars->i].t_str, *start, len_outfile++));
 	*start += len_outfile - 1;
+}
+
+void	extract_outfiles_init(t_prgm *vars)
+{
+	vars->j = 0;
+	vars->index = 0;
+	vars->k = 0;
+	vars->tokens[vars->i].nb_output = count_output(vars);
 }
 
 void	extract_outfiles(t_prgm *vars)
 {
-	int	start;
-	int	j;
-	int	index;
-	int	k;
-
-	j = 0;
-	index = 0;
-	k = 0;
-	vars->tokens[vars->i2].nb_output = count_output(vars);
-	if (vars->tokens[vars->i2].nb_output > 0)
+	extract_outfiles_init(vars);
+	if (vars->tokens[vars->i].nb_output > 0)
 	{
-		vars->tokens[vars->i2].out = malloc(sizeof(int) * (vars->tokens[vars->i2].nb_output + 1));
-		vars->tokens[vars->i2].outfile = malloc(sizeof(char *) * (vars->tokens[vars->i2].nb_output + 1));
-		vars->tokens[vars->i2].outfile[vars->tokens[vars->i2].nb_output] = NULL;
+		vars->tokens[vars->i].out = malloc(sizeof(int) * \
+			(vars->tokens[vars->i].nb_output + 1));
+		vars->tokens[vars->i].outfile = malloc(sizeof(char *) * \
+			(vars->tokens[vars->i].nb_output + 1));
+		vars->tokens[vars->i].outfile[vars->tokens[vars->i].nb_output] = NULL;
 	}
-	while (vars->tokens[vars->i2].t_str[j] != '\0' && vars->tok_error != 1)
+	while (vars->tokens[vars->i].t_str[vars->j] != '\0' && vars->tok_error != 1)
 	{
-		if (j > 0)
+		if (vars->j > 0)
 		{
-			if ((vars->tokens[vars->i2].t_str[j] == '>' && vars->tokens[vars->i2].t_str[j - 1] == '>') \
-				&& ((is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
-				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL) && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) == NULL && \
-				is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) == NULL)))
-			{
-				start = j + 1;
-				vars->tokens[vars->i2].out[index] = OUT_APPEND;
-				skip_white_spaces(vars, &start, vars->i2);
-				subs_outfile(vars, &start, index);
-				index++;
-				j = start;
-				vars->tokens[vars->i2].cmd[k++] = ' ';
-			}
-			else if (vars->tokens[vars->i2].t_str[j - 1] == '>' && \
-						(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j - 1) == NULL && \
-						is_between_quotes(vars->tokens[vars->i2].t_str, '"', j - 1) == NULL))
-			{
-				start = j;
-				vars->tokens[vars->i2].out[index] = OUT_REDIRECT;
-				skip_white_spaces(vars, &start, vars->i2);
-				subs_outfile(vars, &start, index);
-				index++;
-				j = start;
-				vars->tokens[vars->i2].cmd[k++] = ' ';
-			}
+			if (is_append_and_not_inside_quotes(vars, vars->j))
+				extract_outfile_append_and_fill_in_cmd_string(vars);
+			else if (is_output_redirect_and_not_inside_quotes(vars, \
+				vars->j - 1))
+				extract_outfile_output_redirect_and_fill_in_cmd_string(vars);
 			else
-			{
-				if (vars->tokens[vars->i2].t_str[j] != '>' || \
-					(vars->tokens[vars->i2].t_str[j] == '>' && \
-					(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
-					|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
-					vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
-				j++;
-			}
+				fill_in_cmd_string_no_outfile(vars);
 		}
 		else
-		{
-			if (vars->tokens[vars->i2].t_str[j] != '>' || \
-				(vars->tokens[vars->i2].t_str[j] == '>' && \
-				(is_between_quotes(vars->tokens[vars->i2].t_str, '\'', j) != NULL \
-				|| is_between_quotes(vars->tokens[vars->i2].t_str, '"', j) != NULL)))
-				vars->tokens[vars->i2].cmd[k++] = vars->tokens[vars->i2].t_str[j];
-			j++;
-		}
+			fill_in_cmd_string_no_outfile(vars);
 	}
-	vars->tokens[vars->i2].cmd[k] = '\0';
+	vars->tokens[vars->i].cmd[vars->k] = '\0';
 }
 
 void	find_outfile(t_prgm *vars)
 {
-	vars->i2 = 0;
-	while (vars->i2 < vars->pipe_ct + 1)
+	vars->i = 0;
+	while (vars->i < vars->pipe_ct + 1)
 	{
-		free(vars->tokens[vars->i2].t_str);
-		vars->tokens[vars->i2].t_str = ft_strdup(vars->tokens[vars->i2].cmd);
-		free(vars->tokens[vars->i2].cmd);
-		vars->tokens[vars->i2].cmd = malloc(sizeof(char) * (ft_strlen(vars->tokens[vars->i2].t_str) + 1));
-		find_outfile_init(vars);
+		free(vars->tokens[vars->i].t_str);
+		vars->tokens[vars->i].t_str = ft_strdup(vars->tokens[vars->i].cmd);
+		free(vars->tokens[vars->i].cmd);
+		vars->tokens[vars->i].cmd = malloc(sizeof(char) * \
+			(ft_strlen(vars->tokens[vars->i].t_str) + 1));
 		extract_outfiles(vars);
-		if (vars->tokens[vars->i2].out != NULL && vars->tokens[vars->i2].outfile == NULL)
+		if (vars->tokens[vars->i].out != NULL && \
+			vars->tokens[vars->i].outfile == NULL)
 		{
 			printf("syntax error near unexpected token\n");
 			vars->tok_error = 1;
 		}
-		vars->i2++;
+		vars->i++;
 	}
 }

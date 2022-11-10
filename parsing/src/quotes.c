@@ -6,24 +6,33 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 23:46:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 20:11:55 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-int	cnt_quotes(char *s, char c)
+void	ft_ref_quote_helper(int **tab, char *s, char c)
 {
-	int	nb_quotes;
+	int		i;
+	size_t	j;
 
-	nb_quotes = 0;
-	while (*s)
+	i = 0;
+	j = 0;
+	while (j < ft_strlen(s))
 	{
-		if (*s == c)
-			nb_quotes++;
-		s++;
+		if (s[j] == c)
+		{
+			if (tab[i][0] == -1)
+				tab[i][0] = j;
+			else
+			{
+				tab[i][1] = j;
+				i++;
+			}
+		}
+		j++;
 	}
-	return (nb_quotes);
 }
 
 int	**ft_ref_quote(char *s, char c)
@@ -31,7 +40,6 @@ int	**ft_ref_quote(char *s, char c)
 	int		size_array;
 	int		**tab;
 	int		i;
-	size_t	j;
 
 	i = 0;
 	size_array = cnt_quotes(s, c);
@@ -47,22 +55,7 @@ int	**ft_ref_quote(char *s, char c)
 			tab[i][1] = -1;
 			i++;
 		}
-		i = 0;
-		j = 0;
-		while (j < ft_strlen(s))
-		{
-			if (s[j] == c)
-			{
-				if (tab[i][0] == -1)
-					tab[i][0] = j;
-				else
-				{
-					tab[i][1] = j;
-					i++;
-				}
-			}
-			j++;
-		}
+		ft_ref_quote_helper(tab, s, c);
 		return (tab);
 	}
 	return (NULL);
@@ -94,7 +87,6 @@ int	*is_between_quotes(char *s, char c, int ref)
 		}
 		j++;
 	}
-	quotes = NULL;
 	return (NULL);
 }
 
