@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 22:57:07 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 03:14:04 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	splitting_pipes_no_pipes(t_prgm *vars)
 
 	i = 0;
 	vars->tokens = malloc(sizeof(t_token) * 1);
-	vars->tokens[i].t_str = vars->cmd_line;
+	vars->tokens[i].t_str = ft_strdup(vars->cmd_line);
 }
 
 void	splitting_pipes(t_prgm *vars)
@@ -28,6 +28,8 @@ void	splitting_pipes(t_prgm *vars)
 	char	*pipes_loc;
 
 	i = 0;
+	pipes_loc = NULL;
+	tab_token = NULL;
 	pipes_loc = find_pipes(vars->cmd_line);
 	while (pipes_loc[i++] != '\0')
 	{
@@ -43,8 +45,10 @@ void	splitting_pipes(t_prgm *vars)
 		{
 			vars->tokens[i].t_str = ft_strdup(tab_token[i]);
 			vars->tokens[i].t_str_og = ft_strdup(tab_token[i]);
+			free(tab_token[i]);
 			i++;
 		}
+		free(tab_token);
 	}
 	else if (vars->pipe_ct == 0)
 	{
@@ -52,6 +56,8 @@ void	splitting_pipes(t_prgm *vars)
 		vars->tokens[0].t_str_og = ft_strdup(vars->cmd_line);
 	}
 	init_all_tokens(vars);
+	free(pipes_loc);
+	
 }
 
 void	parsing(t_prgm *vars)

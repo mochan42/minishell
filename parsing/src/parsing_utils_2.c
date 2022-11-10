@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/10/24 18:12:50 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 03:10:53 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*find_pipes(char *s)
 			true_pipes.pipes_loc[true_pipes.i] = '.';
 		true_pipes.i++;
 	}
-	true_pipes.pipes_loc[true_pipes.i + 1] = '\0';
+	free(true_pipes.s);
+	true_pipes.pipes_loc[true_pipes.i] = '\0';
 	return (true_pipes.pipes_loc);
 }
 
@@ -89,11 +90,17 @@ char	**ft_split_pipes(char const *s, char c)
 
 	if (!s)
 		return (NULL);
+	pipes_loc = NULL;
 	pipes_loc = find_pipes((char *)s);
 	nb_words = ft_nb_words_ms(pipes_loc, c);
 	array_result = malloc(sizeof(char *) * (nb_words + 1));
 	if (!array_result)
+	{
+		free(pipes_loc);
+		free(array_result);
 		return (NULL);
+	}
 	ft_fill_splited_array_pipes(array_result, (char *)s, pipes_loc, 'P');
+	free(pipes_loc);
 	return (array_result);
 }

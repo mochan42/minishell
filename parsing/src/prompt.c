@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/09 22:42:39 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 03:16:08 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	high_level_tasks(t_prgm *vars)
 {
 	add_history(vars->cmd_line);
 	parsing(vars);
+	vars->exit = 1;
+	return ;
 	if (vars->tok_error == 1)
 		return ;
 	ms_executor(vars);

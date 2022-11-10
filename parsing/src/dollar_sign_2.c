@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 02:11:39 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/10 03:20:41 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ void	extract_ds_vars_helper(t_prgm *v)
 {
 	v->array_ds_vars = malloc(sizeof(char *) * (v->ct1[2] + 1));
 	if (!v->array_ds_vars)
+	{
+		free(v->array_ds_vars);
+		v->array_ds_vars = NULL;
 		return ;
+	}
 	v->array_ds_vars[v->ct1[2]] = NULL;
 	v->tmp = ft_strdup(v->tokens[v->ct1[0]].t_str);
 	v->ct1[1] = 0;
