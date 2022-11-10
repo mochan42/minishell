@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 17:35:12 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:50:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		len; //ct1[4] : length of a string to copy used in ft_substr
 int		index; //ct1[5] : counter for each string of the array of strings
 //ct1[6] : counter to go through each env variable to translate the dollar sign variable.
 */
-void	ids_cmd_opt_arg(t_prgm *v)
+void	interpret_dollar_sign(t_prgm *v)
 {
 	v->ct1[0] = 0;
 	while (v->ct1[0] < v->pipe_ct + 1)
@@ -82,12 +82,12 @@ void	ids_cmd_opt_arg(t_prgm *v)
 	}
 }
 
-void	interpret_dollar_sign(t_prgm *vars)
-{
-	ids_cmd_opt_arg(vars);
-	vars->i = 0;
-	while (vars->i < vars->pipe_ct + 1)
-	{
-		vars->i++;
-	}
-}
+// void	interpret_dollar_sign(t_prgm *vars)
+// {
+// 	ids_cmd_opt_arg(vars);
+// 	vars->i = 0;
+// 	while (vars->i < vars->pipe_ct + 1)
+// 	{
+// 		vars->i++;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/09 22:55:28 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/10 12:50:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void		concatenate_strings_helper_1(t_prgm *v);
 void		concatenate_strings(t_prgm *v);
 void		extract_string_no_ds_helper(t_prgm *v);
 void		extract_string_no_ds(t_prgm *v);
-void		ids_cmd_opt_arg(t_prgm *vars);
-void		interpret_dollar_sign(t_prgm *vars);
+// void		ids_cmd_opt_arg(t_prgm *vars);
+void		interpret_dollar_sign(t_prgm *v);
 
 /* dollar_sign_2.c */
 void		extract_ds_vars_helper(t_prgm *v);
