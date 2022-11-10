@@ -44,14 +44,12 @@ void	free_2_pt(char **pt)
 
 void	ft_exit_code(int ex_code, int mode)
 {
-	int	static	exit_code;
-
 	if (mode == 0)
 		printf("%d", exit_code);
 	else
 	{
 		if (ex_code < 0)
-			exit_code *= (ex_code * -1) %  256;
+			exit_code = (ex_code * -1) % 256;
 		else
 			exit_code = ex_code % 256;
 	}

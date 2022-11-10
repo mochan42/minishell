@@ -38,6 +38,7 @@
 
 /* ########################################################################## */
 /* STRUCTURES */
+extern int	exit_code;
 
 typedef struct s_env
 {

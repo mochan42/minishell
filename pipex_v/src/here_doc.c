@@ -36,6 +36,14 @@ char	*ft_creat_tmp_file(void)
 	return (tmp);
 }
 
+void	ft_close_tmp_here_file(t_prgm *vars, char *tmp, int j, int cmd)
+{
+	close(vars->tokens[cmd].fd_args[j][0]);
+	vars->tokens[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
+	unlink(tmp);
+	free(tmp);
+}
+
 void	ft_here_doc(t_prgm *vars, int cmd, int j)
 {
 	char	*tmp_read;
@@ -60,8 +68,5 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 		free(tmp_read);
 		write(vars->tokens[cmd].fd_args[j][0], "\n", 1);
 	}
-	close(vars->tokens[cmd].fd_args[j][0]);
-	vars->tokens[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
-	unlink(tmp);
-	free(tmp);
+	ft_close_tmp_here_file(vars, tmp, j, cmd);
 }

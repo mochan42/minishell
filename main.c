@@ -13,6 +13,8 @@
 #include "./minishell.h"
 #include "./parsing/inc/parser.h"
 
+int	exit_code;
+
 int	main(int ac, char **av, char **env)
 {
 	t_prgm	*ms;
@@ -29,5 +31,5 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, SIG_IGN);
 		input_loop(ms);
 	}
-	return (0);
+	return (exit_code);
 }
