@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/11 19:20:44 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:23:07 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@
 /* ########################################################################## */
 /* STRUCTURES */
 
-typedef struct s_finding_pipes
-{
-	char	*s;
-	char	*pipes_loc;
-	int		i;
-	int		b_open_double_quote;
-	int		b_open_single_quote;
-}				t_finding_pipes;
+// typedef struct s_finding_pipes
+// {
+// 	char	*s;
+// 	char	*pipes_loc;
+// 	int		i;
+// 	int		b_open_double_quote;
+// 	int		b_open_single_quote;
+// }				t_finding_pipes;
 
 typedef struct s_trim_quotes
 {
@@ -59,6 +59,7 @@ typedef struct s_fill_splitted_array_cmd
 	int		flag;
 	int		i;
 	char	c;
+	int		s_len;
 }				t_fill_splitted_array_cmd;
 
 /* ########################################################################## */
@@ -146,7 +147,7 @@ void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
-void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
+// void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 
 /* parsing_utils_3.c */
 int			cnt_dquotes(char *s);
@@ -162,9 +163,9 @@ void		extract_ds_vars_helper(t_prgm *v);
 void		ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref);
 
 /* parsing_utils_5.c */
-void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
-void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
-void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
+// void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
+// void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
+// void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 char		*trim_quotes(char *s);
 void		trim_quotes_helper(t_trim_quotes *tmp, char *s);
 void		init_trim_quotes(t_trim_quotes *tmp, char *s);

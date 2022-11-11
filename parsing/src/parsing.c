@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 19:21:26 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:29:52 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void	splitting_pipes(t_prgm *vars)
 {
 	int		i;
 	char	**tab_token;
+	char	*s;
 
-	i = 0;
-	tab_token = ft_split_cmd(ft_strdup(vars->cmd_line), '|');
+	s = ft_strdup(ft_strdup(vars->cmd_line));
+	tab_token = ft_split_cmd(s, '|');
 	if (vars->pipe_ct > 0)
 	{
 		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct));
@@ -31,16 +32,22 @@ void	splitting_pipes(t_prgm *vars)
 			i++;
 		}
 		free(tab_token);
-		tab_token = NULL;
 	}
 	else
 		vars->tok_error = 1;
+	i = 0;
+	while (i < vars->pipe_ct)
+	{
+		printf("Après : %s\n", vars->tokens[i].t_str);
+		i++;
+	}
 	init_all_tokens(vars);
 }
 
 void	parsing(t_prgm *vars)
 {
-	vars->pipe_ct = ft_nb_words_cmd(ft_strdup(vars->cmd_line), '|');
+	vars->pipe_ct = ft_nb_words_cmd(vars->cmd_line, '|');
+	printf("%d\n", vars->pipe_ct);
 	if (vars->pipe_ct == 0)
 	{
 		vars->tok_error = 1;

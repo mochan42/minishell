@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_5.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:38:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 20:20:35 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 22:17:32 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
-
-void	check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp)
-{
-	if (is_double_quote(vars_tp->s[vars_tp->i]))
-	{
-		if (vars_tp->b_open_double_quote == 0)
-			vars_tp->b_open_double_quote = 1;
-		else if (vars_tp->b_open_double_quote == 1)
-			vars_tp->b_open_double_quote = 0;
-	}	
-}
-
-void	check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp)
-{
-	if (is_single_quote(vars_tp->s[vars_tp->i]))
-	{
-		if (vars_tp->b_open_single_quote == 0)
-			vars_tp->b_open_single_quote = 1;
-		else if (vars_tp->b_open_single_quote == 1)
-			vars_tp->b_open_single_quote = 0;
-	}
-}
 
 void	init_trim_quotes(t_trim_quotes *tmp, char *s)
 {

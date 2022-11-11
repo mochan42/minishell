@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:59:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 19:16:26 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:24:06 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ void	ft_fill_splited_array_cmd(char **array_split, char *s, char c)
 {
 	t_fill_splitted_array_cmd	tmp;
 
+	tmp.s_len = (int)ft_strlen(s);
 	init_fill_splitted_array_cmd(&tmp, c);
-	while (tmp.i < (int)ft_strlen(s))
+	while (tmp.i < tmp.s_len && s[tmp.i] != '\0')
 	{
 		if (s[tmp.i] != c)
 			ft_fill_splited_array_cmd_helper(&tmp, array_split, s);
 		tmp.i++;
 	}
-	array_split[tmp.word] = '\0';
+	array_split[tmp.word] = NULL;
 }
 
 char	**ft_split_cmd(char const *s, char c)
