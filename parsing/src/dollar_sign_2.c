@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 20:24:11 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:45:35 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	extract_ds_vars(t_prgm *v)
 			v->ct1[1]++;
 			v->ct1[3] = v->ct1[1];
 			v->ct1[4] = 0;
-			while ((v->tmp[v->ct1[1]] >= 'a' && v->tmp[v->ct1[1]] <= 'z') \
+			while ((v->tmp[v->ct1[1]] != '\0') && ((v->tmp[v->ct1[1]] >= 'a' && v->tmp[v->ct1[1]] <= 'z') \
 				|| (v->tmp[v->ct1[1]] >= 'A' && v->tmp[v->ct1[1]] <= 'Z') \
 				|| (v->tmp[v->ct1[1]] >= '0' && v->tmp[v->ct1[1]] <= '9')
 				|| (v->tmp[v->ct1[1]] == '_') || (v->tmp[v->ct1[1]] == '?')
-				|| (v->tmp[v->ct1[1]] == '*'))
+				|| (v->tmp[v->ct1[1]] == '*')))
 			{
 				v->ct1[1]++;
 				v->ct1[4]++;

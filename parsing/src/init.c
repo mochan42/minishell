@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 16:12:52 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:23:28 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_all_tokens(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		init_each_token(&vars->tokens[i]);
 		i++;

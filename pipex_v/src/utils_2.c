@@ -18,7 +18,7 @@ void	free_vars_p(t_prgm *vars)
 	int	j;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		j = 0;
 		while (vars->tokens[i].options[j])
@@ -117,7 +117,7 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	char	*tmp;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		z = 0;
 		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');

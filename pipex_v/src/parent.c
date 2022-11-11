@@ -17,14 +17,14 @@ void	ft_parent_process(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct)
+	while (i < vars->pipe_ct - 1)
 	{
 		close(vars->p.fd[i][0]);
 		close(vars->p.fd[i][1]);
 		i++;
 	}
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		wait(&vars->p.status);
 		i++;

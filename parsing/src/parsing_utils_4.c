@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 19:53:41 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:43:47 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	cnt_dlr(char *s)
 void	err_msg_quotes_not_closed(void)
 {
 	printf("Quotes not closed.\n");
-	exit (0);
 }
 
 char	*ft_strnstr_ms(const char *haystack, \

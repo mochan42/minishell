@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 20:20:11 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 12:15:01 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ int	*is_between_quotes(char *s, char c, int ref)
 			{
 				res[0] = quotes[j][0];
 				res[1] = quotes[j][1];
-				free(quotes);
-				quotes = NULL;
 				return (res);
 			}
 		}

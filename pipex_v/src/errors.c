@@ -18,7 +18,7 @@ int	ft_is_error(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		if (vars->p.error[i][0] != '\0')
 			return (0);
@@ -32,7 +32,7 @@ void	ft_print_err_message(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		if (vars->p.error[i][0] != '\0')
 			printf("%s\n", vars->p.error[i]);

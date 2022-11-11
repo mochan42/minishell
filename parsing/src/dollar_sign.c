@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 13:50:57 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:59:58 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		index; //ct1[5] : counter for each string of the array of strings
 void	interpret_dollar_sign(t_prgm *v)
 {
 	v->ct1[0] = 0;
-	while (v->ct1[0] < v->pipe_ct + 1)
+	while (v->ct1[0] < v->pipe_ct)
 	{
 		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].t_str);
 		v->tokens[v->ct1[0]].ref_dollar = malloc(sizeof(int) * v->ct1[2]);

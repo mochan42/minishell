@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 13:26:16 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:14:53 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	high_level_tasks(t_prgm *vars)
 {
 	add_history(vars->cmd_line);
 	parsing(vars);
-	if (vars->tok_error == 1)
+	if (vars->tok_error >= 1)
+	{	
+		exit_code = 1;
 		return ;
+	}
 	ms_executor(vars);
 }
 

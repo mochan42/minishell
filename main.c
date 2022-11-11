@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		input_loop(ms);
+		ms->tok_error = 0;
 	}
 	return (exit_code);
 }

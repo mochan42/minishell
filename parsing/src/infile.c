@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 16:03:40 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:30:42 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	subs_infile(t_prgm *vars, int *start, int index)
 
 	len_infile = 0;
 	j = *start;
-	skip_white_spaces(vars, start, vars->i);
 	while (vars->tokens[vars->i].t_str[j] != '\0' && \
 		(vars->tokens[vars->i].t_str[j] != ' ' && \
 		vars->tokens[vars->i].t_str[j] != '\t'))
@@ -36,8 +35,12 @@ void	subs_infile(t_prgm *vars, int *start, int index)
 		len_infile++;
 		j++;
 	}
+	if (vars->tokens[vars->i].infile == NULL)
+		return ;
 	vars->tokens[vars->i].infile[index] = trim_quotes \
-		(ft_substr(vars->tokens[vars->i].t_str, *start, len_infile++));
+	(ft_substr(vars->tokens[vars->i].t_str, *start, len_infile++));
+	if (*vars->tokens[vars->i].infile[index] == '\0' && vars->tokens[vars->i].in[index] != IN_STD)
+		vars->tok_error = 1;
 	*start += len_infile - 1;
 }
 
@@ -76,13 +79,12 @@ void	extract_infiles(t_prgm *vars)
 		else
 			fill_in_cmd_string_no_infile(vars);
 	}
-	vars->tokens[vars->i].cmd[vars->k] = '\0';
 }
 
 void	find_infile(t_prgm *vars)
 {
 	vars->i = 0;
-	while (vars->i < vars->pipe_ct + 1)
+	while (vars->i < vars->pipe_ct)
 	{
 		vars->tokens[vars->i].cmd = malloc(sizeof(char) * \
 			(ft_strlen(vars->tokens[vars->i].t_str) + 1));

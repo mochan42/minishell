@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/10 19:57:39 by mochan           ###   ########.fr       */
+/*   Updated: 2022/11/11 15:25:58 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 		len_outfile++;
 		j++;
 	}
+	if (vars->tokens[vars->i].outfile == NULL)
+		return ;
 	vars->tokens[vars->i].outfile[index] = trim_quotes \
 		(ft_substr(vars->tokens[vars->i].t_str, *start, len_outfile++));
+	if (*vars->tokens[vars->i].outfile[index] == '\0' && vars->tokens[vars->i].out[index] != OUT_STD)
+		vars->tok_error = 1;
 	*start += len_outfile - 1;
 }
 
@@ -80,7 +84,7 @@ void	extract_outfiles(t_prgm *vars)
 void	find_outfile(t_prgm *vars)
 {
 	vars->i = 0;
-	while (vars->i < vars->pipe_ct + 1)
+	while (vars->i < vars->pipe_ct)
 	{
 		free(vars->tokens[vars->i].t_str);
 		vars->tokens[vars->i].t_str = ft_strdup(vars->tokens[vars->i].cmd);

@@ -78,7 +78,7 @@ int	ms_executor(t_prgm *vars)
 	if (ft_anticipate_heredoc(vars) == 1)
 		return (0);
 	vars->p.child = 0;
-	while (vars->p.child < vars->pipe_ct + 1)
+	while (vars->p.child < vars->pipe_ct)
 	{
 		if (ft_is_env_buil_ins(vars) == 1)
 			;
@@ -101,7 +101,7 @@ int	ft_anticipate_heredoc(t_prgm *vars)
 	int	j;
 
 	i = 0;
-	while (i < vars->pipe_ct + 1)
+	while (i < vars->pipe_ct)
 	{
 		j = 0;
 		while (j < vars->tokens[i].nb_input)

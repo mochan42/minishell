@@ -98,14 +98,14 @@ void	ft_childs_process(t_prgm *vars)
 	{
 		ft_exec_cmd_1(vars, &let_error);
 	}
-	else if (vars->p.child > 0 && vars->p.child < vars->pipe_ct)
+	else if (vars->p.child > 0 && vars->p.child < vars->pipe_ct - 1)
 	{
 		ft_in_redirect(vars, &let_error);
 		if (let_error != 1)
 			ft_bzero(vars->p.error[vars->p.child], 100);
 		ft_redirect_out(vars);
 	}
-	else if (vars->p.child == vars->pipe_ct)
+	else if (vars->p.child == vars->pipe_ct - 1)
 		ft_exec_cmd_last(vars, &let_error);
 	let_error = 0;
 	ft_close_fds(vars);
