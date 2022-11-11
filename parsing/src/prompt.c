@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 17:14:53 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:54:17 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	high_level_tasks(t_prgm *vars)
 {
+	vars->tok_error = 0;
 	add_history(vars->cmd_line);
 	parsing(vars);
 	if (vars->tok_error >= 1)
@@ -27,8 +28,8 @@ void	high_level_tasks(t_prgm *vars)
 // Function to take input
 int	input_loop(t_prgm *vars)
 {
-	vars->tok_error = 0;
-	vars->cmd_line = readline("minishell ⚽️$");
+	vars->cmd_line = ft_strdup(readline("minishell ⚽️$"));
+	printf("%s", vars->cmd_line);
 	if (!vars->cmd_line)
 		ft_exit_shell(vars);
 	else if (*vars->cmd_line == '\0')
@@ -41,5 +42,7 @@ int	input_loop(t_prgm *vars)
 			high_level_tasks(vars);
 		re_init_tokens(vars);
 	}
+	free(vars->cmd_line);
+	vars->cmd_line = NULL;
 	return (0);
 }

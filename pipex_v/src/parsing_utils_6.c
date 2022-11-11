@@ -6,58 +6,76 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:59:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 19:16:26 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 01:32:52 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../minishell.h"
 
-void	init_fill_splitted_array_cmd(t_fill_splitted_array_cmd *tmp, char c)
+int	ft_nb_words_cmd(char const *s, char c)
 {
-	tmp->word = 0;
-	tmp->flag = -1;
-	tmp->i = 0;
-	tmp->c = c;
-}
+	int	i;
+	int	result;
 
-void	ft_fill_splited_array_cmd_helper(t_fill_splitted_array_cmd *tmp, \
-	char **array_split, char *s)
-{
-	tmp->word_start = tmp->i;
-	tmp->length = 0;
-	tmp->flag = 0;
-	while (s[tmp->i] != 0 && tmp->flag == 0)
+	if (!s)
+		return (0);
+	i = 0;
+	result = 0;
+	while (i <= (int)ft_strlen(s))
 	{
-		if (s[tmp->i] == tmp->c && \
-			is_between_quotes((char *)s, '"', tmp->i) == NULL && \
-			is_between_quotes((char *)s, '\'', tmp->i) == NULL)
+		if ((s[i] == c || s[i] == 0) && i != 0 && (s[i - 1] != 0)
+			&& s[i - 1] != c)
 		{
-			tmp->flag = 1;
-			tmp->i--;
+			if (is_between_quotes((char *)s, '"', i) == NULL && is_between_quotes((char *)s, '\'', i) == NULL)
+			{
+				result++;
+			}
 		}
-		else
-		{
-			tmp->flag = 0;
-			tmp->length++;
-		}
-		tmp->i++;
+		i++;
 	}
-	array_split[tmp->word] = (char *)ft_substr(s, tmp->word_start, tmp->length);
-	tmp->word++;
+	return (result);
 }
 
 void	ft_fill_splited_array_cmd(char **array_split, char *s, char c)
 {
-	t_fill_splitted_array_cmd	tmp;
+	int	word_start;
+	int	i;
+	int	lenght;
+	int	word;
+	int	flag;
 
-	init_fill_splitted_array_cmd(&tmp, c);
-	while (tmp.i < (int)ft_strlen(s))
+	i = 0;
+	word = 0;
+	flag = -1;
+	while (i < (int)ft_strlen(s))
 	{
-		if (s[tmp.i] != c)
-			ft_fill_splited_array_cmd_helper(&tmp, array_split, s);
-		tmp.i++;
+		if (s[i] != c)
+		{
+			word_start = i;
+			lenght = 0;
+			flag = 0;
+			while (s[i] != 0 && flag == 0)
+			{
+				if (s[i] == c && \
+					is_between_quotes((char *)s, '"', i) == NULL && \
+					is_between_quotes((char *)s, '\'', i) == NULL)
+				{
+					flag = 1;
+					i--;
+				}
+				else
+				{
+					flag = 0;
+					lenght++;
+				}
+				i++;
+			}
+			array_split[word] = (char *)ft_substr(s, word_start, lenght);
+			word++;
+		}
+		i++;
 	}
-	array_split[tmp.word] = '\0';
+	array_split[word] = 0;
 }
 
 char	**ft_split_cmd(char const *s, char c)

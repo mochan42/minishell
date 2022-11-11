@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 15:23:28 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:27:37 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ void	init(t_prgm *vars)
 	vars->builts[4] = "export";
 	vars->builts[5] = "pwd";
 	vars->builts[6] = "unset";
-	vars->tok_error = 0;
 }

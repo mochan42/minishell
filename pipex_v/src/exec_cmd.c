@@ -48,7 +48,9 @@ void	ft_exec_cmd_1(t_prgm *vars, int *let_error)
 
 	i = 0;
 	if (vars->tokens[0].in == NULL)
-		;
+	{
+
+	}
 	while (i < vars->tokens[0].nb_input)
 	{
 		if (vars->tokens[0].in[i] == IN_REDIRECT)
@@ -123,7 +125,7 @@ void	ft_close_fds(t_prgm *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->pipe_ct - 1)
+	while (i < vars->pipe_ct)
 	{
 		close(vars->p.fd[i][0]);
 		close(vars->p.fd[i][1]);

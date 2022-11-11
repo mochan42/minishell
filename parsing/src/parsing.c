@@ -6,34 +6,11 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 16:08:15 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:21:26 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
-
-void	splitting_pipes_no_pipes(t_prgm *vars)
-{
-	int	i;
-
-	i = 0;
-	vars->tokens = malloc(sizeof(t_token) * 1);
-	vars->tokens[i].t_str = ft_strdup(vars->cmd_line);
-}
-
-void	count_true_pipes(t_prgm *vars)
-{
-	int		i;
-	char	*pipes_loc;
-
-	i = 0;
-	pipes_loc = find_pipes(vars->cmd_line);
-	while (pipes_loc[i++] != '\0')
-	{
-		if (pipes_loc[i] == 'P')
-			vars->pipe_ct++;
-	}
-}
 
 void	splitting_pipes(t_prgm *vars)
 {
@@ -41,7 +18,7 @@ void	splitting_pipes(t_prgm *vars)
 	char	**tab_token;
 
 	i = 0;
-	tab_token = ft_split_cmd(vars->cmd_line, '|');
+	tab_token = ft_split_cmd(ft_strdup(vars->cmd_line), '|');
 	if (vars->pipe_ct > 0)
 	{
 		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct));
@@ -54,18 +31,16 @@ void	splitting_pipes(t_prgm *vars)
 			i++;
 		}
 		free(tab_token);
+		tab_token = NULL;
 	}
 	else
-	{
 		vars->tok_error = 1;
-		return ;
-	}
 	init_all_tokens(vars);
 }
 
 void	parsing(t_prgm *vars)
 {
-	vars->pipe_ct = ft_nb_words_cmd(vars->cmd_line, '|');
+	vars->pipe_ct = ft_nb_words_cmd(ft_strdup(vars->cmd_line), '|');
 	if (vars->pipe_ct == 0)
 	{
 		vars->tok_error = 1;
