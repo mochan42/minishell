@@ -21,14 +21,14 @@ void	free_vars_p(t_prgm *vars)
 	while (i < vars->pipe_ct)
 	{
 		j = 0;
-		while (vars->tokens[i].options[j])
+		while (vars->tok[i].options[j])
 		{
-			free(vars->tokens[i].options[j]);
+			free(vars->tok[i].options[j]);
 			j++;
 		}
-		if (vars->tokens[i].bin)
-			free(vars->tokens[i].bin);
-		free(vars->tokens[i].options);
+		if (vars->tok[i].bin)
+			free(vars->tok[i].bin);
+		free(vars->tok[i].options);
 		i++;
 	}
 }
@@ -45,41 +45,6 @@ int	len_path(char **paths)
 	return (i);
 }
 
-void	ft_only_file_in(t_prgm *vars, int i)
-{
-	int	ct_red;
-
-	ct_red = 0;
-	while (vars->tokens[i].infile[ct_red] != NULL)
-	{
-		if (vars->tokens[i].in[ct_red] == IN_HEREDOC)
-			ft_here_doc(vars, i, ct_red);
-		else if (access(vars->tokens[i].infile[ct_red], F_OK) != 0)
-			printf("No such file directory : %s\n",
-				vars->tokens[i].infile[ct_red]);
-		ct_red++;
-		vars->tok_error += 1;
-	}
-}
-
-void	ft_only_file_out(t_prgm *vars, int i)
-{
-	int	ct_red;
-
-	ct_red = 0;
-	while (vars->tokens[i].outfile[ct_red] != NULL)
-	{
-		if (vars->tokens[i].out[ct_red] == OUT_REDIRECT
-			&& access(vars->tokens[i].outfile[ct_red], F_OK) == 0)
-		{
-			unlink(vars->tokens[i].outfile[ct_red]);
-			open(vars->tokens[i].outfile[ct_red], O_RDWR | O_CREAT, 0666);
-		}
-		ct_red++;
-		vars->tok_error += 1;
-	}
-}
-
 void	ft_is_builtins_cmd(t_prgm *vars, int i)
 {
 	int	j;
@@ -87,9 +52,9 @@ void	ft_is_builtins_cmd(t_prgm *vars, int i)
 	j = 0;
 	while (j < 7)
 	{
-		if (ft_strcmp(vars->tokens[i].options[0], vars->builts[j]) == 0)
+		if (ft_strcmp(vars->tok[i].options[0], vars->builts[j]) == 0)
 		{
-			vars->tokens[i].built_in = 1;
+			vars->tok[i].built_in = 1;
 			break ;
 		}
 		j++;
@@ -98,12 +63,12 @@ void	ft_is_builtins_cmd(t_prgm *vars, int i)
 
 int	ft_is_error_options(t_prgm *vars, int i, int j)
 {
-	if (vars->tokens[i].options[j] == NULL)
+	if (vars->tok[i].options[j] == NULL)
 	{
 		vars->tok_error = 1;
-		if (vars->tokens[i].infile != NULL)
+		if (vars->tok[i].infile != NULL)
 			ft_only_file_in(vars, i);
-		if (vars->tokens[i].outfile != NULL)
+		if (vars->tok[i].outfile != NULL)
 			ft_only_file_out(vars, i);
 		return (1);
 	}
@@ -120,14 +85,14 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	while (i < vars->pipe_ct)
 	{
 		z = 0;
-		vars->tokens[i].options = ft_split_cmd(vars->tokens[i].cmd, ' ');
+		vars->tok[i].options = ft_split_cmd(vars->tok[i].cmd, ' ');
 		if (ft_is_error_options(vars, i, z) == 1)
 			return ;
-		while (vars->tokens[i].options[z])
+		while (vars->tok[i].options[z])
 		{
-			tmp = trim_quotes(vars->tokens[i].options[z]);
-			free(vars->tokens[i].options[z]);
-			vars->tokens[i].options[z] = ft_strdup(tmp);
+			tmp = trim_quotes(vars->tok[i].options[z]);
+			free(vars->tok[i].options[z]);
+			vars->tok[i].options[z] = ft_strdup(tmp);
 			free(tmp);
 			z++;
 		}

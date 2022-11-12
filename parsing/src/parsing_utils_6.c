@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:59:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 00:25:50 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:16:54 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_fill_splited_array_cmd_helper(t_fill_splitted_array_cmd *tmp, \
 	while (tmp->i < tmp->s_len && tmp->flag == 0)
 	{
 		if (s[tmp->i] == tmp->c && \
-			is_between_quotes((char *)s, '"', tmp->i) == NULL && \
-			is_between_quotes((char *)s, '\'', tmp->i) == NULL)
+			is_btw_q((char *)s, '"', tmp->i) == NULL && \
+			is_btw_q((char *)s, '\'', tmp->i) == NULL)
 		{
 			tmp->flag = 1;
 			tmp->i--;

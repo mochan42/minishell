@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 14:20:19 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:16:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	splitting_pipes(t_prgm *vars)
 	if (vars->pipe_ct > 0)
 	{
 		tab_token = ft_split_cmd(vars->cmd_line, '|');
-		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct));
+		vars->tok = malloc(sizeof(t_token) * (vars->pipe_ct));
 		i = 0;
 		while (i < vars->pipe_ct)
 		{
-			vars->tokens[i].t_str = ft_strdup(tab_token[i]);
-			vars->tokens[i].t_str_og = ft_strdup(tab_token[i]);
+			vars->tok[i].t_str = ft_strdup(tab_token[i]);
+			vars->tok[i].t_str_og = ft_strdup(tab_token[i]);
 			free(tab_token[i]);
 			i++;
 		}

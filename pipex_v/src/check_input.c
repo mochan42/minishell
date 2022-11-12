@@ -43,15 +43,15 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 
 	if (ft_strncmp(*tmp, "OK", 2) == 0)
 		return ;
-	if (ft_strchr(vars->tokens[cmd].options[0], '/'))
+	if (ft_strchr(vars->tok[cmd].options[0], '/'))
 	{
-		tmp_cmd = ft_split(vars->tokens[cmd].options[0], '/');
+		tmp_cmd = ft_split(vars->tok[cmd].options[0], '/');
 		i = len_path(tmp_cmd);
 		if (ft_catch_empty_cmd(vars, tmp_cmd, i) == 1)
 			return ;
-		vars->tokens[cmd].bin = ft_strdup(vars->tokens[cmd].options[0]);
-		free(vars->tokens[cmd].options[0]);
-		vars->tokens[cmd].options[0] = ft_strdup(tmp_cmd[i - 1]);
+		vars->tok[cmd].bin = ft_strdup(vars->tok[cmd].options[0]);
+		free(vars->tok[cmd].options[0]);
+		vars->tok[cmd].options[0] = ft_strdup(tmp_cmd[i - 1]);
 		i = 0;
 		while (tmp_cmd[i])
 		{
@@ -59,7 +59,7 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 			i++;
 		}
 		free(tmp_cmd);
-		if (vars->tokens[cmd].bin && access(vars->tokens[cmd].bin,
+		if (vars->tok[cmd].bin && access(vars->tok[cmd].bin,
 				F_OK | X_OK) == 0)
 			*tmp = "OK";
 	}

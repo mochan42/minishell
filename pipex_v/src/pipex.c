@@ -16,14 +16,14 @@
 void	ft_execve_cmds(t_prgm *vars)
 {
 	ft_childs_process(vars);
-	if (vars->tokens[vars->p.child].built_in == 1)
+	if (vars->tok[vars->p.child].built_in == 1)
 		execbuilt_in(vars);
 	else if (ft_is_error(vars) == 1)
 	{
 		if (is_our_env_path(vars) == 1)
 		{
-			if (execve(vars->tokens[vars->p.child].bin,
-					vars->tokens[vars->p.child].options, vars->env) == -1)
+			if (execve(vars->tok[vars->p.child].bin,
+					vars->tok[vars->p.child].options, vars->env) == -1)
 				exit(127);
 		}
 		else
@@ -32,7 +32,7 @@ void	ft_execve_cmds(t_prgm *vars)
 			exit(127);
 		}
 	}
-	if (vars->tokens[vars->p.child].built_in != 1)
+	if (vars->tok[vars->p.child].built_in != 1)
 		exit (1);
 	exit(0);
 }
@@ -42,15 +42,15 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 	int	i;
 
 	i = 1;
-	if (ft_strcmp(vars->tokens[vars->p.child].options[0], "cd") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].options[0], "cd") == 0)
 		ft_cd(vars);
-	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "export")
-		== 0 && vars->tokens[vars->p.child].options[1])
+	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "export")
+		== 0 && vars->tok[vars->p.child].options[1])
 		ft_export(vars);
-	else if (ft_strcmp(vars->tokens[vars->p.child].options[0],
+	else if (ft_strcmp(vars->tok[vars->p.child].options[0],
 			"unset") == 0)
 		ft_unset(vars, NULL);
-	else if (ft_strcmp(vars->tokens[vars->p.child].options[0], "exit") == 0)
+	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "exit") == 0)
 		ft_exit(vars);
 	else
 		i = 0;
@@ -105,9 +105,9 @@ int	ft_anticipate_heredoc(t_prgm *vars)
 	while (i < vars->pipe_ct)
 	{
 		j = 0;
-		while (j < vars->tokens[i].nb_input)
+		while (j < vars->tok[i].nb_input)
 		{
-			if (vars->tokens[i].in[j] == IN_HEREDOC)
+			if (vars->tok[i].in[j] == IN_HEREDOC)
 				ft_here_doc(vars, i, j);
 			j++;
 		}

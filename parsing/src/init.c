@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 14:13:56 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:15:57 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	init_each_token(t_prgm *vars, int i)
 {
-	vars->tokens[i].in = NULL;
-	vars->tokens[i].out = NULL;
-	vars->tokens[i].infile = NULL;
-	vars->tokens[i].outfile = NULL;
-	vars->tokens[i].bin = NULL;
-	vars->tokens[i].built_in = 0;
-	vars->tokens[i].options = NULL;
-	vars->tokens[i].cmd = NULL;
+	vars->tok[i].in = NULL;
+	vars->tok[i].out = NULL;
+	vars->tok[i].infile = NULL;
+	vars->tok[i].outfile = NULL;
+	vars->tok[i].bin = NULL;
+	vars->tok[i].built_in = 0;
+	vars->tok[i].options = NULL;
+	vars->tok[i].cmd = NULL;
 	vars->p.error[i][0] = '\0';
 }
 

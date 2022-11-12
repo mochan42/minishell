@@ -13,7 +13,7 @@
 #include "./minishell.h"
 #include "./parsing/inc/parser.h"
 
-int	exit_code;
+int	g_exit_code;
 
 int	main(int ac, char **av, char **env)
 {
@@ -32,5 +32,5 @@ int	main(int ac, char **av, char **env)
 		input_loop(ms);
 		ms->tok_error = 0;
 	}
-	return (exit_code);
+	return (g_exit_code);
 }

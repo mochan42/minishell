@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 14:41:52 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:16:54 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	ft_nb_words_cmd(char const *s, char c)
 		if ((s[i] == c || s[i] == 0) && i != 0 && (s[i - 1] != 0)
 			&& s[i - 1] != c)
 		{
-			if (is_between_quotes((char *)s, '"', i) == NULL && \
-				is_between_quotes((char *)s, '\'', i) == NULL)
+			if (is_btw_q((char *)s, '"', i) == NULL && \
+				is_btw_q((char *)s, '\'', i) == NULL)
 			{
 				result++;
 			}

@@ -38,8 +38,8 @@ char	*ft_creat_tmp_file(void)
 
 void	ft_close_tmp_here_file(t_prgm *vars, char *tmp, int j, int cmd)
 {
-	close(vars->tokens[cmd].fd_args[j][0]);
-	vars->tokens[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
+	close(vars->tok[cmd].fd_args[j][0]);
+	vars->tok[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
 	unlink(tmp);
 	free(tmp);
 }
@@ -51,8 +51,8 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 	char	*tmp;
 
 	tmp = ft_strjoin(ft_creat_tmp_file(), ft_itoa(cmd));
-	delimiter = vars->tokens[cmd].infile[j];
-	vars->tokens[cmd].fd_args[j][0] = open(tmp,
+	delimiter = vars->tok[cmd].infile[j];
+	vars->tok[cmd].fd_args[j][0] = open(tmp,
 			O_RDWR | O_CREAT | O_APPEND, 0666);
 	while (1)
 	{
@@ -64,9 +64,9 @@ void	ft_here_doc(t_prgm *vars, int cmd, int j)
 			free(tmp_read);
 			break ;
 		}
-		write(vars->tokens[cmd].fd_args[j][0], tmp_read, ft_strlen(tmp_read));
+		write(vars->tok[cmd].fd_args[j][0], tmp_read, ft_strlen(tmp_read));
 		free(tmp_read);
-		write(vars->tokens[cmd].fd_args[j][0], "\n", 1);
+		write(vars->tok[cmd].fd_args[j][0], "\n", 1);
 	}
 	ft_close_tmp_here_file(vars, tmp, j, cmd);
 }

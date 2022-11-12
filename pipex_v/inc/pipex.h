@@ -38,7 +38,6 @@
 
 /* ########################################################################## */
 /* STRUCTURES */
-extern int	exit_code;
 
 typedef struct s_env
 {
@@ -46,7 +45,7 @@ typedef struct s_env
 	struct s_env	*prev;
 	char			*key;
 	char			*value;
-} 				t_env;
+}				t_env;
 
 typedef struct s_pipe
 {
@@ -60,7 +59,7 @@ typedef struct s_pipe
 
 typedef struct s_token
 {
-	int		*in; // for each token, indicates how many input files there are
+	int		*in;
 	int		*out;
 	char	**infile;
 	char	**outfile;
@@ -79,14 +78,14 @@ typedef struct s_token
 typedef struct s_prgm
 {
 	char	*cmd_line;
-	char	**env; //transform into a linked list
+	char	**env;
 	t_env	*env_head;
-	t_token	*tokens;
+	t_token	*tok;
 	int		pipe_ct;
 	t_pipe	p;
 	char	*builts[7];
-	int		ct1[7]; // 7 counters for dollar sign expansion of command option arguments
-	char	**var_ds;
+	int		ct1[7];
+	char	**d_v;
 	char	*tmp;
 	char	**array_tmp;
 	char	**keys;
@@ -138,13 +137,15 @@ void	ft_print_err_message(t_prgm *vars);
 void	ft_generate_p(t_prgm *vars);
 void	free_2_pt(char **pt);
 void	ft_exit_code(int ex_code, int mode);
-//int		ft_valid_nb_args_bonus(int argc);
+int		ft_check_ex_options(t_prgm *vars);
+/* utils_4.c */
+int		is_numeric(char c);
 /* here_doc.c */
 void	ft_here_doc(t_prgm *vars, int cmd, int j);
 char	*ft_creat_tmp_file(void);
 /* builtins.c*/
 void	execbuilt_in(t_prgm *vars);
-void    ft_cd(t_prgm *vars);
+void	ft_cd(t_prgm *vars);
 void	ft_pwd(void);
 void	ft_env(t_prgm *vars);
 void	ft_export(t_prgm *vars);
@@ -159,7 +160,7 @@ void	ft_export_new_key(t_prgm *vars);
 void	ft_t_env_to_array(t_env *envp, char ***env_ord);
 void	ft_print_exported_env(char ***env_ord, int env_size);
 char	*get_our_env(t_prgm *vars, char *var);
-t_env   *ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr);
+t_env	*ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr);
 int		ft_unset_single_var(t_prgm *vars, char *var);
 /* pipex.c */
 int		ms_executor(t_prgm *vars);
@@ -167,6 +168,6 @@ void	ft_execve_cmds(t_prgm *vars);
 int		ft_anticipate_heredoc(t_prgm *vars);
 int		ft_only_outfile(t_prgm *vars);
 /* signal .c */
-void    new_prompt(int sign_num);
-void    erase_prompt(void);
+void	new_prompt(int sign_num);
+void	erase_prompt(void);
 #endif

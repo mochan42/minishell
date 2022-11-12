@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 18:41:29 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:16:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	re_init_tokens(t_prgm *vars)
 	{
 		while (i < vars->pipe_ct)
 		{
-			free(vars->tokens[i].t_str);
-			free(vars->tokens[i].t_str_og);
-			vars->tokens[i].t_str = NULL;
-			vars->tokens[i].t_str_og = NULL;
+			free(vars->tok[i].t_str);
+			free(vars->tok[i].t_str_og);
+			vars->tok[i].t_str = NULL;
+			vars->tok[i].t_str_og = NULL;
 			i++;
 		}
 	}
@@ -50,6 +50,6 @@ void	re_init_tokens(t_prgm *vars)
 
 void	free_stuff(t_prgm *vars)
 {
-	free(vars->tokens);
+	free(vars->tok);
 	free(vars);
 }

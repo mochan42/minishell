@@ -31,10 +31,10 @@ char	*ft_get_path(char **envp)
 void	ft_set_cmd_error_msg(t_prgm *vars, char **tmp, int cmd)
 {
 	if ((ft_strncmp(*tmp, "OK", 2) != 0)
-		&& (vars->p.error[cmd][0] == 0) && vars->tokens[cmd].built_in == 0)
+		&& (vars->p.error[cmd][0] == 0) && vars->tok[cmd].built_in == 0)
 	{
 		ft_strcat(vars->p.error[cmd], "command not found : ");
-		ft_strcat(vars->p.error[cmd], vars->tokens[cmd].options[0]);
+		ft_strcat(vars->p.error[cmd], vars->tok[cmd].options[0]);
 		ft_exit_code(127, 1);
 	}
 }
@@ -49,16 +49,16 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 	tmp[2] = "";
 	while (paths[i])
 	{
-		if (vars->tokens[cmd].options[0][0] != '/')
-			tmp[0] = ft_strjoin("/", vars->tokens[cmd].options[0]);
+		if (vars->tok[cmd].options[0][0] != '/')
+			tmp[0] = ft_strjoin("/", vars->tok[cmd].options[0]);
 		else
-			tmp[0] = ft_strjoin("../", vars->tokens[cmd].options[0]);
+			tmp[0] = ft_strjoin("../", vars->tok[cmd].options[0]);
 		tmp[1] = ft_strjoin(paths[i], tmp[0]);
 		if (access(tmp[1], F_OK | X_OK) == 0)
 		{
 			if (ft_strcmp(tmp[2], "Ok") == 0)
-				free(vars->tokens[cmd].bin);
-			vars->tokens[cmd].bin = ft_strdup(tmp[1]);
+				free(vars->tok[cmd].bin);
+			vars->tok[cmd].bin = ft_strdup(tmp[1]);
 			tmp[2] = "OK";
 		}
 		free(tmp[0]);

@@ -47,18 +47,18 @@ void	ft_cd(t_prgm *vars)
 
 	envp = vars->env_head;
 	oldpwd = get_our_env(vars, "PWD");
-	if (!vars->tokens[vars->p.child].options[1]
-		|| *vars->tokens[vars->p.child].options[1] == '~')
+	if (!vars->tok[vars->p.child].options[1]
+		|| *vars->tok[vars->p.child].options[1] == '~')
 		chdir(getenv("HOME"));
 	else
 	{
-		if (chdir(vars->tokens[vars->p.child].options[1]) == -1)
+		if (chdir(vars->tok[vars->p.child].options[1]) == -1)
 		{
-			perror(vars->tokens[vars->p.child].options[1]);
+			perror(vars->tok[vars->p.child].options[1]);
 			ft_exit_code(1, 1);
 			return ;
 		}
-		if (vars->pipe_ct > 0)
+		if (vars->pipe_ct > 1)
 		{
 			chdir(oldpwd);
 			return ;

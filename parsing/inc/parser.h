@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/12 13:44:32 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:31:51 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 // 	int		b_open_double_quote;
 // 	int		b_open_single_quote;
 // }				t_finding_pipes;
+extern int	g_exit_code;
 
 typedef struct s_trim_quotes
 {
@@ -74,7 +75,7 @@ void		interpret_dollar_sign(t_prgm *v);
 void		extract_ds_vars_helper(t_prgm *v);
 void		extract_ds_vars(t_prgm *vars);
 void		translate_var(t_prgm *v);
-void		translate_var_helper(t_prgm *v, t_env *tmp_node, int flag);
+void		translate_var_helper(t_prgm *v, t_env *tp_nd, int flag);
 
 /*  init.c */
 void		init(t_prgm *vars);
@@ -102,7 +103,7 @@ void		re_init_tokens(t_prgm *vars);
 /* infile.c */
 void		extract_infiles(t_prgm *vars);
 void		find_infile(t_prgm *vars);
-void		subs_infile(t_prgm *vars, int *start, int index);
+void		subs_infile(t_prgm *v, int *start, int index);
 void		extract_infiles_init(t_prgm *vars);
 
 /* infile_utils_1.c */
@@ -120,7 +121,7 @@ void		skip_white_spaces(t_prgm *vars, int *start, int cnt);
 void		extract_outfile(t_prgm *vars);
 void		extract_outfiles_init(t_prgm *vars);
 void		find_outfile(t_prgm *vars);
-void		subs_outfile(t_prgm *vars, int *start, int index);
+void		subs_outfile(t_prgm *v, int *start, int id);
 
 /* outfile_utils_1.c */
 int			count_output(t_prgm *vars);
@@ -145,7 +146,6 @@ void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
-// void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 
 /* parsing_utils_3.c */
 int			cnt_dquotes(char *s);
@@ -161,9 +161,6 @@ void		extract_ds_vars_helper(t_prgm *v);
 void		ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref);
 
 /* parsing_utils_5.c */
-// void		check_if_double_quote_open_or_closed(t_finding_pipes *vars_tp);
-// void		check_if_single_quote_open_or_closed(t_finding_pipes *vars_tp);
-// void		init_true_pipes(t_finding_pipes *vars_tp, char *s);
 char		*trim_quotes(char *s);
 void		trim_quotes_helper(t_trim_quotes *tmp, char *s);
 void		init_trim_quotes(t_trim_quotes *tmp, char *s);
@@ -184,8 +181,9 @@ int			are_quotes_closed_v3(char *s);
 int			expand_ds(char *s, int ref);
 int			**ft_ref_quote(char *s, char c);
 void		ft_ref_quote_helper(int **tab, char *s, char c);
-int			*is_between_quotes(char *s, char c, int ref);
+int			*is_btw_q(char *s, char c, int ref);
 
 /* quotes_utils_1.c */
 int			cnt_quotes(char *s, char c);
+int			ft_get_ref_qt_size(char *s, char c);
 #endif

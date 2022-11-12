@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:38:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 14:06:00 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:28:51 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*trim_quotes(char *s)
 {
 	t_trim_quotes	tmp;
 	char			*res;
+
 	init_trim_quotes(&tmp, s);
 	trim_quotes_helper(&tmp, s);
 	res = ft_strdup(tmp.res);
