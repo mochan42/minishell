@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:38:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 22:17:32 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:06:00 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_trim_quotes(t_trim_quotes *tmp, char *s)
 	tmp->i = 0;
 	tmp->j = 0;
 	tmp->quote_opened = 0;
-	tmp->res = malloc(sizeof(char) * ft_strlen(s));
+	tmp->res = malloc(sizeof(char) * ft_strlen(s) + 1);
 }
 
 void	trim_quotes_helper(t_trim_quotes *tmp, char *s)
@@ -51,8 +51,10 @@ void	trim_quotes_helper(t_trim_quotes *tmp, char *s)
 char	*trim_quotes(char *s)
 {
 	t_trim_quotes	tmp;
-
+	char			*res;
 	init_trim_quotes(&tmp, s);
 	trim_quotes_helper(&tmp, s);
-	return (tmp.res);
+	res = ft_strdup(tmp.res);
+	free(tmp.res);
+	return (res);
 }

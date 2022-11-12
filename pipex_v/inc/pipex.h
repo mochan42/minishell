@@ -31,10 +31,10 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
 
 /* ########################################################################## */
 /* STRUCTURES */
@@ -73,7 +73,7 @@ typedef struct s_token
 	int		fd_args[200][2];
 	int		nb_input;
 	int		nb_output;
-	int		*ref_dollar;
+	int		*rf_d;
 }				t_token;
 
 typedef struct s_prgm
@@ -86,7 +86,7 @@ typedef struct s_prgm
 	t_pipe	p;
 	char	*builts[7];
 	int		ct1[7]; // 7 counters for dollar sign expansion of command option arguments
-	char	**array_ds_vars;
+	char	**var_ds;
 	char	*tmp;
 	char	**array_tmp;
 	char	**keys;

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 15:43:47 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:41:52 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ void	ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref)
 	right = ft_substr(ptr, ft_strlen(subs_to_r), ft_strlen(ptr));
 	tmp[0] = ft_strjoin(left, r_by);
 	tmp[1] = ft_strjoin(tmp[0], right);
+	if (*str)
+		free(*str);
 	*str = ft_strdup(tmp[1]);
 	free(tmp[0]);
 	free(tmp[1]);
+	free(left);
+	free(right);
 }
 
 int	ft_nb_words_cmd(char const *s, char c)

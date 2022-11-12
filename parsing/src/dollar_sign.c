@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:17:57 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 15:59:58 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:11:56 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_dollar_sign(t_prgm *v)
 {
 	free(v->tmp);
-	free(v->array_ds_vars);
+	free(v->var_ds);
 }
 
 /* int		i; //ct1[0] : counter to go through each token (token = string 
@@ -36,7 +36,8 @@ void	interpret_dollar_sign(t_prgm *v)
 	while (v->ct1[0] < v->pipe_ct)
 	{
 		v->ct1[2] = cnt_dlr(v->tokens[v->ct1[0]].t_str);
-		v->tokens[v->ct1[0]].ref_dollar = malloc(sizeof(int) * v->ct1[2]);
+		v->tokens[v->ct1[0]].rf_d = malloc(sizeof(int) * (v->ct1[2] + 1));
+		v->tokens[v->ct1[0]].rf_d[v->ct1[2]] = -1;
 		if (v->ct1[2] > 0)
 		{
 			extract_ds_vars(v);

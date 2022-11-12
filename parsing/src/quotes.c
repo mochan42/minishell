@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 12:15:01 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:52:20 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	*is_between_quotes(char *s, char c, int ref)
 	int		**quotes;
 	int		size_array;
 	int		*res;
+	int		end;
 
 	size_array = cnt_quotes(s, c);
 	res = malloc(sizeof(int) * 2);
@@ -74,19 +75,24 @@ int	*is_between_quotes(char *s, char c, int ref)
 		size_array += 1;
 	quotes = ft_ref_quote(s, c);
 	j = 0;
+	end = 0;
 	while (j < size_array / 2)
 	{
 		if (quotes[j][0] != -1 && quotes[j][1] != -1)
 		{
-			if (ref > quotes[j][0] && ref < quotes[j][1])
+			if (ref > quotes[j][0] && ref < quotes[j][1] && end == 0)
 			{
 				res[0] = quotes[j][0];
 				res[1] = quotes[j][1];
-				return (res);
+				free(quotes[j]);
+				end = 1;
 			}
 		}
 		j++;
 	}
+	free(quotes);
+	if (end == 1)
+		return (res);
 	return (NULL);
 }
 

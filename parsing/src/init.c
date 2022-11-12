@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 01:23:11 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:13:56 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_each_token(t_prgm *vars, int i)
 	vars->tokens[i].built_in = 0;
 	vars->tokens[i].options = NULL;
 	vars->tokens[i].cmd = NULL;
+	vars->p.error[i][0] = '\0';
 }
 
 void	init_all_tokens(t_prgm *vars)

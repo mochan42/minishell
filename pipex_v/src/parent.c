@@ -15,12 +15,30 @@
 void	ft_parent_process(t_prgm *vars)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < vars->pipe_ct - 1)
 	{
+		j = 0;
 		close(vars->p.fd[i][0]);
 		close(vars->p.fd[i][1]);
+		if (vars->tokens[i].infile != NULL)
+		{
+			while (vars->tokens[i].infile[j])
+			{
+				close(vars->tokens[i].fd_args[j][0]);
+				j++;
+			}
+		}
+		if (vars->tokens[i].outfile != NULL)
+		{
+			while (vars->tokens[i].outfile[j])
+			{
+				close(vars->tokens[i].fd_args[j][1]);
+				j++;
+			}
+		}
 		i++;
 	}
 	i = 0;
