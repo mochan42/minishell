@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 12:02:28 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 12:40:24 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ void	splitting_pipes(t_prgm *vars)
 {
 	int		i;
 	char	**tab_token;
-	char	*s;
 
-	s = ft_strdup(vars->cmd_line);
-	printf("%s\n", s);
-	printf("%s\n", vars->cmd_line);
-	tab_token = ft_split_cmd(s, '|');
+	tab_token = ft_split_cmd(vars->cmd_line, '|');
 	if (vars->pipe_ct > 0)
 	{
 		vars->tokens = malloc(sizeof(t_token) * (vars->pipe_ct));
@@ -36,8 +32,8 @@ void	splitting_pipes(t_prgm *vars)
 	}
 	else
 		vars->tok_error = 1;
+	free(tab_token);
 	init_all_tokens(vars);
-	printf("BONJOUR : %d*******\n", ft_strcmp(vars->tokens[0].t_str, vars->cmd_line));
 }
 
 void	parsing(t_prgm *vars)
