@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 20:39:40 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 22:03:39 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,27 @@ int	**ft_ref_quote(char *s, char c)
 int	*is_btw_q(char *s, char c, int ref)
 {
 	int		j[3];
-	int		**quotes;
+	int		**qts;
 	int		*res;
 
 	j[2] = ft_get_ref_qt_size(s, c);
 	res = malloc(sizeof(int) * 2);
-	quotes = ft_ref_quote(s, c);
+	qts = ft_ref_quote(s, c);
 	j[0] = 0;
 	j[1] = 0;
 	while (j[0] < j[2] / 2)
 	{
-		if (quotes[j[0]][0] != -1 && quotes[j[0]][1] != -1)
+		if (qts[j[0]][0] != -1 && qts[j[0]][1] != -1)
 		{
-			if (ref > quotes[j[0]][0] && ref < quotes[j[0]][1] && j[1] == 0)
+			if (check(ref, qts[j[0]][0], qts[j[0]][1], res) == 0 && j[1] == 0)
 			{
-				res[0] = quotes[j[0]][0];
-				res[1] = quotes[j[0]][1];
-				free(quotes[j[0]]);
+				free(qts[j[0]]);
 				j[1] = 1;
 			}
 		}
 		j[0] += 1;
 	}
-	free(quotes);
+	free(qts);
 	if (j[1] == 1)
 		return (res);
 	return (NULL);

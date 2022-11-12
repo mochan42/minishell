@@ -54,30 +54,3 @@ void	ft_exit_code(int ex_code, int mode)
 			g_exit_code = ex_code % 256;
 	}
 }
-
-int	ft_assert_numeric(t_prgm *vars, int indice)
-{
-	int	j;
-
-	j = 0;
-	while (vars->tok[vars->p.child].options[indice][j])
-	{
-		if (is_numeric(
-				vars->tok[vars->p.child].options[indice][j]) == 1)
-		{
-			printf("numeric argument required : %s\n",
-				vars->tok[vars->p.child].options[indice]);
-			ft_exit_code(255, 1);
-			return (1);
-		}
-		j++;
-	}
-	return (0);
-}
-
-int	is_numeric(char c)
-{
-	if (!(c >= '0' && c <= '9') && c != '-')
-		return (1);
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 19:16:54 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 22:05:14 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ int	cnt_dlr(char *s)
 	return (nb_dlr_sign);
 }
 
-void	err_msg_quotes_not_closed(void)
+int	check(int ref, int start, int end, int *res)
 {
-	printf("Quotes not closed.\n");
+	if (ref > start && ref < end)
+	{
+		res[0] = start;
+		res[1] = end;
+		return (0);
+	}
+	return (1);
 }
 
 char	*ft_strnstr_ms(const char *haystack, \

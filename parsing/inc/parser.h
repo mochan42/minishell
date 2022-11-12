@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/12 21:31:51 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 22:05:45 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,10 @@ void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
+void		ft_only_file_in(t_prgm *vars, int i);
+void		ft_only_file_out(t_prgm *vars, int i);
+int			ft_assert_numeric(t_prgm *vars, int indice);
+int			is_numeric(char c);
 
 /* parsing_utils_3.c */
 int			cnt_dquotes(char *s);
@@ -159,7 +163,7 @@ int			cnt_dlr(char *s);
 void		err_msg_quotes_not_closed(void);
 void		extract_ds_vars_helper(t_prgm *v);
 void		ft_str_replace(char **str, char *subs_to_r, char *r_by, int ref);
-
+int			check(int ref, int start, int end, int *res);
 /* parsing_utils_5.c */
 char		*trim_quotes(char *s);
 void		trim_quotes_helper(t_trim_quotes *tmp, char *s);

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:07:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 21:36:54 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:55:34 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,32 @@ int	ft_check_ex_options(t_prgm *vars)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+int	ft_assert_numeric(t_prgm *vars, int indice)
+{
+	int	j;
+
+	j = 0;
+	while (vars->tok[vars->p.child].options[indice][j])
+	{
+		if (is_numeric(
+				vars->tok[vars->p.child].options[indice][j]) == 1)
+		{
+			printf("numeric argument required : %s\n",
+				vars->tok[vars->p.child].options[indice]);
+			ft_exit_code(255, 1);
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
+int	is_numeric(char c)
+{
+	if (!(c >= '0' && c <= '9') && c != '-')
+		return (1);
 	return (0);
 }
