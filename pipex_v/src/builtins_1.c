@@ -91,7 +91,7 @@ void	ft_exit(t_prgm *vars)
 	int	i;
 
 	i = 1;
-	if (vars->pipe_ct > 0)
+	if (vars->pipe_ct > 1)
 		return ;
 	if (ft_check_ex_options(vars) == 1)
 		return ;

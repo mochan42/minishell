@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:59:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 23:24:06 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:25:50 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_fill_splited_array_cmd_helper(t_fill_splitted_array_cmd *tmp, \
 	tmp->word_start = tmp->i;
 	tmp->length = 0;
 	tmp->flag = 0;
-	while (s[tmp->i] != 0 && tmp->flag == 0)
+	while (tmp->i < tmp->s_len && tmp->flag == 0)
 	{
 		if (s[tmp->i] == tmp->c && \
 			is_between_quotes((char *)s, '"', tmp->i) == NULL && \
@@ -52,16 +52,16 @@ void	ft_fill_splited_array_cmd(char **array_split, char *s, char c)
 
 	tmp.s_len = (int)ft_strlen(s);
 	init_fill_splitted_array_cmd(&tmp, c);
-	while (tmp.i < tmp.s_len && s[tmp.i] != '\0')
+	while (tmp.i < tmp.s_len)
 	{
 		if (s[tmp.i] != c)
 			ft_fill_splited_array_cmd_helper(&tmp, array_split, s);
 		tmp.i++;
 	}
-	array_split[tmp.word] = NULL;
+	array_split[tmp.word] = 0;
 }
 
-char	**ft_split_cmd(char const *s, char c)
+char	**ft_split_cmd(char *s, char c)
 {
 	char	**array_result;
 	int		nb_words;

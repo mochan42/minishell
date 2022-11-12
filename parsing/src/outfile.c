@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 16:41:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 22:18:52 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 12:21:28 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	subs_outfile(t_prgm *vars, int *start, int index)
 			&& is_between_quotes(vars->tokens[vars->i].t_str, '"', j) == NULL))
 		{
 			vars->tok_error = 1;
+			vars->tokens[vars->i].cmd[vars->k] = '\0';
 			return ;
 		}
 		len_outfile++;

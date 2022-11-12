@@ -81,7 +81,8 @@ int	ms_executor(t_prgm *vars)
 	while (vars->p.child < vars->pipe_ct)
 	{
 		if (ft_is_env_buil_ins(vars) == 1)
-			;
+		{
+		}
 		else
 		{
 			vars->p.pid[vars->p.child] = fork();

@@ -6,22 +6,22 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 18:27:37 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:23:11 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-void	init_each_token(t_token *token)
+void	init_each_token(t_prgm *vars, int i)
 {
-	token->in = NULL;
-	token->out = NULL;
-	token->infile = NULL;
-	token->outfile = NULL;
-	token->bin = NULL;
-	token->built_in = 0;
-	token->options = NULL;
-	token->cmd = NULL;
+	vars->tokens[i].in = NULL;
+	vars->tokens[i].out = NULL;
+	vars->tokens[i].infile = NULL;
+	vars->tokens[i].outfile = NULL;
+	vars->tokens[i].bin = NULL;
+	vars->tokens[i].built_in = 0;
+	vars->tokens[i].options = NULL;
+	vars->tokens[i].cmd = NULL;
 }
 
 void	init_all_tokens(t_prgm *vars)
@@ -31,7 +31,7 @@ void	init_all_tokens(t_prgm *vars)
 	i = 0;
 	while (i < vars->pipe_ct)
 	{
-		init_each_token(&vars->tokens[i]);
+		init_each_token(vars, i);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:27:23 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/11 22:18:45 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/12 12:23:16 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	subs_infile(t_prgm *vars, int *start, int index)
 			is_between_quotes(vars->tokens[vars->i].t_str, '"', j) == NULL))
 		{
 			vars->tok_error = 1;
+			vars->tokens[vars->i].cmd[vars->k] = '\0';
 			return ;
 		}
 		len_infile++;
@@ -79,6 +80,7 @@ void	extract_infiles(t_prgm *vars)
 		else
 			fill_in_cmd_string_no_infile(vars);
 	}
+	vars->tokens[vars->i].cmd[vars->k] = '\0';
 }
 
 void	find_infile(t_prgm *vars)
