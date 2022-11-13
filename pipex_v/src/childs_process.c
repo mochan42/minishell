@@ -83,6 +83,7 @@ void	ft_redirect_out(t_prgm	*vars)
 			|| vars->tok[vars->p.child].out[i] == OUT_REDIRECT)
 		{
 			dup2(vars->tok[vars->p.child].fd_args[i][1], 1);
+			close(vars->tok[vars->p.child].fd_args[i][1]);
 		}
 		i++;
 	}

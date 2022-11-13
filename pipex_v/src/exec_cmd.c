@@ -37,7 +37,10 @@ void	ft_processing_output_1(t_prgm *vars)
 					O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if (vars->tok[0].out[i] == OUT_APPEND
 			|| vars->tok[0].out[i] == OUT_REDIRECT)
+		{
 			dup2(vars->tok[0].fd_args[i][1], 1);
+			close(vars->tok[0].fd_args[i][1]);
+		}
 		i++;
 	}
 }
@@ -87,7 +90,10 @@ void	ft_processing_output(t_prgm *vars)
 					O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if (vars->tok[vars->p.child].out[i] == OUT_APPEND
 			|| vars->tok[vars->p.child].out[i] == OUT_REDIRECT)
+		{
 			dup2(vars->tok[vars->p.child].fd_args[i][1], 1);
+			close(vars->tok[vars->p.child].fd_args[i][1]);
+		}
 		i++;
 	}
 }

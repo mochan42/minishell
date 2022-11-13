@@ -39,7 +39,8 @@ char	*ft_creat_tmp_file(void)
 void	ft_close_tmp_here_file(t_prgm *vars, char *tmp, int j, int cmd)
 {
 	close(vars->tok[cmd].fd_args[j][0]);
-	vars->tok[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
+	if (vars->tok_error == 0)
+		vars->tok[cmd].fd_args[j][0] = open(tmp, O_RDONLY);
 	unlink(tmp);
 	free(tmp);
 }

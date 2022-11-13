@@ -68,10 +68,3 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 	ft_check_full_cmd_pt(vars, &tmp[2], cmd);
 	ft_set_cmd_error_msg(vars, &tmp[2], cmd);
 }
-
-// void	ft_put_error_outfile(t_pipe *p, char *error)
-// {
-// 	ft_strcat(vars->error[1], error);
-// 	ft_strcat(vars->error[1], " : ");
-// 	ft_strcat(vars->error[1], vars->[p->ac - 1]);
-// }

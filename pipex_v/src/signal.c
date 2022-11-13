@@ -25,12 +25,3 @@ void	new_prompt(int sign_num)
 	if (SIGINT == sign_num)
 		erase_prompt();
 }
-
-void	exit_shell(int sign_num)
-{
-	if (SIGQUIT == sign_num)
-	{
-		kill(0, SIGKILL);
-		exit(0);
-	}
-}

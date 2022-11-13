@@ -12,30 +12,6 @@
 
 #include "../../minishell.h"
 
-void	close_in_outfiles(t_prgm *vars, int i)
-{
-	int	j;
-
-	j = 0;
-	if (vars->tok[i].infile != NULL)
-	{
-		while (vars->tok[i].infile[j])
-		{
-			close(vars->tok[i].fd_args[j][0]);
-			j++;
-		}
-	}
-	j = 0;
-	if (vars->tok[i].outfile != NULL)
-	{
-		while (vars->tok[i].outfile[j])
-		{
-			close(vars->tok[i].fd_args[j][1]);
-			j++;
-		}
-	}
-}
-
 void	ft_parent_process(t_prgm *vars)
 {
 	int	i;
@@ -45,7 +21,6 @@ void	ft_parent_process(t_prgm *vars)
 	{
 		close(vars->p.fd[i][0]);
 		close(vars->p.fd[i][1]);
-		close_in_outfiles(vars, i);
 		i++;
 	}
 	i = 0;
