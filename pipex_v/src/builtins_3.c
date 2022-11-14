@@ -28,16 +28,12 @@ void	ft_echo(t_prgm *vars)
 		i = 0;
 	while (vars->tok[vars->p.child].options[1 + i])
 	{
-		if (ft_strcmp(vars->tok[vars->p.child].options[1 + i], "$?") == 0)
-			ft_exit_code(0, 0);
-		else
-			printf("%s", vars->tok[vars->p.child].options[1 + i]);
+		printf("%s", vars->tok[vars->p.child].options[1 + i]);
 		i++;
 		if (vars->tok[vars->p.child].options[1 + i])
 			printf(" ");
 	}
 	printf("%c", end);
-	exit (0);
 }
 
 void	ft_unset(t_prgm *vars, char *var)
@@ -109,4 +105,5 @@ void	ft_only_file_out(t_prgm *vars, int i)
 		ct_red++;
 		vars->tok_error += 1;
 	}
+	g_exit_code = 0;
 }

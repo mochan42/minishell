@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:06:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 22:05:14 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:01:49 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strnstr_ms(const char *haystack, \
 
 	occ_copy = 0;
 	haystack_char = (char *)haystack;
-	if (needle[0] == '\0')
+	if (*needle == '\0')
 		return (haystack_char);
 	len_needle = ft_strlen(needle);
 	while (*haystack_char && len >= len_needle)

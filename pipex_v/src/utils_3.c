@@ -45,7 +45,10 @@ void	free_2_pt(char **pt)
 void	ft_exit_code(int ex_code, int mode)
 {
 	if (mode == 0)
+	{
 		printf("%d", g_exit_code);
+		g_exit_code = 0;
+	}
 	else
 	{
 		if (ex_code < 0)

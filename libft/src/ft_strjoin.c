@@ -29,7 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j] != '\0')
 		j++;
 	length = i + j;
-	str_joined = (char *)malloc(length + 1);
+	str_joined = (char *)malloc(sizeof(char) * length + 1);
 	if (!str_joined)
 		return (0);
 	ft_jonction(s1, s2, str_joined, length);

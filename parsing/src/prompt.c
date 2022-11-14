@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/12 21:28:21 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/14 23:56:22 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	input_loop(t_prgm *vars)
 	{
 		if (are_quotes_closed_v3(vars->cmd_line) == 1)
 			printf("Quotes are not closed.\n");
+		else if (validate_pipes(vars->cmd_line, '|') == 1)
+			printf("syntax error near unexpected token\n");
 		else
 			high_level_tasks(vars);
 		re_init_tokens(vars);

@@ -176,7 +176,6 @@ void	ft_unset(t_prgm *vars, char *var);
 int		ft_unset_single_var(t_prgm *vars, char *var);
 void	ft_only_file_out(t_prgm *vars, int i);
 
-
 /* builtins_4.c */
 char	*get_our_env(t_prgm *vars, char *var);
 int		is_our_env_path(t_prgm *vars);
@@ -187,6 +186,7 @@ void	ft_update_env(t_env *envp, char *oldpwd);
 int		ft_strcmp(const char *s1, const char *s2);
 t_env	*ft_creat_var_node(char *delim, t_prgm *vars, int i, int curr);
 void	ft_export_new_key(t_prgm *vars);
+int		ft_is_env_buil_ins_check(t_prgm *vars);
 
 /* pipex.c */
 void	ft_execve_cmds(t_prgm *vars);

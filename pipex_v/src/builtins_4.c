@@ -65,6 +65,7 @@ void	ft_cd(t_prgm *vars)
 		}
 	}
 	ft_update_env(envp, oldpwd);
+	ft_exit_code(0, 1);
 }
 
 void	ft_update_env(t_env *envp, char *oldpwd)
@@ -75,7 +76,7 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 	flag = 0;
 	while (envp)
 	{
-		if (ft_strncmp(envp->key, "OLDPWD", 6) == 0)
+		if (ft_strcmp(envp->key, "OLDPWD") == 0)
 		{
 			if (envp->value)
 				free(envp->value);
@@ -94,4 +95,18 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 			return ;
 		envp = envp->next;
 	}
+}
+
+int	ft_is_env_buil_ins_check(t_prgm *vars)
+{
+	if (ft_strcmp(vars->tok[vars->p.child].options[0], "cd") == 0)
+		return (1);
+	if (ft_strcmp(vars->tok[vars->p.child].options[0], "export")
+		== 0 && vars->tok[vars->p.child].options[1])
+		return (1);
+	if (ft_strcmp(vars->tok[vars->p.child].options[0], "unset") == 0)
+		return (1);
+	if (ft_strcmp(vars->tok[vars->p.child].options[0], "exit") == 0)
+		return (1);
+	return (0);
 }

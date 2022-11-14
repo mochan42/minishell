@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/14 13:49:14 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:23:22 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,12 +144,12 @@ void		parsing(t_prgm *vars);
 char		*find_pipes(char *s);
 void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
+int			validate_pipes(char *s, char c);
 int			ft_nb_words_ms(char const *s, char c);
 char		**ft_split_pipes(char const *s, char c);
 void		ft_only_file_in(t_prgm *vars, int i);
 void		ft_only_file_out(t_prgm *vars, int i);
 int			ft_assert_numeric(t_prgm *vars, int indice);
-int			is_numeric(char c);
 
 /* parsing_utils_3.c */
 int			cnt_dquotes(char *s);

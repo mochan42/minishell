@@ -18,11 +18,13 @@ void	ft_pwd(void)
 
 	printf("\033[0;34m%s:\n", getcwd(repo, MAX_LEN_DIR));
 	printf("\033[0;37m");
+	ft_exit_code(0, 1);
 }
 
 void	ft_env(t_prgm *vars)
 {
 	printlist(vars->env_head);
+	ft_exit_code(0, 1);
 }
 
 void	execbuilt_in(t_prgm *vars)
@@ -37,6 +39,7 @@ void	execbuilt_in(t_prgm *vars)
 		ft_export(vars);
 	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "echo") == 0)
 		ft_echo(vars);
+	exit(0);
 }
 
 void	ft_exit(t_prgm *vars)

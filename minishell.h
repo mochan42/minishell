@@ -19,6 +19,6 @@
 // # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 // # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/readline.h>
 // # include </Users/mochan/goinfre/.brew/opt/readline/include/readline/history.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 #endif

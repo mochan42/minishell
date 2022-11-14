@@ -82,6 +82,7 @@ void	ft_export(t_prgm *vars)
 	ft_sorting_env(env_ord, env_size);
 	if (!vars->tok[vars->p.child].options[1])
 		ft_print_exported_env(env_ord, env_size);
+	ft_exit_code(0, 1);
 }
 
 void	ft_only_file_in(t_prgm *vars, int i)
@@ -99,5 +100,6 @@ void	ft_only_file_in(t_prgm *vars, int i)
 		ct_red++;
 		vars->tok_error += 1;
 	}
+	if (vars->tok_error != 1)
+		ft_exit_code(0, 1);
 }
-
