@@ -54,3 +54,30 @@ void	ft_exit_code(int ex_code, int mode)
 			g_exit_code = ex_code % 256;
 	}
 }
+
+int	ft_check_ex_options(t_prgm *vars)
+{
+	int	i;
+
+	i = 1;
+	while (vars->tok[vars->p.child].options[i])
+	{
+		if (i > 1)
+		{
+			printf("too many arguments\n");
+			ft_exit_code(1, 1);
+			return (1);
+		}
+		if (ft_assert_numeric(vars, i) == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_numeric(char c)
+{
+	if (!(c >= '0' && c <= '9') && c != '-')
+		return (1);
+	return (0);
+}

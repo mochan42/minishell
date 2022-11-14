@@ -83,3 +83,21 @@ void	ft_export(t_prgm *vars)
 	if (!vars->tok[vars->p.child].options[1])
 		ft_print_exported_env(env_ord, env_size);
 }
+
+void	ft_only_file_in(t_prgm *vars, int i)
+{
+	int	ct_red;
+
+	ct_red = 0;
+	while (vars->tok[i].infile[ct_red] != NULL)
+	{
+		if (vars->tok[i].in[ct_red] == IN_HEREDOC)
+			ft_here_doc(vars, i, ct_red);
+		else if (access(vars->tok[i].infile[ct_red], F_OK) != 0)
+			printf("No such file directory : %s\n",
+				vars->tok[i].infile[ct_red]);
+		ct_red++;
+		vars->tok_error += 1;
+	}
+}
+

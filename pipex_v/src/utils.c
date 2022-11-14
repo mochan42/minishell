@@ -68,3 +68,23 @@ void	ft_parse(t_prgm *vars, char **paths, int cmd)
 	ft_check_full_cmd_pt(vars, &tmp[2], cmd);
 	ft_set_cmd_error_msg(vars, &tmp[2], cmd);
 }
+
+int	ft_assert_numeric(t_prgm *vars, int indice)
+{
+	int	j;
+
+	j = 0;
+	while (vars->tok[vars->p.child].options[indice][j])
+	{
+		if (is_numeric(
+				vars->tok[vars->p.child].options[indice][j]) == 1)
+		{
+			printf("numeric argument required : %s\n",
+				vars->tok[vars->p.child].options[indice]);
+			ft_exit_code(255, 1);
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}

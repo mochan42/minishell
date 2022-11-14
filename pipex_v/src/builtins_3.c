@@ -92,3 +92,21 @@ int	ft_unset_single_var(t_prgm *vars, char *var)
 	}
 	return (0);
 }
+
+void	ft_only_file_out(t_prgm *vars, int i)
+{
+	int	ct_red;
+
+	ct_red = 0;
+	while (vars->tok[i].outfile[ct_red] != NULL)
+	{
+		if (vars->tok[i].out[ct_red] == OUT_REDIRECT
+			&& access(vars->tok[i].outfile[ct_red], F_OK) == 0)
+		{
+			unlink(vars->tok[i].outfile[ct_red]);
+			open(vars->tok[i].outfile[ct_red], O_RDWR | O_CREAT, 0666);
+		}
+		ct_red++;
+		vars->tok_error += 1;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/12 22:05:45 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:49:14 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
