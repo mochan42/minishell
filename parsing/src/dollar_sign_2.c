@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 00:18:28 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:23:51 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	translate_var(t_prgm *v)
 	while (v->ct1[6] < v->ct1[2])
 	{
 		tp_nd = v->env_head;
-		if (expand_ds(v->tok[v->ct1[0]].t_str_og,
+		if (expand_ds(ft_strdup(v->tok[v->ct1[0]].t_str_og),
 			v->tok[v->ct1[0]].rf_d[v->ct1[6]]) == 1)
 				translate_var_helper(v, tp_nd, flag);
 		v->ct1[6] += 1;
