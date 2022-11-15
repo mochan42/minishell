@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mochan <mochan@student.42.fr>              +#+  +:+       +#+         #
+#    By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 13:29:32 by mochan            #+#    #+#              #
-#    Updated: 2022/11/10 20:12:24 by mochan           ###   ########.fr        #
+#    Updated: 2022/11/16 00:07:50 by fakouyat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC_FILES			:=	prompt.c init.c free.c \
 						env.c env_utils_1.c \
 						infile.c infile_utils_1.c infile_utils_2.c \
 						outfile.c outfile_utils_1.c outfile_utils_2.c \
-						dollar_sign.c dollar_sign_2.c \
+						dollar_sign.c dollar_sign_2.c dollar_sign_3.c \
 						quotes.c quotes_utils_1.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}

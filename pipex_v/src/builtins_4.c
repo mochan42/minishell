@@ -76,10 +76,7 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 	{
 		if (ft_strcmp(envp->key, "OLDPWD") == 0)
 		{
-			if (envp->value)
-				free(envp->value);
-			envp->value = ft_strdup(oldpwd);
-			free(oldpwd);
+			put_data(&envp->value, oldpwd);
 			flag += 1;
 		}
 		else if (ft_strncmp(envp->key, "PWD", 3) == 0)

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:33:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 20:31:01 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:25:26 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,25 @@ void	init(t_prgm *vars)
 	vars->builts[4] = "export";
 	vars->builts[5] = "pwd";
 	vars->builts[6] = "unset";
+}
+
+void	free_env(t_prgm *v)
+{
+	t_env	*env;
+
+	v->ct1[3] = ft_list_size(v->env_head);
+	v->ct1[2] = 0;
+	while (v->ct1[2] < v->ct1[3])
+	{
+		env = v->env_head->next;
+		free(v->env_head->key);
+		if (v->env_head->value)
+			free(v->env_head->value);
+		free(v->res[v->ct1[2]]);
+		free(v->env_head);
+		v->env_head = env;
+		v->ct1[2] += 1;
+	}
+	free(v->res);
+	free(v->env_head);
 }

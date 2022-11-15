@@ -34,5 +34,4 @@ void	ft_parent_process(t_prgm *vars)
 		ft_exit_code(WEXITSTATUS(vars->p.status), 1);
 	else if (ft_is_env_buil_ins_check(vars) != 1)
 		ft_exit_code(0, 1);
-	//free_vars_p(vars);
 }

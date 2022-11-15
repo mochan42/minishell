@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/15 19:29:37 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:07:00 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 
 /* ########################################################################## */
@@ -77,10 +77,17 @@ void		extract_ds_vars(t_prgm *vars);
 void		translate_var(t_prgm *v);
 void		translate_var_helper(t_prgm *v, t_env *tp_nd, int flag);
 
+/* dollar_sign_3.c */
+void		add_var(t_prgm *v);
+void		loop_find_var(t_prgm *v);
+void		ft_adapt_ref(t_prgm *v);
+void		update_expand_cmd(t_prgm *v, char *value);
+
 /*  init.c */
 void		init(t_prgm *vars);
 void		init_each_token(t_prgm *vars, int i);
 void		init_all_tokens(t_prgm *vars);
+void		free_env(t_prgm *vars);
 
 char		**ft_split_pipes(char const *s, char c);
 /* env.c */

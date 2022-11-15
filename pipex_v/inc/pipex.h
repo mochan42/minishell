@@ -31,10 +31,10 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /* ########################################################################## */
 /* STRUCTURES */
@@ -98,6 +98,7 @@ typedef struct s_prgm
 	int		index;
 	int		exit;
 	int		tok_error;
+	int		env_flag;
 }	t_prgm;
 
 /* ########################################################################## */
@@ -175,6 +176,7 @@ void	ft_echo(t_prgm *vars);
 void	ft_unset(t_prgm *vars, char *var);
 int		ft_unset_single_var(t_prgm *vars, char *var);
 void	ft_only_file_out(t_prgm *vars, int i);
+void	put_data(char **dest, char *data);
 
 /* builtins_4.c */
 char	*get_our_env(t_prgm *vars, char *var);

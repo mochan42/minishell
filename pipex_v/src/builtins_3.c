@@ -107,3 +107,11 @@ void	ft_only_file_out(t_prgm *vars, int i)
 	}
 	g_exit_code = 0;
 }
+
+void	put_data(char **dest, char *data)
+{
+	if (*dest)
+		free(*dest);
+	*dest = ft_strdup(data);
+	free(data);
+}

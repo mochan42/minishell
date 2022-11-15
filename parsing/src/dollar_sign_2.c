@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 20:30:27 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:04:44 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,8 @@ void	extract_ds_vars(t_prgm *v)
 			v->ct1[3] = v->ct1[1];
 			v->tok[v->ct1[0]].rf_d[v->ct1[5]] = v->ct1[1];
 			v->ct1[1] += 1;
-			while (v->tmp[v->ct1[1]] != '\0')
-			{
-				if (!ft_isalpha(v->tmp[v->ct1[1]]) && 
-					v->tmp[v->ct1[1]] != '_' && v->tmp[v->ct1[1]] != '$')
-				{
-					v->ct1[1] += 1;
-					break ;
-				}
-				if (v->tmp[v->ct1[1]] == '$')
-					break ;
-				v->ct1[1] += 1;
-				if (v->tmp[v->ct1[1]] != '\0' && !ft_isalpha(v->tmp[v->ct1[1]]))
-					break ;
-			}
-			if (v->ct1[1] - v->ct1[3] >= 1)
-			{
-				v->d_v[v->ct1[5]] = ft_substr(v->tmp, v->ct1[3], v->ct1[1] - v->ct1[3]);
-				v->ct1[5] += 1;
-			}
+			loop_find_var(v);
+			add_var(v);
 		}
 		else
 			v->ct1[1] += 1;
@@ -66,17 +49,13 @@ void	extract_ds_vars(t_prgm *v)
 
 void	translate_var_helper(t_prgm *v, t_env *tp_nd, int flag)
 {
-	int	i;
-
 	while (tp_nd != NULL)
 	{
 		if (ft_strcmp(v->d_v[v->ct1[6]] + 1, tp_nd->key) == 0)
 		{
 			if (*tp_nd->value == '\0')
-				break;
-			ft_str_replace(&v->tok[v->ct1[0]].t_str,
-				v->d_v[v->ct1[6]], tp_nd->value,
-				v->tok[v->ct1[0]].rf_d[v->ct1[6]]);
+				break ;
+			update_expand_cmd(v, tp_nd->value);
 			flag = 1;
 			break ;
 		}
@@ -84,26 +63,13 @@ void	translate_var_helper(t_prgm *v, t_env *tp_nd, int flag)
 	}
 	if (flag == 0 && ft_strcmp(v->d_v[v->ct1[6]], "$?") == 0)
 	{
-		ft_str_replace(&v->tok[v->ct1[0]].t_str, v->d_v[v->ct1[6]],
-		 	ft_itoa(g_exit_code),
-			v->tok[v->ct1[0]].rf_d[v->ct1[6]]);
-			i = 1;
-		while(v->ct1[6] + i < v->ct1[2])
-		{
-			v->tok[v->ct1[0]].rf_d[v->ct1[6] + i] -= 2;
-			i++;
-		}
+		update_expand_cmd(v, ft_itoa(g_exit_code));
+		ft_adapt_ref(v);
 	}
 	else if (flag == 0)
 	{
-		ft_str_replace(&v->tok[v->ct1[0]].t_str, v->d_v[v->ct1[6]], "",
-		v->tok[v->ct1[0]].rf_d[v->ct1[6]]);
-		i = 1;
-		while(v->ct1[6] + i < v->ct1[2])
-		{
-			v->tok[v->ct1[0]].rf_d[v->ct1[6] + i] -= ft_strlen(v->d_v[v->ct1[6]]);
-			i++;
-		}
+		update_expand_cmd(v, "");
+		ft_adapt_ref(v);
 	}
 }
 
@@ -118,8 +84,8 @@ void	translate_var(t_prgm *v)
 	{
 		tp_nd = v->env_head;
 		if (expand_ds(ft_strdup(v->tok[v->ct1[0]].t_str_og),
-			v->tok[v->ct1[0]].rf_d[v->ct1[6]]) == 1)
-				translate_var_helper(v, tp_nd, flag);
+				v->tok[v->ct1[0]].rf_d[v->ct1[6]]) == 1)
+			translate_var_helper(v, tp_nd, flag);
 		v->ct1[6] += 1;
 	}
 }

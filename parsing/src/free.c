@@ -6,53 +6,18 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:01:27 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 20:35:57 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:08:31 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-void	free_table(char **table)
-{
-	int	i;
-
-	i = 0;
-	if (!table)
-		exit (1);
-	while (table[i] != NULL)
-	{
-		free(table[i]);
-		i++;
-	}
-	free(table);
-}
-
 void	re_init_tokens(t_prgm *vars)
 {
-	int	i;
-
-	i = 0;
-	// if (vars->pipe_ct > 0)
-	// {
-	// 	while (i < vars->pipe_ct)
-	// 	{
-	// 		free(vars->tok[i].t_str);
-	// 		free(vars->tok[i].t_str_og);
-	// 		vars->tok[i].t_str = NULL;
-	// 		vars->tok[i].t_str_og = NULL;
-	// 		i++;
-	// 	}
-	// }
 	free_mini(vars);
 	vars->pipe_ct = 0;
 	vars->tok_error = 0;
 	vars->cmd_line = NULL;
-}
-
-void	free_stuff(t_prgm *vars)
-{
-	free(vars->tok);
-	free(vars);
 }
 
 void	free_inputs(t_prgm *v, int i)
@@ -102,6 +67,7 @@ void	free_toks(t_prgm *v, int i)
 	if (v->tok[i].opts)
 		free_2_pt(v->tok[i].opts);
 }
+
 void	free_mini(t_prgm *v)
 {
 	int	i;
@@ -122,25 +88,4 @@ void	free_mini(t_prgm *v)
 	}
 	if (v->tok)
 		free(v->tok);
-}
-
-void	free_env(t_prgm *v)
-{
-	t_env	*env;
-	
-	v->ct1[3] = ft_list_size(v->env_head);
-	v->ct1[2] = 0;
-	while (v->ct1[2] < v->ct1[3])
-	{
-		env = v->env_head->next;
-		free(v->env_head->key);
-		if (v->env_head->value)
-			free(v->env_head->value);
-		free(v->res[v->ct1[2]]);
-		free(v->env_head);
-		v->env_head = env;
-		v->ct1[2] += 1;
-	}
-	free(v->res);
-	free(v->env_head);	
 }
