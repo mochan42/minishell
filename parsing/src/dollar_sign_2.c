@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 01:23:51 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:17:39 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	extract_ds_vars_helper(t_prgm *v)
 		free(v->d_v);
 		return ;
 	}
+	if (v->tmp)
+		free(v->tmp);
 	v->tmp = ft_strdup(v->tok[v->ct1[0]].t_str);
 	v->ct1[1] = 0;
 	v->ct1[5] = 0;

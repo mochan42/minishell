@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/14 17:23:22 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:18:44 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
 # include <signal.h>
 
 /* ########################################################################## */
@@ -82,10 +82,12 @@ void		init(t_prgm *vars);
 void		init_each_token(t_prgm *vars, int i);
 void		init_all_tokens(t_prgm *vars);
 
+char		**ft_split_pipes(char const *s, char c);
 /* env.c */
 void		init_env_init(t_prgm *vars);
 void		init_env_split(t_prgm *vars);
 t_env		*init_env(t_prgm *vars);
+void		printenv(t_env *head);
 
 /* env_utils_1.c */
 int			ft_list_size(t_env *begin_list);
@@ -146,7 +148,6 @@ void		ft_fill_splited_array_pipes(char **array_split, char *s, \
 				char *pipes_loc, char c);
 int			validate_pipes(char *s, char c);
 int			ft_nb_words_ms(char const *s, char c);
-char		**ft_split_pipes(char const *s, char c);
 void		ft_only_file_in(t_prgm *vars, int i);
 void		ft_only_file_out(t_prgm *vars, int i);
 int			ft_assert_numeric(t_prgm *vars, int indice);

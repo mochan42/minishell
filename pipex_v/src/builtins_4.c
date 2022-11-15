@@ -47,6 +47,8 @@ void	ft_cd(t_prgm *vars)
 
 	envp = vars->env_head;
 	oldpwd = get_our_env(vars, "PWD");
+	if (oldpwd == NULL)
+		return ;
 	if (!vars->tok[vars->p.child].options[1]
 		|| *vars->tok[vars->p.child].options[1] == '~')
 		chdir(getenv("HOME"));
@@ -64,7 +66,7 @@ void	ft_cd(t_prgm *vars)
 			return ;
 		}
 	}
-	ft_update_env(envp, oldpwd);
+	ft_update_env(envp, ft_strdup(oldpwd));
 	ft_exit_code(0, 1);
 }
 
@@ -81,6 +83,7 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 			if (envp->value)
 				free(envp->value);
 			envp->value = ft_strdup(oldpwd);
+			free(oldpwd);
 			flag += 1;
 		}
 		else if (ft_strncmp(envp->key, "PWD", 3) == 0)

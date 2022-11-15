@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:35 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/08 17:35:25 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:17:47 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,20 @@ void	printlist(t_env *head)
 			printf("%s=%s\n", temporary->key, temporary->value);
 		else
 			printf("%s\n", temporary->key);
+		temporary = temporary->next;
+	}
+	printf("\n");
+}
+
+void	printenv(t_env *head)
+{
+	t_env	*temporary;
+
+	temporary = head;
+	while (temporary != NULL)
+	{
+		if (temporary->value)
+			printf("%s=%s\n", temporary->key, temporary->value);
 		temporary = temporary->next;
 	}
 	printf("\n");

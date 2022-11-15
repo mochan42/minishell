@@ -23,7 +23,7 @@ void	ft_pwd(void)
 
 void	ft_env(t_prgm *vars)
 {
-	printlist(vars->env_head);
+	printenv(vars->env_head);
 	ft_exit_code(0, 1);
 }
 

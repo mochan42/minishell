@@ -31,10 +31,10 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <signal.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
-// # include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/fakouyat/goinfre/.brew/opt/readline/include/readline/history.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
 
 /* ########################################################################## */
 /* STRUCTURES */
@@ -65,7 +65,7 @@ typedef struct s_token
 	char	**outfile;
 	char	*bin;
 	int		built_in;
-	char	**options;
+	char	**opts;
 	char	*t_str;
 	char	*t_str_og;
 	char	*cmd;

@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/14 23:56:22 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:57:49 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	high_level_tasks(t_prgm *vars)
 	vars->tok_error = 0;
 	add_history(vars->cmd_line);
 	parsing(vars);
+	printf("BREAK1");
+	return;
 	if (vars->tok_error >= 1)
 	{	
 		ft_exit_code(1, 1);
