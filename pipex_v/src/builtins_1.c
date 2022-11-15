@@ -29,15 +29,15 @@ void	ft_env(t_prgm *vars)
 
 void	execbuilt_in(t_prgm *vars)
 {
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "pwd") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "pwd") == 0)
 		ft_pwd();
-	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "env") == 0)
+	else if (ft_strcmp(vars->tok[vars->p.child].opts[0], "env") == 0)
 		ft_env(vars);
 	else if (
-		ft_strcmp(vars->tok[vars->p.child].options[0], "export") == 0
+		ft_strcmp(vars->tok[vars->p.child].opts[0], "export") == 0
 	)
 		ft_export(vars);
-	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "echo") == 0)
+	else if (ft_strcmp(vars->tok[vars->p.child].opts[0], "echo") == 0)
 		ft_echo(vars);
 	exit(0);
 }
@@ -49,10 +49,10 @@ void	ft_exit(t_prgm *vars)
 	i = 1;
 	if (vars->pipe_ct > 1)
 		return ;
-	if (ft_check_ex_options(vars) == 1)
+	if (ft_check_ex_opts(vars) == 1)
 		return ;
-	if (vars->tok[vars->p.child].options[i])
-		ft_exit_code(ft_atoi(vars->tok[vars->p.child].options[i]), 1);
+	if (vars->tok[vars->p.child].opts[i])
+		ft_exit_code(ft_atoi(vars->tok[vars->p.child].opts[i]), 1);
 	vars->exit = 1;
 	printf("Exit, BYE!!!!!!\n");
 }

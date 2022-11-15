@@ -32,5 +32,7 @@ int	main(int ac, char **av, char **env)
 		input_loop(ms);
 		ms->tok_error = 0;
 	}
+	free_env(ms);
+	free(ms);
 	return (g_exit_code);
 }

@@ -21,14 +21,14 @@ void	free_vars_p(t_prgm *vars)
 	while (i < vars->pipe_ct)
 	{
 		j = 0;
-		while (vars->tok[i].options[j])
+		while (vars->tok[i].opts[j])
 		{
-			free(vars->tok[i].options[j]);
+			free(vars->tok[i].opts[j]);
 			j++;
 		}
 		if (vars->tok[i].bin)
 			free(vars->tok[i].bin);
-		free(vars->tok[i].options);
+		free(vars->tok[i].opts);
 		i++;
 	}
 }
@@ -52,7 +52,7 @@ void	ft_is_builtins_cmd(t_prgm *vars, int i)
 	j = 0;
 	while (j < 7)
 	{
-		if (ft_strcmp(vars->tok[i].options[0], vars->builts[j]) == 0)
+		if (ft_strcmp(vars->tok[i].opts[0], vars->builts[j]) == 0)
 		{
 			vars->tok[i].built_in = 1;
 			break ;
@@ -61,9 +61,9 @@ void	ft_is_builtins_cmd(t_prgm *vars, int i)
 	}
 }
 
-int	ft_is_error_options(t_prgm *vars, int i, int j)
+int	ft_is_error_opts(t_prgm *vars, int i, int j)
 {
-	if (vars->tok[i].options[j] == NULL)
+	if (vars->tok[i].opts[j] == NULL)
 	{
 		vars->tok_error = 1;
 		if (vars->tok[i].infile != NULL)
@@ -85,14 +85,14 @@ void	ft_parse_all(t_prgm *vars, char **pt)
 	while (i < vars->pipe_ct)
 	{
 		z = 0;
-		vars->tok[i].options = ft_split_cmd(vars->tok[i].cmd, ' ');
-		if (ft_is_error_options(vars, i, z) == 1)
+		vars->tok[i].opts = ft_split_cmd(vars->tok[i].cmd, ' ');
+		if (ft_is_error_opts(vars, i, z) == 1)
 			return ;
-		while (vars->tok[i].options[z])
+		while (vars->tok[i].opts[z])
 		{
-			tmp = trim_quotes(vars->tok[i].options[z]);
-			free(vars->tok[i].options[z]);
-			vars->tok[i].options[z] = ft_strdup(tmp);
+			tmp = trim_quotes(vars->tok[i].opts[z]);
+			free(vars->tok[i].opts[z]);
+			vars->tok[i].opts[z] = ft_strdup(tmp);
 			free(tmp);
 			z++;
 		}

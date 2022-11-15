@@ -80,7 +80,7 @@ void	ft_export(t_prgm *vars)
 	env_ord = (char ***)malloc(sizeof(char **) * env_size);
 	ft_t_env_to_array(envp, env_ord);
 	ft_sorting_env(env_ord, env_size);
-	if (!vars->tok[vars->p.child].options[1])
+	if (!vars->tok[vars->p.child].opts[1])
 		ft_print_exported_env(env_ord, env_size);
 	ft_exit_code(0, 1);
 }

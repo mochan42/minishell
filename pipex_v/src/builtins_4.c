@@ -47,22 +47,18 @@ void	ft_cd(t_prgm *vars)
 
 	envp = vars->env_head;
 	oldpwd = get_our_env(vars, "PWD");
-	if (oldpwd == NULL)
+	if (oldpwd == NULL || vars->pipe_ct > 1)
 		return ;
-	if (!vars->tok[vars->p.child].options[1]
-		|| *vars->tok[vars->p.child].options[1] == '~')
+	if (!vars->tok[vars->p.child].opts[1]
+		|| *vars->tok[vars->p.child].opts[1] == '~')
 		chdir(getenv("HOME"));
 	else
 	{
-		if (chdir(vars->tok[vars->p.child].options[1]) == -1)
+		if (chdir(vars->tok[vars->p.child].opts[1]) == -1)
 		{
-			perror(vars->tok[vars->p.child].options[1]);
+			perror(vars->tok[vars->p.child].opts[1]);
 			ft_exit_code(1, 1);
-			return ;
-		}
-		if (vars->pipe_ct > 1)
-		{
-			chdir(oldpwd);
+			free(oldpwd);
 			return ;
 		}
 	}
@@ -102,14 +98,14 @@ void	ft_update_env(t_env *envp, char *oldpwd)
 
 int	ft_is_env_buil_ins_check(t_prgm *vars)
 {
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "cd") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "cd") == 0)
 		return (1);
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "export")
-		== 0 && vars->tok[vars->p.child].options[1])
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "export")
+		== 0 && vars->tok[vars->p.child].opts[1])
 		return (1);
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "unset") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "unset") == 0)
 		return (1);
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "exit") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "exit") == 0)
 		return (1);
 	return (0);
 }

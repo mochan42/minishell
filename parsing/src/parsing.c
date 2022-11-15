@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:03:24 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 16:11:31 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:00:24 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	splitting_pipes(t_prgm *vars)
 
 void	parsing(t_prgm *vars)
 {
+	vars->d_v = NULL;
 	vars->pipe_ct = ft_nb_words_cmd(vars->cmd_line, '|');
 	if (vars->pipe_ct == 0)
 	{

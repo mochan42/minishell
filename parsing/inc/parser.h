@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/15 15:18:44 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:29:37 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int			ft_list_size(t_env *begin_list);
 void		free_table(char **table);
 void		free_stuff(t_prgm *vars);
 void		re_init_tokens(t_prgm *vars);
+void		free_mini(t_prgm *v);
+void		free_env(t_prgm *v);
 
 /* infile.c */
 void		extract_infiles(t_prgm *vars);

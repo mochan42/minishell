@@ -39,7 +39,8 @@ void	free_2_pt(char **pt)
 		free(pt[i]);
 		i++;
 	}
-	free(pt);
+	if (pt)
+		free(pt);
 }
 
 void	ft_exit_code(int ex_code, int mode)
@@ -58,12 +59,12 @@ void	ft_exit_code(int ex_code, int mode)
 	}
 }
 
-int	ft_check_ex_options(t_prgm *vars)
+int	ft_check_ex_opts(t_prgm *vars)
 {
 	int	i;
 
 	i = 1;
-	while (vars->tok[vars->p.child].options[i])
+	while (vars->tok[vars->p.child].opts[i])
 	{
 		if (i > 1)
 		{

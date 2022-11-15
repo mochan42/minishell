@@ -23,7 +23,7 @@ void	ft_execve_cmds(t_prgm *vars)
 		if (is_our_env_path(vars) == 1)
 		{
 			if (execve(vars->tok[vars->p.child].bin,
-					vars->tok[vars->p.child].options, vars->env) == -1)
+					vars->tok[vars->p.child].opts, vars->env) == -1)
 				exit(127);
 		}
 		else
@@ -42,15 +42,15 @@ int	ft_is_env_buil_ins(t_prgm *vars)
 	int	i;
 
 	i = 1;
-	if (ft_strcmp(vars->tok[vars->p.child].options[0], "cd") == 0)
+	if (ft_strcmp(vars->tok[vars->p.child].opts[0], "cd") == 0)
 		ft_cd(vars);
-	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "export")
-		== 0 && vars->tok[vars->p.child].options[1])
+	else if (ft_strcmp(vars->tok[vars->p.child].opts[0], "export")
+		== 0 && vars->tok[vars->p.child].opts[1])
 		ft_export(vars);
-	else if (ft_strcmp(vars->tok[vars->p.child].options[0],
+	else if (ft_strcmp(vars->tok[vars->p.child].opts[0],
 			"unset") == 0)
 		ft_unset(vars, NULL);
-	else if (ft_strcmp(vars->tok[vars->p.child].options[0], "exit") == 0)
+	else if (ft_strcmp(vars->tok[vars->p.child].opts[0], "exit") == 0)
 		ft_exit(vars);
 	else
 		i = 0;

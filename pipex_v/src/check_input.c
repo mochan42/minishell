@@ -43,15 +43,15 @@ void	ft_check_full_cmd_pt(t_prgm *vars, char **tmp, int cmd)
 
 	if (ft_strncmp(*tmp, "OK", 2) == 0)
 		return ;
-	if (ft_strchr(vars->tok[cmd].options[0], '/'))
+	if (ft_strchr(vars->tok[cmd].opts[0], '/'))
 	{
-		tmp_cmd = ft_split(vars->tok[cmd].options[0], '/');
+		tmp_cmd = ft_split(vars->tok[cmd].opts[0], '/');
 		i = len_path(tmp_cmd);
 		if (ft_catch_empty_cmd(vars, tmp_cmd, i) == 1)
 			return ;
-		vars->tok[cmd].bin = ft_strdup(vars->tok[cmd].options[0]);
-		free(vars->tok[cmd].options[0]);
-		vars->tok[cmd].options[0] = ft_strdup(tmp_cmd[i - 1]);
+		vars->tok[cmd].bin = ft_strdup(vars->tok[cmd].opts[0]);
+		free(vars->tok[cmd].opts[0]);
+		vars->tok[cmd].opts[0] = ft_strdup(tmp_cmd[i - 1]);
 		i = 0;
 		while (tmp_cmd[i])
 		{

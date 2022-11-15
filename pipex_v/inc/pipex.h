@@ -115,7 +115,7 @@ void	free_vars_p(t_prgm *vars);
 int		len_path(char **paths);
 void	ft_parse_all(t_prgm *vars, char **pt);
 void	ft_is_builtins_cmd(t_prgm *vars, int i);
-int		ft_is_error_options(t_prgm *vars, int i, int j);
+int		ft_is_error_opts(t_prgm *vars, int i, int j);
 
 /* utils.c */
 char	*ft_get_path(char **envp);
@@ -148,7 +148,7 @@ void	ft_print_err_message(t_prgm *vars);
 void	ft_generate_p(t_prgm *vars);
 void	free_2_pt(char **pt);
 void	ft_exit_code(int ex_code, int mode);
-int		ft_check_ex_options(t_prgm *vars);
+int		ft_check_ex_opts(t_prgm *vars);
 int		is_numeric(char c);
 
 /* here_doc.c */
@@ -198,5 +198,4 @@ int		ft_anticipate_heredoc(t_prgm *vars);
 /* signal .c */
 void	new_prompt(int sign_num);
 void	erase_prompt(void);
-
 #endif
