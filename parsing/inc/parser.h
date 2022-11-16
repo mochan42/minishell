@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/16 01:30:38 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 04:58:00 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,10 @@ int			expand_ds(char *s, int ref);
 int			**ft_ref_quote(char *s, char c);
 void		ft_ref_quote_helper(int **tab, char *s, char c);
 int			*is_btw_q(char *s, char c, int ref);
+
+/* quotes_1.c */
+int			*is_btw_val_sq(char *s, char c, int ref);
+int			**ft_valid_sq_ref(char *s, char c);
 
 /* quotes_utils_1.c */
 int			cnt_quotes(char *s, char c);

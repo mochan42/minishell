@@ -6,7 +6,7 @@
 #    By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 13:29:32 by mochan            #+#    #+#              #
-#    Updated: 2022/11/16 00:07:50 by fakouyat         ###   ########.fr        #
+#    Updated: 2022/11/16 03:08:45 by fakouyat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRC_FILES			:=	prompt.c init.c free.c \
 						infile.c infile_utils_1.c infile_utils_2.c \
 						outfile.c outfile_utils_1.c outfile_utils_2.c \
 						dollar_sign.c dollar_sign_2.c dollar_sign_3.c \
-						quotes.c quotes_utils_1.c
+						quotes.c quotes_utils_1.c quotes_1.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 

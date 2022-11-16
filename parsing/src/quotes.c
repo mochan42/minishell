@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 22:57:39 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/15 16:34:36 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 04:51:21 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	expand_ds(char *s, int ref)
 	size_array = cnt_quotes(s, '"');
 	if (size_array % 2 != 0)
 		size_array += 1;
-	level[0] = is_btw_q(s, '\'', ref);
+	level[0] = is_btw_val_sq(s, '\'', ref);
 	if (level[0] != NULL)
 	{
 		level[1] = is_btw_q(s, '"', level[0][0]);
