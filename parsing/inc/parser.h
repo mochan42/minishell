@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:46:49 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/11/16 00:07:00 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:30:38 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void		translate_var_helper(t_prgm *v, t_env *tp_nd, int flag);
 /* dollar_sign_3.c */
 void		add_var(t_prgm *v);
 void		loop_find_var(t_prgm *v);
-void		ft_adapt_ref(t_prgm *v);
 void		update_expand_cmd(t_prgm *v, char *value);
+void		ft_adapt_ref(t_prgm *v, size_t len);
 
 /*  init.c */
 void		init(t_prgm *vars);

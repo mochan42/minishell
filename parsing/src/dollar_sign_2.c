@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:05:31 by mochan            #+#    #+#             */
-/*   Updated: 2022/11/16 00:04:44 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:32:33 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	translate_var_helper(t_prgm *v, t_env *tp_nd, int flag)
 	if (flag == 0 && ft_strcmp(v->d_v[v->ct1[6]], "$?") == 0)
 	{
 		update_expand_cmd(v, ft_itoa(g_exit_code));
-		ft_adapt_ref(v);
+		ft_adapt_ref(v, 2);
 	}
 	else if (flag == 0)
 	{
 		update_expand_cmd(v, "");
-		ft_adapt_ref(v);
+		ft_adapt_ref(v, ft_strlen(v->d_v[v->ct1[6]]));
 	}
 }
 

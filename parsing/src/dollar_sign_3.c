@@ -19,7 +19,7 @@ void	add_var(t_prgm *v)
 		v->d_v[v->ct1[5]] = ft_substr(v->tmp, v->ct1[3], v->ct1[1] - v->ct1[3]);
 		v->ct1[5] += 1;
 	}
-	else if (v->ct1[1] - v->ct1[3] == 1)
+	else if (v->ct1[1] - v->ct1[3] == 0)
 	{
 		v->d_v[v->ct1[5]] = ft_strdup("$");
 		v->ct1[5] += 1;
@@ -30,6 +30,8 @@ void	loop_find_var(t_prgm *v)
 {
 	while (v->tmp[v->ct1[1]] != '\0')
 	{
+		if (v->tmp[v->ct1[1]] == ' ')
+			break ;
 		if (!ft_isalpha(v->tmp[v->ct1[1]])
 			&& v->tmp[v->ct1[1]] != '_' && v->tmp[v->ct1[1]] != '$')
 		{
@@ -44,14 +46,14 @@ void	loop_find_var(t_prgm *v)
 	}
 }
 
-void	ft_adapt_ref(t_prgm *v)
+void	ft_adapt_ref(t_prgm *v, size_t len)
 {
 	int	i;
 
 	i = 1;
 	while (v->ct1[6] + i < v->ct1[2])
 	{
-		v->tok[v->ct1[0]].rf_d[v->ct1[6] + i] -= 2;
+		v->tok[v->ct1[0]].rf_d[v->ct1[6] + i] -= (int)len;
 		i++;
 	}
 }
